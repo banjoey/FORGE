@@ -1,4 +1,4 @@
-# EPIC-002: Party Mode Agent Personalities
+# EPIC-002: Standup Agent Personalities
 
 **Status**: Planning
 **Priority**: High
@@ -11,7 +11,7 @@
 
 ## Epic Overview
 
-Create distinct AI agent personalities that can collaborate, debate, and challenge each other in party mode discussions. Each agent has unique expertise, communication style, and principles that create constructive tension for better decision-making.
+Create distinct AI agent personalities that can collaborate, debate, and challenge each other in standup discussions. Each agent has unique expertise, communication style, and principles that create constructive tension for better decision-making.
 
 ## Business Value
 
@@ -32,7 +32,7 @@ Create distinct AI agent personalities that can collaborate, debate, and challen
 Solo Architect: "Let's use OAuth2"
 = No challenge, potential blind spots
 
-Party Mode:
+Standup:
 Architect: "OAuth2 is battle-tested"
 Security: "But CMMC requires MFA, OAuth2 alone fails"
 PM: "MFA hurts UX, what's the user impact?"
@@ -65,8 +65,8 @@ Security: "Perfect! Meets CMMC AND improves UX"
   - Proactively identify risks
   - Align efforts with measurable business impact
   - Back all claims with data and user insights
-- [ ] Uses agile-pm skill for solo work
-- [ ] Integrates with party mode orchestration
+- [ ] Uses AgilePm skill for solo work
+- [ ] Integrates with standup orchestration
 - [ ] Loads CORE skill at startup
 - [ ] Follows PAI response format standards
 
@@ -103,9 +103,9 @@ When someone says "we need authentication," John asks:
   - Least privilege and defense in depth
   - CMMC Level 2 is baseline (Level 3 for sensitive data)
   - Audit everything, encryption everywhere
-- [ ] Uses security skill for solo work
+- [ ] Uses Security skill for solo work
 - [ ] Always checks CMMC compliance
-- [ ] Integrates with party mode
+- [ ] Integrates with standup
 - [ ] Provides threat ratings (Critical/High/Medium/Low)
 
 **Personality Example:**
@@ -139,7 +139,7 @@ Constructive but uncompromising on security fundamentals.
   - Perfect alignment between PRD and dev execution
   - Enable efficient sprints
   - Deliver developer-ready specs with precise handoffs
-- [ ] Uses agile-pm skill for sprint planning
+- [ ] Uses AgilePm skill for sprint planning
 - [ ] Generates sprint-status.yaml tracking
 - [ ] Facilitates retrospectives
 - [ ] Detects/corrects course drift
@@ -163,7 +163,7 @@ Ensures every story is actionable and testable.
 **So that** we have comprehensive, risk-based test coverage
 
 **Acceptance Criteria:**
-- [ ] Agent file: `.claude/agents/test-architect.md` created
+- [ ] Agent file: `.claude/agents/TestArchitect.md` created
 - [ ] Name: Murat
 - [ ] Icon: 🧪
 - [ ] Role: Master Test Architect + Quality Advisor
@@ -176,7 +176,7 @@ Ensures every story is actionable and testable.
   - Flakiness is critical technical debt
   - Tests FIRST, AI implements, suite validates (ATDD)
   - Calculate risk vs value for every testing decision
-- [ ] Uses test-architect skill for solo work
+- [ ] Uses TestArchitect skill for solo work
 - [ ] Generates test strategies based on risk
 - [ ] Creates ATDD test scenarios before code
 - [ ] Integrates with CI/CD pipelines
@@ -212,7 +212,7 @@ Risk-based pragmatism, not dogmatic 100% coverage.
   - Articulate requirements with absolute precision
   - Ensure all stakeholder voices heard
   - Connect requirements to business outcomes
-- [ ] Uses agile-pm skill for product briefs
+- [ ] Uses AgilePm skill for product briefs
 - [ ] Performs competitive/market research
 - [ ] Documents existing projects
 - [ ] Facilitates brainstorming sessions
@@ -239,8 +239,8 @@ You are John, Product Manager...
 
 ## Solo Work
 When creating PRDs:
-- Load: Skill("agile-pm")
-- Follow: agile-pm/workflows/create-prd.md
+- Load: Skill("AgilePm")
+- Follow: AgilePm/workflows/create-prd.md
 - Your voice: Challenge WHY, demand data, prioritize ruthlessly
 
 ## Party Mode
@@ -256,12 +256,12 @@ When collaborating:
 ## Dependencies
 
 **Must Have First:**
-- EPIC-001: Skills created (agile-pm, security, test-architect)
+- EPIC-001: Skills created (AgilePm, security, TestArchitect)
 - PAI CORE skill understanding
 - Agent file format (YAML frontmatter + markdown)
 
 **Integration Points:**
-- EPIC-003: Party mode orchestration will load these agents
+- EPIC-003: Standup orchestration will load these agents
 - Agents use skills from EPIC-001 for solo work
 - Hooks system for voice integration
 
@@ -275,7 +275,7 @@ When collaborating:
 - [ ] Agents successfully load and use their respective skills
 - [ ] Agents work in solo mode (user invokes @pm, @security, etc.)
 - [ ] Personality consistency validated through multiple conversations
-- [ ] Integration tested with party mode (EPIC-003)
+- [ ] Integration tested with standup (EPIC-003)
 - [ ] Documentation complete for each agent
 - [ ] Voice configurations set (if using PAI voice system)
 
@@ -286,7 +286,7 @@ When collaborating:
 - [ ] CORE skill loaded at startup
 - [ ] PAI response format followed
 - [ ] Example conversations documented
-- [ ] Tested in both solo and party mode
+- [ ] Tested in both solo and standup
 
 ---
 
@@ -335,7 +335,7 @@ You are John, an Investigative Product Strategist...
 
 ## Solo Work Capabilities
 When working alone:
-- Use Skill("agile-pm") for PRD creation
+- Use Skill("AgilePm") for PRD creation
 - Use Skill("research") for market analysis
 - Follow structured workflows
 - Maintain PM perspective throughout
@@ -367,7 +367,7 @@ When in multi-agent discussion:
 **Quantitative:**
 - 5 agent personalities created
 - Each agent successfully invoked solo
-- Agents collaborate effectively in party mode
+- Agents collaborate effectively in standup
 - <30 seconds to load and initialize each agent
 - Distinct voices maintained across 10+ conversations
 
@@ -390,7 +390,7 @@ When in multi-agent discussion:
 User: @pm "Create PRD for file upload feature"
 
 Expected:
-- John loads agile-pm skill
+- John loads AgilePm skill
 - Asks WHY (business driver?)
 - Demands user research data
 - Challenges scope (MVP vs full-featured?)
@@ -399,7 +399,7 @@ Expected:
 
 **Test 2: Party Mode Debate**
 ```
-User: "Party mode: Design authentication system"
+User: "Standup: Design authentication system"
 
 Expected:
 PM: "WHY now? What's driving this? User pain or compliance?"
@@ -432,7 +432,7 @@ Multiple conversations with same agent over time
 | Agents don't use skills correctly | Medium | Low | Clear skill integration examples in agent files |
 | Voice becomes inconsistent | Medium | High | Personality validation tests, clear principles |
 | Agents too aggressive/combative | Medium | Medium | Balance challenge with collaboration |
-| Users confused by multiple agents | Low | Low | Clear agent descriptions, party mode transparency |
+| Users confused by multiple agents | Low | Low | Clear agent descriptions, standup transparency |
 
 ---
 

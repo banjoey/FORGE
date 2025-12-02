@@ -4,20 +4,44 @@
 **Goal**: Enhance PAI with enterprise-grade features from BMAD patterns
 **Owner**: @banjoey
 **Created**: 2025-12-02
+**Last Updated**: 2025-12-02 (post multi-agent review)
 
 ---
 
-## Epic Overview
+## 🎯 Phased Release Strategy
+
+After comprehensive multi-agent review, FORGE is planned in **3 phased releases**:
+
+| Release | Focus | Timeline | Story Points | Status |
+|---------|-------|----------|--------------|--------|
+| [**0.1 MVP**](RELEASE-0.1-MVP.md) | Prove standup value | 8-10 weeks | 60 | Planning |
+| [**0.2 Enterprise**](RELEASE-0.2-ENTERPRISE.md) | Security + Testing rigor | 8-10 weeks | 78 | Planning |
+| [**0.3 Upstream**](RELEASE-0.3-UPSTREAM.md) | Customization + Contribution | 3-4 weeks | 26 | Planning |
+
+**Total**: 164 story points, 20-25 weeks (5-6 months)
+
+### Why Phased? (Based on Multi-Agent Review)
+
+- **Faster validation**: Prove standup hypothesis in 2 months vs. 4 months
+- **Reduced risk**: Smaller investment if standup doesn't work
+- **Realistic timeline**: Solo developer velocity = 8-10 pts/week (was 16 weeks, now 20-25)
+- **Critical gaps addressed**: 10 security gaps + 5 testing gaps = +28 story points
+
+📊 **[View Complete Review Findings](REVIEW-FINDINGS-SUMMARY.md)**
+
+---
+
+## Original Epic Overview
 
 | Epic | Priority | Story Points | Timeline | Status | Dependencies |
 |------|----------|--------------|----------|--------|--------------|
 | [EPIC-001](EPIC-001-skills-from-bmad.md) | High | 55 | 9 weeks | Planning | None |
-| [EPIC-002](EPIC-002-party-mode-agents.md) | High | 21 | 3 weeks | Planning | EPIC-001 |
-| [EPIC-003](EPIC-003-party-mode-orchestration.md) | Critical | 34 | 4 weeks | Planning | EPIC-001, EPIC-002 |
+| [EPIC-002](EPIC-002-standup-agents.md) | High | 21 | 3 weeks | Planning | EPIC-001 |
+| [EPIC-003](EPIC-003-standup-orchestration.md) | Critical | 34 | 4 weeks | Planning | EPIC-001, EPIC-002 |
 | [EPIC-004](EPIC-004-pai-customization.md) | Medium | 21 | 3 weeks | Planning | None |
 
-**Total Story Points**: 131
-**Total Timeline**: ~4 months (16 weeks) with some parallel work
+**Original Total**: 131 story points, 16 weeks
+**Revised Total**: 164 story points, 20-25 weeks (includes gap fixes)
 
 ---
 
@@ -25,7 +49,7 @@
 
 ### Release 0.1 (Months 1-3): Core Features
 
-**Focus**: Skills + Agents + Party Mode
+**Focus**: Skills + Agents + Standup
 
 #### Sprint 1-2 (Weeks 1-4): Agile PM Skill Foundation
 - [x] Planning complete
@@ -71,14 +95,14 @@
 - Each agent uses appropriate skills
 - Personality validation complete
 
-#### Sprint 8-9 (Weeks 14-17): Party Mode Orchestration
-- [ ] EPIC-003: All stories (Party mode skill)
+#### Sprint 8-9 (Weeks 14-17): Standup Orchestration
+- [ ] EPIC-003: All stories (Standup skill)
 - [ ] Multi-agent conversation
 - [ ] Transparent coordination
 - [ ] Interactive vs. autonomous modes
 
 **Deliverables:**
-- Party mode skill functional
+- Standup skill functional
 - Multi-agent debates working
 - Session synthesis generating
 - Integration with agents + skills
@@ -91,9 +115,9 @@
 - [ ] Performance optimization
 
 **Release 0.1 Deliverables:**
-- 3 skills (agile-pm, security, test-architect)
+- 3 skills (AgilePm, Security, TestArchitect)
 - 5 agent personalities
-- Party mode orchestration
+- Standup orchestration
 - Ready for real-world use at work + home
 
 ---
@@ -141,7 +165,7 @@
 10. Risk-Based Testing (5 pts)
 11. CI/CD Quality Gates (8 pts)
 
-### EPIC-002: Party Mode Agents (21 points)
+### EPIC-002: Standup Agents (21 points)
 **Stories: 5**
 1. Product Manager Agent (5 pts)
 2. Security Engineer Agent (5 pts)
@@ -149,9 +173,9 @@
 4. Test Architect Agent (5 pts)
 5. Business Analyst Agent (3 pts)
 
-### EPIC-003: Party Mode Orchestration (34 points)
+### EPIC-003: Standup Orchestration (34 points)
 **Stories: 7**
-1. Party Mode Activation (5 pts)
+1. Standup Activation (5 pts)
 2. Intelligent Agent Selection (5 pts)
 3. Turn-Based Conversation (8 pts)
 4. Transparent Coordination (5 pts)
@@ -177,7 +201,7 @@ EPIC-001 (Skills)
     ↓
     ├─→ EPIC-002 (Agent Personalities)
     │       ↓
-    └───────┴─→ EPIC-003 (Party Mode Orchestration)
+    └───────┴─→ EPIC-003 (Standup Orchestration)
 
 EPIC-004 (Customization) - Independent, can run in parallel
 ```
@@ -188,14 +212,16 @@ EPIC-001 → EPIC-002 → EPIC-003 (16 weeks)
 **Parallel Track:**
 EPIC-004 (3 weeks, can start anytime)
 
+**Note:** EPIC-003 builds standup orchestration - multi-agent conversation for better decision-making
+
 ---
 
 ## Success Criteria
 
 ### Release 0.1 Success
-- [ ] All 3 skills working (agile-pm, security, test-architect)
+- [ ] All 3 skills working (AgilePm, Security, TestArchitect)
 - [ ] All 5 agents distinct and functional
-- [ ] Party mode enables multi-agent debates
+- [ ] Standup enables multi-agent debates
 - [ ] Used successfully on 2+ real projects (work + home)
 - [ ] Measurably better outcomes than solo mode
 - [ ] <5 minutes to generate comprehensive PRD with security + test strategy
@@ -218,7 +244,7 @@ EPIC-004 (3 weeks, can start anytime)
 | Risk | Impact | Probability | Mitigation |
 |------|--------|-------------|------------|
 | Skills too complex for PAI | High | Low | Start simple, iterate |
-| Party mode feels artificial | High | Medium | Transparent coordination, natural flow |
+| Standup feels artificial | High | Medium | Transparent coordination, natural flow |
 | Timeline too aggressive | Medium | High | Prioritize ruthlessly, ship MVP |
 | Upstream PAI rejects contributions | Medium | Low | Engage Dan early, align with his vision |
 | CMMC knowledge becomes stale | Medium | High | Version control, quarterly updates |
@@ -268,14 +294,70 @@ See individual epic documents for detailed risk analysis.
 
 ---
 
+## Multi-Agent Review Completed (2025-12-02)
+
+✅ **4 specialized agents reviewed all epics**:
+- ✅ Technical Compliance (14 violations found → ALL FIXED)
+- ✅ Security & CMMC (10 critical gaps → added to Release 0.2)
+- ✅ Business & Agile (timeline 70% optimistic → MVP created)
+- ✅ Testing & Quality (5 critical gaps → added to Release 0.2)
+
+**Result**: Plan improved, timeline realistic, gaps addressed
+
+📊 **[Full Review Report](REVIEW-FINDINGS-SUMMARY.md)**
+
+---
+
+## Release Documents
+
+### Release 0.1 - Standup MVP (8-10 weeks)
+📄 **[RELEASE-0.1-MVP.md](RELEASE-0.1-MVP.md)**
+
+**Goal**: Prove standup multi-agent conversation value
+**Scope**: 1 skill (AgilePm) + 3 agents + core standup
+**Validation**: 4 gates (weeks 2, 6, 8, 10)
+**Success Metric**: Standup finds 2-3x more issues than solo mode
+
+### Release 0.2 - Enterprise Security & Testing (8-10 weeks)
+📄 **[RELEASE-0.2-ENTERPRISE.md](RELEASE-0.2-ENTERPRISE.md)**
+
+**Goal**: Add CMMC compliance and ATDD rigor
+**Scope**: 2 skills (Security, TestArchitect) + 3 agents + gap fixes
+**New Work**: 28 story points (security + testing gaps from review)
+**Success Metric**: Full CMMC Level 2 compliance (all 17 domains)
+
+### Release 0.3 - Customization & Upstream (3-4 weeks)
+📄 **[RELEASE-0.3-UPSTREAM.md](RELEASE-0.3-UPSTREAM.md)**
+
+**Goal**: Make FORGE shareable and contribute upstream
+**Scope**: Customization (remove "Kai"/"Daniel") + upstream prep
+**Success Metric**: ≥1 PR merged to upstream PAI
+
+---
+
 ## Next Actions
 
-1. **Review & Approve Epics** - Are these the right priorities?
-2. **Set Up Project Structure** - Git branches, project tracking
-3. **Start EPIC-001, Sprint 1** - PRD creation workflow
-4. **Daily Progress** - Small commits, frequent testing
-5. **Weekly Check-ins** - Track velocity, adjust course
+### Immediate (This Week)
+1. ✅ Multi-agent review complete
+2. ✅ Revised release plan created
+3. ⏳ **Approve MVP scope** (Release 0.1)
+4. ⏳ Create sprint backlog for Sprint 1 (AgilePm skill)
+5. ⏳ Set up validation infrastructure (PRD rubric, test scenarios)
+
+### Before Sprint 1 Start
+1. Define PRD quality rubric (for week 2 validation)
+2. Recruit external reviewers (for week 6 personality test)
+3. Select 10 A/B test decisions (for week 8 validation)
+4. Set up project tracking (sprint-status.yaml)
+
+### Sprint 1 (Weeks 1-2)
+1. **Start EPIC-001, Stories 1.1-1.2** - PRD + Epic workflows
+2. Follow PAI standards exactly (TitleCase, USE WHEN, Examples)
+3. Test with FORGE project itself (dogfooding)
+4. Track velocity daily
 
 ---
 
 **FORGE: Build More, Architect Dreams with Multi-Agent Intelligence!**
+
+*Phased approach ensures we prove value fast, address all gaps, and contribute back to PAI community.*

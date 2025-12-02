@@ -15,9 +15,9 @@ Create PAI skills that provide enterprise-grade agile workflows, security practi
 ## Business Value
 
 **For Company (Work):**
-- CMMC compliance from day one (security skill)
-- Enterprise-quality testing (test-architect skill)
-- Structured agile workflows (agile-pm skill)
+- CMMC compliance from day one (Security skill)
+- Enterprise-quality testing (TestArchitect skill)
+- Structured agile workflows (AgilePm skill)
 - Audit-ready documentation
 - Reduced technical debt
 
@@ -338,57 +338,203 @@ Story 1.9 (ATDD) → Story 1.10 (Risk Testing) → Story 1.11 (CI/CD Gates)
 
 ### Skill Directory Structure
 
+**IMPORTANT**: PAI requires TitleCase naming for all skills per SkillSystem.md standard.
+
 ```
 .claude/skills/
-├── agile-pm/
-│   ├── skill.md                    # Skill definition
-│   ├── METHODOLOGY.md              # Agile principles
+├── AgilePm/                         # TitleCase (was agile-pm)
+│   ├── skill.md                     # Skill definition with USE WHEN
+│   ├── METHODOLOGY.md               # Agile principles
 │   ├── workflows/
-│   │   ├── create-prd.md           # Story 1.1
-│   │   ├── create-epics.md         # Story 1.2
-│   │   ├── create-stories.md       # Story 1.3
-│   │   ├── sprint-planning.md      # Story 1.4
-│   │   └── validation.md           # Second-pass review
+│   │   ├── CreatePrd.md             # Story 1.1 (TitleCase)
+│   │   ├── CreateEpics.md           # Story 1.2
+│   │   ├── CreateStories.md         # Story 1.3
+│   │   ├── SprintPlanning.md        # Story 1.4
+│   │   └── Validation.md            # Second-pass review
 │   ├── templates/
 │   │   ├── prd-template.md
 │   │   ├── epic-template.md
 │   │   ├── story-template.md
 │   │   ├── sprint-status.yaml
 │   │   └── project-context.md
-│   └── knowledge/
-│       ├── story-patterns.md
-│       └── epic-sizing.md
-├── security/
-│   ├── skill.md
+│   ├── knowledge/
+│   │   ├── story-patterns.md
+│   │   └── epic-sizing.md
+│   └── tools/                       # Required by PAI standard
+├── Security/                        # TitleCase (was security)
+│   ├── skill.md                     # With USE WHEN
 │   ├── workflows/
-│   │   ├── cmmc-baseline.md        # Story 1.5
-│   │   ├── threat-model.md         # Story 1.6
-│   │   ├── security-review.md      # Story 1.7
-│   │   └── infrastructure-security.md # Story 1.8
+│   │   ├── CmmcBaseline.md          # Story 1.5 (TitleCase)
+│   │   ├── ThreatModel.md           # Story 1.6
+│   │   ├── SecurityReview.md        # Story 1.7
+│   │   └── InfrastructureSecurity.md # Story 1.8
 │   ├── templates/
 │   │   ├── security-baseline.md
 │   │   ├── threat-model-template.md
 │   │   └── cmmc-ssp-template.md
-│   └── knowledge/
-│       ├── cmmc-level-2.md
-│       ├── cmmc-level-3.md
-│       ├── stride-methodology.md
-│       ├── owasp-top-10.md
-│       └── aws-security-best-practices.md
-└── test-architect/
-    ├── skill.md
+│   ├── knowledge/
+│   │   ├── cmmc-level-2.md
+│   │   ├── cmmc-level-3.md
+│   │   ├── stride-methodology.md
+│   │   ├── owasp-top-10.md
+│   │   └── aws-security-best-practices.md
+│   └── tools/                       # Required
+└── TestArchitect/                   # TitleCase (was test-architect)
+    ├── skill.md                     # With USE WHEN
     ├── workflows/
-    │   ├── atdd.md                  # Story 1.9
-    │   ├── risk-based-testing.md    # Story 1.10
-    │   └── ci-integration.md        # Story 1.11
+    │   ├── Atdd.md                  # Story 1.9 (TitleCase)
+    │   ├── RiskBasedTesting.md      # Story 1.10
+    │   └── CiIntegration.md         # Story 1.11
     ├── templates/
     │   ├── test-plan.md
     │   ├── test-scenario.md
     │   └── quality-gates.yml
-    └── knowledge/
-        ├── atdd-patterns.md
-        ├── playwright-examples.md
-        └── risk-metrics.md
+    ├── knowledge/
+    │   ├── atdd-patterns.md
+    │   ├── playwright-examples.md
+    │   └── risk-metrics.md
+    └── tools/                       # Required
+```
+
+### Required skill.md Format (PAI Standard)
+
+Each skill MUST include:
+
+**AgilePm/skill.md:**
+```markdown
+---
+name: AgilePm
+description: Enterprise agile product management workflows for PAI. USE WHEN user needs PRD creation, epic decomposition, user story generation, sprint planning, or structured agile project management. Provides BMAD-quality rigor with PAI simplicity.
+---
+
+# AgilePm
+
+Structured agile workflows for professional software development.
+
+## Workflow Routing
+
+| Workflow | When to Use | Output |
+|----------|-------------|--------|
+| CreatePrd | Starting new project or feature | Comprehensive PRD with architecture |
+| CreateEpics | Breaking down PRD into deliverable chunks | Epic list with user value themes |
+| CreateStories | Planning sprint or implementation | User stories with acceptance criteria |
+| SprintPlanning | Organizing work into iterations | sprint-status.yaml tracking file |
+
+## Examples
+
+### Example 1: Create PRD for new feature
+```
+User: "Create a PRD for user authentication system"
+Skill loads: AgilePm → CreatePrd workflow
+Output: PRD with exec summary, architecture, features, checklist
+```
+
+### Example 2: Break PRD into epics
+```
+User: "Break this PRD into epics"
+Skill loads: AgilePm → CreateEpics workflow
+Output: epics.md with user-value grouped features
+```
+
+### Example 3: Generate user stories
+```
+User: "Create user stories for Epic 1"
+Skill loads: AgilePm → CreateStories workflow
+Output: stories.md with acceptance criteria and story points
+```
+
+## Integration
+
+- Works with Security skill (adds security reqs to stories)
+- Works with TestArchitect skill (adds test strategy to PRD)
+- Generates project-context.md as "bible" for project
+```
+
+**Security/skill.md:**
+```markdown
+---
+name: Security
+description: CMMC-compliant security workflows including threat modeling (STRIDE), code review (OWASP Top 10), infrastructure security, and compliance baseline. USE WHEN user needs security analysis, CMMC compliance, threat assessment, or vulnerability detection. DoD-grade rigor.
+---
+
+# Security
+
+Enterprise security and CMMC compliance for PAI projects.
+
+## Workflow Routing
+
+| Workflow | When to Use | Output |
+|----------|-------------|--------|
+| CmmcBaseline | Starting CMMC-compliant project | security-baseline.md with L2/L3 requirements |
+| ThreatModel | Designing system architecture | threat-model.md with STRIDE analysis |
+| SecurityReview | Code review for vulnerabilities | Security findings with severity ratings |
+| InfrastructureSecurity | Reviewing IaC (Terraform, etc.) | Infrastructure security report |
+
+## Examples
+
+### Example 1: Create CMMC baseline
+```
+User: "Set up CMMC Level 2 baseline for this project"
+Skill loads: Security → CmmcBaseline workflow
+Output: security-baseline.md with all 110 practices mapped
+```
+
+### Example 2: Threat model architecture
+```
+User: "Threat model this authentication design"
+Skill loads: Security → ThreatModel workflow
+Output: threat-model.md with STRIDE per component
+```
+
+### Example 3: Security code review
+```
+User: "Review this code for security issues"
+Skill loads: Security → SecurityReview workflow
+Output: Vulnerabilities found with CVSS scores and fixes
+```
+```
+
+**TestArchitect/skill.md:**
+```markdown
+---
+name: TestArchitect
+description: Test-first development with ATDD (Acceptance Test-Driven Development), risk-based test prioritization, and CI/CD quality gates. USE WHEN user needs test strategy, quality assurance, test coverage analysis, or testing workflows. Write tests BEFORE code.
+---
+
+# TestArchitect
+
+Test-first quality assurance for PAI projects.
+
+## Workflow Routing
+
+| Workflow | When to Use | Output |
+|----------|-------------|--------|
+| Atdd | Starting story implementation | E2E test scenarios before code |
+| RiskBasedTesting | Planning test coverage | test-strategy.md with prioritized testing |
+| CiIntegration | Setting up quality gates | CI/CD config with automated checks |
+
+## Examples
+
+### Example 1: ATDD for user story
+```
+User: "Create tests for Story 3.2 (User login)"
+Skill loads: TestArchitect → Atdd workflow
+Output: E2E test scenarios in Gherkin/Playwright format
+```
+
+### Example 2: Risk-based test strategy
+```
+User: "Create test strategy for this codebase"
+Skill loads: TestArchitect → RiskBasedTesting workflow
+Output: test-strategy.md with coverage targets by risk
+```
+
+### Example 3: CI/CD quality gates
+```
+User: "Set up quality gates for GitHub Actions"
+Skill loads: TestArchitect → CiIntegration workflow
+Output: .github/workflows/quality-gates.yml
+```
 ```
 
 ---
@@ -396,7 +542,7 @@ Story 1.9 (ATDD) → Story 1.10 (Risk Testing) → Story 1.11 (CI/CD Gates)
 ## Success Metrics
 
 **Quantitative:**
-- 3 skills created (agile-pm, security, test-architect)
+- 3 skills created (AgilePm, Security, TestArchitect)
 - 11+ workflows implemented
 - 10+ templates created
 - 15+ knowledge base documents
@@ -406,8 +552,8 @@ Story 1.9 (ATDD) → Story 1.10 (Risk Testing) → Story 1.11 (CI/CD Gates)
 - <3 minutes for complete test strategy
 
 **Qualitative:**
-- Architect agent successfully uses agile-pm skill
-- Engineer agent successfully uses security + test-architect skills
+- Architect agent successfully uses AgilePm skill
+- Engineer agent successfully uses security + TestArchitect skills
 - Generated PRDs meet professional standards
 - Security analysis catches real vulnerabilities
 - Test strategies provide clear coverage guidance

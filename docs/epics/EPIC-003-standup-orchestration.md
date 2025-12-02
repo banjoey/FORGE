@@ -1,4 +1,4 @@
-# EPIC-003: Party Mode Orchestration Skill
+# EPIC-003: Standup Orchestration Skill
 
 **Status**: Planning
 **Priority**: Critical
@@ -11,7 +11,7 @@
 
 ## Epic Overview
 
-Create a party mode orchestration skill that enables multiple AI agent personalities to have transparent, collaborative conversations where they debate, challenge, and build on each other's ideas to reach better decisions.
+Create a standup orchestration skill that enables multiple AI agent personalities to have transparent, collaborative conversations where they debate, challenge, and build on each other's ideas to reach better decisions.
 
 ## Business Value
 
@@ -21,7 +21,7 @@ Create a party mode orchestration skill that enables multiple AI agent personali
 - Results synthesized, not debated
 - One perspective dominates
 
-**Desired State (FORGE Party Mode):**
+**Desired State (FORGE Standup):**
 - Multiple distinct personalities conversing
 - Transparent coordination (user sees who's talking)
 - Constructive debate and challenge
@@ -29,14 +29,14 @@ Create a party mode orchestration skill that enables multiple AI agent personali
 - Better outcomes through tension
 
 **Innovation:**
-- BMAD has party mode but project-locked
+- BMAD has standup but project-locked
 - PAI has multi-agent parallelization but no conversation
-- **FORGE brings transparent party mode to PAI with cross-project context**
+- **FORGE brings transparent standup to PAI with cross-project context**
 
 **Value Proposition:**
 ```
 Solo Mode: Fast, focused, single perspective
-Party Mode: Thorough, multi-perspective, better for complex decisions
+Standup: Thorough, multi-perspective, better for complex decisions
 
 Example Decision: Auth System Design
 Solo (5 min): Architect designs OAuth2 system
@@ -49,16 +49,16 @@ ROI: 2x time investment, 10x better outcome (fewer bugs, better UX, compliant)
 
 ## User Stories
 
-### Story 3.1: Party Mode Activation
+### Story 3.1: Standup Activation
 
 **As a** user facing a complex decision
-**I want** to invoke party mode with relevant experts
+**I want** to invoke standup with relevant experts
 **So that** I get multi-perspective analysis
 
 **Acceptance Criteria:**
-- [ ] User can invoke: `Skill("party-mode")` or trigger phrase "party mode: [topic]"
+- [ ] User can invoke: `Skill("party-mode")` or trigger phrase "standup: [topic]"
 - [ ] System analyzes topic and selects 2-4 relevant agents
-- [ ] User sees: "🎉 PARTY MODE ACTIVATED! Bringing in: [agents list]"
+- [ ] User sees: "🎉 STANDUP ACTIVATED! Bringing in: [agents list]"
 - [ ] Each agent introduced with icon, name, role
 - [ ] System asks: "What would you like to discuss with the team?"
 - [ ] Clear indication that multiple agents are active
@@ -66,10 +66,10 @@ ROI: 2x time investment, 10x better outcome (fewer bugs, better UX, compliant)
 
 **Example:**
 ```
-User: "Party mode: design authentication system"
+User: "Standup: design authentication system"
 
 Output:
-🎉 PARTY MODE ACTIVATED! 🎉
+🎉 STANDUP ACTIVATED! 🎉
 
 Bringing in our expert team:
 📋 John (PM) - Product strategy and business value
@@ -82,13 +82,13 @@ What specific aspects would you like the team to address?
 **Technical Notes:**
 - Topic analysis determines required expertise
 - Default team: PM + Architect + Security
-- User can override: "party mode with test-architect"
+- User can override: "standup with test-architect"
 
 ---
 
 ### Story 3.2: Intelligent Agent Selection
 
-**As a** system orchestrating party mode
+**As a** system orchestrating standup
 **I want** to select the most relevant agents for the topic
 **So that** conversations stay focused and productive
 
@@ -96,12 +96,12 @@ What specific aspects would you like the team to address?
 - [ ] Topic keywords trigger specific agents:
   - "design, architecture, system" → Architect
   - "requirements, features, MVP" → PM + Analyst
-  - "security, compliance, CMMC, threat" → Security
+  - "Security, compliance, CMMC, threat" → Security
   - "testing, quality, CI/CD" → Test Architect
   - "sprint, story, backlog" → Scrum Master
 - [ ] Maximum 4 agents per party (avoid overcrowding)
 - [ ] Minimum 2 agents (ensure debate)
-- [ ] User can manually select: "party mode: pm, security, test-architect"
+- [ ] User can manually select: "standup: pm, Security, test-architect"
 - [ ] System explains WHY each agent was selected
 - [ ] Can add agents mid-conversation: "add test-architect to discussion"
 
@@ -161,7 +161,7 @@ CMMC requires segmentation of CUI data. How does that map to modules?"
 
 ### Story 3.4: Transparent Coordination
 
-**As a** user observing party mode
+**As a** user observing standup
 **I want** to see orchestration decisions
 **So that** I understand why agents are being consulted
 
@@ -182,7 +182,7 @@ CMMC requires segmentation of CUI data. How does that map to modules?"
 ```
 [After architect proposes OAuth2]
 
-🧙 Orchestrator: This involves authentication security and
+🧙 Orchestrator: This involves authentication Security and
 compliance. Consulting Sam (Security) for CMMC requirements...
 
 🔐 Sam (Security): "OAuth2 is a good start, but CMMC Level 2
@@ -192,7 +192,7 @@ practice IA.L2-3.5.3 requires MFA for privileged accounts..."
 **NOT this (opaque):**
 ```
 [Architect speaks]
-[Suddenly security speaks with no explanation]
+[Suddenly Security speaks with no explanation]
 [User confused about why]
 ```
 
@@ -200,7 +200,7 @@ practice IA.L2-3.5.3 requires MFA for privileged accounts..."
 
 ### Story 3.5: Interactive vs. Autonomous Mode Detection
 
-**As a** system managing party mode
+**As a** system managing standup
 **I want** to detect when to run interactively vs. autonomously
 **So that** users get the right level of involvement
 
@@ -209,11 +209,11 @@ practice IA.L2-3.5.3 requires MFA for privileged accounts..."
   - User asks open-ended question ("What should we build?")
   - Ambiguous requirements (need clarification)
   - User uses keyword "brainstorm"
-  - Explicitly requests: "Interactive party mode"
+  - Explicitly requests: "Interactive standup"
 - [ ] **Autonomous Mode Triggers:**
   - User provides detailed requirements/context
   - Clear decision to make ("Design auth for CMMC")
-  - User says "party mode, figure it out"
+  - User says "standup, figure it out"
   - Sufficient context available (PRD, architecture exists)
 - [ ] System announces mode:
   - Interactive: "Starting collaborative discussion..."
@@ -223,9 +223,9 @@ practice IA.L2-3.5.3 requires MFA for privileged accounts..."
 
 **Example Interactive:**
 ```
-User: "Party mode: brainstorm new product ideas"
+User: "Standup: brainstorm new product ideas"
 
-🎉 PARTY MODE - INTERACTIVE SESSION
+🎉 STANDUP - INTERACTIVE SESSION
 
 This is exploratory - I'll guide a discussion between:
 📊 Mary (Analyst) - Market research and trends
@@ -238,10 +238,10 @@ This is exploratory - I'll guide a discussion between:
 
 **Example Autonomous:**
 ```
-User: "Party mode: Design authentication for our CMMC app.
+User: "Standup: Design authentication for our CMMC app.
 Requirements: Level 2 compliance, good UX, budget-conscious."
 
-🎉 PARTY MODE - AUTONOMOUS ANALYSIS
+🎉 STANDUP - AUTONOMOUS ANALYSIS
 
 I'll have the team discuss and return with a recommendation.
 
@@ -257,7 +257,7 @@ I'll have the team discuss and return with a recommendation.
 
 ### Story 3.6: Agent Cross-Referencing
 
-**As an** agent in party mode
+**As an** agent in standup
 **I want** to reference other agents' points
 **So that** I build on, challenge, or acknowledge their ideas
 
@@ -269,7 +269,7 @@ I'll have the team discuss and return with a recommendation.
   - "John, what's the business impact of..."
 - [ ] Agents can challenge each other:
   - "Winston, that's technically sound but impractical"
-  - "Sam, you're right about security but we need to balance UX"
+  - "Sam, you're right about Security but we need to balance UX"
 - [ ] Agents can ask each other questions:
   - "John, have we validated this with users?"
   - "Sam, does this pass CMMC controls?"
@@ -298,14 +298,14 @@ passkey adoption rates?"
 
 ---
 
-### Story 3.7: Party Mode Exit & Synthesis
+### Story 3.7: Standup Exit & Synthesis
 
-**As a** user completing a party mode session
+**As a** user completing a standup session
 **I want** clear synthesis and actionable outcomes
 **So that** I can move forward with confidence
 
 **Acceptance Criteria:**
-- [ ] User can exit with: "exit party mode", "end discussion", "/end"
+- [ ] User can exit with: "exit standup", "end discussion", "/end"
 - [ ] System detects natural conclusion (consensus reached)
 - [ ] Exit process:
   1. Ask if discussion complete
@@ -326,11 +326,11 @@ passkey adoption rates?"
 
 **Example Exit:**
 ```
-User: "I think we have a decision. End party mode."
+User: "I think we have a decision. End standup."
 
 🧙 Orchestrator: Synthesizing team discussion...
 
-## Party Mode Session Summary
+## Standup Session Summary
 **Topic:** Authentication system design
 **Participants:** John (PM), Winston (Architect), Sam (Security)
 **Duration:** 8 minutes
@@ -354,7 +354,7 @@ with OAuth2 as fallback for legacy device support.
 ### Unresolved Questions
 ⚠️ Passkey adoption curve (need user research data)
 ⚠️ Recovery mechanism if user loses passkey device
-⚠️ Admin account handling (higher security requirements)
+⚠️ Admin account handling (higher Security requirements)
 
 ### Next Actions
 1. Create PRD for passkey auth (John)
@@ -371,14 +371,14 @@ Would you like the team to start on any of these actions?
 
 **Must Have:**
 - EPIC-001: Skills (agents use them during discussion)
-- EPIC-002: Agent Personalities (distinct voices for party mode)
+- EPIC-002: Agent Personalities (distinct voices for standup)
 - PAI Task tool understanding (may use for sub-agents)
 - Conversation state management
 
 **Integration Points:**
 - Cross-project context skill (agents reference global + project context)
 - Agent skills loaded during discussion
-- History system captures party mode sessions
+- History system captures standup sessions
 - Voice system (optional TTS for each agent)
 
 ---
@@ -386,8 +386,8 @@ Would you like the team to start on any of these actions?
 ## Definition of Done
 
 **For Epic:**
-- [ ] Party mode skill created and functional
-- [ ] Users can activate party mode with topic
+- [ ] Standup skill created and functional
+- [ ] Users can activate standup with topic
 - [ ] System intelligently selects relevant agents (2-4)
 - [ ] Agents have transparent, turn-based conversations
 - [ ] Agents reference and challenge each other
@@ -414,7 +414,7 @@ Would you like the team to start on any of these actions?
 ### Skill Directory Structure
 
 ```
-.claude/skills/party-mode/
+.claude/skills/Standup/
 ├── skill.md                          # Skill definition
 ├── ORCHESTRATION.md                  # Core orchestration logic
 ├── workflows/
@@ -432,13 +432,13 @@ Would you like the team to start on any of these actions?
 └── examples/
     ├── auth-system-design.md
     ├── product-brainstorm.md
-    └── security-review.md
+    └── Security-review.md
 ```
 
 ### Conversation State Management
 
 ```yaml
-# Party mode session state
+# Standup session state
 session:
   id: "party-20251202-auth-design"
   topic: "Authentication system design"
@@ -446,7 +446,7 @@ session:
   active_agents:
     - pm
     - architect
-    - security
+    - Security
   conversation_history:
     - speaker: pm
       message: "WHY authentication now?"
@@ -459,7 +459,7 @@ session:
       consensus: true
       rationale: "CMMC compliance + good UX"
   next_speaker_candidates:
-    - security  # hasn't spoken in 2 turns
+    - Security  # hasn't spoken in 2 turns
     - pm        # would challenge current direction
 ```
 
@@ -506,11 +506,11 @@ Between agent responses:
 ## Success Metrics
 
 **Quantitative:**
-- Party mode activation <5 seconds
+- Standup activation <5 seconds
 - 2-4 agents selected per topic
 - Conversation quality: 3-5 agent turns per decision
 - Session synthesis generated in <30 seconds
-- 10+ successful party mode sessions tested
+- 10+ successful standup sessions tested
 - Zero personality bleed between agents
 
 **Qualitative:**
@@ -530,7 +530,7 @@ Between agent responses:
 Topic: "Design authentication for CMMC app"
 Agents: PM, Architect, Security
 Expected: Multi-perspective technical discussion
-Outcome: Decision with security + UX + technical considerations
+Outcome: Decision with Security + UX + technical considerations
 Success: Better than single architect decision
 ```
 
@@ -545,7 +545,7 @@ Success: Ideas not thought of in solo mode
 
 ### Test 3: Security Review (Challenge/Audit)
 ```
-Topic: "Review proposed architecture for security"
+Topic: "Review proposed architecture for Security"
 Agents: Architect (presenting), Security (reviewing), Test Architect
 Expected: Security challenges architect's assumptions
 Outcome: Vulnerabilities identified, mitigations proposed
@@ -570,7 +570,7 @@ Success: Balanced scope, clear acceptance criteria
 | Agents don't sound distinct | High | Medium | Strong personality definitions, validation tests |
 | Conversation too long/unfocused | Medium | High | Time limits, topic focus, exit detection |
 | Orchestration feels artificial | Medium | High | Transparent coordination, natural flow patterns |
-| Users prefer solo mode | Low | Low | Party mode optional, solo still available |
+| Users prefer solo mode | Low | Low | Standup optional, solo still available |
 | Performance issues (loading agents) | Medium | Low | Optimize agent loading, cache personalities |
 | Agents agree too much | High | Medium | Program agents to challenge, reward disagreement |
 
@@ -605,7 +605,7 @@ Success: Balanced scope, clear acceptance criteria
 
 ## Next Steps
 
-1. **Complete EPIC-001 & EPIC-002 first** - Party mode needs skills + agents
+1. **Complete EPIC-001 & EPIC-002 first** - Standup needs skills + agents
 2. **Design orchestration state machine** - Conversation flow logic
 3. **Prototype 2-agent conversation** - Simplest case (PM + Architect)
 4. **Test personality distinctiveness** - Can user tell them apart?

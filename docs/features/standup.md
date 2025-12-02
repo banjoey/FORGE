@@ -1,4 +1,4 @@
-# Feature: Party Mode
+# Feature: Standup (Multi-Agent Collaboration)
 
 **Status**: Planning
 **Priority**: High
@@ -19,7 +19,7 @@ Complex tasks benefit from specialized expertise:
 
 ## BMAD's Approach
 
-BMAD METHOD v6 provides "party mode":
+BMAD METHOD v6 provides "standup":
 - 19 specialized agents
 - 50+ guided workflows
 - Single-project scope
@@ -73,7 +73,7 @@ agents:
 ```
 User: "Design user authentication for Project X"
 
-Party Mode Activates:
+Standup Activates:
 1. PM Agent: Clarifies requirements, user stories
 2. Architect Agent: Proposes architecture (OAuth2, JWT, etc.)
 3. Security Agent: Reviews for vulnerabilities
@@ -121,7 +121,7 @@ Product Manager for company product portfolio
 ### Invocation Syntax
 
 ```
-User: "Party up: pm, architect, security"
+User: "Standup: pm, architect, security"
 # Brings three agents into the conversation
 
 User: "PM: Should we build feature X?"
@@ -150,7 +150,7 @@ User: "All agents: review this design"
 - [ ] Build coordination layer
 - [ ] Test collaboration patterns
 
-### Phase 3: Full Party Mode
+### Phase 3: Full Standup
 - [ ] Complete agent roster
 - [ ] Dynamic team composition
 - [ ] Cross-project context
@@ -172,11 +172,11 @@ User: "All agents: review this design"
 ## Related Docs
 
 - `repos/BMAD-METHOD/` (reference study)
-- `experiments/party-mode-prototype/` (to be created)
+- `experiments/standup-prototype/` (to be created)
 
 ## Open Questions
 
-1. Should party mode be PAI core or a separate skill package?
+1. Should standup be PAI core or a separate skill package?
 2. How to handle agent context without exploding costs?
 3. What's the ideal number of agents for different task types?
 4. Should agents have voting/consensus mechanisms?
