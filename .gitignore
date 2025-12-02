@@ -1,0 +1,28 @@
+# FORGE .gitignore
+
+# Exclude forked repos (they have their own git history)
+repos/
+
+# Exclude experiments that aren't ready to share
+experiments/*/wip/
+
+# Exclude local configurations
+installations/*/secrets/
+installations/*/.env
+
+# macOS
+.DS_Store
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
