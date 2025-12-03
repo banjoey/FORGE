@@ -19,7 +19,11 @@ FORGE is a PAI enhancement that brings **multi-agent collaboration** to software
 
 ## TL;DR - Quick Install
 
-**Step 1: Install PAI** (if not already installed)
+**Step 1: Install Claude Code**
+- Download and install from [claude.com/claude-code](https://claude.com/claude-code)
+- Follow the installation guide for your platform
+
+**Step 2: Install PAI** (if not already installed)
 ```bash
 # Clone Daniel Miessler's PAI
 git clone https://github.com/danielmiessler/pai.git
@@ -29,7 +33,7 @@ cd pai/Personal_AI_Infrastructure
 ./install.sh
 ```
 
-**Step 2: Install FORGE**
+**Step 3: Install FORGE**
 ```bash
 # Clone FORGE
 git clone https://github.com/banjoey/FORGE.git
