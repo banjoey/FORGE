@@ -124,9 +124,9 @@ Critical Assets:
 
 ---
 
-### Step 2: Emma Performs STRIDE Analysis
+### Step 2: Daniel Performs STRIDE Analysis
 
-**Emma's STRIDE Process**:
+**Daniel's STRIDE Process**:
 
 **S - Spoofing** (Identity Attacks):
 - Can attacker impersonate another user?
@@ -166,9 +166,9 @@ Critical Assets:
 
 ---
 
-### Step 3: Emma Reports All Threats
+### Step 3: Daniel Reports All Threats
 
-**Emma's Output Format**:
+**Daniel's Output Format**:
 ```
 🔍 STRIDE Threat Analysis
 
@@ -274,7 +274,7 @@ No threats found in this category.
 
 ### Step 5: Remediate Threats
 
-**Action**: Fix threats using Emma's mitigation guidance
+**Action**: Fix threats using Daniel's mitigation guidance
 
 **Remediation Workflow**:
 1. Fix Critical threats immediately
@@ -360,7 +360,7 @@ emma-scan --stride --verbose src/api/
 
 ## STRIDE + CMMC Mapping
 
-Emma maps STRIDE threats to CMMC practices:
+Daniel maps STRIDE threats to CMMC practices:
 
 **Spoofing** → Identification & Authentication (IA):
 - IA.L2-3.5.1: MFA for privileged accounts
@@ -425,7 +425,7 @@ Emma maps STRIDE threats to CMMC practices:
 
 - **ScanCode**: Scan code for known vulnerability patterns
 - **GenerateAudit**: Create CMMC compliance audit trail
-- **RunStandup**: Multi-agent threat review (Emma + team)
+- **RunStandup**: Multi-agent threat review (Daniel + team)
 - **ThreatModel** (Security skill): STRIDE threat modeling for architecture
 
 ---

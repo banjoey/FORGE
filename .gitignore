@@ -26,3 +26,5 @@ installations/*/.env
 # Temporary files
 tmp/
 temp/
+coverage/
+*.backup

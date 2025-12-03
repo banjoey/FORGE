@@ -11,8 +11,9 @@ FORGE is a PAI enhancement that brings **multi-agent collaboration** to software
 **Core Innovation**: Standup mode finds **2-3x more issues** than solo agent mode (validated through A/B testing).
 
 **What FORGE Provides**:
-- **4 Skills**: AgilePm, Security, TestArchitect, Standup
-- **3 Default Agents**: Murat (Product Manager), Emma (Security Engineer), Wei (QA Lead)
+- **5 Skills**: AgilePm, Daniel (Security), Security, TestArchitect, Standup
+- **5 Default Agents**: Daniel (Security Engineer), Mary (Business Analyst), Clay (Tech Lead), Hefley (Product Manager), Amy (QA Lead)
+- **Personalization**: Name your assistant and personalize the experience
 - **Customizable Rosters**: Define agents for any domain (Investment Advisory, Legal, Healthcare, etc.)
 - **Multi-Agent Orchestration**: Better decisions through diverse perspectives
 
@@ -41,20 +42,20 @@ Test-first development strategy:
 
 **Dogfooded**: FORGE's test strategy defines 144 tests (70% unit, 20% integration, 10% E2E)
 
-### 4. Emma Security Engineer ✅ PRODUCTION READY
+### 4. Daniel Security Engineer ✅ PRODUCTION READY
 
-**Status**: 100% test coverage (78/78 tests passing)
+**Status**: 89.65% function coverage, 107/107 tests passing
 
 Comprehensive security analysis with CMMC Level 2 compliance:
 - **50+ Vulnerability Patterns**: SQL injection, XSS, authentication bypass, authorization flaws, infrastructure misconfigurations
 - **STRIDE Threat Modeling**: Categorizes threats across 6 categories (Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation of Privilege)
 - **CMMC Level 2 Coverage**: Maps vulnerabilities to 17 CMMC domains and 25+ practices
-- **Multi-Agent Standup**: Coordinates with Mary, Bob, Murat for comprehensive feature analysis
+- **Multi-Agent Standup**: Coordinates with Mary, Clay, Hefley, Amy for comprehensive feature analysis
 - **Audit Trail Generation**: Creates CMMC-compliant audit trails for security reviews
 
 **Quick Start**:
 ```typescript
-import { reviewCode } from './src/emma/security-review'
+import { reviewCode } from './src/daniel/security-review'
 
 const analysis = await reviewCode(yourCode)
 console.log(analysis.vulnerability)  // "SQL Injection - String Concatenation"
@@ -70,17 +71,18 @@ console.log(analysis.mitigation)     // Remediation guidance
 - ✅ CMMC compliance (17/17 domains, 100% coverage)
 - ✅ Multi-agent standup orchestration
 - ✅ Audit trail generation for compliance assessors
-- ✅ Production-ready (100% test coverage)
+- ✅ Production-ready (89.65% function coverage)
 
 **Test Coverage**:
 - Acceptance: 13/13 (100%)
 - Critical: 31/31 (100%)
 - Authorization: 11/11 (100%)
 - CMMC: 23/23 (100%)
-- **Overall: 78/78 (100%)** ✅
+- Coverage Boost: 16/16 (100%)
+- **Overall: 107/107 (100%)** ✅
 
 **Documentation**:
-- [Emma README](src/emma/README.md) - Complete usage guide
+- [Daniel README](src/daniel/README.md) - Complete usage guide
 - [CMMC Mapping](docs/CMMC-MAPPING.md) - CMMC practice-to-pattern reference
 - [Architecture](docs/ARCHITECTURE.md) - System design diagrams
 - [Examples](examples/) - Sample usage scenarios
@@ -103,18 +105,33 @@ Multi-agent collaborative decision-making:
 git clone <your-fork-url>
 cd FORGE
 
-# Run install script
+# Run install script (includes personalization setup)
 ./install.sh
 ```
+
+**During installation, you'll be prompted to**:
+- Enter your name
+- Name your assistant (default: FORGE)
+
+**Your profile** will be saved to `~/.pai/profile.json` and used to personalize agent responses.
 
 **Manual install**:
 ```bash
 # Install in PAI (symlink skills and agents)
 ln -s $(pwd)/.claude/skills/* ~/.claude/skills/
 ln -s $(pwd)/.claude/agents/* ~/.claude/agents/
+
+# Create profile manually
+mkdir -p ~/.pai
+cat > ~/.pai/profile.json << EOF
+{
+  "user": { "name": "Your Name" },
+  "assistant": { "name": "FORGE" }
+}
+EOF
 ```
 
-See [INSTALL.md](INSTALL.md) for detailed installation instructions and troubleshooting.
+See [QUICKSTART.md](QUICKSTART.md) for detailed installation instructions and first-run tutorial.
 
 ### Use a Skill
 

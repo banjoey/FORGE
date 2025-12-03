@@ -1,6 +1,6 @@
 # RunStandup Workflow
 
-**Purpose**: Multi-agent security review coordinating Emma with Mary, Bob, and Murat
+**Purpose**: Multi-agent security review coordinating Daniel with Mary, Bob, and Murat
 
 **Input**: Feature description, code, or architecture diagram
 
@@ -13,7 +13,7 @@
 **RunStandup** orchestrates collaboration between specialist agents to provide comprehensive feature analysis:
 
 **Agent Roster**:
-- **Emma** (Security Engineer): Security threats, CMMC compliance, vulnerability analysis
+- **Daniel** (Security Engineer): Security threats, CMMC compliance, vulnerability analysis
 - **Mary** (Business Analyst): User value, business impact, UX considerations
 - **Bob** (Tech Lead): Timeline estimates, capacity planning, technical feasibility
 - **Murat** (QA Lead): Test coverage, quality assurance, edge cases
@@ -27,7 +27,7 @@
 **Value Proposition**: Standup finds **3.67x more issues** than solo agent mode (validated through A/B testing)
 
 **Example**: "Should we add OAuth2 to MVP or defer to v1.1?"
-- **Emma**: Security/compliance perspective → "Defer OAuth2, add MFA"
+- **Daniel**: Security/compliance perspective → "Defer OAuth2, add MFA"
 - **Mary**: User value perspective → "Solo developers don't need OAuth2 initially"
 - **Bob**: Timeline perspective → "OAuth2 adds 3-4 weeks of work"
 - **Murat**: Testing perspective → "OAuth2 adds 15 test scenarios"
@@ -112,17 +112,17 @@ const context = {
 
 ---
 
-### Step 2: Emma Performs Security Analysis
+### Step 2: Daniel Performs Security Analysis
 
-**Emma's Contribution**:
+**Daniel's Contribution**:
 - **STRIDE threat modeling**: Identify security threats
 - **CMMC compliance**: Map to CMMC practices
 - **Vulnerability detection**: Scan code for security issues
 - **Risk assessment**: Rate threat severity
 
-**Emma's Output**:
+**Daniel's Output**:
 ```markdown
-## Emma (Security Engineer)
+## Daniel (Security Engineer)
 
 ### Security Analysis
 - SQL Injection risk in login endpoint (Critical)
@@ -305,7 +305,7 @@ const context = {
 
 ### Step 6: Synthesize Decision
 
-**Action**: Emma synthesizes all perspectives into actionable decision
+**Action**: Daniel synthesizes all perspectives into actionable decision
 
 **Synthesis Format**:
 ```markdown
@@ -317,7 +317,7 @@ const context = {
 ## Rationale
 
 ### All Agents Agree (Unanimous)
-- **Emma** (Security): Email/password + MFA meets CMMC requirements
+- **Daniel** (Security): Email/password + MFA meets CMMC requirements
 - **Mary** (Business): 80% of users don't need OAuth2 yet
 - **Bob** (Tech Lead): OAuth2 adds 3 weeks to timeline (38% increase)
 - **Murat** (QA): OAuth2 adds 55 tests, increases testing time by 150%
@@ -380,7 +380,7 @@ import { runStandup } from './src/standup/orchestrator'
 
 const result = await runStandup({
   feature: 'User authentication system',
-  roster: ['Emma', 'Mary', 'Bob', 'Murat'],
+  roster: ['Daniel', 'Mary', 'Bob', 'Murat'],
   codeSnippet: loginCode,
   designDoc: {
     components: ['Login API', 'JWT service', 'User database'],
@@ -388,7 +388,7 @@ const result = await runStandup({
   }
 })
 
-console.log(result.Emma?.vulnerability)  // Emma's security findings
+console.log(result.Daniel?.vulnerability)  // Daniel's security findings
 console.log(result.Mary?.recommendation) // Mary's business recommendation
 console.log(result.Bob?.timeline)        // Bob's timeline estimate
 console.log(result.Murat?.testCoverage)  // Murat's test requirements
@@ -404,12 +404,12 @@ console.log(result.synthesis)            // Synthesized decision
 **Validated**: FORGE dogfooding found standup identifies 3.67x more issues than solo mode
 
 **Example**:
-- **Solo mode** (Emma only): Found SQL injection, missing MFA (2 issues)
-- **Standup mode** (Emma + team): Found SQL injection, missing MFA, timeline risk, test coverage gap, scope creep risk, UX friction, enterprise demand gap (7 issues)
+- **Solo mode** (Daniel only): Found SQL injection, missing MFA (2 issues)
+- **Standup mode** (Daniel + team): Found SQL injection, missing MFA, timeline risk, test coverage gap, scope creep risk, UX friction, enterprise demand gap (7 issues)
 
 ### Diverse Perspectives
 
-**Security** (Emma):
+**Security** (Daniel):
 - Threat modeling
 - Compliance requirements
 - Vulnerability detection
@@ -438,7 +438,7 @@ console.log(result.synthesis)            // Synthesized decision
 - Compliance vs convenience
 
 **Conflict Detection**:
-- Emma says "secure it now"
+- Daniel says "secure it now"
 - Mary says "users don't need it"
 - Bob says "no time"
 - Synthesis finds middle ground
@@ -447,8 +447,8 @@ console.log(result.synthesis)            // Synthesized decision
 
 ## Related Workflows
 
-- **ScanCode**: Emma's vulnerability scanning (used within RunStandup)
-- **PerformSTRIDE**: Emma's threat modeling (used within RunStandup)
+- **ScanCode**: Daniel's vulnerability scanning (used within RunStandup)
+- **PerformSTRIDE**: Daniel's threat modeling (used within RunStandup)
 - **GenerateAudit**: CMMC audit trail generation
 - **Standup** (Standup skill): General-purpose multi-agent orchestration
 
@@ -465,7 +465,7 @@ console.log(result.synthesis)            // Synthesized decision
 ```typescript
 const result = await runStandup({
   feature: 'Contract review automation',
-  roster: ['Emma', 'LegalCounsel', 'ComplianceOfficer', 'UXDesigner']
+  roster: ['Daniel', 'LegalCounsel', 'ComplianceOfficer', 'UXDesigner']
 })
 ```
 

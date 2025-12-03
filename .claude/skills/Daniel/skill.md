@@ -1,9 +1,9 @@
 ---
-name: Emma
+name: Daniel
 description: Production-ready security analysis with CMMC Level 2 compliance. USE WHEN user needs vulnerability scanning, STRIDE threat modeling, security code review, CMMC compliance mapping, or multi-agent security analysis. Detects 50+ vulnerability patterns with remediation guidance.
 ---
 
-# Emma
+# Daniel
 
 Comprehensive security analysis for application code and infrastructure with CMMC Level 2 compliance mapping.
 
@@ -14,14 +14,14 @@ Comprehensive security analysis for application code and infrastructure with CMM
 | ScanCode | Analyzing code for security vulnerabilities | Security analysis with vulnerability findings, CMMC mapping, remediation guidance |
 | PerformSTRIDE | Comprehensive threat modeling of feature | STRIDE threat analysis (all 6 categories) with priority rankings |
 | GenerateAudit | Creating CMMC compliance audit trail | Audit trail document with all vulnerabilities mapped to CMMC practices |
-| RunStandup | Multi-agent security review | Coordinated analysis from Emma, Mary, Bob, and Murat |
+| RunStandup | Multi-agent security review | Coordinated analysis from Daniel, Mary, Bob, and Murat |
 
 ## Examples
 
 ### Example 1: Scan code for vulnerabilities
 ```
 User: "Scan this authentication code for security issues"
-Skill loads: Emma → ScanCode workflow
+Skill loads: Daniel → ScanCode workflow
 Output: Security analysis identifying SQL injection, weak passwords, missing MFA
   - Vulnerability: SQL Injection - String Concatenation
   - Severity: Critical
@@ -33,7 +33,7 @@ Output: Security analysis identifying SQL injection, weak passwords, missing MFA
 ### Example 2: STRIDE threat modeling
 ```
 User: "Perform STRIDE analysis on payment processing"
-Skill loads: Emma → PerformSTRIDE workflow
+Skill loads: Daniel → PerformSTRIDE workflow
 Output: Comprehensive threat model across 6 categories
   - Spoofing: 2 threats found
   - Tampering: 1 threat found
@@ -47,7 +47,7 @@ Output: Comprehensive threat model across 6 categories
 ### Example 3: Generate CMMC audit trail
 ```
 User: "Generate CMMC audit trail for security review"
-Skill loads: Emma → GenerateAudit workflow
+Skill loads: Daniel → GenerateAudit workflow
 Output: CMMC-compliant audit document
   - All vulnerabilities found
   - Mapped to CMMC practices (17 domains)
@@ -58,9 +58,9 @@ Output: CMMC-compliant audit document
 ### Example 4: Multi-agent security standup
 ```
 User: "Review authentication system with full team"
-Skill loads: Emma → RunStandup workflow
+Skill loads: Daniel → RunStandup workflow
 Output: Multi-perspective analysis
-  - Emma: Security threats (STRIDE + CMMC violations)
+  - Daniel: Security threats (STRIDE + CMMC violations)
   - Mary: Business impact and user value
   - Bob: Timeline and capacity estimates
   - Murat: Test coverage and quality assurance
@@ -120,23 +120,23 @@ Output: Multi-perspective analysis
 
 ## CLI Usage
 
-Emma can also be invoked via command-line for CI/CD integration:
+Daniel can also be invoked via command-line for CI/CD integration:
 
 ```bash
 # Scan single file
-emma-scan src/auth/login.ts
+daniel-scan src/auth/login.ts
 
 # Scan entire directory
-emma-scan src/
+daniel-scan src/
 
 # STRIDE threat modeling
-emma-scan --stride src/payment.ts
+daniel-scan --stride src/payment.ts
 
 # JSON output for automation
-emma-scan --json src/api.ts
+daniel-scan --json src/api.ts
 
 # Stdin support for pipes
-cat suspicious.js | emma-scan --stdin
+cat suspicious.js | daniel-scan --stdin
 ```
 
 Exit codes:
@@ -162,7 +162,7 @@ Exit codes:
 
 ## Methodology
 
-Emma follows security industry standards:
+Daniel follows security industry standards:
 
 - **STRIDE**: Microsoft's threat modeling framework
 - **OWASP Top 10**: Web application security risks
@@ -172,12 +172,12 @@ Emma follows security industry standards:
 
 ## Implementation
 
-Emma is implemented in TypeScript with:
-- `src/emma/security-review.ts` - Core vulnerability detection
-- `src/emma/vulnerability-patterns.ts` - 50+ detection patterns
-- `src/emma/cmmc-lookup.ts` - CMMC practice mapping
-- `src/emma/stride.ts` - STRIDE threat modeling
+Daniel is implemented in TypeScript with:
+- `src/daniel/security-review.ts` - Core vulnerability detection
+- `src/daniel/vulnerability-patterns.ts` - 50+ detection patterns
+- `src/daniel/cmmc-lookup.ts` - CMMC practice mapping
+- `src/daniel/stride.ts` - STRIDE threat modeling
 - `src/standup/orchestrator.ts` - Multi-agent coordination
-- `bin/emma-scan.ts` - Command-line interface
+- `bin/daniel-scan.ts` - Command-line interface
 
-See `src/emma/README.md` for detailed API documentation and usage examples.
+See `src/daniel/README.md` for detailed API documentation and usage examples.

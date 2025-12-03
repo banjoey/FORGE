@@ -82,7 +82,7 @@ install_skills() {
     echo ""
     print_info "Installing FORGE skills..."
 
-    local skills=("AgilePm" "Security" "TestArchitect" "Standup" "Emma")
+    local skills=("AgilePm" "Security" "TestArchitect" "Standup" "Daniel")
 
     for skill in "${skills[@]}"; do
         local source="$FORGE_DIR/.claude/skills/$skill"
@@ -148,12 +148,37 @@ verify_installation() {
     print_info "Verifying installation..."
 
     local all_ok=true
+    local start_time=$(date +%s)
 
     # Check skills
-    local skills=("AgilePm" "Security" "TestArchitect" "Standup" "Emma")
+    local skills=("AgilePm" "Security" "TestArchitect" "Standup" "Daniel")
     for skill in "${skills[@]}"; do
-        if [ -e "$HOME/.claude/skills/$skill/skill.md" ]; then
-            print_success "Skill verified: $skill"
+        local skill_file="$HOME/.claude/skills/$skill/SKILL.md"
+
+        if [ -e "$skill_file" ]; then
+            # Check if symlink
+            if [ -L "$skill_file" ]; then
+                # Verify symlink is not broken
+                if [ -r "$skill_file" ]; then
+                    print_success "Skill verified: $skill (symlink)"
+                else
+                    print_error "Skill symlink broken: $skill"
+                    all_ok=false
+                    continue
+                fi
+            else
+                print_success "Skill verified: $skill (copy)"
+            fi
+
+            # Verify file is readable and recent (modified within last 60 seconds)
+            local file_time=$(stat -f %m "$skill_file" 2>/dev/null || stat -c %Y "$skill_file" 2>/dev/null)
+            local time_diff=$((start_time - file_time))
+
+            if [ "$time_diff" -lt 60 ]; then
+                print_info "  ✓ Recently installed ($time_diff seconds ago)"
+            else
+                print_warning "  ⚠ File is older than expected (may be from previous install)"
+            fi
         else
             print_error "Skill missing: $skill"
             all_ok=false
@@ -161,9 +186,23 @@ verify_installation() {
     done
 
     # Check agents
-    local agent_count=$(find "$HOME/.claude/agents" -maxdepth 1 -type d -o -type l | wc -l)
+    local agent_count=$(find "$HOME/.claude/agents" -maxdepth 1 -type d -o -type l 2>/dev/null | wc -l)
     if [ "$agent_count" -gt 1 ]; then
         print_success "Agents installed: $((agent_count - 1)) agents"
+
+        # Verify agent directories/symlinks are readable
+        find "$HOME/.claude/agents" -maxdepth 1 -type d -o -type l 2>/dev/null | while read -r agent_path; do
+            if [ "$agent_path" != "$HOME/.claude/agents" ]; then
+                local agent_name=$(basename "$agent_path")
+                if [ -L "$agent_path" ]; then
+                    if [ -r "$agent_path/agent.md" ]; then
+                        print_info "  ✓ Agent symlink valid: $agent_name"
+                    else
+                        print_warning "  ⚠ Agent symlink may be broken: $agent_name"
+                    fi
+                fi
+            fi
+        done
     else
         print_warning "No agents found"
     fi
@@ -171,6 +210,7 @@ verify_installation() {
     if [ "$all_ok" = true ]; then
         echo ""
         print_success "Installation verified successfully!"
+        print_info "Installation completed in $(($(date +%s) - start_time)) seconds"
     else
         echo ""
         print_error "Installation verification failed"
@@ -178,13 +218,72 @@ verify_installation() {
     fi
 }
 
+# Setup user profile
+setup_profile() {
+    echo ""
+    print_info "Let's personalize your FORGE installation..."
+    echo ""
+
+    # Get user name
+    read -p "What's your name? " USER_NAME
+    if [ -z "$USER_NAME" ]; then
+        USER_NAME="User"
+    fi
+
+    # Get assistant name
+    echo ""
+    read -p "What would you like to name your assistant? (default: FORGE) " ASSISTANT_NAME
+    if [ -z "$ASSISTANT_NAME" ]; then
+        ASSISTANT_NAME="FORGE"
+    fi
+
+    # Create profile.json
+    local PROFILE_DIR="$HOME/.pai"
+    mkdir -p "$PROFILE_DIR"
+
+    cat > "$PROFILE_DIR/profile.json" <<EOF
+{
+  "version": "1.0",
+  "user": {
+    "name": "$USER_NAME",
+    "preferred_name": "$USER_NAME"
+  },
+  "assistant": {
+    "name": "$ASSISTANT_NAME",
+    "personality": "professional"
+  },
+  "preferences": {
+    "voice_enabled": false,
+    "observability": false
+  }
+}
+EOF
+
+    print_success "Profile created: $PROFILE_DIR/profile.json"
+    print_info "  User: $USER_NAME"
+    print_info "  Assistant: $ASSISTANT_NAME"
+    echo ""
+}
+
 # Print success message
 print_completion() {
+    # Load profile to personalize completion message
+    local PROFILE_FILE="$HOME/.pai/profile.json"
+    local USER_NAME="User"
+    local ASSISTANT_NAME="FORGE"
+
+    if [ -f "$PROFILE_FILE" ]; then
+        USER_NAME=$(grep -o '"name": *"[^"]*"' "$PROFILE_FILE" | head -1 | sed 's/"name": *"\([^"]*\)"/\1/')
+        ASSISTANT_NAME=$(grep -o '"name": *"[^"]*"' "$PROFILE_FILE" | tail -1 | sed 's/"name": *"\([^"]*\)"/\1/')
+    fi
+
     echo ""
     echo -e "${GREEN}========================================${NC}"
     echo -e "${GREEN}  FORGE Installation Complete!${NC}"
     echo -e "${GREEN}========================================${NC}\n"
 
+    echo "Welcome, $USER_NAME! Your assistant '$ASSISTANT_NAME' is ready."
+    echo ""
     echo "Next steps:"
     echo "  1. Run: claude"
     echo "  2. Type: Use the AgilePm skill"
@@ -225,6 +324,9 @@ main() {
         echo "Installation cancelled."
         exit 0
     fi
+
+    # Setup user profile
+    setup_profile
 
     # Install
     install_skills "$install_method"

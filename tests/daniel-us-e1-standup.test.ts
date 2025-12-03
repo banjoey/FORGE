@@ -10,6 +10,7 @@
 import { describe, test, expect } from '@jest/globals'
 import { runStandup } from '../src/standup/orchestrator'
 import { StandupContext, StandupResult } from '../src/types'
+import { promises as fs } from 'fs'
 
 describe('US-E1: Emma Participates in Security Standups (5 points)', () => {
 
@@ -163,7 +164,6 @@ describe('US-E1: Emma Participates in Security Standups (5 points)', () => {
     await result.recordDecision('docs/project-context.md')
 
     // Read project-context.md and verify decision is logged
-    const fs = require('fs').promises
     const projectContext = await fs.readFile('docs/project-context.md', 'utf-8')
 
     expect(projectContext).toContain('bcrypt')

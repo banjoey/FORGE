@@ -110,16 +110,16 @@ emma-scan --stride src/auth/
 
 ---
 
-### Step 2: Emma Generates Audit Trail
+### Step 2: Daniel Generates Audit Trail
 
-**Emma's Audit Trail Generation**:
+**Daniel's Audit Trail Generation**:
 
 **Section 1: Executive Summary**
 ```markdown
 # CMMC Level 2 Security Review Audit Trail
 **Date**: 2025-12-03
 **Scope**: User authentication system
-**Reviewer**: Emma Security Engineer
+**Reviewer**: Daniel Security Engineer
 
 ## Summary
 - Files Scanned: 24
@@ -276,7 +276,7 @@ emma-scan --stride src/auth/
 ```bash
 # Generate and save audit trail
 emma-scan src/ > findings.json
-# Emma generates audit trail
+# Daniel generates audit trail
 # Save to: cmmc-audit-trail-2025-12-03.md
 ```
 
@@ -293,7 +293,7 @@ emma-scan src/ > findings.json
 4. Remediation timeline (progress tracking)
 5. Evidence of controls (proof of implementation)
 
-**Assessor Questions Emma Can Answer**:
+**Assessor Questions Daniel Can Answer**:
 - "What CMMC practices are covered?"
 - "How many vulnerabilities were found?"
 - "What's the remediation status?"
@@ -311,7 +311,7 @@ import { runStandup } from './src/standup/orchestrator'
 
 const result = await runStandup({
   feature: 'E-commerce checkout flow',
-  roster: ['Emma'],
+  roster: ['Daniel'],
   codeSnippet: checkoutCode,
   designDoc: {
     components: ['Payment API', 'Order Database', 'Email Service']
@@ -330,7 +330,7 @@ await result.recordAuditTrail('cmmc-audit-trail-checkout.md')
 # Scan and generate audit trail
 emma-scan src/ --json > findings.json
 
-# Emma automatically generates audit trail
+# Daniel automatically generates audit trail
 # Output: cmmc-audit-trail-YYYY-MM-DD.md
 ```
 
@@ -338,7 +338,7 @@ emma-scan src/ --json > findings.json
 
 ## CMMC Practice Reference
 
-Emma maps vulnerabilities to these CMMC Level 2 practices:
+Daniel maps vulnerabilities to these CMMC Level 2 practices:
 
 **Access Control (AC) - 3.1.x**
 - AC.L2-3.1.1: Limit system access to authorized users
@@ -416,17 +416,17 @@ See `docs/CMMC-MAPPING.md` for complete practice-to-pattern reference.
 
 ## Assessor FAQs
 
-**Q: What CMMC level does Emma cover?**
+**Q: What CMMC level does Daniel cover?**
 A: CMMC Level 2 (110 practices across 17 domains)
 
-**Q: How many vulnerability patterns does Emma detect?**
+**Q: How many vulnerability patterns does Daniel detect?**
 A: 50+ patterns covering OWASP Top 10 and CMMC requirements
 
-**Q: Is Emma's analysis automated or manual?**
+**Q: Is Daniel's analysis automated or manual?**
 A: Hybrid - automated pattern detection + manual security review
 
-**Q: Can Emma generate evidence for all CMMC practices?**
-A: Emma covers 25+ practices with code-level evidence. Infrastructure practices (PE, PS, AT) require additional documentation.
+**Q: Can Daniel generate evidence for all CMMC practices?**
+A: Daniel covers 25+ practices with code-level evidence. Infrastructure practices (PE, PS, AT) require additional documentation.
 
 **Q: How often should audit trails be generated?**
 A: Quarterly at minimum, or before each CMMC assessment

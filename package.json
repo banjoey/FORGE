@@ -4,7 +4,7 @@
   "description": "Fused Optimization & Reasoning for Generative Engineering - Multi-agent collaboration for PAI",
   "type": "module",
   "bin": {
-    "emma-scan": "./bin/emma-scan.ts"
+    "daniel-scan": "./bin/daniel-scan.ts"
   },
   "scripts": {
     "test": "jest",
@@ -12,8 +12,8 @@
     "test:coverage": "jest --coverage",
     "build": "tsc",
     "lint": "eslint src tests --ext .ts",
-    "emma:scan": "ts-node bin/emma-scan.ts",
-    "emma:stride": "ts-node bin/emma-scan.ts --stride"
+    "daniel:scan": "ts-node bin/daniel-scan.ts",
+    "daniel:stride": "ts-node bin/daniel-scan.ts --stride"
   },
   "keywords": [
     "pai",

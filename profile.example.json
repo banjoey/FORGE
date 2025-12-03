@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "user": {
+    "name": "Your Name",
+    "preferred_name": "Your Name",
+    "email": "you@example.com"
+  },
+  "assistant": {
+    "name": "FORGE",
+    "personality": "professional"
+  },
+  "preferences": {
+    "voice_enabled": false,
+    "observability": false
+  }
+}

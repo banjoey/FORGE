@@ -60,7 +60,30 @@ Process:
 Output: Multi-perspective design review with actionable recommendations
 ```
 
-### Example 4: Custom roster standup
+### Example 4: Custom roster - Code review
+```typescript
+// Specify exact roster for focused code review
+const result = await runStandup({
+  feature: 'Database migration script',
+  roster: ['Daniel', 'Clay'],  // Only security + tech lead
+  codeSnippet: migrationScript
+})
+// Output: Daniel finds SQL injection risks, Clay estimates timeline
+```
+
+### Example 5: Custom roster - Full team override
+```typescript
+// Force full team review (override smart defaults)
+const result = await runStandup({
+  feature: 'Minor UI tweak',
+  roster: ['Mary', 'Clay', 'Hefley', 'Daniel', 'Amy'],  // All 5 agents
+  description: 'Change button color from blue to green'
+})
+// Output: Full team perspective on what seems like a simple change
+//         (may uncover accessibility, brand, or UX issues)
+```
+
+### Example 6: Custom roster - Domain-specific experts
 ```
 User: "Run standup with Investment Advisory Team to review portfolio allocation strategy"
 Skill loads: Standup → RunStandup workflow with custom roster
@@ -68,7 +91,18 @@ Agents: Financial Analyst, Compliance Officer, Client Advisor
 Output: Investment strategy with risk, compliance, and client perspective
 ```
 
-### Example 5: Record decision
+### Example 7: Custom roster - Two agents only
+```typescript
+// Minimal roster for quick checks
+const result = await runStandup({
+  feature: 'Performance optimization',
+  roster: ['Clay', 'Amy'],  // Only tech lead + QA
+  question: 'Is this optimization worth the complexity?'
+})
+// Output: Clay's capacity estimate + Amy's testing complexity
+```
+
+### Example 8: Record decision
 ```
 User: "Update project context with our decision on auth approach"
 Skill loads: Standup → ManageContext workflow

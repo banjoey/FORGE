@@ -532,4 +532,83 @@ FORGE is a fork/extension of PAI adding:
 
 ---
 
+## Planning Sessions & Backlog Ideas
+
+### Session 2025-12-03: Rapid Deployment Plan
+
+**Context**: Need to deploy FORGE to teammates today with basic personalization
+
+**Decision**: Implement Option A - Minimal MVP (4-6 hours)
+- ✅ Stories 4.1 + 4.2 (names only, not full profile)
+- ✅ Simple install.sh wizard
+- ✅ Template FORGE-specific files
+- ✅ Basic QUICKSTART.md
+- ⏸ Defer: Team config, company branding, full PAI audit
+
+**Deployment Target**: EOD 2025-12-03
+
+### Backlog: "Create Team" Skill Idea
+
+**Proposed**: New skill for team setup and management
+
+**User Story**:
+> As a team lead deploying FORGE to my team
+> I want a simple workflow to create team configuration
+> So that I don't have to manually edit JSON files
+
+**Possible Workflows**:
+1. **CreateTeam** - Interactive wizard to set up team profile
+   ```
+   User: "Create a team configuration for Platform Engineering"
+   Skill: Prompts for team name, members, tech stack, standards
+   Output: team-config.json + shared context files
+   ```
+
+2. **AddTeamMember** - Add new member to existing team
+   ```
+   User: "Add Sarah to the Platform team"
+   Skill: Creates member profile, links to team config
+   Output: Updated team roster, member onboarding docs
+   ```
+
+3. **TeamStandards** - Define shared standards (coding, security, testing)
+   ```
+   User: "Define our team's security baseline"
+   Skill: Guides through CMMC requirements, creates baseline
+   Output: cmmc-baseline.md, security checklist
+   ```
+
+**Integration Points**:
+- Works with AgilePm (team velocity, capacity planning)
+- Works with Security (shared security baseline)
+- Works with Standup (team roster defaults)
+- Generates team-context.md (shared knowledge base)
+
+**Story Points**: 8 points (2-3 days)
+- CreateTeam workflow: 3 pts
+- Team config persistence: 2 pts
+- Integration with existing skills: 2 pts
+- Documentation: 1 pt
+
+**Priority**: Medium (after basic personalization works)
+
+**Notes**:
+- Consider whether this should be:
+  - A) Separate skill (CreateTeam)
+  - B) Part of AgilePm skill (team planning workflows)
+  - C) CORE skill extension (system configuration)
+- Team config should layer on top of personal config:
+  ```
+  Personal config (James, Atlas)
+  + Team config (Platform Team, tech stack, standards)
+  = Full context for agent
+  ```
+
+**Related to Story 4.4**: Team Configuration Support
+- This skill would be the **user-facing interface** for Story 4.4
+- Story 4.4 = Infrastructure (JSON schema, loading, templating)
+- CreateTeam skill = Workflow (guided setup, validation, documentation)
+
+---
+
 **Make PAI yours while honoring Dan's incredible work!**

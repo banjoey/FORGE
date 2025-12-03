@@ -113,9 +113,9 @@ app.get('/api/user/:id', async (req, res) => {
 
 ---
 
-### Step 2: Emma Analyzes Code
+### Step 2: Daniel Analyzes Code
 
-**Emma's Analysis Process**:
+**Daniel's Analysis Process**:
 1. **Pattern Matching**: Check code against 50+ vulnerability patterns
 2. **Severity Assessment**: Rate vulnerability (Critical/High/Medium/Low)
 3. **CMMC Mapping**: Map vulnerability to CMMC practice
@@ -124,7 +124,7 @@ app.get('/api/user/:id', async (req, res) => {
 6. **Remediation Guidance**: Provide fix recommendations
 7. **Secure Code Example**: Show corrected code
 
-**Emma's Output**:
+**Daniel's Output**:
 ```
 ❌ Vulnerability Detected!
 
@@ -157,7 +157,7 @@ app.get('/api/user/:id', async (req, res) => {
 - **Do I have a secure code example?** (implementation reference)
 
 **False Positive Handling**:
-- Emma aims for high accuracy but may occasionally flag false positives
+- Daniel aims for high accuracy but may occasionally flag false positives
 - Review context to determine if vulnerability is real
 - If false positive, document why and suppress warning
 
@@ -165,7 +165,7 @@ app.get('/api/user/:id', async (req, res) => {
 
 ### Step 4: Remediate Vulnerabilities
 
-**Action**: Fix vulnerabilities using Emma's guidance
+**Action**: Fix vulnerabilities using Daniel's guidance
 
 **Remediation Priority** (fix in this order):
 1. **Critical**: Fix immediately (SQL injection, XSS, auth bypass)
@@ -174,10 +174,10 @@ app.get('/api/user/:id', async (req, res) => {
 4. **Low**: Fix when convenient (missing logs, documentation gaps)
 
 **Remediation Workflow**:
-1. Understand the vulnerability (read Emma's explanation)
+1. Understand the vulnerability (read Daniel's explanation)
 2. Review the secure code example (see how to fix it)
 3. Apply the fix to your code
-4. Re-scan to verify fix (Emma should report clean)
+4. Re-scan to verify fix (Daniel should report clean)
 5. Add tests to prevent regression
 
 **Example Fix**:
@@ -232,7 +232,7 @@ const user = await db.query(query, [userId])
 
 ## CLI Usage
 
-Emma can also be invoked from command-line:
+Daniel can also be invoked from command-line:
 
 ```bash
 # Scan single file
@@ -255,7 +255,7 @@ emma-scan --verbose src/
 **Integration with CI/CD**:
 ```yaml
 # GitHub Actions example
-- name: Emma Security Scan
+- name: Daniel Security Scan
   run: |
     npm install
     npm run emma:scan src/
@@ -297,7 +297,7 @@ if (analysis.detected) {
 
 ## CMMC Compliance Mapping
 
-Emma maps vulnerabilities to CMMC Level 2 practices across 17 domains:
+Daniel maps vulnerabilities to CMMC Level 2 practices across 17 domains:
 
 **Access Control (AC)**:
 - AC.L2-3.1.1: Limit system access to authorized users
@@ -354,7 +354,7 @@ See `docs/CMMC-MAPPING.md` for complete practice-to-pattern reference.
 
 - **PerformSTRIDE**: Comprehensive threat modeling (use for architecture/design)
 - **GenerateAudit**: Create CMMC compliance audit trail
-- **RunStandup**: Multi-agent security review (Emma + Mary + Bob + Murat)
+- **RunStandup**: Multi-agent security review (Daniel + Mary + Bob + Murat)
 - **ThreatModel** (Security skill): STRIDE threat modeling for new features
 - **CmmcBaseline** (Security skill): CMMC Level 2 compliance baseline
 
@@ -369,7 +369,7 @@ See `docs/CMMC-MAPPING.md` for complete practice-to-pattern reference.
 - Authorization: 11/11 (100%)
 - CMMC Compliance: 23/23 (100%)
 
-Emma has been rigorously tested against OWASP Top 10 and CMMC Level 2 requirements.
+Daniel has been rigorously tested against OWASP Top 10 and CMMC Level 2 requirements.
 
 ---
 
