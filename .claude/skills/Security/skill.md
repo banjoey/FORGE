@@ -12,7 +12,9 @@ Shift-left security: identify and mitigate threats before code is written.
 | Workflow | When to Use | Output |
 |----------|-------------|--------|
 | ThreatModel | Designing new feature or system | Threat model document with STRIDE threats and mitigations |
-| CmmcBaseline | Starting DoD/government project | CMMC Level 2 compliance baseline with gap analysis |
+| CmmcBaseline | Starting DoD/government project | CMMC Level 2 compliance baseline (all 17 domains, 110 practices) |
+| SecurityReview | Reviewing code for vulnerabilities | Security review report with OWASP Top 10 findings and fixes |
+| InfrastructureSecurity | Auditing cloud/infrastructure config | Infrastructure security audit with hardening recommendations |
 
 ## Examples
 
@@ -30,11 +32,18 @@ Skill loads: Security → CmmcBaseline workflow
 Output: CMMC practices mapped to features, gap analysis, compliance roadmap
 ```
 
-### Example 3: Security review for user story
+### Example 3: Code security review
 ```
-User: "Add security requirements to this user story: file upload"
-Skill loads: Security → ThreatModel workflow (focused on file upload)
-Output: Security threats (malware, XXE, path traversal) + mitigations
+User: "Review this authentication code for security vulnerabilities"
+Skill loads: Security → SecurityReview workflow
+Output: OWASP Top 10 analysis, vulnerability findings (SQL injection, weak passwords), remediation guidance
+```
+
+### Example 4: Infrastructure security audit
+```
+User: "Audit our AWS configuration for security issues"
+Skill loads: Security → InfrastructureSecurity workflow
+Output: Infrastructure security findings (open S3 buckets, weak IAM policies), CIS Benchmark gaps
 ```
 
 ## Integration

@@ -31,30 +31,97 @@
 
 ## Workflow Steps
 
-### Step 1: Create Initial Project Context
+### Step 1: Classify Project Data
 
-**Action**: Generate project-context.md from PRD
+**Action**: Determine data classification level for the project
 
-**When**: After PRD is created (AgilePm skill)
+**When**: At project initialization (before creating project-context.md)
+
+**Classification Levels**:
+- **Public**: No sensitive information (e.g., open source projects, marketing sites)
+- **Internal**: Company confidential (e.g., internal tools, employee data)
+- **CUI (Controlled Unclassified Information)**: DoD contractor data requiring CMMC compliance
+- **Classified**: Government classified information (requires clearance)
+
+**Classification Questions**:
+1. Does this project handle DoD contractor data? → **CUI**
+2. Does this project handle ITAR/export-controlled technical data? → **CUI//SP-CTI**
+3. Is this project publicly shareable? → **Public**
+4. Is this project company confidential only? → **Internal**
+
+**Data Handling Rules by Classification**:
+| Classification | Cross-Project Sharing | Encryption | CMMC Required | GitHub |
+|----------------|----------------------|------------|---------------|--------|
+| Public | ✅ Shareable with all | Optional | No | Public repos OK |
+| Internal | ✅ Internal/Public only | Recommended | No | Private repos only |
+| CUI | ⚠️ CUI projects only | Required | Yes (Level 2) | Private repos only, CUI marked |
+| Classified | ❌ No sharing | Required (FIPS 140-2) | Yes (Level 3+) | No GitHub |
+
+**Warning for CUI/Classified Projects**:
+```
+⚠️ CUI DATA CLASSIFICATION
+
+This project handles Controlled Unclassified Information (CUI).
+
+CMMC Practices:
+- AC.L2-3.1.20: Control CUI posted on publicly accessible systems
+- MP.L2-3.8.4: Mark media with necessary CUI markings
+- AU.L2-3.3.1: Create audit records for data access
+
+Do NOT commit this project-context.md to public GitHub repositories.
+Do NOT share architecture details with Public or Internal classified projects.
+```
+
+**Template Selection**:
+- Public/Internal: Use `templates/project-context.md` (standard)
+- CUI/Classified: Use `templates/project-context-classified.md` (with classification controls)
+
+---
+
+### Step 2: Create Initial Project Context
+
+**Action**: Generate project-context.md from PRD with appropriate classification
+
+**When**: After PRD is created (AgilePm skill) and classification determined (Step 1)
 
 **Source**: docs/PRD-[ProjectName].md
 
 **What to Extract**:
 - Executive summary → Project overview
-- System architecture → Architecture section
+- System architecture → Architecture section (mark CUI sections if applicable)
 - Success metrics → Success metrics section
 - Feature breakdown → Epics overview
 - Tech stack → Tech stack decisions
 
+**Data Classification by Component** (for CUI projects):
+Identify which components handle CUI data:
+| Component | Data Handled | Classification | Security Notes |
+|-----------|--------------|----------------|----------------|
+| API Gateway | User requests | Internal | No CUI |
+| Database | Technical specs | **CUI//SP-CTI** | Export-controlled technical data |
+| File Storage | Design docs | **CUI** | Defense contractor data |
+
 **Generated File**: docs/project-context.md
 
-**Template**: Use `templates/project-context.md` as starting point
+**Classification Marking** (for CUI):
+```markdown
+# Project Context: [Project Name]
+
+**Data Classification**: CUI//SP-CTI
+**Last Updated**: 2025-12-02
+
+CUI//SP-CTI
+
+[Project content here - all marked as CUI]
+
+CUI//SP-CTI
+```
 
 ---
 
-### Step 2: Add Key Decisions
+### Step 3: Add Key Decisions
 
-**Action**: Record decisions made during standup
+**Action**: Record decisions made during standup with classification awareness
 
 **When**: After each standup discussion (RunStandup workflow)
 
@@ -310,6 +377,171 @@ Recent decisions are below (last 6 months):
 3. Ask clarifying questions (fill gaps in context)
 
 **Result**: Fast onboarding, no tribal knowledge lost
+
+---
+
+## Cross-Project Data Isolation (CMMC AC.L2-3.1.20)
+
+**Purpose**: Prevent CUI data leakage between projects with different classification levels
+
+**Rule**: Projects can reference other projects at **same or lower** classification level only
+
+### Classification Hierarchy
+
+```
+Classified (highest)
+    ↓ (can reference)
+CUI
+    ↓ (can reference)
+Internal
+    ↓ (can reference)
+Public (lowest)
+```
+
+**Examples**:
+- ✅ CUI project can reference Internal project lessons learned (lower classification)
+- ❌ Internal project cannot reference CUI project architecture (higher classification)
+- ✅ Public project can reference Public project code (same classification)
+
+---
+
+### Cross-Project Reference Checklist
+
+**Before Referencing Another Project**:
+
+1. **Check Classification Compatibility**:
+   ```markdown
+   Current Project: [Your classification]
+   Referenced Project: [Their classification]
+
+   Is Referenced ≤ Current? (Same or lower)
+   - ✅ Yes → Safe to reference
+   - ❌ No → BLOCKED (data isolation violation)
+   ```
+
+2. **Sanitize CUI Details** (if referencing from CUI project to lower):
+   - ✅ Shareable: Architectural patterns, lessons learned, generic decisions
+   - ❌ Not Shareable: Specific technical details, code, configurations, customer names
+
+3. **Log Cross-Project Reference** (audit trail):
+   ```markdown
+   ## Cross-Project References
+
+   | Date | Referenced Project | Classification | Purpose | Approved |
+   |------|-------------------|----------------|---------|----------|
+   | 2025-12-02 | Project B | CUI | Shared library | ✅ Same classification |
+   | 2025-12-03 | Project C | Internal | Lessons learned | ✅ Lower classification |
+   ```
+
+4. **Mark Sensitive Sections** (for CUI projects):
+   ```markdown
+   CUI//SP-CTI
+
+   ## System Architecture (CUI)
+
+   [Architecture details here - controlled technical information]
+
+   This section contains export-controlled technical data.
+   Do NOT share with non-CUI projects.
+
+   CUI//SP-CTI
+   ```
+
+---
+
+### Automated Classification Checks
+
+**Git Pre-Commit Hook** (prevents accidental CUI exposure):
+
+```bash
+#!/bin/bash
+# Check if project-context.md contains CUI marking but repo is public
+
+if grep -q "Data Classification.*CUI" docs/project-context.md; then
+  # This is a CUI project
+
+  # Check if attempting to commit to public repo
+  if git remote get-url origin | grep -q "github.com"; then
+    echo "❌ ERROR: CUI project detected"
+    echo "Cannot commit CUI project-context.md to GitHub (public or private)"
+    echo ""
+    echo "CMMC AC.L2-3.1.20: Control CUI posted on publicly accessible systems"
+    echo ""
+    echo "Action: Store CUI projects in on-premise git or government-approved cloud"
+    exit 1
+  fi
+fi
+```
+
+**Standup Validation** (before cross-project reference):
+
+```markdown
+**Before Standup Loads Context from Multiple Projects**:
+
+1. Identify classification of each project
+2. Determine highest classification level in standup
+3. Filter out projects above highest allowed level
+
+Example:
+- Project A: CUI
+- Project B: Internal
+- Project C: Public
+
+If current standup is for Project B (Internal):
+- ✅ Load Project B context (same)
+- ✅ Load Project C context (lower)
+- ❌ Block Project A context (higher - CUI data cannot leak to Internal project)
+```
+
+---
+
+### Quarterly Classification Review
+
+**Every 90 days**:
+
+1. **Review Project Classification**:
+   - Does project still handle CUI data?
+   - Has classification level changed (upgraded/downgraded)?
+   - Update `Data Classification` field if changed
+
+2. **Review Cross-Project References**:
+   - Are all referenced projects at correct classification level?
+   - Any unauthorized references detected?
+   - Remove outdated references
+
+3. **Audit Cross-Project Access Logs**:
+   - Review audit trail for classification violations
+   - Investigate any suspicious access patterns
+   - Report violations to security team
+
+**CMMC Practice**: AU.L2-3.3.1 (Create and retain audit records)
+
+---
+
+### CUI Data Handling Rules
+
+**For CUI Projects** (CMMC Level 2):
+
+**DO**:
+- ✅ Mark all CUI sections with `CUI` or `CUI//SP-CTI` banners
+- ✅ Store project-context.md in encrypted storage
+- ✅ Restrict access to authorized personnel only
+- ✅ Log all data access (audit trail)
+- ✅ Quarterly review of classification and access
+
+**DON'T**:
+- ❌ Commit CUI project-context.md to public GitHub
+- ❌ Share CUI architecture with Public/Internal projects
+- ❌ Send CUI project context via unencrypted email
+- ❌ Store CUI data on personal devices without encryption
+- ❌ Reference CUI projects from non-CUI projects
+
+**CMMC Practices**:
+- AC.L2-3.1.20: Control CUI posted on publicly accessible systems
+- MP.L2-3.8.4: Mark media with necessary CUI markings
+- AU.L2-3.3.1: Create audit records for data access
+- SC.L2-3.13.5: Protect confidentiality of CUI during transmission
+- SC.L2-3.13.16: Protect confidentiality of CUI at rest
 
 ---
 
