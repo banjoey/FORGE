@@ -39,6 +39,13 @@ Skill loads: AgilePm → CreateStories workflow
 Output: stories.md with acceptance criteria and story points
 ```
 
+### Example 4: Plan sprints
+```
+User: "Organize these stories into sprints"
+Skill loads: AgilePm → SprintPlanning workflow
+Output: sprint-status.yaml with sprint assignments and tracking
+```
+
 ## Integration
 
 - Works with Security skill (adds security reqs to stories)
