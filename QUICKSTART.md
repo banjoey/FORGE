@@ -518,4 +518,4 @@ Specific: "Should we add OAuth2 to MVP or defer to v1.1? Constraints: 8-week dea
 ---
 
 **Last Updated**: 2025-12-02
-**FORGE Version**: Release 0.1 MVP (Sprint 5)
+**FORGE Version**: Release 0.2 (Emma Security Engineer agent with 72 automated tests)

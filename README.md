@@ -53,15 +53,24 @@ Multi-agent collaborative decision-making:
 
 ### Installation
 
+**Automated install** (recommended):
 ```bash
 # Clone FORGE
 git clone <your-fork-url>
 cd FORGE
 
+# Run install script
+./install.sh
+```
+
+**Manual install**:
+```bash
 # Install in PAI (symlink skills and agents)
 ln -s $(pwd)/.claude/skills/* ~/.claude/skills/
 ln -s $(pwd)/.claude/agents/* ~/.claude/agents/
 ```
+
+See [INSTALL.md](INSTALL.md) for detailed installation instructions and troubleshooting.
 
 ### Use a Skill
 
@@ -213,6 +222,44 @@ PAI integration components follow PAI's MIT license.
 
 ---
 
-**Status**: Release 0.1 MVP (Sprint 5 - Final polish)
+**Status**: Release 0.2 - Phase A In Progress (Emma implementation: 48% pass rate, target 90%)
 
 **Note**: This is my first major OSS contribution project. Built with Claude Code, dogfooded with FORGE's own skills.
+
+---
+
+## Release 0.2 Update: Emma Security Engineer
+
+**Sprint 1-2 Complete** (3 weeks):
+- ✅ Emma agent persona (812 lines, CMMC Level 2 integration)
+- ✅ STRIDE threat modeling framework (all 6 categories)
+- ✅ 72 automated tests (12 acceptance + 60 security)
+- ✅ CMMC compliance (11 of 17 domains, 20 practices tested)
+- ✅ Test-driven development (ATDD framework for LLM agents)
+
+### Emma's Capabilities
+
+**Security Analysis**:
+- STRIDE threat modeling (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege)
+- CMMC Level 2 enforcement (110 practices across 17 domains)
+- OWASP Top 10 vulnerability detection
+- Risk-based prioritization (Critical/High/Medium/Low)
+
+**Test Coverage** (60 security tests):
+- SQL Injection (10 tests)
+- XSS (10 tests)
+- Authentication Bypass (10 tests)
+- Authorization Flaws (10 tests)
+- CMMC Violations (20 tests)
+
+**Success Criteria**: Emma catches ≥54/60 vulnerabilities (90%)
+
+### Documentation
+
+**Architecture & Contribution**:
+- `ARCHITECTURE.md` - Technical architecture, integration with PAI
+- `CONTRIBUTION_PROPOSAL.md` - Upstream contribution to PAI ecosystem
+- `docs/sprint-2-review.md` - Sprint retrospective, lessons learned
+- `docs/emma-test-suite-summary.md` - Complete test documentation
+
+**For detailed Emma documentation**, see `.claude/skills/Standup/agents/emma-security-engineer.md` (32KB persona)

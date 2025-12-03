@@ -27,11 +27,18 @@
 - **Mary** (Business Analyst): Requirements gathering, user value, business priorities, stakeholder management
 - **Bob** (Scrum Master): Sprint planning, velocity tracking, impediment removal, scope protection
 - **Murat** (Test Architect): ATDD enforcement, risk-based testing, quality gates, test strategy
+- **Emma** (Security Engineer): STRIDE threat modeling, CMMC Level 2 compliance, OWASP Top 10 prevention ✅ **AVAILABLE**
 
 **Additional Specialists** (Add as needed):
-- **Emma** (Security Engineer): Security threats, CMMC compliance, secure design [Create agent file to activate]
 - **Wei** (QA Lead): Test execution, automation, bug tracking [Create agent file to activate]
 - **[Your Custom Agent]**: Define role, expertise, personality
+
+**When to Include Emma**:
+- Security-sensitive features (authentication, payment, data handling, admin APIs)
+- High-risk features (risk score ≥4.0) requiring threat modeling
+- CMMC compliance reviews (DoD contractors, government software)
+- API design with security implications (public APIs, data exposure)
+- Features handling sensitive data (PII, financial data, health records)
 
 **Custom Rosters** (Your Domain):
 You can define custom agent rosters for different domains:
@@ -200,51 +207,109 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 ### Step 3: Agent Discussion Round
 
-**Action**: Each agent provides their perspective (Murat, Emma, Wei)
+**Action**: Each agent provides their perspective
 
-**Discussion Order**:
-1. **Murat (Product Manager)** speaks first
+**Discussion Order** (Default roster: Mary/Bob/Murat/Emma):
+1. **Mary (Business Analyst)** speaks first
    - User value perspective
-   - Prioritization (Must/Should/Could/Won't)
-   - Business impact
+   - Business priorities (MoSCoW)
+   - Success metrics
 
-2. **Emma (Security Engineer)** speaks second
+2. **Bob (Scrum Master)** speaks second
+   - Sprint capacity and timeline
+   - Dependencies and risks
+   - Process implications
+
+3. **Murat (Test Architect)** speaks third
+   - Test strategy and ATDD requirements
+   - Risk-based testing approach
+   - Quality gates
+
+4. **Emma (Security Engineer)** speaks fourth (when included)
    - Security threats (STRIDE)
    - CMMC compliance
    - Risk mitigation
 
-3. **Wei (QA Lead)** speaks third
-   - Test strategy
-   - Testability concerns
-   - Quality gates
-
 **Why This Order**:
-- Murat frames user value (sets context)
-- Emma identifies security concerns (can veto if critical)
-- Wei addresses testability (final quality check)
+- Mary frames user value and business impact (sets context)
+- Bob assesses feasibility and timeline (practical constraints)
+- Murat defines quality requirements (testing strategy)
+- Emma identifies security concerns last (can veto if Critical)
+
+---
+
+#### Mary's Response Format:
+
+```markdown
+### Mary's Perspective (Business Analyst)
+
+**User Value Analysis**:
+[Does this serve our primary persona? What problem does it solve?]
+
+**Business Prioritization** (MoSCoW):
+- Must Have / Should Have / Could Have / Won't Have
+- Rationale: [Why this priority level?]
+
+**Success Metrics**:
+- Success looks like: [Measurable outcome]
+- Failure looks like: [Measurable negative outcome]
+
+**Recommendation**:
+- Ship now / Defer to next release / Reject
+- Rationale: [Business value vs effort]
+```
+
+---
+
+#### Bob's Response Format:
+
+```markdown
+### Bob's Perspective (Scrum Master)
+
+**Capacity Analysis**:
+- Estimated effort: [Story points]
+- Current sprint capacity: [Available points]
+- Fits in sprint: Yes / No / With adjustments
+
+**Timeline & Dependencies**:
+- Dependencies: [What do we need before starting?]
+- Risks: [What could delay this?]
+- Recommended timeline: [Sprint X, Y weeks]
+
+**Process Implications**:
+- Impact on sprint goal: [Supports / Neutral / Conflicts]
+- Velocity impact: [On track / Behind / Ahead]
+
+**Recommendation**:
+- Approve for current sprint / Defer to next sprint / Need more time to estimate
+```
 
 ---
 
 #### Murat's Response Format:
 
 ```markdown
-### Murat's Perspective (Product Manager)
+### Murat's Perspective (Test Architect)
 
-**User Value Analysis**:
-[Does this serve our primary persona? What problem does it solve?]
+**Risk Assessment**:
+- Risk level: Critical / High / Medium / Low
+- Risk factors: [Business criticality, complexity, security, compliance]
+- Coverage target: [90% / 80% / 70% / 50%]
 
-**Prioritization**:
-- Must Have / Should Have / Could Have / Won't Have
-- Rationale: [Why this priority level?]
+**Test Strategy**:
+- Test types required: [Unit, Integration, E2E, Security, Performance]
+- ATDD compliance: [Given-When-Then scenarios defined?]
+- Test count estimate: [N unit, M integration, K E2E tests]
+- Estimated testing effort: [Story points]
 
-**Business Impact**:
-- If we ship this: [Positive outcomes]
-- If we defer this: [Negative outcomes]
-- Recommendation: [Ship now | Defer to v1.1 | Reject]
+**Quality Gates**:
+- Acceptance criteria defined: Yes / No
+- Tests before code (ATDD): Required / Recommended
+- Coverage enforcement: [Threshold %]
 
-**Metrics**:
-- Success looks like: [Measurable outcome]
-- Failure looks like: [Measurable negative outcome]
+**Recommendation**:
+- Approve / Approve with modifications / Block (untestable design)
+- Required modifications: [List]
 ```
 
 ---
