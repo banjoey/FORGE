@@ -46,7 +46,7 @@ After proving FORGE's value internally (0.1) and adding enterprise rigor (0.2), 
 
 ## Release 0.3 Scope
 
-### EPIC-004: PAI Customization (Complete - 21 points)
+### EPIC-004: PAI Customization (Complete - 23 points)
 
 **Story 4.1: Assistant Name Configuration** (3 points)
 - During installation: "What would you like to name your assistant?"
@@ -81,6 +81,17 @@ After proving FORGE's value internally (0.1) and adding enterprise rigor (0.2), 
 - Prompts: name, assistant name, company, preferences
 - Creates `~/.pai/profile.json`
 - Runs `pai doctor` validation
+
+**Story 4.7: Configurable Affirmation Levels** (2 points)
+- During installation: "Choose your preferred communication style"
+- Options:
+  - **Supportive** (default): Uses affirmations like "Great question!", "You're right"
+  - **Professional**: Neutral tone, minimal affirmations
+  - **Direct**: Concise, no affirmations (just facts)
+- Stored in `PAI_TONE_PREFERENCE` in profile.json
+- All agent prompts adapt based on preference
+- Example: "You're absolutely right" → "That's correct" (Professional) → "Correct" (Direct)
+- User can change later: `forge config set tone professional`
 
 ### NEW: Upstream Contribution Prep (5 points)
 
@@ -141,13 +152,14 @@ After proving FORGE's value internally (0.1) and adding enterprise rigor (0.2), 
 
 ### Sprint 2 (Weeks 3-4): Team Support & Installation Wizard
 
-**Goal**: Make FORGE team-ready
-**Story Points**: 12 points
+**Goal**: Make FORGE team-ready and customizable
+**Story Points**: 14 points
 
 **Stories**:
 - 4.4: Team Configuration Support (3 pts)
 - 4.5: Company Branding Support (2 pts)
 - 4.6: Installation Wizard (2 pts)
+- 4.7: Configurable Affirmation Levels (2 pts) ← NEW
 - **U-1**: Prepare Skills for Upstream (2 pts)
 - **U-2**: Prepare Standup for Upstream (2 pts)
 - **U-3**: Engage Dan & Community (1 pt)
@@ -353,13 +365,13 @@ Based on BMAD METHOD patterns adapted for PAI
 
 ## Timeline Estimate
 
-**Story Points Total**: 26 points (21 original + 5 upstream prep)
+**Story Points Total**: 28 points (23 customization + 5 upstream prep)
 
 **Week-by-Week**:
 - Weeks 1-2: De-personalization + configuration (14 pts)
-- Weeks 3-4: Team support + upstream prep (12 pts)
+- Weeks 3-4: Team support + upstream prep (14 pts)
 
-**Total**: 26 points / 8 points per week = 3.25 weeks (round to 3-4 weeks)
+**Total**: 28 points / 8 points per week = 3.5 weeks (round to 3-4 weeks)
 
 ---
 
@@ -372,7 +384,7 @@ Based on BMAD METHOD patterns adapted for PAI
 ✅ **Shareability** (0.3): Customizable, team-ready, upstream-contributable
 
 **Total FORGE**:
-- **Story Points**: 164 (60 + 78 + 26)
+- **Story Points**: 166 (60 + 78 + 28)
 - **Timeline**: 20-24 weeks (~5-6 months)
 - **Capabilities**: 3 skills, 6 agents, full standup, CMMC compliance, test-first
 - **Adoption**: Solo developer, teams, upstream PAI
@@ -409,7 +421,7 @@ Based on BMAD METHOD patterns adapted for PAI
 | **Release 0.1** | 8-10 weeks | 1 skill + 3 agents + core standup | Hypothesis validated ✅ |
 | **Release 0.2** | 8-10 weeks | 2 skills + 3 agents + enterprise features | CMMC + ATDD ready ✅ |
 | **Release 0.3** | 3-4 weeks | Customization + upstream contribution | Shareable ✅ |
-| **TOTAL** | 20-25 weeks | 164 story points | FORGE complete ✅ |
+| **TOTAL** | 20-25 weeks | 166 story points | FORGE complete ✅ |
 
 ---
 
