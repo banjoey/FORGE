@@ -309,3 +309,173 @@ Upstream Contribution: 🚀 NEXT (after Release 0.2)
 **Final Scope**: 0 story points
 
 **Dogfooding Impact**: Multi-agent standup review prevented 3+ story points of wasted work ✅
+
+---
+
+## New Backlog Items (Added 2025-12-03)
+
+### Story 3.7: CreateAgent Skill (5 points) - ⏩ DEFERRED
+
+**Priority**: Could Have (nice-to-have productivity tool)
+**Decision (2025-12-03)**: ⏩ DEFERRED to post-0.2 backlog (agreed with user)
+
+**Problem**:
+Creating custom agents requires manually writing 850-950 line agent.md files with specific sections (Role, Responsibilities, Communication Style, Examples, Integration, etc.). This is time-consuming and error-prone.
+
+**Solution**:
+Create a CreateAgent skill that guides users through interactive agent creation:
+
+**Workflow**:
+1. Ask user for agent basics (name, role, expertise, personality)
+2. Generate agent.md with PAI-compliant structure
+3. Add agent to `.claude/agents/[AgentName]/agent.md`
+4. Provide validation (check structure, completeness, PAI compliance)
+5. Offer to add agent to default standup roster (optional)
+
+**Example**:
+```
+User: "Create a new agent for DevOps engineering"
+
+CreateAgent workflow:
+  1. Agent name? → "David"
+  2. Role? → "DevOps Engineer"
+  3. Expertise? → "CI/CD, infrastructure, monitoring, incident response"
+  4. Personality? → "Proactive, automation-focused, reliability-minded"
+  5. Triggers? → "Deployment, infrastructure changes, performance issues"
+  6. Generates .claude/agents/David/agent.md (850 lines)
+  7. Validates structure and PAI compliance
+  8. Adds David to Standup skill roster (optional)
+
+Output: David agent ready for standup participation
+```
+
+**Benefits**:
+- ✅ Faster agent creation (10 minutes vs 2 hours)
+- ✅ Consistent structure (PAI-compliant by default)
+- ✅ Validation built-in (catch errors early)
+- ✅ Lower barrier to custom rosters (more user adoption)
+
+**Effort**: 5 story points
+- 2 pts: CreateAgent workflow (interactive prompts, validation)
+- 1 pt: agent.md template generation (850-950 line structure)
+- 1 pt: PAI compliance validation (TitleCase, USE WHEN, Examples)
+- 1 pt: Integration with Standup skill (add to roster)
+
+**Acceptance Criteria**:
+- [ ] Interactive workflow collects agent basics (name, role, expertise, personality)
+- [ ] Generates PAI-compliant agent.md (850-950 lines)
+- [ ] Validates structure (required sections present)
+- [ ] Creates agent file at `.claude/agents/[AgentName]/agent.md`
+- [ ] Optionally adds agent to Standup skill roster
+- [ ] Provides usage examples (how to invoke new agent)
+
+**Validation**:
+- Test: Create agent "David (DevOps)" → generates valid agent.md
+- Test: Validation catches missing sections → provides helpful error
+- Test: Add to roster → David appears in suggestRoster() logic
+- Test: Run standup with David → David contributes expertise
+
+**Deferral Rationale**:
+- User agreed: "I like the idea but agree it's a nice to have. Let's put it on the backlog."
+- Current manual process works (not blocking any users)
+- Better to ship Release 0.2, gather feedback on agent creation pain points
+- Revisit IF users report: "Creating custom agents is too complex"
+
+**Priority**: Could Have (productivity tool, not MVP blocker)
+
+---
+
+### Epic 3.8: Emma Optimization (8 points) - ⏩ DEFERRED
+
+**Priority**: Should Have (performance optimization)
+**Decision (2025-12-03)**: ⏩ DEFERRED until user testing validates need
+
+**Problem**:
+Emma's comprehensive security analysis may have performance optimization opportunities. User wants to test impact before implementing changes to ensure efficacy isn't affected.
+
+**Solution**:
+Identify and implement Emma optimizations ONLY after validating they don't reduce security detection accuracy.
+
+**User Requirements**:
+1. Test any optimizations against current Emma baseline (78/78 tests passing)
+2. Ensure security efficacy is maintained or improved (zero regression)
+3. Measure impact on:
+   - Detection accuracy (same or better)
+   - Response time (target: <2s for code review)
+   - Context usage (target: <50% reduction)
+   - Test coverage (maintain 100%)
+
+**Potential Optimization Areas** (TBD after testing):
+1. CMMC hierarchical loading (see Story 0.3-S1 - rejected for standup, may revisit for Emma)
+2. Vulnerability pattern caching (avoid re-analyzing same patterns)
+3. Threat model templates (pre-built STRIDE analysis for common features)
+4. Progressive security analysis (quick scan first, deep scan on demand)
+
+**Testing Approach**:
+```
+1. Establish Emma baseline:
+   - Run Emma on 20 code samples (varied vulnerabilities)
+   - Measure: detection rate, response time, context usage
+   - Target: 100% detection rate (all vulnerabilities found)
+
+2. Apply optimization (one at a time):
+   - Implement optimization
+   - Re-run 20 code samples
+   - Compare: detection rate, response time, context usage
+
+3. Validate:
+   - Detection rate: Same or better (100%)
+   - Response time: Faster (target: <2s)
+   - Context usage: Lower (target: <50% reduction)
+   - All 78 tests still passing
+
+4. If validation fails:
+   - Revert optimization
+   - Document why it failed
+   - Try alternative approach
+```
+
+**Benefits**:
+- ✅ Faster Emma responses (better UX)
+- ✅ Lower context usage (more efficient)
+- ✅ Maintained accuracy (zero security regression)
+- ✅ Data-driven optimization (not guessing)
+
+**Effort**: 8 story points
+- 2 pts: Establish Emma baseline (20 code samples, metrics)
+- 2 pts: Implement optimization 1 (TBD after testing)
+- 2 pts: Implement optimization 2 (TBD after testing)
+- 1 pt: Validation testing (ensure no regression)
+- 1 pt: Documentation (optimization decisions and trade-offs)
+
+**Acceptance Criteria**:
+- [ ] Emma baseline established (20 code samples, 100% detection)
+- [ ] Optimizations tested individually (not bulk changes)
+- [ ] All 78 tests still passing (zero regression)
+- [ ] Detection accuracy maintained or improved (100%)
+- [ ] Performance improved (measurable response time reduction)
+- [ ] Documentation updated (optimization rationale)
+
+**Validation**:
+- Test: Run Emma on 20 code samples → 100% detection rate
+- Test: Apply optimization → detection rate still 100%
+- Test: Measure response time → faster than baseline
+- Test: All 78 tests passing → zero regression
+
+**Deferral Rationale**:
+- User requirement: "I'd like to do some testing to see how it will affect her"
+- User concern: "I don't want to affect her efficacy at all"
+- User plan: "We may need to help her 'get fit'" (data-driven optimization)
+- Better to ship Release 0.2 first, then optimize based on actual usage patterns
+- Make this its own epic (not bundled with other work)
+- Revisit AFTER Release 0.2 with real user data
+
+**Priority**: Should Have (but only after validation)
+**Risk**: Medium (could reduce security efficacy if done wrong)
+**Mitigation**: Test thoroughly, revert if validation fails, make incremental changes
+
+---
+
+**Backlog Last Updated**: 2025-12-03
+**New Items Added**: 2 (CreateAgent skill, Emma optimization epic)
+**Total Deferred Scope**: 5 + 8 = 13 story points (future work, post-0.2)
