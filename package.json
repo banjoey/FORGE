@@ -3,12 +3,17 @@
   "version": "0.2.0",
   "description": "Fused Optimization & Reasoning for Generative Engineering - Multi-agent collaboration for PAI",
   "type": "module",
+  "bin": {
+    "emma-scan": "./bin/emma-scan.ts"
+  },
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "build": "tsc",
-    "lint": "eslint src tests --ext .ts"
+    "lint": "eslint src tests --ext .ts",
+    "emma:scan": "ts-node bin/emma-scan.ts",
+    "emma:stride": "ts-node bin/emma-scan.ts --stride"
   },
   "keywords": [
     "pai",

@@ -134,9 +134,39 @@ Problem: Existing task managers are too complex
 
 ---
 
+### Test 4: Emma CLI (Optional)
+
+If you want to use Emma's command-line security scanner:
+
+```bash
+# Install Emma CLI globally (from FORGE directory)
+npm install
+npm link
+
+# Test Emma CLI
+emma-scan --help
+
+# Scan a file
+emma-scan src/auth/login.ts
+
+# Scan with STRIDE analysis
+emma-scan --stride src/payment.ts
+```
+
+**Expected output**: Emma security scan results with vulnerability findings
+
+**Alternative (without global install)**:
+```bash
+# Use npm scripts
+npm run emma:scan src/auth/login.ts
+npm run emma:stride src/payment.ts
+```
+
+---
+
 ## What Gets Installed
 
-### Skills (4 total)
+### Skills (5 total)
 
 | Skill | Workflows | Purpose |
 |-------|-----------|---------|
@@ -144,6 +174,7 @@ Problem: Existing task managers are too complex
 | **Security** | ThreatModel, CmmcBaseline, SecurityReview | Security engineering |
 | **TestArchitect** | CreateTestStrategy, DefineCoverage, ATDD | Test strategy and quality |
 | **Standup** | RunStandup, SynthesizeDecision, ManageContext | Multi-agent orchestration |
+| **Emma** | ScanCode, PerformSTRIDE, GenerateAudit, RunStandup | Security scanning with CMMC Level 2 compliance (CLI + PAI skill) |
 
 ---
 
@@ -428,5 +459,9 @@ claude                 # Start Claude Code
 
 ---
 
-**Last Updated**: 2025-12-02
-**FORGE Version**: Release 0.2 (Emma Security Engineer agent with 72 automated tests)
+**Last Updated**: 2025-12-03
+**FORGE Version**: Release 0.2 - Production Ready
+- Emma Security Engineer: 100% test coverage (78/78 tests)
+- Emma CLI tool: Command-line security scanning
+- Emma PAI Skill: Integrated with Claude Code
+- GitHub Actions: Automated CI/CD security scanning

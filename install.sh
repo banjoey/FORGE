@@ -82,7 +82,7 @@ install_skills() {
     echo ""
     print_info "Installing FORGE skills..."
 
-    local skills=("AgilePm" "Security" "TestArchitect" "Standup")
+    local skills=("AgilePm" "Security" "TestArchitect" "Standup" "Emma")
 
     for skill in "${skills[@]}"; do
         local source="$FORGE_DIR/.claude/skills/$skill"
@@ -150,7 +150,7 @@ verify_installation() {
     local all_ok=true
 
     # Check skills
-    local skills=("AgilePm" "Security" "TestArchitect" "Standup")
+    local skills=("AgilePm" "Security" "TestArchitect" "Standup" "Emma")
     for skill in "${skills[@]}"; do
         if [ -e "$HOME/.claude/skills/$skill/skill.md" ]; then
             print_success "Skill verified: $skill"

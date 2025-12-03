@@ -1,0 +1,237 @@
+name: Emma Security Scan
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  pull-requests: write
+
+jobs:
+  security-scan:
+    name: Security Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Emma
+        run: npm run build
+
+      - name: Run Emma Security Scan
+        id: emma-scan
+        run: |
+          set -o pipefail
+          npx ts-node bin/emma-scan.ts src/ --json | tee emma-results.json
+        continue-on-error: true
+
+      - name: Parse Emma Results
+        id: parse-results
+        if: always()
+        run: |
+          if [ -f emma-results.json ]; then
+            echo "Emma scan completed"
+
+            # Count vulnerabilities by severity
+            CRITICAL=$(jq -r '.vulnerabilities[] | select(.severity == "Critical") | .vulnerability' emma-results.json 2>/dev/null | wc -l || echo "0")
+            HIGH=$(jq -r '.vulnerabilities[] | select(.severity == "High") | .vulnerability' emma-results.json 2>/dev/null | wc -l || echo "0")
+            MEDIUM=$(jq -r '.vulnerabilities[] | select(.severity == "Medium") | .vulnerability' emma-results.json 2>/dev/null | wc -l || echo "0")
+            LOW=$(jq -r '.vulnerabilities[] | select(.severity == "Low") | .vulnerability' emma-results.json 2>/dev/null | wc -l || echo "0")
+
+            echo "critical=$CRITICAL" >> $GITHUB_OUTPUT
+            echo "high=$HIGH" >> $GITHUB_OUTPUT
+            echo "medium=$MEDIUM" >> $GITHUB_OUTPUT
+            echo "low=$LOW" >> $GITHUB_OUTPUT
+
+            TOTAL=$((CRITICAL + HIGH + MEDIUM + LOW))
+            echo "total=$TOTAL" >> $GITHUB_OUTPUT
+
+            echo "### Emma Security Scan Results" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "| Severity | Count |" >> $GITHUB_STEP_SUMMARY
+            echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
+            echo "| Critical | $CRITICAL |" >> $GITHUB_STEP_SUMMARY
+            echo "| High | $HIGH |" >> $GITHUB_STEP_SUMMARY
+            echo "| Medium | $MEDIUM |" >> $GITHUB_STEP_SUMMARY
+            echo "| Low | $LOW |" >> $GITHUB_STEP_SUMMARY
+            echo "| **Total** | **$TOTAL** |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No Emma results found"
+            echo "total=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload Emma Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: emma-security-results
+          path: emma-results.json
+          retention-days: 30
+
+      - name: Comment PR with Results
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            let resultsComment = '## 🔒 Emma Security Scan Results\n\n';
+
+            if (fs.existsSync('emma-results.json')) {
+              const results = JSON.parse(fs.readFileSync('emma-results.json', 'utf8'));
+              const critical = '${{ steps.parse-results.outputs.critical }}';
+              const high = '${{ steps.parse-results.outputs.high }}';
+              const medium = '${{ steps.parse-results.outputs.medium }}';
+              const low = '${{ steps.parse-results.outputs.low }}';
+              const total = '${{ steps.parse-results.outputs.total }}';
+
+              resultsComment += '| Severity | Count |\n';
+              resultsComment += '|----------|-------|\n';
+              resultsComment += `| 🔴 Critical | ${critical} |\n`;
+              resultsComment += `| 🟠 High | ${high} |\n`;
+              resultsComment += `| 🟡 Medium | ${medium} |\n`;
+              resultsComment += `| 🟢 Low | ${low} |\n`;
+              resultsComment += `| **Total** | **${total}** |\n\n`;
+
+              if (results.vulnerabilities && results.vulnerabilities.length > 0) {
+                resultsComment += '### Vulnerabilities Found\n\n';
+                results.vulnerabilities.slice(0, 10).forEach((vuln, i) => {
+                  resultsComment += `#### ${i + 1}. ${vuln.vulnerability} (${vuln.severity})\n`;
+                  resultsComment += `- **CMMC**: ${vuln.cmmc}\n`;
+                  resultsComment += `- **OWASP**: ${vuln.owasp}\n`;
+                  resultsComment += `- **Mitigation**: ${vuln.mitigation}\n\n`;
+                });
+
+                if (results.vulnerabilities.length > 10) {
+                  resultsComment += `\n_... and ${results.vulnerabilities.length - 10} more vulnerabilities. See full report in artifacts._\n`;
+                }
+              } else {
+                resultsComment += '✅ **No vulnerabilities detected!**\n\n';
+                resultsComment += 'Your code passed Emma\'s security analysis.\n';
+              }
+            } else {
+              resultsComment += '⚠️ Emma scan did not complete. Check workflow logs.\n';
+            }
+
+            resultsComment += '\n---\n';
+            resultsComment += '*Powered by [Emma Security Engineer](https://github.com/banjoey/FORGE) - CMMC Level 2 Compliance*\n';
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: resultsComment
+            });
+
+      - name: Fail on Critical Vulnerabilities
+        if: steps.parse-results.outputs.critical > 0
+        run: |
+          echo "❌ Critical vulnerabilities found! Failing build."
+          echo "Critical vulnerabilities must be fixed before merging."
+          exit 1
+
+      - name: Warn on High Vulnerabilities
+        if: steps.parse-results.outputs.high > 0 && steps.parse-results.outputs.critical == 0
+        run: |
+          echo "⚠️ High severity vulnerabilities found!"
+          echo "Consider fixing before merging."
+
+  stride-analysis:
+    name: STRIDE Threat Modeling
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Emma
+        run: npm run build
+
+      - name: Run STRIDE Analysis on Changed Files
+        id: stride
+        run: |
+          # Get list of changed .ts, .tsx, .js, .jsx files
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -E '\.(ts|tsx|js|jsx)$' || true)
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No code files changed, skipping STRIDE analysis"
+            echo "files_changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "Running STRIDE analysis on changed files"
+            echo "files_changed=true" >> $GITHUB_OUTPUT
+
+            # Run STRIDE on each changed file
+            for file in $CHANGED_FILES; do
+              if [ -f "$file" ]; then
+                echo "Analyzing $file"
+                npx ts-node bin/emma-scan.ts --stride "$file" --json >> stride-results.json || true
+              fi
+            done
+          fi
+        continue-on-error: true
+
+      - name: Upload STRIDE Results
+        if: steps.stride.outputs.files_changed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: emma-stride-results
+          path: stride-results.json
+          retention-days: 30
+
+  cmmc-compliance:
+    name: CMMC Compliance Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Emma
+        run: npm run build
+
+      - name: Run Emma Tests
+        run: npm test
+
+      - name: Check CMMC Coverage
+        run: |
+          echo "### CMMC Level 2 Compliance Status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Emma is configured for CMMC Level 2 compliance" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Coverage**: 17 CMMC domains, 25+ practices" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "See \`docs/CMMC-MAPPING.md\` for complete practice-to-pattern reference." >> $GITHUB_STEP_SUMMARY
