@@ -4,7 +4,7 @@
 
 **Input**: Decision context (PRD review, architecture design, feature prioritization, etc.)
 
-**Output**: Synthesized recommendations from Murat (PM), Emma (Security), and Wei (QA) with decision recorded in project-context.md
+**Output**: Synthesized recommendations from Mary (Business Analyst), Bob (Scrum Master), and Murat (Test Architect) with decision recorded in project-context.md
 
 ---
 
@@ -23,10 +23,15 @@
 
 ## Agent Rosters (Customizable)
 
-**Default Roster** (Software Development):
-- **Murat** (Product Manager): User value, business priorities, MVP scoping
-- **Emma** (Security Engineer): Security threats, CMMC compliance, secure design
-- **Wei** (QA Lead): Test strategy, testability, quality gates
+**Default Roster** (Agile Software Development):
+- **Mary** (Business Analyst): Requirements gathering, user value, business priorities, stakeholder management
+- **Bob** (Scrum Master): Sprint planning, velocity tracking, impediment removal, scope protection
+- **Murat** (Test Architect): ATDD enforcement, risk-based testing, quality gates, test strategy
+
+**Additional Specialists** (Add as needed):
+- **Emma** (Security Engineer): Security threats, CMMC compliance, secure design [Create agent file to activate]
+- **Wei** (QA Lead): Test execution, automation, bug tracking [Create agent file to activate]
+- **[Your Custom Agent]**: Define role, expertise, personality
 
 **Custom Rosters** (Your Domain):
 You can define custom agent rosters for different domains:
@@ -49,11 +54,11 @@ Create a `.claude/agents/[AgentName]/agent.md` file with:
 - Integration with other agents
 
 **Roster Selection**:
-- **project-context.md** defines which roster to use (default: Murat/Emma/Wei)
-- Override per standup: "Run standup with Investment Advisory Team"
+- **project-context.md** defines which roster to use (default: Mary/Bob/Murat)
+- Override per standup: "Run standup with Investment Advisory Team" or "Add Emma (Security) to this standup"
 - Future: FORGE auto-detects domain and suggests roster
 
-**Default Throughout This Workflow**: Examples use Murat/Emma/Wei (software development roster), but principles apply to any custom roster.
+**Default Throughout This Workflow**: Examples use Mary/Bob/Murat (agile software development roster), but principles apply to any custom roster. Add Emma (Security) or Wei (QA) for security-sensitive or quality-critical decisions.
 
 ---
 
