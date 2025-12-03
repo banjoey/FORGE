@@ -307,7 +307,7 @@ describe('Authentication Bypass Detection (10 tests)', () => {
     expect(analysis.strideCategory).toBe('Spoofing')
     expect(analysis.severity).toBe('Critical')
     expect(analysis.owasp).toBe('A07')
-    expect(analysis.cmmc).toBe('IA.L2-3.5.7')
+    expect(analysis.cmmc).toBe('IA.L2-3.5.10')  // Protected Passwords (store/transmit cryptographically)
     expect(analysis.mitigation.toLowerCase()).toMatch(/environment|secret.*manager/)
   })
 

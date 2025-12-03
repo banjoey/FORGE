@@ -361,12 +361,16 @@ app.post('/admin/login', async (req, res) => {
 
 **Patterns Detecting This Violation**:
 - **Weak Password Policy** - No password strength validation
-- **Hardcoded Credentials** - Passwords in source code
 
 **Example**:
 ```typescript
 // VIOLATION
-const ADMIN_PASSWORD = "admin123"  // Hardcoded, weak!
+function validatePassword(password) {
+  if (password.length >= 6) {  // Too weak!
+    return true
+  }
+  return false
+}
 
 // COMPLIANT
 const passwordSchema = new PasswordValidator()
@@ -383,32 +387,38 @@ if (!passwordSchema.validate(req.body.password)) {
 ```
 
 **STRIDE Category**: Spoofing
-**Severity**: Critical
+**Severity**: Medium
 **OWASP**: A07 - Identification and Authentication Failures
-**Test Coverage**: Critical-3, Critical-9
+**Test Coverage**: Critical-9, CMMC-4
 
 #### IA.L2-3.5.10: Protected Passwords
 **Requirement**: Store and transmit only cryptographically-protected passwords.
 
 **Patterns Detecting This Violation**:
+- **Hardcoded Credentials** - Passwords/secrets stored in plaintext source code
 - **JWT Secret in Code** - JWT secret hardcoded
 - **Insecure Password Reset** - Tokens not cryptographically secure
 - **Insecure Remember Me** - Plaintext tokens
 
 **Example**:
 ```typescript
-// VIOLATION
+// VIOLATION - Hardcoded credentials
+const ADMIN_PASSWORD = "admin123"  // Stored in plaintext!
 const JWT_SECRET = "my-secret-key"  // Hardcoded!
 
-// COMPLIANT
-const JWT_SECRET = process.env.JWT_SECRET  // From secure secret manager
+// COMPLIANT - Cryptographically protected
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD  // From secure vault
+const JWT_SECRET = process.env.JWT_SECRET  // From secret manager
 if (!JWT_SECRET) throw new Error('JWT_SECRET not configured')
+
+// Store passwords with bcrypt/Argon2
+const hashedPassword = await bcrypt.hash(password, 12)
 ```
 
-**STRIDE Category**: Information Disclosure
+**STRIDE Category**: Spoofing
 **Severity**: Critical
-**OWASP**: A02 - Cryptographic Failures
-**Test Coverage**: CMMC-3, Critical-10, Critical-11
+**OWASP**: A07 - Identification and Authentication Failures
+**Test Coverage**: CMMC-3, Critical-3, Critical-10, Critical-11
 
 ---
 
@@ -840,8 +850,8 @@ app.get('/oauth/callback', async (req, res) => {
 | CM.L2-3.4.3 | Change Control | 1 | Medium | Missing Change Control |
 | CP.L2-3.6.1 | Backup | 1 | Medium | Missing Backup Mechanism |
 | IA.L2-3.5.1 | Multi-Factor Authentication | 1 | High | Missing MFA on Privileged Accounts |
-| IA.L2-3.5.7 | Password Complexity | 2 | Critical | Hardcoded Credentials, Weak Password Policy |
-| IA.L2-3.5.10 | Protected Passwords | 3 | Critical | JWT Secret in Code, Insecure Password Reset |
+| IA.L2-3.5.7 | Password Complexity | 1 | Medium | Weak Password Policy |
+| IA.L2-3.5.10 | Protected Passwords | 4 | Critical | Hardcoded Credentials, JWT Secret in Code, Insecure Password Reset, Insecure Remember Me |
 | IR.L2-3.6.1 | Incident Response | 1 | Medium | Missing Incident Response |
 | MP.L2-3.8.3 | Data at Rest Encryption | 1 | High | Unencrypted Data at Rest |
 | RA.L2-3.11.2 | Vulnerability Scanning | 1 | Medium | Missing Vulnerability Scanning |
@@ -882,8 +892,8 @@ Use this checklist to track CMMC Level 2 compliance across domains:
 
 ### Identification and Authentication (IA)
 - [ ] IA.L2-3.5.1: MFA enabled for privileged accounts
-- [ ] IA.L2-3.5.7: Strong password policies enforced (no hardcoded credentials)
-- [ ] IA.L2-3.5.10: Passwords stored with cryptographic protection (bcrypt, Argon2)
+- [ ] IA.L2-3.5.7: Strong password policies enforced (minimum length, complexity requirements)
+- [ ] IA.L2-3.5.10: Passwords stored/transmitted with cryptographic protection (no hardcoded credentials, use bcrypt/Argon2)
 
 ### Incident Response (IR)
 - [ ] IR.L2-3.6.1: Incident detection and response mechanisms implemented
