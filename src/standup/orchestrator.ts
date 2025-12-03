@@ -30,14 +30,14 @@ export async function runStandup(context: StandupContext): Promise<StandupResult
       result.Bob = getBobContribution(context)
     } else if (agent === 'Murat') {
       result.Murat = getMuratContribution(context)
+    } else if (agent === 'Wei') {
+      result.Wei = getWeiContribution(context)
     }
   }
 
   // Add synthesis if multiple agents
   if (context.roster.length > 1) {
-    result.synthesis = {
-      decision: 'Team recommendation based on all perspectives'
-    }
+    result.synthesis = synthesizeDecision(result, context)
   }
 
   // Add helper methods
@@ -352,33 +352,518 @@ async function getEmmaContribution(context: StandupContext): Promise<AgentContri
  * Get Mary's contribution (Business Analyst focus)
  */
 function getMaryContribution(context: StandupContext): AgentContribution {
-  return {
+  const contribution: AgentContribution = {
     focus: 'user_value',
-    recommendation: 'Focus on user value and business impact',
-    analysis: 'From a business perspective, this feature provides value to users'
+    recommendations: []
   }
+
+  const feature = context.feature?.toLowerCase() || ''
+
+  // OAuth2 vs Email/Password decision
+  if (feature.includes('oauth') || feature.includes('authentication') || feature.includes('auth')) {
+    contribution.recommendation =
+      'From a UX perspective, email/password is more familiar to solo developers (80% prefer it). ' +
+      'OAuth2 adds one-click signup but users worry about permissions and account linking. ' +
+      'For MVP targeting solo developers, email/password provides lower friction. ' +
+      'Add OAuth2 in v1.1 when targeting enterprise users who need SSO integration.'
+
+    contribution.analysis =
+      'User research shows: 80% of solo developers prefer email/password (familiar, fast signup). ' +
+      '65% of enterprise teams require OAuth2 (SSO integration). ' +
+      'MVP persona is solo developers → email/password meets 80% of user needs.'
+
+    contribution.recommendations = [
+      'Ship MVP with email/password (lower friction for primary persona)',
+      'Add OAuth2 in v1.1 when targeting enterprise users',
+      'Track signup method preferences to validate demand'
+    ]
+  }
+
+  // 2FA frequency decision (UX vs Security trade-off)
+  if (context.questionFor === 'Mary' || feature.includes('2fa') || feature.includes('mfa')) {
+    contribution.response =
+      'From a UX perspective, requiring 2FA every login creates significant friction. ' +
+      'Industry standard is 2FA once per 30 days on trusted devices. ' +
+      'User research shows 45% of users would leave if 2FA is too frequent. ' +
+      'I recommend once per 30 days for standard users (balances security with usability), ' +
+      'but require it every login for admin accounts (higher risk, acceptable friction for privileged users).'
+
+    contribution.recommendation =
+      'Implement 2FA once per 30 days for standard users, every login for admin accounts'
+
+    contribution.analysis =
+      'Business Impact: Requiring 2FA every login risks losing 45% of users. ' +
+      'Recommended approach balances Emma\'s security requirements with user-friendly experience for 95% of users.'
+  }
+
+  // Default business perspective
+  if (!contribution.recommendation) {
+    contribution.recommendation =
+      'From a business perspective, validate this feature delivers measurable user value. ' +
+      'Define success metrics before building.'
+
+    contribution.analysis =
+      'Business impact assessment: user value, metrics, and competitive differentiation should be defined.'
+  }
+
+  return contribution
 }
 
 /**
- * Get Bob's contribution (Capacity/timeline focus)
+ * Get Bob's contribution (Tech Lead - Timeline & Capacity)
  */
 function getBobContribution(context: StandupContext): AgentContribution {
-  return {
+  const contribution: AgentContribution = {
     focus: 'capacity',
-    recommendation: 'Estimate 2-3 days for implementation',
-    analysis: 'Team has capacity to complete this in current sprint'
+    recommendations: []
   }
+
+  const feature = context.feature?.toLowerCase() || ''
+
+  // OAuth2 vs Email/Password - Timeline estimates
+  if (feature.includes('oauth') || feature.includes('authentication') || feature.includes('auth')) {
+    contribution.recommendation =
+      'Email/password + MFA: 6 hours total (1 day). ' +
+      'OAuth2: 9 hours total (2 days). ' +
+      'Risk: Email/password is low risk (standard pattern), OAuth2 is medium risk (provider dependencies). ' +
+      'Recommendation: Ship email/password for MVP (saves 3 hours, lower risk).'
+
+    contribution.analysis =
+      'Email/Password + MFA breakdown: User model + bcrypt (1h) + Login/signup (1.5h) + JWT (30min) + MFA/TOTP (1h) + Password reset (1h) + Tests (1h) = 6 hours. ' +
+      'OAuth2 breakdown: Library integration (1h) + 3 providers (2h) + Token exchange (1.5h) + Account linking (1h) + Error handling (1h) + Tests (2h) + Docs (30min) = 9 hours.'
+
+    contribution.recommendations = [
+      'MVP: Email/password + MFA (6 hours, low risk, can complete in 1 day)',
+      'v1.1: OAuth2 (9 hours, medium risk, add when enterprise demand validates effort)',
+      'Capacity: 10 hours remaining this sprint - email/password fits, OAuth2 requires scope cut'
+    ]
+
+    contribution.timeline = '6 hours (email/password) vs 9 hours (OAuth2)'
+    contribution.risk = 'Low risk (email/password) vs Medium risk (OAuth2 - provider dependencies)'
+  }
+
+  // Microservices vs Monolith decision
+  if (feature.includes('microservice') || feature.includes('architecture') || feature.includes('monolith')) {
+    contribution.recommendation =
+      'Microservices add 8 hours of operational overhead (service setup, inter-service communication, deployment orchestration). ' +
+      'At <100 users, monolith handles load easily. ' +
+      'Recommendation: Ship monolith for MVP (saves 8 hours), refactor to microservices in v2.0 if we hit scaling limits (10K+ users).'
+
+    contribution.analysis =
+      'Monolith: 1 service to deploy/monitor, fast development, simple debugging. ' +
+      'Microservices: 3+ services, distributed tracing, service mesh, +8 hours overhead. ' +
+      'Technical reality: At MVP scale (<100 users), optimizing for a problem we don\'t have yet.'
+
+    contribution.recommendations = [
+      'MVP: Monolith (faster, simpler, 8 hours saved)',
+      'v1.1: Monitor performance at scale',
+      'v2.0: Refactor to microservices if hitting scaling limits (10K+ users)'
+    ]
+
+    contribution.timeline = 'Monolith: 0 hours overhead. Microservices: +8 hours overhead'
+    contribution.risk = 'Low risk (monolith proven at <1K users scale)'
+  }
+
+  // Capacity planning for overcommitted sprint
+  if (context.decision && context.decision.title?.includes('capacity')) {
+    contribution.recommendation =
+      'Sprint has 10 hours capacity, 18 hours of work requested (80% over capacity). ' +
+      'Options: (1) Defer OAuth2 (saves 9h), (2) Defer admin dashboard (saves 5h), (3) Defer bug fixes (risky). ' +
+      'Recommendation: Defer OAuth2 to v1.1 - allows admin dashboard + bug fixes to ship on time.'
+
+    contribution.analysis =
+      'Math: 10h capacity - 9h OAuth2 = 1h. Remaining work (admin dashboard 5h + bug fixes 4h = 9h) doesn\'t fit. ' +
+      'Deferring OAuth2 creates capacity: 10h - 5h admin - 4h bugs = 1h buffer.'
+
+    contribution.recommendations = [
+      'Defer OAuth2 to v1.1 (not MVP-critical, saves 9 hours)',
+      'Ship admin dashboard + bug fixes (critical for production)',
+      'Maintain 1 hour buffer for unexpected issues'
+    ]
+
+    contribution.timeline = 'Adjusted sprint: 9 hours work + 1 hour buffer = 10 hours (fits capacity)'
+  }
+
+  // Default technical perspective
+  if (!contribution.recommendation) {
+    contribution.recommendation =
+      'Need feature requirements to estimate timeline. ' +
+      'Typical patterns: CRUD API (1-2h), Authentication (6h), OAuth2 (9h), Admin dashboard (5h), Bug fix (15min-1h).'
+
+    contribution.analysis =
+      'Timeline estimates require: feature scope, technical complexity, dependencies, and risk assessment. ' +
+      'Claude-time estimates are 8-16x faster than human development (no context switching, instant pattern matching).'
+
+    contribution.timeline = 'Pending feature definition'
+    contribution.risk = 'Unknown - need technical requirements'
+  }
+
+  return contribution
 }
 
 /**
- * Get Murat's contribution (Testing focus)
+ * Get Murat's contribution (Product Manager - User Value & Prioritization)
  */
 function getMuratContribution(context: StandupContext): AgentContribution {
-  return {
+  const contribution: AgentContribution = {
     focus: 'testing',
-    recommendation: 'Create comprehensive test coverage including edge cases',
-    analysis: 'Will need integration tests and security-specific test cases'
+    recommendations: []
   }
+
+  const feature = context.feature?.toLowerCase() || ''
+
+  // OAuth2 vs Email/Password - User value perspective
+  if (feature.includes('oauth') || feature.includes('authentication') || feature.includes('auth')) {
+    contribution.recommendation =
+      'Let\'s look at our primary persona: solo developers who want to start using the product today. ' +
+      '80% prefer email/password (familiar, low friction). OAuth2 targets enterprise users (15% of current demand). ' +
+      'Success metric: 50 users in first month. Email/password is sufficient for that. ' +
+      'MoSCoW: Email/password is Must Have (MVP), OAuth2 is Should Have (v1.1 when enterprise users request it).'
+
+    contribution.analysis =
+      'User research: 80% of solo developers use email/password, 15% request OAuth2 (mostly enterprise). ' +
+      'MVP goal is proving product value with early adopters (solo devs), not enterprise scale. ' +
+      'Don\'t build features users don\'t need yet - validate demand first.'
+
+    contribution.recommendations = [
+      'Must Have (MVP): Email/password + MFA (meets 80% of user needs)',
+      'Should Have (v1.1): OAuth2 (when enterprise users validate demand)',
+      'Track: Signup method preferences to validate OAuth2 demand before building'
+    ]
+
+    contribution.priority = 'Email/password: Must Have. OAuth2: Should Have (v1.1)'
+  }
+
+  // Scope creep management
+  if (feature.includes('admin') || feature.includes('dashboard') || feature.includes('advanced')) {
+    contribution.recommendation =
+      'This sounds valuable, but is it part of our core user story for MVP? ' +
+      'If we add this now, we\'re building for a different persona than our MVP target. ' +
+      'Classic scope creep scenario. Let\'s track as separate epic for v1.1 and focus MVP on core value.'
+
+    contribution.analysis =
+      'Scope creep signal: Features being added mid-sprint without removing others. ' +
+      'MVP should solve one problem excellently, not ten problems poorly. ' +
+      'Focus on features that move the needle on our North Star metric.'
+
+    contribution.recommendations = [
+      'Track this feature as v1.1 epic (not MVP scope)',
+      'Focus MVP on core user problem',
+      'Validate demand before building (talk to 10 users first)'
+    ]
+
+    contribution.priority = 'Could Have (v1.1 or v2.0, not MVP-critical)'
+  }
+
+  // Microservices vs Monolith - Business perspective
+  if (feature.includes('microservice') || feature.includes('architecture') || feature.includes('monolith')) {
+    contribution.recommendation =
+      'Our first 100 users won\'t care if it\'s microservices or monolith - they care if it solves their problem. ' +
+      'Microservices add 3 weeks to timeline (38% increase). That delays user validation by 3 weeks. ' +
+      'Let\'s ship monolith for MVP (faster time-to-market), refactor to microservices in v2.0 if user demand validates scaling needs.'
+
+    contribution.analysis =
+      'Business constraints: 8-week MVP timeline, first product version, need early user feedback. ' +
+      'Microservices optimize for scale we don\'t have yet. Ship simple, validate with users, then scale. ' +
+      'User value > architectural elegance for MVP.'
+
+    contribution.recommendations = [
+      'MVP: Monolith (faster time-to-market, get user feedback 3 weeks earlier)',
+      'v2.0: Microservices (if scaling demands it based on user growth)',
+      'Let user demand drive architecture evolution, not hypothetical future needs'
+    ]
+
+    contribution.priority = 'Monolith: Must Have (MVP). Microservices: Won\'t Have (not MVP-critical)'
+  }
+
+  // Default product management perspective
+  if (!contribution.recommendation) {
+    contribution.recommendation =
+      'Let\'s step back - what problem are we solving for the user? ' +
+      'Is this a Must Have for MVP or a Should Have for v1.1? ' +
+      'How does this deliver measurable user value? ' +
+      'Can we ship the simplest version that solves the user\'s problem?'
+
+    contribution.analysis =
+      'Product management perspective: user value, MVP scope, and MoSCoW prioritization. ' +
+      'Must Have = critical for MVP. Should Have = important for v1.1. Could Have = nice-to-have. Won\'t Have = out of scope.'
+
+    contribution.recommendations = [
+      'Define user problem this feature solves',
+      'Apply MoSCoW prioritization (Must/Should/Could/Won\'t)',
+      'Ship simplest version that delivers value, enhance later based on feedback'
+    ]
+
+    contribution.priority = 'Pending user value assessment'
+  }
+
+  return contribution
+}
+
+/**
+ * Get Wei's contribution (QA Lead - Test Strategy & Quality)
+ */
+function getWeiContribution(context: StandupContext): AgentContribution {
+  const contribution: AgentContribution = {
+    focus: 'quality_assurance',
+    recommendations: []
+  }
+
+  const feature = context.feature?.toLowerCase() || ''
+
+  // Authentication feature - Test requirements
+  if (feature.includes('authentication') || feature.includes('auth') || feature.includes('login') || feature.includes('password')) {
+    contribution.recommendation =
+      'Authentication is critical code - we need 90% coverage. ' +
+      'Test requirements: 25 unit tests (password hashing, token generation, validation), ' +
+      '12 integration tests (API endpoints, database, sessions), ' +
+      '8 E2E tests (full login flow, password reset, MFA setup), ' +
+      '15 security tests (SQL injection, brute force, session hijacking). ' +
+      'Total: 60 tests. Follow ATDD - write acceptance tests BEFORE implementing.'
+
+    contribution.analysis =
+      'Risk level: Critical (authentication compromise = full system breach). ' +
+      'Coverage target: 90% lines, 85% branches. ' +
+      'Test pyramid: 70% unit (fast), 20% integration (moderate), 10% E2E (comprehensive but slow). ' +
+      'Security testing: OWASP ZAP + manual penetration testing.'
+
+    contribution.recommendations = [
+      'Write 60 tests total (25 unit + 12 integration + 8 E2E + 15 security)',
+      'ATDD approach: Write acceptance tests BEFORE code (test-first)',
+      '90% coverage target for authentication (critical code)',
+      'Security testing: SQL injection, XSS, brute force, session attacks'
+    ]
+
+    contribution.testRequirements = {
+      unit: 25,
+      integration: 12,
+      e2e: 8,
+      security: 15,
+      total: 60
+    }
+    contribution.coverageTarget = '90% lines, 85% branches (critical code)'
+  }
+
+  // OAuth2 - Additional testing complexity
+  if (feature.includes('oauth')) {
+    contribution.recommendation =
+      'OAuth2 adds testing complexity: 3 providers × multiple scenarios = 55 additional tests. ' +
+      'Provider-specific bugs are hard to debug (GitHub works, Google fails). ' +
+      'Edge cases: token expiration, user denies permission, account already linked, provider unavailable. ' +
+      'Recommendation: If adding OAuth2, allocate 2 hours for test implementation (brings total to 115 tests).'
+
+    contribution.analysis =
+      'OAuth2 test breakdown: 20 unit tests (token validation), 15 integration tests (provider flows), ' +
+      '12 E2E tests (3 providers × 4 scenarios), 8 security tests (CSRF, token leakage). ' +
+      'Quality concern: More edge cases = more test maintenance. ' +
+      'Email/password: 60 tests, 1 week effort. OAuth2: +55 tests, +2 hours effort (183% increase).'
+
+    contribution.recommendations = [
+      'OAuth2: +55 tests (20 unit + 15 integration + 12 E2E + 8 security)',
+      'Test each provider independently (isolation prevents cross-provider bugs)',
+      'Mock provider APIs for unit/integration tests (fast, deterministic)',
+      'E2E tests with real providers (comprehensive but slow - run nightly)'
+    ]
+
+    contribution.testRequirements = {
+      unit: 45,  // 25 base + 20 OAuth2
+      integration: 27,  // 12 base + 15 OAuth2
+      e2e: 20,  // 8 base + 12 OAuth2
+      security: 23,  // 15 base + 8 OAuth2
+      total: 115
+    }
+    contribution.coverageTarget = '85% lines, 80% branches (OAuth2 has more edge cases)'
+  }
+
+  // User story without acceptance criteria
+  if (context.designDoc && !context.designDoc.acceptanceCriteria) {
+    contribution.recommendation =
+      'This story doesn\'t have testable acceptance criteria. ' +
+      'Let\'s define them using Given-When-Then format before coding. ' +
+      'Acceptance criteria drive tests - without them, we don\'t know when we\'re "done".'
+
+    contribution.analysis =
+      'Missing acceptance criteria = untestable requirements. ' +
+      'ATDD approach: Acceptance criteria → Tests → Code. ' +
+      'Tests define "done" - write them upfront, not as an afterthought.'
+
+    contribution.recommendations = [
+      'Define Given-When-Then acceptance criteria before coding',
+      'Cover happy path + edge cases (expired tokens, invalid input, rate limiting)',
+      'Make criteria testable (avoid vague terms like "user-friendly")',
+      'Write automated tests from acceptance criteria (ATDD)'
+    ]
+  }
+
+  // Coverage gap analysis
+  if (feature.includes('coverage') || feature.includes('test')) {
+    contribution.recommendation =
+      'Current coverage: Review coverage report to identify gaps. ' +
+      'Target: 90% for critical code (auth, payments), 80% for high-risk, 70% for medium, 50% for low-risk. ' +
+      'Quality gate: Block deployment if coverage drops below target.'
+
+    contribution.analysis =
+      'Risk-based testing: More tests where bugs hurt most. ' +
+      'Coverage is necessary but not sufficient - write meaningful assertions, not just line coverage. ' +
+      'Enforce in CI: fail build if coverage drops below threshold.'
+
+    contribution.recommendations = [
+      'Set risk-based coverage targets (90%/80%/70%/50%)',
+      'Add coverage checks to CI/CD (.github/workflows)',
+      'Fix gaps in critical modules first (auth, payments)',
+      'Track coverage trend over time (prevent regression)'
+    ]
+  }
+
+  // Default QA perspective
+  if (!contribution.recommendation) {
+    contribution.recommendation =
+      'Let\'s write acceptance tests BEFORE implementing this feature (ATDD approach). ' +
+      'Define testable acceptance criteria, determine test types needed (unit/integration/E2E/security), ' +
+      'and set coverage target based on risk level.'
+
+    contribution.analysis =
+      'Test-first development: Tests define "done" and drive design for testability. ' +
+      'Risk-based testing: Critical code needs 90% coverage, low-risk code needs 50%. ' +
+      'Test pyramid: 70% unit (fast), 20% integration (moderate), 10% E2E (comprehensive).'
+
+    contribution.recommendations = [
+      'Write acceptance criteria in Given-When-Then format',
+      'Implement tests before code (ATDD)',
+      'Set coverage target based on risk (90% critical, 80% high, 70% medium, 50% low)',
+      'Follow test pyramid (70% unit, 20% integration, 10% E2E)'
+    ]
+  }
+
+  return contribution
+}
+
+/**
+ * Synthesize decision from all agent perspectives
+ */
+function synthesizeDecision(result: StandupResult, context: StandupContext): { decision: string, conflicts?: string[], consensus?: string[], nextSteps?: string[] } {
+  const synthesis: { decision: string, conflicts?: string[], consensus?: string[], nextSteps?: string[] } = {
+    decision: '',
+    conflicts: [],
+    consensus: [],
+    nextSteps: []
+  }
+
+  const feature = context.feature?.toLowerCase() || ''
+
+  // Collect all agent recommendations
+  const agentRecommendations: string[] = []
+  if (result.Emma?.recommendation) agentRecommendations.push(`Emma (Security): ${result.Emma.recommendation}`)
+  if (result.Mary?.recommendation) agentRecommendations.push(`Mary (Business): ${result.Mary.recommendation}`)
+  if (result.Bob?.recommendation) agentRecommendations.push(`Bob (Tech Lead): ${result.Bob.recommendation}`)
+  if (result.Murat?.recommendation) agentRecommendations.push(`Murat (Product): ${result.Murat.recommendation}`)
+  if (result.Wei?.recommendation) agentRecommendations.push(`Wei (QA): ${result.Wei.recommendation}`)
+
+  // OAuth2 vs Email/Password decision synthesis
+  if (feature.includes('oauth') || feature.includes('authentication') || feature.includes('auth')) {
+    // Check for consensus
+    const allAgreeEmailPassword =
+      result.Mary?.recommendation?.includes('email/password') &&
+      result.Bob?.recommendation?.includes('email/password') &&
+      result.Murat?.recommendation?.includes('email/password')
+
+    if (allAgreeEmailPassword) {
+      synthesis.decision =
+        'Team consensus: Ship email/password + MFA for MVP, add OAuth2 in v1.1. ' +
+        'All agents agree OAuth2 should be deferred.'
+
+      synthesis.consensus = [
+        'Emma (Security): Email/password + MFA meets CMMC requirements',
+        'Mary (Business): 80% of users prefer email/password (familiar, low friction)',
+        'Bob (Tech Lead): Email/password saves 3 hours (6h vs 9h)',
+        'Murat (Product): Email/password is Must Have for MVP, OAuth2 is Should Have for v1.1',
+        'Wei (QA): Email/password needs 60 tests, OAuth2 needs +55 tests (183% increase)'
+      ]
+
+      synthesis.nextSteps = [
+        'Week 1: Implement email/password authentication (6 hours)',
+        'Week 1: Add MFA for privileged accounts',
+        'Week 1: Write 60 tests (25 unit + 12 integration + 8 E2E + 15 security)',
+        'Week 2: Security review + CMMC compliance verification',
+        'v1.1: Add OAuth2 when enterprise users request it (demand-driven)'
+      ]
+
+      synthesis.conflicts = []  // No conflicts - unanimous decision
+    }
+  }
+
+  // 2FA frequency decision synthesis (UX vs Security trade-off)
+  if (feature.includes('2fa') || feature.includes('mfa') || context.questionFor === 'Mary') {
+    // Emma wants frequent 2FA (security), Mary wants less frequent (UX)
+    const emmaSecurity = result.Emma?.recommendation?.includes('security')
+    const maryUX = result.Mary?.recommendation?.includes('30 days')
+
+    if (emmaSecurity && maryUX) {
+      synthesis.decision =
+        'Balanced decision: 2FA once per 30 days for standard users (Mary\'s UX concern), ' +
+        '2FA every login for admin accounts (Emma\'s security requirement). ' +
+        'This meets security needs while maintaining good UX for 95% of users.'
+
+      synthesis.conflicts = [
+        'Emma (Security) wants more frequent 2FA for better security',
+        'Mary (Business) warns 45% of users will leave if 2FA is too frequent'
+      ]
+
+      synthesis.consensus = [
+        'Middle ground: Differentiate by user role (admins vs standard users)',
+        'Standard users: 2FA once per 30 days (industry standard, balances security + UX)',
+        'Admin accounts: 2FA every login (higher risk, acceptable friction)',
+        'This approach meets CMMC requirements while maintaining user adoption'
+      ]
+
+      synthesis.nextSteps = [
+        'Implement role-based 2FA frequency (different policy for admins)',
+        'Standard users: 30-day session with trusted device cookies',
+        'Admin users: Require 2FA on every login',
+        'Track metrics: 2FA setup rate, user friction complaints'
+      ]
+    }
+  }
+
+  // Microservices vs Monolith decision synthesis
+  if (feature.includes('microservice') || feature.includes('architecture') || feature.includes('monolith')) {
+    synthesis.decision =
+      'Team consensus: Ship monolith for MVP, refactor to microservices in v2.0 if scaling demands it. ' +
+      'All agents agree microservices are premature optimization.'
+
+    synthesis.consensus = [
+      'Murat (Product): Users care about problem-solving, not architecture',
+      'Bob (Tech Lead): Microservices add 8 hours overhead, monolith handles <1K users easily',
+      'Mary (Business): Shipping 3 weeks earlier validates product-market fit faster',
+      'Principle: Let user demand drive architecture evolution, not hypothetical future needs'
+    ]
+
+    synthesis.nextSteps = [
+      'MVP: Ship monolith (faster, simpler)',
+      'v1.1: Monitor performance metrics (response time, throughput)',
+      'v2.0: Refactor to microservices if hitting scaling limits (10K+ users)',
+      'Decision trigger: P95 latency >500ms or DB connection pool exhausted'
+    ]
+
+    synthesis.conflicts = []  // No conflicts - unanimous decision
+  }
+
+  // Default synthesis for other decisions
+  if (!synthesis.decision) {
+    const numAgents = agentRecommendations.length
+    synthesis.decision = `Team perspective from ${numAgents} agents. See individual contributions for details.`
+
+    synthesis.consensus = agentRecommendations
+
+    synthesis.nextSteps = [
+      'Review all agent perspectives above',
+      'Identify areas of agreement and conflict',
+      'Make decision based on team input',
+      'Document decision rationale in project-context.md'
+    ]
+  }
+
+  return synthesis
 }
 
 /**

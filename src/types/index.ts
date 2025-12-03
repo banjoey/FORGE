@@ -288,6 +288,23 @@ export interface AgentContribution {
     }>
     decisions?: any[]
   }
+
+  /** Bob (Tech Lead) specific fields */
+  timeline?: string
+  risk?: string
+
+  /** Murat (Product Manager) specific fields */
+  priority?: string
+
+  /** Wei (QA Lead) specific fields */
+  testRequirements?: {
+    unit?: number
+    integration?: number
+    e2e?: number
+    security?: number
+    total?: number
+  }
+  coverageTarget?: string
 }
 
 // ============================================================================
