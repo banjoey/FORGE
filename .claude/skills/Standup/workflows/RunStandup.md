@@ -23,24 +23,40 @@
 
 ## Agent Rosters (Customizable)
 
-**Default Roster** (Agile Software Development):
-- **Mary** (Business Analyst): Requirements gathering, user value, business priorities, stakeholder management
-- **Bob** (Scrum Master): Sprint planning, velocity tracking, impediment removal, scope protection
-- **Murat** (Test Architect): ATDD enforcement, risk-based testing, quality gates, test strategy
-- **Emma** (Security Engineer): STRIDE threat modeling, CMMC Level 2 compliance, OWASP Top 10 prevention ✅ **AVAILABLE**
+### Smart Roster Selection ✅ **IMPLEMENTED**
+FORGE automatically suggests the right experts based on your feature context:
 
-**Additional Specialists** (Add as needed):
-- **Wei** (QA Lead): Test execution, automation, bug tracking [Create agent file to activate]
-- **[Your Custom Agent]**: Define role, expertise, personality
+| Feature Type | Auto-Suggested Roster | Why |
+|--------------|----------------------|-----|
+| Authentication | Emma, Mary, Bob, Murat, Wei | Critical feature - full team review |
+| Security/Vulnerabilities | Emma, Bob, Wei | Security-focused: threat + implementation + security tests |
+| UX/User Experience | Mary, Emma, Bob, Wei | UX-focused: user research + security review + implementation |
+| Database/SQL | Emma, Bob, Wei | Database-focused: SQL injection + implementation + testing |
+| Architecture/Design | Bob, Mary, Murat, Wei | Architecture-focused: tech lead + business impact + priority |
+| Testing/QA | Wei, Emma, Bob | QA-focused: test strategy + security tests + implementation |
+| Timeline/Estimates | Bob, Murat, Wei | Planning-focused: tech lead + priority + test time |
+| Prioritization | Murat, Mary, Bob | Prioritization-focused: product + UX + tech feasibility |
 
-**When to Include Emma**:
-- Security-sensitive features (authentication, payment, data handling, admin APIs)
-- High-risk features (risk score ≥4.0) requiring threat modeling
-- CMMC compliance reviews (DoD contractors, government software)
-- API design with security implications (public APIs, data exposure)
-- Features handling sensitive data (PII, financial data, health records)
+**Question Context Override** ✅ **IMPLEMENTED**
+Questions override feature patterns for focused discussions:
+- "How long will this take?" → Bob, Murat, Wei (timeline focus)
+- "How many tests do we need?" → Wei, Emma, Bob (testing focus)
+- "Should we build this?" → Murat, Mary, Bob (prioritization focus)
 
-**Custom Rosters** (Your Domain):
+**Manual Override** ✅ **IMPLEMENTED**
+Explicitly specify roster to override smart defaults:
+```typescript
+runStandup({ feature: 'Auth', roster: ['Emma', 'Bob'] }) // Override: only Emma + Bob
+```
+
+### Software Development Roster
+- **Emma** (Security Engineer): STRIDE threat modeling, CMMC Level 2 compliance, OWASP Top 10 prevention
+- **Mary** (Business Analyst): User value, UX design, user research, business priorities, stakeholder communication
+- **Bob** (Tech Lead): Technical feasibility, timeline estimates (Claude-time), capacity planning, risk assessment
+- **Murat** (Product Manager): User value, business priorities, MVP scoping, MoSCoW prioritization
+- **Wei** (QA Lead): Test strategy, testability, quality gates, ATDD, risk-based testing
+
+### Custom Rosters (Your Domain)
 You can define custom agent rosters for different domains:
 
 **Example: Investment Advisory Team**
@@ -60,12 +76,11 @@ Create a `.claude/agents/[AgentName]/agent.md` file with:
 - Communication style
 - Integration with other agents
 
-**Roster Selection**:
-- **project-context.md** defines which roster to use (default: Mary/Bob/Murat)
-- Override per standup: "Run standup with Investment Advisory Team" or "Add Emma (Security) to this standup"
-- Future: FORGE auto-detects domain and suggests roster
-
-**Default Throughout This Workflow**: Examples use Mary/Bob/Murat (agile software development roster), but principles apply to any custom roster. Add Emma (Security) or Wei (QA) for security-sensitive or quality-critical decisions.
+**How Roster Selection Works**:
+1. **Auto-suggest** (default): FORGE analyzes feature context and suggests appropriate roster
+2. **Question override**: Questions like "How long?" override feature patterns
+3. **Manual override**: Explicitly specify roster to override auto-suggestion
+4. **Fallback**: If no match, suggests full team (Emma, Mary, Bob, Murat, Wei)
 
 ---
 
