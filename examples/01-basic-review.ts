@@ -5,7 +5,7 @@
  * It analyzes a code snippet and reports any vulnerabilities found.
  */
 
-import { reviewCode } from '../src/emma/security-review'
+import { reviewCode } from '../src/daniel/security-review'
 
 async function basicReview() {
   console.log('=== Emma Security Review - Basic Example ===\n')

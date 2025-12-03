@@ -5,7 +5,7 @@
  * modeling, which identifies all security threats across 6 categories.
  */
 
-import { performSTRIDE } from '../src/emma/security-review'
+import { performSTRIDE } from '../src/daniel/security-review'
 import type { StrideCategory } from '../src/types'
 
 async function strideAnalysis() {

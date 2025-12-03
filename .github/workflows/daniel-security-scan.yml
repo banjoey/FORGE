@@ -34,10 +34,10 @@ jobs:
         run: npm run build
 
       - name: Run Emma Security Scan
-        id: emma-scan
+        id: daniel-scan
         run: |
           set -o pipefail
-          npx ts-node bin/emma-scan.ts src/ --json | tee emma-results.json
+          npx ts-node bin/daniel-scan.ts src/ --json | tee emma-results.json
         continue-on-error: true
 
       - name: Parse Emma Results
@@ -189,7 +189,7 @@ jobs:
             for file in $CHANGED_FILES; do
               if [ -f "$file" ]; then
                 echo "Analyzing $file"
-                npx ts-node bin/emma-scan.ts --stride "$file" --json >> stride-results.json || true
+                npx ts-node bin/daniel-scan.ts --stride "$file" --json >> stride-results.json || true
               fi
             done
           fi

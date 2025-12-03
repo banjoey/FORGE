@@ -9,7 +9,7 @@
 
 import { describe, test, expect } from '@jest/globals'
 import { runStandup } from '../src/standup/orchestrator'
-import { lookupCMMCPractice } from '../src/emma/cmmc'
+import { lookupCMMCPractice } from '../src/daniel/cmmc'
 import { StandupContext, StandupResult, CMMCPractice } from '../src/types'
 
 describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {

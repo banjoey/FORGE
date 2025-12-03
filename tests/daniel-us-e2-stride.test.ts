@@ -9,7 +9,7 @@
 
 import { describe, test, expect } from '@jest/globals'
 import { runStandup } from '../src/standup/orchestrator'
-import { performSTRIDE } from '../src/emma/stride'
+import { performSTRIDE } from '../src/daniel/stride'
 import { StandupContext, StandupResult, ThreatModel } from '../src/types'
 
 describe('US-E2: Emma Performs STRIDE Threat Modeling (8 points)', () => {

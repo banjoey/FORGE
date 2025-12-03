@@ -5,7 +5,7 @@
  */
 
 import type { StandupContext, StandupResult, AgentContribution } from '../types'
-import { reviewCode } from '../emma/security-review'
+import { reviewCode } from '../daniel/security-review'
 import { promises as fs } from 'fs'
 
 /**

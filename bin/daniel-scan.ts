@@ -9,7 +9,7 @@
  *   emma-scan --help                  # Show help
  */
 
-import { reviewCode, performSTRIDE } from '../src/emma/security-review'
+import { reviewCode, performSTRIDE } from '../src/daniel/security-review'
 import { promises as fs } from 'fs'
 import * as path from 'path'
 

@@ -11,7 +11,7 @@
  */
 
 import { describe, test, expect } from '@jest/globals'
-import { reviewCode } from '../src/emma/security-review'
+import { reviewCode } from '../src/daniel/security-review'
 import { SecurityAnalysis } from '../src/types'
 
 // ============================================================================
