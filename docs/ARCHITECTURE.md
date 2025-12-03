@@ -1,4 +1,4 @@
-# FORGE Architecture - Emma Security Engineer
+# FORGE Architecture - Daniel Security Engineer
 
 **Last Updated**: December 4, 2025
 **Status**: Production Ready (98.7% test coverage)
@@ -9,7 +9,7 @@
 
 1. [System Overview](#system-overview)
 2. [Multi-Agent Standup Flow](#multi-agent-standup-flow)
-3. [Emma Security Analysis Flow](#emma-security-analysis-flow)
+3. [Daniel Security Analysis Flow](#emma-security-analysis-flow)
 4. [Pattern Detection Flow](#pattern-detection-flow)
 5. [CMMC Enrichment Flow](#cmmc-enrichment-flow)
 6. [STRIDE Threat Modeling Flow](#stride-threat-modeling-flow)
@@ -21,15 +21,15 @@
 
 ## System Overview
 
-The FORGE system implements a multi-agent architecture where Emma (Security Engineer) collaborates with other specialized agents to provide comprehensive feature analysis.
+The FORGE system implements a multi-agent architecture where Daniel (Security Engineer) collaborates with other specialized agents to provide comprehensive feature analysis.
 
 ```mermaid
 graph TD
     A[User Request] --> B[Standup Orchestrator]
-    B --> C[Emma - Security]
+    B --> C[Daniel - Security]
     B --> D[Mary - Business]
-    B --> E[Bob - Capacity]
-    B --> F[Murat - Testing]
+    B --> E[Clay - Capacity]
+    B --> F[Hefley - Testing]
 
     C --> G[Vulnerability Detection]
     C --> H[STRIDE Analysis]
@@ -68,44 +68,44 @@ graph TD
 ### Key Components
 
 - **Standup Orchestrator**: Coordinates multi-agent collaboration
-- **Emma (Security)**: Vulnerability detection, STRIDE modeling, CMMC compliance
+- **Daniel (Security)**: Vulnerability detection, STRIDE modeling, CMMC compliance
 - **Mary (Business)**: User value analysis, UX considerations
-- **Bob (Capacity)**: Timeline estimates, resource planning
-- **Murat (Testing)**: Test coverage, quality assurance
+- **Clay (Capacity)**: Timeline estimates, resource planning
+- **Hefley (Testing)**: Test coverage, quality assurance
 - **Synthesis Engine**: Combines agent perspectives into team decision
 
 ---
 
 ## Multi-Agent Standup Flow
 
-How Emma participates in multi-agent standups to provide security perspective.
+How Daniel participates in multi-agent standups to provide security perspective.
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Emma
+    participant Daniel
     participant Mary
-    participant Bob
-    participant Murat
+    participant Clay
+    participant Hefley
     participant Synthesis
 
     User->>Orchestrator: runStandup(context)
 
-    Orchestrator->>Emma: getEmmaContribution()
-    Emma->>Emma: reviewCode(codeSnippet)
-    Emma->>Emma: performSTRIDE(codeSnippet)
-    Emma->>Emma: lookupCMMC(practiceId)
-    Emma-->>Orchestrator: SecurityContribution
+    Orchestrator->>Daniel: getDanielContribution()
+    Daniel->>Daniel: reviewCode(codeSnippet)
+    Daniel->>Daniel: performSTRIDE(codeSnippet)
+    Daniel->>Daniel: lookupCMMC(practiceId)
+    Daniel-->>Orchestrator: SecurityContribution
 
     Orchestrator->>Mary: getMaryContribution()
     Mary-->>Orchestrator: BusinessContribution
 
-    Orchestrator->>Bob: getBobContribution()
-    Bob-->>Orchestrator: CapacityContribution
+    Orchestrator->>Clay: getClayContribution()
+    Clay-->>Orchestrator: CapacityContribution
 
-    Orchestrator->>Murat: getMuratContribution()
-    Murat-->>Orchestrator: TestingContribution
+    Orchestrator->>Hefley: getHefleyContribution()
+    Hefley-->>Orchestrator: TestingContribution
 
     Orchestrator->>Synthesis: synthesizeDecision()
     Synthesis-->>Orchestrator: TeamDecision
@@ -125,9 +125,9 @@ sequenceDiagram
 
 ---
 
-## Emma Security Analysis Flow
+## Daniel Security Analysis Flow
 
-Emma's internal flow for security analysis with CMMC compliance mapping.
+Daniel's internal flow for security analysis with CMMC compliance mapping.
 
 ```mermaid
 flowchart TD
@@ -181,7 +181,7 @@ flowchart TD
 
 ## Pattern Detection Flow
 
-How Emma's pattern matching engine detects vulnerabilities with proper ordering.
+How Daniel's pattern matching engine detects vulnerabilities with proper ordering.
 
 ```mermaid
 flowchart LR
@@ -226,7 +226,7 @@ flowchart LR
 
 ## CMMC Enrichment Flow
 
-How Emma enriches vulnerability findings with CMMC Level 2 compliance metadata.
+How Daniel enriches vulnerability findings with CMMC Level 2 compliance metadata.
 
 ```mermaid
 flowchart TD
@@ -284,7 +284,7 @@ flowchart TD
 
 ## STRIDE Threat Modeling Flow
 
-How Emma categorizes threats using Microsoft's STRIDE framework.
+How Daniel categorizes threats using Microsoft's STRIDE framework.
 
 ```mermaid
 flowchart TD
@@ -348,14 +348,14 @@ flowchart TD
 
 **Key Functions**:
 - `runStandup(context)`: Main orchestration
-- `getEmmaContribution()`: Emma's security analysis
+- `getDanielContribution()`: Daniel's security analysis
 - `getMaryContribution()`: Business perspective
-- `getBobContribution()`: Capacity planning
-- `getMuratContribution()`: Testing strategy
+- `getClayContribution()`: Capacity planning
+- `getHefleyContribution()`: Testing strategy
 - `recordDecisionToFile()`: Log decisions
 - `recordAuditTrailToFile()`: CMMC audit trail
 
-### Emma Security Review
+### Daniel Security Review
 
 **File**: `src/emma/security-review.ts` (111 lines)
 
@@ -475,21 +475,21 @@ User Request
 runStandup(context)
   ↓
 Parallel Agent Processing:
-  - Emma → Security Analysis
+  - Daniel → Security Analysis
   - Mary → Business Value
-  - Bob → Capacity Planning
-  - Murat → Test Strategy
+  - Clay → Capacity Planning
+  - Hefley → Test Strategy
   ↓
 Synthesis Engine
   ↓
 Conflict Detection
   ↓
 Return: StandupResult {
-  participants: ['Emma', 'Mary', 'Bob', 'Murat'],
-  Emma: { focus: 'security', ... },
+  participants: ['Daniel', 'Mary', 'Clay', 'Hefley'],
+  Daniel: { focus: 'security', ... },
   Mary: { focus: 'business_value', ... },
-  Bob: { focus: 'capacity_planning', ... },
-  Murat: { focus: 'testing', ... },
+  Clay: { focus: 'capacity_planning', ... },
+  Hefley: { focus: 'testing', ... },
   synthesis: { decision: '...' },
   conflicts: [],
   recordDecision: async (path) => {...},
@@ -626,9 +626,9 @@ FORGE/
 
 ## Security Architecture
 
-### Threat Model for Emma Itself
+### Threat Model for Daniel Itself
 
-**Assumption**: Emma analyzes untrusted user code. What could go wrong?
+**Assumption**: Daniel analyzes untrusted user code. What could go wrong?
 
 #### Potential Threats
 
@@ -638,10 +638,10 @@ FORGE/
 
 2. **Code Injection**
    - **Risk**: Analyzed code could attempt to execute during analysis
-   - **Mitigation**: Emma never executes user code, only pattern matches
+   - **Mitigation**: Daniel never executes user code, only pattern matches
 
 3. **Information Disclosure**
-   - **Risk**: Emma could leak sensitive patterns or CMMC definitions
+   - **Risk**: Daniel could leak sensitive patterns or CMMC definitions
    - **Mitigation**: All patterns are public knowledge (OWASP, NIST)
 
 4. **Audit Trail Tampering**
@@ -650,7 +650,7 @@ FORGE/
 
 ### Security Best Practices
 
-1. **Never Execute User Code**: Emma only performs pattern matching
+1. **Never Execute User Code**: Daniel only performs pattern matching
 2. **Validate Inputs**: All inputs are strings (no executable code)
 3. **Fail Secure**: On error, report "unable to analyze" (don't skip checks)
 4. **Audit Everything**: All security analyses logged to audit trail
@@ -735,7 +735,7 @@ User Application
              ┌───────────────┼───────────────┐
              │               │               │
     ┌────────▼────────┐ ┌───▼────────┐ ┌───▼────────┐
-    │  Emma Service   │ │Mary Service│ │Bob Service │
+    │  Daniel Service   │ │Mary Service│ │Clay Service │
     │  (Security)     │ │(Business)  │ │(Capacity)  │
     └────────┬────────┘ └───┬────────┘ └───┬────────┘
              │              │              │
@@ -779,7 +779,7 @@ Time:        4.398 s
 **Sample Dashboard**:
 ```
 ┌─────────────────────────────────────────┐
-│  Emma Security Dashboard                │
+│  Daniel Security Dashboard                │
 ├─────────────────────────────────────────┤
 │  Scans Today: 127                       │
 │  Vulnerabilities: 34 Critical, 56 High  │
@@ -793,7 +793,7 @@ Time:        4.398 s
 
 ## Additional Resources
 
-- **[Emma README](../src/emma/README.md)**: Complete usage guide
+- **[Daniel README](../src/emma/README.md)**: Complete usage guide
 - **[CMMC Mapping](CMMC-MAPPING.md)**: Compliance reference
 - **[Examples](../examples/)**: Sample usage scenarios
 - **[Session Summary](sessions/2025-12-03-emma-implementation.md)**: Implementation details
@@ -803,5 +803,5 @@ Time:        4.398 s
 ---
 
 **Last Updated**: December 4, 2025
-**Emma Version**: 1.0 (Production Ready)
+**Daniel Version**: 1.0 (Production Ready)
 **Architecture Status**: Documented and Stable

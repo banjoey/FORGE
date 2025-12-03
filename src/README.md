@@ -1,8 +1,8 @@
 # FORGE Implementation
 
-**Emma Security Engineer - Pattern-Based Vulnerability Detection**
+**Daniel Security Engineer - Pattern-Based Vulnerability Detection**
 
-This directory contains the TypeScript implementation of Emma's security review capabilities.
+This directory contains the TypeScript implementation of Daniel's security review capabilities.
 
 ---
 

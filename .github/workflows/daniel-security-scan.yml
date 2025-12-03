@@ -1,4 +1,4 @@
-name: Emma Security Scan
+name: Daniel Security Scan
 
 on:
   push:
@@ -30,22 +30,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Emma
+      - name: Build Daniel
         run: npm run build
 
-      - name: Run Emma Security Scan
+      - name: Run Daniel Security Scan
         id: daniel-scan
         run: |
           set -o pipefail
           npx ts-node bin/daniel-scan.ts src/ --json | tee emma-results.json
         continue-on-error: true
 
-      - name: Parse Emma Results
+      - name: Parse Daniel Results
         id: parse-results
         if: always()
         run: |
           if [ -f emma-results.json ]; then
-            echo "Emma scan completed"
+            echo "Daniel scan completed"
 
             # Count vulnerabilities by severity
             CRITICAL=$(jq -r '.vulnerabilities[] | select(.severity == "Critical") | .vulnerability' emma-results.json 2>/dev/null | wc -l || echo "0")
@@ -61,7 +61,7 @@ jobs:
             TOTAL=$((CRITICAL + HIGH + MEDIUM + LOW))
             echo "total=$TOTAL" >> $GITHUB_OUTPUT
 
-            echo "### Emma Security Scan Results" >> $GITHUB_STEP_SUMMARY
+            echo "### Daniel Security Scan Results" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "| Severity | Count |" >> $GITHUB_STEP_SUMMARY
             echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
@@ -71,11 +71,11 @@ jobs:
             echo "| Low | $LOW |" >> $GITHUB_STEP_SUMMARY
             echo "| **Total** | **$TOTAL** |" >> $GITHUB_STEP_SUMMARY
           else
-            echo "No Emma results found"
+            echo "No Daniel results found"
             echo "total=0" >> $GITHUB_OUTPUT
           fi
 
-      - name: Upload Emma Results
+      - name: Upload Daniel Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -90,7 +90,7 @@ jobs:
           script: |
             const fs = require('fs');
 
-            let resultsComment = '## 🔒 Emma Security Scan Results\n\n';
+            let resultsComment = '## 🔒 Daniel Security Scan Results\n\n';
 
             if (fs.existsSync('emma-results.json')) {
               const results = JSON.parse(fs.readFileSync('emma-results.json', 'utf8'));
@@ -122,14 +122,14 @@ jobs:
                 }
               } else {
                 resultsComment += '✅ **No vulnerabilities detected!**\n\n';
-                resultsComment += 'Your code passed Emma\'s security analysis.\n';
+                resultsComment += 'Your code passed Daniel\'s security analysis.\n';
               }
             } else {
-              resultsComment += '⚠️ Emma scan did not complete. Check workflow logs.\n';
+              resultsComment += '⚠️ Daniel scan did not complete. Check workflow logs.\n';
             }
 
             resultsComment += '\n---\n';
-            resultsComment += '*Powered by [Emma Security Engineer](https://github.com/banjoey/FORGE) - CMMC Level 2 Compliance*\n';
+            resultsComment += '*Powered by [Daniel Security Engineer](https://github.com/banjoey/FORGE) - CMMC Level 2 Compliance*\n';
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -169,7 +169,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Emma
+      - name: Build Daniel
         run: npm run build
 
       - name: Run STRIDE Analysis on Changed Files
@@ -220,17 +220,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Emma
+      - name: Build Daniel
         run: npm run build
 
-      - name: Run Emma Tests
+      - name: Run Daniel Tests
         run: npm test
 
       - name: Check CMMC Coverage
         run: |
           echo "### CMMC Level 2 Compliance Status" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "✅ Emma is configured for CMMC Level 2 compliance" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Daniel is configured for CMMC Level 2 compliance" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Coverage**: 17 CMMC domains, 25+ practices" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY

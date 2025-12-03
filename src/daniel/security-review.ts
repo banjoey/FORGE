@@ -1,5 +1,5 @@
 /**
- * Emma's Security Review Logic
+ * Daniel's Security Review Logic
  *
  * Core reviewCode() function that detects vulnerabilities using pattern matching
  */

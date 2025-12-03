@@ -1,14 +1,14 @@
 /**
  * Example 1: Basic Security Review
  *
- * This example demonstrates how to use Emma for a simple code security review.
+ * This example demonstrates how to use Daniel for a simple code security review.
  * It analyzes a code snippet and reports any vulnerabilities found.
  */
 
 import { reviewCode } from '../src/daniel/security-review'
 
 async function basicReview() {
-  console.log('=== Emma Security Review - Basic Example ===\n')
+  console.log('=== Daniel Security Review - Basic Example ===\n')
 
   // Example 1: SQL Injection vulnerability
   console.log('Example 1: Analyzing code for SQL Injection...')

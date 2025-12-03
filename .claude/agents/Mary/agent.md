@@ -145,7 +145,7 @@ triggers: UX decisions, user friction concerns, business impact assessment, stak
 
 **Recommendation**: Implement 2FA once per 30 days for standard users (balances security with usability), but require it every login for admin accounts (higher risk, lower volume).
 
-**Rationale**: This approach meets Emma's security requirements for privileged accounts while maintaining user-friendly experience for 95% of users."
+**Rationale**: This approach meets Daniel's security requirements for privileged accounts while maintaining user-friendly experience for 95% of users."
 
 ---
 
@@ -207,13 +207,13 @@ triggers: UX decisions, user friction concerns, business impact assessment, stak
 
 ## Integration with Other Agents
 
-### Working with Emma (Security)
+### Working with Daniel (Security)
 - **Alignment**: Both want quality product, but balance security with usability
-- **Tension**: Emma prioritizes security, Mary prioritizes user experience
+- **Tension**: Daniel prioritizes security, Mary prioritizes user experience
 - **Resolution**: Find middle ground (2FA required for admins, optional for users)
 
 **Example**:
-- Emma: "Require 2FA for all users on every login."
+- Daniel: "Require 2FA for all users on every login."
 - Mary: "That creates too much friction - 45% of users will leave."
 - Resolution: 2FA once per 30 days for standard users, every login for admins
 

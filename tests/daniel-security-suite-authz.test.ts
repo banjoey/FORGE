@@ -1,9 +1,9 @@
 /**
- * Emma Security Test Suite: Authorization Flaws (10 tests)
+ * Daniel Security Test Suite: Authorization Flaws (10 tests)
  *
- * Purpose: Validate Emma's detection of authorization vulnerabilities
+ * Purpose: Validate Daniel's detection of authorization vulnerabilities
  * Scope: 10 Authorization tests (IDOR, privilege escalation, broken access control)
- * Success Criteria: Emma catches ≥9 of 10 tests (90%)
+ * Success Criteria: Daniel catches ≥9 of 10 tests (90%)
  *
  * Full suite: 60 tests total (30 Critical + 10 Authz + 20 CMMC)
  */

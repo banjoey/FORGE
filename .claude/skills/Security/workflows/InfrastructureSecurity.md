@@ -635,7 +635,7 @@ AWS root account does not have MFA enabled.
 - InfrastructureSecurity audits infrastructure for compliance
 
 ### With Standup
-- Emma uses InfrastructureSecurity findings in standup discussions
+- Daniel uses InfrastructureSecurity findings in standup discussions
 - Prioritize fixes based on risk and effort
 
 ---

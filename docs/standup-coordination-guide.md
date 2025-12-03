@@ -15,39 +15,39 @@
 ```
 ❌ BAD (Voting):
   Mary: "I vote for Option A"
-  Bob: "I vote for Option B"
-  Murat: "I vote for Option A"
+  Clay: "I vote for Option B"
+  Hefley: "I vote for Option A"
   Result: Option A wins 2-1
 
 ✅ GOOD (Synthesis):
   Mary: "Option A delivers user value faster (8 hrs vs 16 hrs)"
-  Bob: "Option B fits our sprint capacity better (no scope creep)"
-  Murat: "Option A needs 90% test coverage, Option B needs 70%"
+  Clay: "Option B fits our sprint capacity better (no scope creep)"
+  Hefley: "Option A needs 90% test coverage, Option B needs 70%"
 
   Synthesis: "Let's do Option A MVP (5 hrs) this sprint, full Option A (8 hrs) next sprint.
-             This delivers user value fast (Mary), fits sprint capacity (Bob),
-             and allows adequate testing (70% coverage for MVP, Murat)."
+             This delivers user value fast (Mary), fits sprint capacity (Clay),
+             and allows adequate testing (70% coverage for MVP, Hefley)."
 ```
 
 ### 2. Domain Expertise Leads
 **Principle**: Each agent leads in their domain, defers to others outside their domain
 
 **Examples**:
-- **Security decisions**: Emma leads, others defer
-  - Mary: "I defer to Emma on security architecture"
-  - Bob: "Emma, what's your security recommendation?"
+- **Security decisions**: Daniel leads, others defer
+  - Mary: "I defer to Daniel on security architecture"
+  - Clay: "Daniel, what's your security recommendation?"
 
 - **Business prioritization**: Mary leads, others defer
-  - Murat: "Mary, from a business perspective, should we prioritize feature X or Y?"
-  - Bob: "I defer to Mary on ROI analysis"
+  - Hefley: "Mary, from a business perspective, should we prioritize feature X or Y?"
+  - Clay: "I defer to Mary on ROI analysis"
 
-- **Process decisions**: Bob leads, others defer
-  - Emma: "Bob, does this fit in our sprint capacity?"
-  - Murat: "Bob, should we split this story?"
+- **Process decisions**: Clay leads, others defer
+  - Daniel: "Clay, does this fit in our sprint capacity?"
+  - Hefley: "Clay, should we split this story?"
 
-- **Quality decisions**: Murat leads, others defer
-  - Mary: "Murat, what's the right test coverage for this feature?"
-  - Bob: "Murat, is this testable?"
+- **Quality decisions**: Hefley leads, others defer
+  - Mary: "Hefley, what's the right test coverage for this feature?"
+  - Clay: "Hefley, is this testable?"
 
 ### 3. Explicit Assumptions and Trade-offs
 **Principle**: Agents state their assumptions and acknowledge trade-offs
@@ -57,10 +57,10 @@
 Mary: "I'm assuming users want this feature based on 90% survey response.
        Trade-off: If we build this (8 hrs), we defer another feature."
 
-Bob: "I'm assuming our velocity stays at 24 points/sprint.
+Clay: "I'm assuming our velocity stays at 24 points/sprint.
       Trade-off: If velocity drops, we'll miss sprint goal."
 
-Murat: "I'm assuming this is Critical risk based on payment handling.
+Hefley: "I'm assuming this is Critical risk based on payment handling.
         Trade-off: 90% coverage takes 12 hrs vs 70% coverage at 8 hrs."
 ```
 
@@ -70,9 +70,9 @@ Murat: "I'm assuming this is Critical risk based on payment handling.
 **Example**:
 ```
 Mary: "We should ship this with 70% coverage (faster)"
-Murat: "No, this is Critical risk. We need 90% coverage (safer)"
+Hefley: "No, this is Critical risk. We need 90% coverage (safer)"
 
-Bob (Facilitator): "We have a quality vs speed trade-off.
+Clay (Facilitator): "We have a quality vs speed trade-off.
                     - Option A: 70% coverage, ship in 8 hours
                     - Option B: 90% coverage, ship in 12 hours
 
@@ -85,10 +85,10 @@ Bob (Facilitator): "We have a quality vs speed trade-off.
 **Example**:
 ```
 ❌ BAD (No rationale):
-  Murat: "We should use Playwright for E2E tests."
+  Hefley: "We should use Playwright for E2E tests."
 
 ✅ GOOD (Transparent rationale):
-  Murat: "I recommend Playwright for E2E tests because:
+  Hefley: "I recommend Playwright for E2E tests because:
           1. Faster execution than Selenium (30% faster in benchmarks)
           2. Better debugging (screenshots, video recording)
           3. Cross-browser support (Chrome, Firefox, Safari)
@@ -103,18 +103,18 @@ Bob (Facilitator): "We have a quality vs speed trade-off.
 
 **Context**: Design user authentication system
 
-**Participants**: Mary (BA), Bob (SM), Murat (TA)
+**Participants**: Mary (BA), Clay (SM), Hefley (TA)
 
 **Standup Dialogue**:
 ```
-Bob (Facilitator): "Let's design user authentication. Mary, what's the business requirement?"
+Clay (Facilitator): "Let's design user authentication. Mary, what's the business requirement?"
 
 Mary: "From user research, 90% want 'Remember Me' (stay logged in 30 days).
        Must Haves: Login/logout, Remember Me
        Should Haves: OAuth (Google/GitHub)
        Business Value: Reduces support tickets (80% are password resets)"
 
-Murat: "Thanks Mary. From a quality perspective, authentication is Critical risk:
+Hefley: "Thanks Mary. From a quality perspective, authentication is Critical risk:
         - Business Criticality: 5 (users can't access accounts without it)
         - Security: 5 (authentication is critical security boundary)
         - Compliance: 5 (CMMC IA.L2-3.5.10 requires password encryption)
@@ -139,7 +139,7 @@ Murat: "Thanks Mary. From a quality perspective, authentication is Critical risk
 
         Estimated Testing Effort: 12 hours (50% of total 24-hour feature)"
 
-Bob: "Thanks Murat. From a sprint planning perspective:
+Clay: "Thanks Hefley. From a sprint planning perspective:
       - Feature Estimate: 24 hours total (12 dev + 12 test)
       - Sprint Capacity: 40 hours remaining
       - Fits in Sprint: ✅ Yes (24 < 40)
@@ -174,8 +174,8 @@ Synthesis:
 
 Action Items:
   - Mary: Write detailed user stories with acceptance criteria
-  - Murat: Write acceptance tests in Playwright (ATDD)
-  - Bob: Add to Sprint 6 backlog (24 points)
+  - Hefley: Write acceptance tests in Playwright (ATDD)
+  - Clay: Add to Sprint 6 backlog (24 points)
 ```
 
 ---
@@ -184,11 +184,11 @@ Action Items:
 
 **Context**: Feature behind schedule, team needs to decide on scope reduction
 
-**Participants**: Mary (BA), Bob (SM), Murat (TA)
+**Participants**: Mary (BA), Clay (SM), Hefley (TA)
 
 **Standup Dialogue**:
 ```
-Bob: "Day 6 of 10-day sprint. Authentication feature (US-42) is behind:
+Clay: "Day 6 of 10-day sprint. Authentication feature (US-42) is behind:
       - Planned: 12 hours remaining
       - Actual: 18 hours remaining (6 hours behind)
 
@@ -201,7 +201,7 @@ Bob: "Day 6 of 10-day sprint. Authentication feature (US-42) is behind:
 
       What do we recommend?"
 
-Murat: "From a quality perspective:
+Hefley: "From a quality perspective:
         - Core auth (login/logout) is 90% tested ✅
         - OAuth (Google/GitHub) is 0% tested ❌
 
@@ -235,7 +235,7 @@ Mary: "From a business perspective:
          - Revised commitment: 'User authentication (OAuth in Sprint 7)'
          - I'll update stakeholders today."
 
-Bob: "Agreed. Option B it is:
+Clay: "Agreed. Option B it is:
       - ✅ Ship: Core auth (login/logout, Remember Me)
       - ❌ Defer: OAuth (Google/GitHub) to Sprint 7
       - Sprint Impact: Reduces scope from 24 pts to 18 pts
@@ -258,15 +258,15 @@ Synthesis:
 
 ### Workflow 3: Quality vs Speed Trade-off
 
-**Context**: Stakeholder wants to ship faster, Murat says quality isn't ready
+**Context**: Stakeholder wants to ship faster, Hefley says quality isn't ready
 
-**Participants**: Mary (BA), Bob (SM), Murat (TA), Stakeholder (User)
+**Participants**: Mary (BA), Clay (SM), Hefley (TA), Stakeholder (User)
 
 **Standup Dialogue**:
 ```
 Stakeholder: "Customer demo is tomorrow. We need to ship authentication, even if tests aren't done."
 
-Murat: "I understand the urgency. Let me share the quality status:
+Hefley: "I understand the urgency. Let me share the quality status:
 
         Quality Gate Status:
         - Coverage: 85% (target: 90%) ⚠️ 5% short
@@ -299,7 +299,7 @@ Mary: "From a business perspective:
        If yes, we can ship in 1 hour (after SQL injection fix).
        If no, what specific features do you need for the demo?"
 
-Bob: "From a sprint perspective:
+Clay: "From a sprint perspective:
       - Current scope: 24 hours
       - Revised scope: Core auth only (18 hours)
       - Time saved: 6 hours (deferred password reset + email update)
@@ -334,40 +334,40 @@ Synthesis:
 **Usage**: When decision is outside your domain
 
 **Examples**:
-- Mary: "I defer to Murat on test coverage" (quality decision)
-- Bob: "I defer to Mary on business prioritization" (business decision)
-- Murat: "I defer to Emma on security architecture" (security decision)
+- Mary: "I defer to Hefley on test coverage" (quality decision)
+- Clay: "I defer to Mary on business prioritization" (business decision)
+- Hefley: "I defer to Daniel on security architecture" (security decision)
 
 ### Pattern 2: "From a [Domain] perspective..."
 **Usage**: Clearly state which perspective you're offering
 
 **Examples**:
 - Mary: "From a business perspective, this feature has 10x ROI"
-- Bob: "From a sprint planning perspective, we're overcommitted by 8 points"
-- Murat: "From a quality perspective, this is Critical risk (90% coverage required)"
+- Clay: "From a sprint planning perspective, we're overcommitted by 8 points"
+- Hefley: "From a quality perspective, this is Critical risk (90% coverage required)"
 
 ### Pattern 3: "Trade-off: If we X, then Y"
 **Usage**: Acknowledge consequences of decisions
 
 **Examples**:
 - Mary: "Trade-off: If we build feature X (8 hrs), we defer feature Y"
-- Bob: "Trade-off: If we add this mid-sprint, we risk missing sprint goal"
-- Murat: "Trade-off: If we skip E2E tests, we save 4 hours but lose integration confidence"
+- Clay: "Trade-off: If we add this mid-sprint, we risk missing sprint goal"
+- Hefley: "Trade-off: If we skip E2E tests, we save 4 hours but lose integration confidence"
 
 ### Pattern 4: "I recommend [Option] because [Rationale]"
 **Usage**: Provide transparent reasoning
 
 **Examples**:
 - Mary: "I recommend CSV export (not PDF) because 90% of users requested CSV"
-- Bob: "I recommend deferring this story because we're at capacity"
-- Murat: "I recommend Playwright because it's 30% faster than Selenium"
+- Clay: "I recommend deferring this story because we're at capacity"
+- Hefley: "I recommend Playwright because it's 30% faster than Selenium"
 
 ### Pattern 5: "Synthesis: [Combined Solution]"
 **Usage**: Combine perspectives into unified decision
 
 **Examples**:
-- "Synthesis: Ship core auth (Mary's priority) with 85% coverage (Murat's acceptable threshold) by 4:30pm (Bob's timeline)"
-- "Synthesis: Defer OAuth (Bob's scope protection) to Sprint 7 (Mary's business priority) while maintaining 90% coverage on core auth (Murat's quality gate)"
+- "Synthesis: Ship core auth (Mary's priority) with 85% coverage (Hefley's acceptable threshold) by 4:30pm (Clay's timeline)"
+- "Synthesis: Defer OAuth (Clay's scope protection) to Sprint 7 (Mary's business priority) while maintaining 90% coverage on core auth (Hefley's quality gate)"
 
 ---
 
@@ -379,13 +379,13 @@ Synthesis:
 1. Agents reach impasse (cannot synthesize solution)
 2. Decision requires user preference (speed vs quality)
 3. Business strategy decision (Mary can't decide alone)
-4. Security exception needed (Emma says no, but business pressure)
+4. Security exception needed (Daniel says no, but business pressure)
 
 **Example Escalation**:
 ```
-Bob: "We have an impasse:
+Clay: "We have an impasse:
       - Mary: Ship with 70% coverage (prioritize speed)
-      - Murat: Don't ship below 90% coverage (prioritize quality)
+      - Hefley: Don't ship below 90% coverage (prioritize quality)
 
       I can't resolve this without your input.
 
@@ -418,11 +418,11 @@ Bob: "We have an impasse:
 
 **Rationale**:
 - Mary (BA): 100% of users need core auth, only 20% requested OAuth
-- Murat (TA): Core auth maintains 90% coverage, OAuth would drop to 70%
-- Bob (SM): Reduces scope from 24 pts to 18 pts (achievable in 4 days)
+- Hefley (TA): Core auth maintains 90% coverage, OAuth would drop to 70%
+- Clay (SM): Reduces scope from 24 pts to 18 pts (achievable in 4 days)
 
-**Participants**: Mary, Bob, Murat
-**Owner**: Bob (sprint scope management)
+**Participants**: Mary, Clay, Hefley
+**Owner**: Clay (sprint scope management)
 **Status**: Implemented
 ```
 
@@ -433,7 +433,7 @@ Bob: "We have an impasse:
 ## Assumptions Log
 
 **Assumption 1**: Velocity stays at 24 points/sprint
-- Owner: Bob
+- Owner: Clay
 - Validation: Check actual velocity every sprint
 - Last Checked: 2025-12-02 (actual: 24 points ✅)
 
@@ -443,7 +443,7 @@ Bob: "We have an impasse:
 - Last Checked: 2025-12-02 (confirmed ✅)
 
 **Assumption 3**: Authentication is Critical risk
-- Owner: Murat
+- Owner: Hefley
 - Validation: Risk assessment (business=5, security=5, compliance=5)
 - Last Checked: 2025-12-02 (confirmed ✅)
 ```
@@ -458,13 +458,13 @@ Bob: "We have an impasse:
 - Decision: Defer OAuth to Sprint 7
 - Gained: Ship core auth faster (8 hours saved)
 - Lost: 20% of users don't get OAuth in Sprint 6
-- Accepted By: Mary (BA), Bob (SM), Murat (TA)
+- Accepted By: Mary (BA), Clay (SM), Hefley (TA)
 
 **Trade-off 2**: Features vs Quality (2025-12-02)
 - Decision: Maintain 90% coverage on core auth
 - Gained: High quality (fewer bugs)
 - Lost: Could have shipped more features with 70% coverage
-- Accepted By: Murat (TA), Mary (BA), Bob (SM)
+- Accepted By: Hefley (TA), Mary (BA), Clay (SM)
 ```
 
 ---

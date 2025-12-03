@@ -1,7 +1,7 @@
 /**
  * Standup Orchestrator
  *
- * Coordinates multi-agent standups with Emma providing security perspective
+ * Coordinates multi-agent standups with Daniel providing security perspective
  */
 
 import type { StandupContext, StandupResult, AgentContribution } from '../types'
@@ -23,17 +23,17 @@ export function suggestRoster(feature: string, question?: string): string[] {
 
   // Testing questions
   if (questionLower.includes('how many tests') || questionLower.includes('test')) {
-    return ['Wei', 'Emma', 'Bob'] // QA lead + security tests + implementation
+    return ['Amy', 'Daniel', 'Clay'] // QA lead + security tests + implementation
   }
 
   // Timeline questions
   if (questionLower.includes('how long') || questionLower.includes('timeline') || questionLower.includes('estimate')) {
-    return ['Bob', 'Murat', 'Wei'] // Tech lead + priority + test time
+    return ['Clay', 'Hefley', 'Amy'] // Tech lead + priority + test time
   }
 
   // Prioritization questions
   if (questionLower.includes('should we build') || questionLower.includes('priority') || questionLower.includes('value')) {
-    return ['Murat', 'Mary', 'Bob'] // Product + UX + tech feasibility
+    return ['Hefley', 'Mary', 'Clay'] // Product + UX + tech feasibility
   }
 
   // PRIORITY 2: Check feature keywords (specific to general)
@@ -48,7 +48,7 @@ export function suggestRoster(feature: string, question?: string): string[] {
     featureLower.includes('oauth') ||
     featureLower.includes('session')
   ) {
-    return ['Emma', 'Mary', 'Bob', 'Murat', 'Wei'] // Full team - critical feature
+    return ['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy'] // Full team - critical feature
   }
 
   // Security/vulnerability focus (specific)
@@ -60,7 +60,7 @@ export function suggestRoster(feature: string, question?: string): string[] {
     featureLower.includes('xss') ||
     featureLower.includes('csrf')
   ) {
-    return ['Emma', 'Bob', 'Wei'] // Security-focused team
+    return ['Daniel', 'Clay', 'Amy'] // Security-focused team
   }
 
   // Database/data features (specific - check before "design" patterns)
@@ -71,7 +71,7 @@ export function suggestRoster(feature: string, question?: string): string[] {
     featureLower.includes('schema') ||
     featureLower.includes('migration')
   ) {
-    return ['Emma', 'Bob', 'Wei'] // Security (SQL injection) + implementation + testing
+    return ['Daniel', 'Clay', 'Amy'] // Security (SQL injection) + implementation + testing
   }
 
   // Testing/QA focus (specific) - but exclude "usability testing" which is UX
@@ -82,7 +82,7 @@ export function suggestRoster(feature: string, question?: string): string[] {
     featureLower.includes('quality') ||
     featureLower.includes('coverage'))
   ) {
-    return ['Wei', 'Emma', 'Bob'] // QA lead + security tests + implementation
+    return ['Amy', 'Daniel', 'Clay'] // QA lead + security tests + implementation
   }
 
   // Timeline/capacity planning (specific)
@@ -92,7 +92,7 @@ export function suggestRoster(feature: string, question?: string): string[] {
     featureLower.includes('capacity') ||
     featureLower.includes('how long')
   ) {
-    return ['Bob', 'Murat', 'Wei'] // Tech lead + priority + test time
+    return ['Clay', 'Hefley', 'Amy'] // Tech lead + priority + test time
   }
 
   // Prioritization/business value (specific)
@@ -102,7 +102,7 @@ export function suggestRoster(feature: string, question?: string): string[] {
     featureLower.includes('roadmap') ||
     featureLower.includes('mvp')
   ) {
-    return ['Murat', 'Mary', 'Bob'] // Product + UX + tech feasibility
+    return ['Hefley', 'Mary', 'Clay'] // Product + UX + tech feasibility
   }
 
   // Architecture/technical design (check "design pattern" before general "design")
@@ -114,7 +114,7 @@ export function suggestRoster(feature: string, question?: string): string[] {
     featureLower.includes('technical debt') ||
     featureLower.includes('microservice')
   ) {
-    return ['Bob', 'Mary', 'Murat', 'Wei'] // Tech lead + business impact + priority + testing
+    return ['Clay', 'Mary', 'Hefley', 'Amy'] // Tech lead + business impact + priority + testing
   }
 
   // UX/User experience focus (general - check after specific "design pattern")
@@ -126,11 +126,11 @@ export function suggestRoster(feature: string, question?: string): string[] {
     featureLower.includes('design') ||
     featureLower.includes('usability')
   ) {
-    return ['Mary', 'Emma', 'Bob', 'Wei'] // UX-focused with security review
+    return ['Mary', 'Daniel', 'Clay', 'Amy'] // UX-focused with security review
   }
 
   // Default: Full team for comprehensive review
-  return ['Emma', 'Mary', 'Bob', 'Murat', 'Wei']
+  return ['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy']
 }
 
 /**
@@ -150,16 +150,16 @@ export async function runStandup(context: StandupContext): Promise<StandupResult
 
   // Process each agent in the roster
   for (const agent of roster) {
-    if (agent === 'Emma') {
-      result.Emma = await getEmmaContribution(context)
+    if (agent === 'Daniel') {
+      result.Daniel = await getDanielContribution(context)
     } else if (agent === 'Mary') {
       result.Mary = getMaryContribution(context)
-    } else if (agent === 'Bob') {
-      result.Bob = getBobContribution(context)
-    } else if (agent === 'Murat') {
-      result.Murat = getMuratContribution(context)
-    } else if (agent === 'Wei') {
-      result.Wei = getWeiContribution(context)
+    } else if (agent === 'Clay') {
+      result.Clay = getClayContribution(context)
+    } else if (agent === 'Hefley') {
+      result.Hefley = getHefleyContribution(context)
+    } else if (agent === 'Amy') {
+      result.Amy = getAmyContribution(context)
     }
   }
 
@@ -181,9 +181,9 @@ export async function runStandup(context: StandupContext): Promise<StandupResult
 }
 
 /**
- * Get Emma's security contribution
+ * Get Daniel's security contribution
  */
-async function getEmmaContribution(context: StandupContext): Promise<AgentContribution> {
+async function getDanielContribution(context: StandupContext): Promise<AgentContribution> {
   const contribution: AgentContribution = {
     focus: 'security',
     strideCategories: [],
@@ -454,8 +454,8 @@ async function getEmmaContribution(context: StandupContext): Promise<AgentContri
     }
   }
 
-  // Handle questions directed at Emma
-  if (context.questionFor === 'Emma') {
+  // Handle questions directed at Daniel
+  if (context.questionFor === 'Daniel') {
     contribution.response =
       'From a security perspective, more frequent 2FA provides better protection against unauthorized access. ' +
       'However, this is primarily a UX decision that Mary (Business Analyst) should weigh - balancing security with user friction. ' +
@@ -521,7 +521,7 @@ function getMaryContribution(context: StandupContext): AgentContribution {
 
     contribution.analysis =
       'Business Impact: Requiring 2FA every login risks losing 45% of users. ' +
-      'Recommended approach balances Emma\'s security requirements with user-friendly experience for 95% of users.'
+      'Recommended approach balances Daniel\'s security requirements with user-friendly experience for 95% of users.'
   }
 
   // Default business perspective
@@ -538,9 +538,9 @@ function getMaryContribution(context: StandupContext): AgentContribution {
 }
 
 /**
- * Get Bob's contribution (Tech Lead - Timeline & Capacity)
+ * Get Clay's contribution (Tech Lead - Timeline & Capacity)
  */
-function getBobContribution(context: StandupContext): AgentContribution {
+function getClayContribution(context: StandupContext): AgentContribution {
   const contribution: AgentContribution = {
     focus: 'capacity',
     recommendations: []
@@ -630,9 +630,9 @@ function getBobContribution(context: StandupContext): AgentContribution {
 }
 
 /**
- * Get Murat's contribution (Product Manager - User Value & Prioritization)
+ * Get Hefley's contribution (Product Manager - User Value & Prioritization)
  */
-function getMuratContribution(context: StandupContext): AgentContribution {
+function getHefleyContribution(context: StandupContext): AgentContribution {
   const contribution: AgentContribution = {
     focus: 'testing',
     recommendations: []
@@ -729,9 +729,9 @@ function getMuratContribution(context: StandupContext): AgentContribution {
 }
 
 /**
- * Get Wei's contribution (QA Lead - Test Strategy & Quality)
+ * Get Amy's contribution (QA Lead - Test Strategy & Quality)
  */
-function getWeiContribution(context: StandupContext): AgentContribution {
+function getAmyContribution(context: StandupContext): AgentContribution {
   const contribution: AgentContribution = {
     focus: 'quality_assurance',
     recommendations: []
@@ -881,19 +881,19 @@ function synthesizeDecision(result: StandupResult, context: StandupContext): { d
 
   // Collect all agent recommendations
   const agentRecommendations: string[] = []
-  if (result.Emma?.recommendation) agentRecommendations.push(`Emma (Security): ${result.Emma.recommendation}`)
+  if (result.Daniel?.recommendation) agentRecommendations.push(`Daniel (Security): ${result.Daniel.recommendation}`)
   if (result.Mary?.recommendation) agentRecommendations.push(`Mary (Business): ${result.Mary.recommendation}`)
-  if (result.Bob?.recommendation) agentRecommendations.push(`Bob (Tech Lead): ${result.Bob.recommendation}`)
-  if (result.Murat?.recommendation) agentRecommendations.push(`Murat (Product): ${result.Murat.recommendation}`)
-  if (result.Wei?.recommendation) agentRecommendations.push(`Wei (QA): ${result.Wei.recommendation}`)
+  if (result.Clay?.recommendation) agentRecommendations.push(`Clay (Tech Lead): ${result.Clay.recommendation}`)
+  if (result.Hefley?.recommendation) agentRecommendations.push(`Hefley (Product): ${result.Hefley.recommendation}`)
+  if (result.Amy?.recommendation) agentRecommendations.push(`Amy (QA): ${result.Amy.recommendation}`)
 
   // OAuth2 vs Email/Password decision synthesis
   if (feature.includes('oauth') || feature.includes('authentication') || feature.includes('auth')) {
     // Check for consensus
     const allAgreeEmailPassword =
       result.Mary?.recommendation?.includes('email/password') &&
-      result.Bob?.recommendation?.includes('email/password') &&
-      result.Murat?.recommendation?.includes('email/password')
+      result.Clay?.recommendation?.includes('email/password') &&
+      result.Hefley?.recommendation?.includes('email/password')
 
     if (allAgreeEmailPassword) {
       synthesis.decision =
@@ -901,11 +901,11 @@ function synthesizeDecision(result: StandupResult, context: StandupContext): { d
         'All agents agree OAuth2 should be deferred.'
 
       synthesis.consensus = [
-        'Emma (Security): Email/password + MFA meets CMMC requirements',
+        'Daniel (Security): Email/password + MFA meets CMMC requirements',
         'Mary (Business): 80% of users prefer email/password (familiar, low friction)',
-        'Bob (Tech Lead): Email/password saves 3 hours (6h vs 9h)',
-        'Murat (Product): Email/password is Must Have for MVP, OAuth2 is Should Have for v1.1',
-        'Wei (QA): Email/password needs 60 tests, OAuth2 needs +55 tests (183% increase)'
+        'Clay (Tech Lead): Email/password saves 3 hours (6h vs 9h)',
+        'Hefley (Product): Email/password is Must Have for MVP, OAuth2 is Should Have for v1.1',
+        'Amy (QA): Email/password needs 60 tests, OAuth2 needs +55 tests (183% increase)'
       ]
 
       synthesis.nextSteps = [
@@ -922,18 +922,18 @@ function synthesizeDecision(result: StandupResult, context: StandupContext): { d
 
   // 2FA frequency decision synthesis (UX vs Security trade-off)
   if (feature.includes('2fa') || feature.includes('mfa') || context.questionFor === 'Mary') {
-    // Emma wants frequent 2FA (security), Mary wants less frequent (UX)
-    const emmaSecurity = result.Emma?.recommendation?.includes('security')
+    // Daniel wants frequent 2FA (security), Mary wants less frequent (UX)
+    const emmaSecurity = result.Daniel?.recommendation?.includes('security')
     const maryUX = result.Mary?.recommendation?.includes('30 days')
 
     if (emmaSecurity && maryUX) {
       synthesis.decision =
         'Balanced decision: 2FA once per 30 days for standard users (Mary\'s UX concern), ' +
-        '2FA every login for admin accounts (Emma\'s security requirement). ' +
+        '2FA every login for admin accounts (Daniel\'s security requirement). ' +
         'This meets security needs while maintaining good UX for 95% of users.'
 
       synthesis.conflicts = [
-        'Emma (Security) wants more frequent 2FA for better security',
+        'Daniel (Security) wants more frequent 2FA for better security',
         'Mary (Business) warns 45% of users will leave if 2FA is too frequent'
       ]
 
@@ -960,8 +960,8 @@ function synthesizeDecision(result: StandupResult, context: StandupContext): { d
       'All agents agree microservices are premature optimization.'
 
     synthesis.consensus = [
-      'Murat (Product): Users care about problem-solving, not architecture',
-      'Bob (Tech Lead): Microservices add 8 hours overhead, monolith handles <1K users easily',
+      'Hefley (Product): Users care about problem-solving, not architecture',
+      'Clay (Tech Lead): Microservices add 8 hours overhead, monolith handles <1K users easily',
       'Mary (Business): Shipping 3 weeks earlier validates product-market fit faster',
       'Principle: Let user demand drive architecture evolution, not hypothetical future needs'
     ]
@@ -1012,11 +1012,11 @@ async function recordDecisionToFile(
 **Participants**: ${context.roster.join(', ')}
 **Status**: Approved
 
-### Emma's Recommendation
+### Daniel's Recommendation
 ${decision?.emmaRecommendation || 'See security analysis above'}
 
 ### CMMC Practice
-${decision?.cmmcPractice || result.Emma?.cmmc || 'N/A'}
+${decision?.cmmcPractice || result.Daniel?.cmmc || 'N/A'}
 
 ### Rationale
 Security best practice for password protection. bcrypt uses adaptive hashing with configurable cost factor, making it resistant to brute force attacks.
@@ -1046,7 +1046,7 @@ async function recordAuditTrailToFile(
   context: StandupContext,
   filePath: string
 ): Promise<void> {
-  const auditTrail = result.Emma?.auditTrail
+  const auditTrail = result.Daniel?.auditTrail
   if (!auditTrail) return
 
   const auditLog = `

@@ -1,6 +1,6 @@
-# Emma Security Engineer - Usage Examples
+# Daniel Security Engineer - Usage Examples
 
-This directory contains practical examples demonstrating how to use Emma for security analysis, STRIDE threat modeling, and CMMC compliance auditing.
+This directory contains practical examples demonstrating how to use Daniel for security analysis, STRIDE threat modeling, and CMMC compliance auditing.
 
 ## Prerequisites
 
@@ -8,7 +8,7 @@ This directory contains practical examples demonstrating how to use Emma for sec
 # Install dependencies
 npm install
 
-# Run tests to verify Emma is working
+# Run tests to verify Daniel is working
 npm test
 ```
 
@@ -31,7 +31,7 @@ npx ts-node examples/01-basic-review.ts
 
 **Expected output**:
 ```
-=== Emma Security Review - Basic Example ===
+=== Daniel Security Review - Basic Example ===
 
 Example 1: Analyzing code for SQL Injection...
 ❌ Vulnerability Detected!
@@ -53,7 +53,7 @@ Example 1: Analyzing code for SQL Injection...
 
 ### 2. Multi-Agent Standup (`02-multi-agent-standup.ts`)
 
-**What it does**: Orchestrates a team standup where Emma provides security perspective alongside other agents.
+**What it does**: Orchestrates a team standup where Daniel provides security perspective alongside other agents.
 
 **Use cases**:
 - Feature planning with security, business, capacity, and testing perspectives
@@ -62,10 +62,10 @@ Example 1: Analyzing code for SQL Injection...
 - Record decisions to project context
 
 **Agents involved**:
-- **Emma** (Security): Vulnerability detection, STRIDE, CMMC compliance
+- **Daniel** (Security): Vulnerability detection, STRIDE, CMMC compliance
 - **Mary** (Business): User value, UX impact
-- **Bob** (Capacity): Timeline, effort estimates
-- **Murat** (Testing): Test coverage, edge cases
+- **Clay** (Capacity): Timeline, effort estimates
+- **Hefley** (Testing): Test coverage, edge cases
 
 **Run it**:
 ```bash
@@ -74,13 +74,13 @@ npx ts-node examples/02-multi-agent-standup.ts
 
 **Expected output**:
 ```
-=== Emma Security Review - Multi-Agent Standup ===
+=== Daniel Security Review - Multi-Agent Standup ===
 
 Scenario: Reviewing user authentication implementation
 
-Participants: Emma, Mary, Bob, Murat
+Participants: Daniel, Mary, Clay, Hefley
 
-👤 Emma (Security Engineer):
+👤 Daniel (Security Engineer):
    Focus: security
    Vulnerability: SQL Injection - String Concatenation
    STRIDE Category: Tampering
@@ -98,12 +98,12 @@ Participants: Emma, Mary, Bob, Murat
    Analysis: Authentication is core to user experience...
    Recommendation: Prioritize security fixes before launch
 
-👤 Bob (Capacity Planner):
+👤 Clay (Capacity Planner):
    Focus: capacity_planning
    Analysis: Security fixes estimated at 2-3 days...
    Recommendation: Schedule remediation sprint
 
-👤 Murat (Test Engineer):
+👤 Hefley (Test Engineer):
    Focus: testing
    Analysis: Need security test cases for SQL injection...
    Recommendation: Add penetration testing to QA plan
@@ -144,7 +144,7 @@ npx ts-node examples/03-stride-analysis.ts
 
 **Expected output**:
 ```
-=== Emma Security Review - STRIDE Threat Modeling ===
+=== Daniel Security Review - STRIDE Threat Modeling ===
 
 Scenario: Analyzing payment transfer endpoint
 
@@ -213,11 +213,11 @@ npx ts-node examples/04-cmmc-audit.ts
 
 **Expected output**:
 ```
-=== Emma Security Review - CMMC Compliance Audit ===
+=== Daniel Security Review - CMMC Compliance Audit ===
 
 Scenario: CMMC Level 2 compliance audit for e-commerce checkout
 
-Emma's Security Analysis:
+Daniel's Security Analysis:
 
 Focus: security
 
@@ -270,7 +270,7 @@ CMMC Practices Checked: 10 practices across multiple domains
 
 **Date**: 2025-12-04
 **Feature**: E-commerce checkout flow
-**Participants**: Emma
+**Participants**: Daniel
 
 ## CMMC Practices Checked (10 domains)
 - AC.L2-3.1.1 (Access Control)
@@ -302,7 +302,7 @@ Examples generate output files in `examples/output/`:
 - **`project-context.md`**: Decision log from multi-agent standups
 - **`cmmc-audit-trail.md`**: CMMC compliance audit documentation
 
-These files are created automatically when you run the examples. You can review them to see how Emma formats decisions and audit trails.
+These files are created automatically when you run the examples. You can review them to see how Daniel formats decisions and audit trails.
 
 ## Creating Your Own Examples
 
@@ -335,7 +335,7 @@ myCustomAnalysis()
 
 ```yaml
 # .github/workflows/security-scan.yml
-name: Emma Security Scan
+name: Daniel Security Scan
 
 on: [push, pull_request]
 
@@ -346,7 +346,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: npm install
-      - name: Run Emma Security Scan
+      - name: Run Daniel Security Scan
         run: npx ts-node examples/01-basic-review.ts
 ```
 
@@ -356,7 +356,7 @@ jobs:
 #!/bin/bash
 # .git/hooks/pre-commit
 
-echo "Running Emma security scan..."
+echo "Running Daniel security scan..."
 npx ts-node examples/01-basic-review.ts
 
 if [ $? -ne 0 ]; then
@@ -367,7 +367,7 @@ fi
 
 ## Additional Resources
 
-- **[Emma README](../src/emma/README.md)**: Complete API reference
+- **[Daniel README](../src/emma/README.md)**: Complete API reference
 - **[CMMC Mapping](../docs/CMMC-MAPPING.md)**: CMMC practice-to-pattern mapping
 - **[Architecture](../docs/ARCHITECTURE.md)**: System design and flows
 - **[Test Suite](../tests/)**: Comprehensive test examples

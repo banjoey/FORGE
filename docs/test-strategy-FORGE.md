@@ -1,7 +1,7 @@
 # Test Strategy: FORGE
 
 **Date**: 2025-12-02
-**Owner**: Wei (QA Lead via dogfooding)
+**Owner**: Amy (QA Lead via dogfooding)
 **Status**: Approved
 **Review Frequency**: Per release
 
@@ -34,9 +34,9 @@ This test strategy defines testing approach for FORGE (Fused Optimization & Reas
 - **Standup**: Multi-agent orchestration
 
 **Agents** (Personas):
-- **Murat**: Product Manager
-- **Emma**: Security Engineer
-- **Wei**: QA Lead
+- **Hefley**: Product Manager
+- **Daniel**: Security Engineer
+- **Amy**: QA Lead
 
 **Workflows** (13 total):
 - AgilePm: CreatePrd, CreateEpics, CreateStories, SprintPlanning
@@ -92,7 +92,7 @@ This test strategy defines testing approach for FORGE (Fused Optimization & Reas
 - **Risks**: Wrong velocity calculation, over-committed sprints, missed dependencies
 - **Test Types**: Unit (velocity calc), Integration (sprint assignment)
 
-**7. Agent Personas (Murat, Emma, Wei)**
+**7. Agent Personas (Hefley, Daniel, Amy)**
 - **Why High**: Persona consistency = user trust, inconsistency = confusion
 - **Risks**: Out-of-character responses, missing expertise, wrong tone
 - **Test Types**: Persona validation (catchphrase usage, decision framework)
@@ -157,7 +157,7 @@ This test strategy defines testing approach for FORGE (Fused Optimization & Reas
 - Workflow step logic (e.g., INVEST validation, DREAD scoring, velocity calculation)
 - Template population (correct placeholders replaced)
 - Data validation (story points are Fibonacci, risk levels valid)
-- Agent decision frameworks (e.g., Murat's MoSCoW matrix, Emma's veto logic)
+- Agent decision frameworks (e.g., Hefley's MoSCoW matrix, Daniel's veto logic)
 
 **Test Count Estimate**: 80-100 unit tests
 
@@ -194,8 +194,8 @@ describe('ThreatModel - STRIDE Coverage', () => {
   })
 })
 
-// Example unit test for Emma's veto logic
-describe('Emma Agent - Veto Authority', () => {
+// Example unit test for Daniel's veto logic
+describe('Daniel Agent - Veto Authority', () => {
   test('vetoes critical vulnerability with high likelihood', () => {
     const decision = {
       vulnerability: 'SQL Injection',
@@ -228,7 +228,7 @@ describe('Emma Agent - Veto Authority', () => {
 
 **Scope**:
 - Full workflow execution (CreatePrd generates valid PRD)
-- Multi-agent discussion flow (Murat → Emma → Wei order)
+- Multi-agent discussion flow (Hefley → Daniel → Amy order)
 - File operations (project-context.md created, updated correctly)
 - Quality gates (PRD scores ≥8/10 on rubric)
 - Agent collaboration (synthesis produces actionable decision)
@@ -264,22 +264,22 @@ describe('CreatePrd Workflow - Integration', () => {
 
 // Example integration test for RunStandup workflow
 describe('RunStandup Workflow - Integration', () => {
-  test('agents speak in correct order: Murat → Emma → Wei', async () => {
+  test('agents speak in correct order: Hefley → Daniel → Amy', async () => {
     const decision = 'Should we add OAuth2 to MVP?'
     const standup = await runStandup(decision)
 
-    expect(standup.speakers[0]).toBe('Murat')
-    expect(standup.speakers[1]).toBe('Emma')
-    expect(standup.speakers[2]).toBe('Wei')
+    expect(standup.speakers[0]).toBe('Hefley')
+    expect(standup.speakers[1]).toBe('Daniel')
+    expect(standup.speakers[2]).toBe('Amy')
   })
 
   test('synthesis includes all agent perspectives', async () => {
     const decision = 'Review authentication design'
     const standup = await runStandup(decision)
 
-    expect(standup.synthesis).toContain('Murat')
-    expect(standup.synthesis).toContain('Emma')
-    expect(standup.synthesis).toContain('Wei')
+    expect(standup.synthesis).toContain('Hefley')
+    expect(standup.synthesis).toContain('Daniel')
+    expect(standup.synthesis).toContain('Amy')
     expect(standup.synthesis).toContain('## Consensus Decision')
     expect(standup.synthesis).toContain('## Action Items')
   })
@@ -352,9 +352,9 @@ describe('FORGE E2E - Full Project Lifecycle', () => {
 
     // Step 5: Run standup on architecture decision
     const standup = await runStandup('Review authentication approach')
-    expect(standup.participants).toContain('Murat')
-    expect(standup.participants).toContain('Emma')
-    expect(standup.participants).toContain('Wei')
+    expect(standup.participants).toContain('Hefley')
+    expect(standup.participants).toContain('Daniel')
+    expect(standup.participants).toContain('Amy')
     expect(standup).toHaveProperty('decision')
   })
 })
@@ -374,7 +374,7 @@ describe('FORGE E2E - Security Workflow', () => {
 
     // Step 3: Run standup on security decision
     const standup = await runStandup('Review data encryption approach')
-    expect(standup.participants).toContain('Emma')
+    expect(standup.participants).toContain('Daniel')
     expect(standup.synthesis).toContain('CMMC')
   })
 })
@@ -425,9 +425,9 @@ describe('FORGE E2E - Dogfooding Validation', () => {
 | ManageContext | 6 | 2 | 1 | 0 | 0 | 9 |
 | SynthesizeDecision | 6 | 2 | 0 | 0 | 0 | 8 |
 | **Agents** | 12 | 3 | 1 | 0 | 0 | 16 |
-| Murat | 4 | 1 | 0 | 0 | 0 | 5 |
-| Emma | 4 | 1 | 1 | 0 | 0 | 6 |
-| Wei | 4 | 1 | 0 | 0 | 0 | 5 |
+| Hefley | 4 | 1 | 0 | 0 | 0 | 5 |
+| Daniel | 4 | 1 | 1 | 0 | 0 | 6 |
+| Amy | 4 | 1 | 0 | 0 | 0 | 5 |
 | **Templates** | 8 | 2 | 0 | 0 | 0 | 10 |
 | **TOTAL** | **100** | **30** | **9** | **4** | **1** | **144** |
 
@@ -439,7 +439,7 @@ describe('FORGE E2E - Dogfooding Validation', () => {
 
 **Security Test Types**:
 
-### 1. Threat Model Validation (Emma's domain)
+### 1. Threat Model Validation (Daniel's domain)
 - **Test**: All STRIDE categories addressed for each component
 - **Tool**: Manual review + automated STRIDE checklist
 - **Frequency**: Per release
@@ -530,7 +530,7 @@ describe('FORGE E2E - Dogfooding Validation', () => {
 | ThreatModel | Critical | 90% | Security foundation |
 | CreatePrd | High | 80% | Complex output, quality gate |
 | SprintPlanning | High | 80% | Project timeline impact |
-| Agents (Murat/Emma/Wei) | High | 80% | Persona consistency |
+| Agents (Hefley/Daniel/Amy) | High | 80% | Persona consistency |
 | CreateEpics | Medium | 70% | Standard process |
 | CreateStories | Medium | 70% | INVEST validation available |
 | CreateTestStrategy | Medium | 70% | Self-documenting |
@@ -576,19 +576,19 @@ describe('FORGE E2E - Dogfooding Validation', () => {
 
 ## Persona Consistency Testing
 
-**Challenge**: Agent personas (Murat, Emma, Wei) must stay in character
+**Challenge**: Agent personas (Hefley, Daniel, Amy) must stay in character
 
 **Test Approach**:
 
 ### 1. Catchphrase Usage
-- **Murat**: "What problem are we solving?", "Is this Must Have or Should Have?"
-- **Emma**: "Let's threat model this", "What could go wrong?"
-- **Wei**: "Let's write tests before code", "Follow the Test Pyramid"
+- **Hefley**: "What problem are we solving?", "Is this Must Have or Should Have?"
+- **Daniel**: "Let's threat model this", "What could go wrong?"
+- **Amy**: "Let's write tests before code", "Follow the Test Pyramid"
 
 **Test**: Agent responses contain expected catchphrases
 
 ```typescript
-describe('Murat Persona Consistency', () => {
+describe('Hefley Persona Consistency', () => {
   test('uses prioritization catchphrases', () => {
     const response = murat.respond('Should we add this feature?')
     expect(response).toMatch(/Must Have|Should Have|Could Have|Won't Have/)
@@ -599,14 +599,14 @@ describe('Murat Persona Consistency', () => {
 ---
 
 ### 2. Decision Framework Usage
-- **Murat**: MoSCoW prioritization, Value vs Effort matrix
-- **Emma**: STRIDE methodology, CMMC practice citation, Veto authority
-- **Wei**: Test Pyramid, Risk-based coverage, ATDD
+- **Hefley**: MoSCoW prioritization, Value vs Effort matrix
+- **Daniel**: STRIDE methodology, CMMC practice citation, Veto authority
+- **Amy**: Test Pyramid, Risk-based coverage, ATDD
 
 **Test**: Agent applies correct framework to decisions
 
 ```typescript
-describe('Emma Persona Consistency', () => {
+describe('Daniel Persona Consistency', () => {
   test('applies STRIDE to security decisions', () => {
     const response = emma.respond('Review authentication design')
     expect(response).toContain('Spoofing')
@@ -619,9 +619,9 @@ describe('Emma Persona Consistency', () => {
 ---
 
 ### 3. Tone Consistency
-- **Murat**: User-centric, pragmatic, ruthless prioritizer
-- **Emma**: Security-first, proactive, educator
-- **Wei**: Quality-focused, test-first advocate, pragmatic
+- **Hefley**: User-centric, pragmatic, ruthless prioritizer
+- **Daniel**: Security-first, proactive, educator
+- **Amy**: Quality-focused, test-first advocate, pragmatic
 
 **Test**: Agent tone matches personality (manual review for MVP, sentiment analysis later)
 
@@ -711,7 +711,7 @@ describe('Emma Persona Consistency', () => {
 ### Challenge 2: Multi-Agent Conversation Flow
 - **Problem**: Agent discussions are complex, hard to mock
 - **Solution**: Integration tests with real agents, validate:
-  - Speaker order (Murat → Emma → Wei)
+  - Speaker order (Hefley → Daniel → Amy)
   - Perspective inclusion (all agents' views in synthesis)
   - Decision quality (actionable, includes rationale)
 
@@ -825,14 +825,14 @@ describe('Emma Persona Consistency', () => {
 
 | Date | Reviewer | Changes | Version |
 |------|----------|---------|----|
-| 2025-12-02 | Wei (via dogfooding) | Initial test strategy | 1.0 |
+| 2025-12-02 | Amy (via dogfooding) | Initial test strategy | 1.0 |
 
 ---
 
 **Test Strategy Version**: 1.0
 **Last Updated**: 2025-12-02
 **Next Review**: 2026-03-02 (quarterly)
-**Approval**: Wei (QA Lead)
+**Approval**: Amy (QA Lead)
 
 ---
 

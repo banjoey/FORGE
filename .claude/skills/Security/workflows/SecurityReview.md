@@ -684,7 +684,7 @@ db.query(query, [`%${req.query.name}%`])
 - **Sprint Planning**: Allocate time for security remediation
 
 ### With Standup
-- **Emma's Role**: Emma uses SecurityReview findings in standup
+- **Daniel's Role**: Daniel uses SecurityReview findings in standup
 - **Discussion**: Prioritize which findings to fix in current sprint
 
 ### With TestArchitect

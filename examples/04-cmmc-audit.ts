@@ -1,7 +1,7 @@
 /**
  * Example 4: CMMC Compliance Audit
  *
- * This example demonstrates how to use Emma to generate a CMMC Level 2
+ * This example demonstrates how to use Daniel to generate a CMMC Level 2
  * compliance audit trail for a comprehensive feature review.
  */
 
@@ -9,14 +9,14 @@ import { runStandup } from '../src/standup/orchestrator'
 import { promises as fs } from 'fs'
 
 async function cmmcAudit() {
-  console.log('=== Emma Security Review - CMMC Compliance Audit ===\n')
+  console.log('=== Daniel Security Review - CMMC Compliance Audit ===\n')
 
   // Scenario: Comprehensive review of e-commerce checkout flow
   console.log('Scenario: CMMC Level 2 compliance audit for e-commerce checkout\n')
 
   const result = await runStandup({
     feature: 'E-commerce checkout flow',
-    roster: ['Emma'],
+    roster: ['Daniel'],
     description: 'Multi-component checkout system with payment processing',
     designDoc: {
       components: [
@@ -32,19 +32,19 @@ async function cmmcAudit() {
     }
   })
 
-  console.log('Emma\'s Security Analysis:\n')
+  console.log('Daniel\'s Security Analysis:\n')
 
-  if (result.Emma) {
-    console.log(`Focus: ${result.Emma.focus}`)
+  if (result.Daniel) {
+    console.log(`Focus: ${result.Daniel.focus}`)
 
     // CMMC Practices Checked
-    if (result.Emma.cmmcPracticesChecked) {
-      console.log(`\nCMMC Practices Checked: ${result.Emma.cmmcPracticesChecked.length} practices across multiple domains\n`)
+    if (result.Daniel.cmmcPracticesChecked) {
+      console.log(`\nCMMC Practices Checked: ${result.Daniel.cmmcPracticesChecked.length} practices across multiple domains\n`)
 
       // Group by domain
-      const practicesByDomain: Record<string, typeof result.Emma.cmmcPracticesChecked> = {}
+      const practicesByDomain: Record<string, typeof result.Daniel.cmmcPracticesChecked> = {}
 
-      result.Emma.cmmcPracticesChecked.forEach(practice => {
+      result.Daniel.cmmcPracticesChecked.forEach(practice => {
         const domain = practice.domainCode
         if (!practicesByDomain[domain]) {
           practicesByDomain[domain] = []
@@ -59,10 +59,10 @@ async function cmmcAudit() {
     }
 
     // CMMC Violations Found
-    if (result.Emma.cmmcViolations && result.Emma.cmmcViolations.length > 0) {
-      console.log(`\n\n⚠️  CMMC Violations Found: ${result.Emma.cmmcViolations.length}\n`)
+    if (result.Daniel.cmmcViolations && result.Daniel.cmmcViolations.length > 0) {
+      console.log(`\n\n⚠️  CMMC Violations Found: ${result.Daniel.cmmcViolations.length}\n`)
 
-      result.Emma.cmmcViolations.forEach((violation, index) => {
+      result.Daniel.cmmcViolations.forEach((violation, index) => {
         console.log(`${index + 1}. ${violation.description}`)
         console.log(`   Practice: ${violation.practice} (${violation.domainCode})`)
         console.log(`   Severity: ${violation.severity}`)
@@ -75,9 +75,9 @@ async function cmmcAudit() {
     }
 
     // Recommendations
-    if (result.Emma.recommendations && result.Emma.recommendations.length > 0) {
+    if (result.Daniel.recommendations && result.Daniel.recommendations.length > 0) {
       console.log('📋 Security Recommendations:\n')
-      result.Emma.recommendations.forEach((rec, i) => {
+      result.Daniel.recommendations.forEach((rec, i) => {
         console.log(`   ${i + 1}. ${rec}`)
       })
       console.log('')
@@ -111,8 +111,8 @@ async function cmmcAudit() {
   // Compliance Summary
   console.log('\n📊 CMMC Compliance Summary:\n')
 
-  const totalPractices = result.Emma?.cmmcPracticesChecked?.length || 0
-  const violations = result.Emma?.cmmcViolations?.length || 0
+  const totalPractices = result.Daniel?.cmmcPracticesChecked?.length || 0
+  const violations = result.Daniel?.cmmcViolations?.length || 0
   const passingPractices = totalPractices - violations
 
   const complianceRate = totalPractices > 0

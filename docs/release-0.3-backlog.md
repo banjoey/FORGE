@@ -10,7 +10,7 @@
 
 Release 0.3 was originally planned for optimizations and final polish before upstream contribution. However, after dogfooding FORGE on itself (multi-agent standup review), we identified that all 3 stories are **premature optimizations** with no validated user pain points.
 
-**Decision (2025-12-02)**: Cancel Release 0.3, ship Release 0.2 (Emma agent) directly to upstream contribution.
+**Decision (2025-12-02)**: Cancel Release 0.3, ship Release 0.2 (Daniel agent) directly to upstream contribution.
 
 **Rationale**:
 - No user feedback yet (no validation these optimizations are needed)
@@ -19,7 +19,7 @@ Release 0.3 was originally planned for optimizations and final polish before ups
 - Better to ship, gather users, optimize based on feedback
 
 **Next Steps**:
-- Complete Release 0.2 (Emma agent, 18 points, 3 weeks)
+- Complete Release 0.2 (Daniel agent, 18 points, 3 weeks)
 - Contribute FORGE upstream to PAI ecosystem
 - Gather usage data and user feedback
 - Revisit these optimizations IF users request them
@@ -93,19 +93,19 @@ Refactor into hierarchical structure:
 
 **Standup Review (2025-12-02)**:
 
-*Participants*: Mary (Business Analyst), Bob (Scrum Master), Murat (Test Architect)
+*Participants*: Mary (Business Analyst), Clay (Scrum Master), Hefley (Test Architect)
 
 **Issues Found**:
 1. **Mary**: Poor ROI - $0.18/standup savings requires 1,667 standups to break even (3 years)
    - Alternative: Use Haiku for CMMC lookups (90% cheaper, no refactoring)
    - No validated user pain point (no feedback saying "CMMC loading is slow")
 
-2. **Bob**: Premature optimization
+2. **Clay**: Premature optimization
    - Delays upstream contribution by 1-2 weeks
    - No usage data to validate this is a problem
    - Better to ship, gather users, optimize based on feedback
 
-3. **Murat**: High regression risk for marginal gain
+3. **Hefley**: High regression risk for marginal gain
    - Splitting 2,235-line file risks content loss or errors
    - Testing effort = 67% of story (2 hours testing for 3-point story)
    - "Don't fix what isn't broken" - current system works
@@ -138,9 +138,9 @@ Enable agents to reference decision history:
 **Decision**: PostgreSQL
 **Rationale**:
   - Mary (BA): 80% of enterprise customers use PostgreSQL
-  - Bob (SM): Team has PostgreSQL experience (faster implementation)
-  - Murat (TA): PostgreSQL has good test tooling (pg_tap)
-**Participants**: Mary, Bob, Murat
+  - Clay (SM): Team has PostgreSQL experience (faster implementation)
+  - Hefley (TA): PostgreSQL has good test tooling (pg_tap)
+**Participants**: Mary, Clay, Hefley
 **Status**: Implemented
 ```
 
@@ -152,9 +152,9 @@ Mary: "I see we previously chose PostgreSQL for user data (Decision 2025-11-01).
        For analytics, MongoDB might be better (document-based queries).
        But mixing databases adds operational complexity.
 
-       Bob, from an ops perspective, do we want to manage 2 databases?"
+       Clay, from an ops perspective, do we want to manage 2 databases?"
 
-Bob: "Referencing our PostgreSQL decision: we chose it partly because the team
+Clay: "Referencing our PostgreSQL decision: we chose it partly because the team
       knows it well. Adding MongoDB means learning curve + 2 databases to maintain.
 
       Recommendation: Use PostgreSQL for analytics too (simpler ops),
@@ -191,15 +191,15 @@ Bob: "Referencing our PostgreSQL decision: we chose it partly because the team
 ### Story S-2: Security Agent Veto Authority (3 points) - ⏩ MOVED TO EMMA AGENT
 
 **Original Priority**: Should Have (security governance)
-**Decision (2025-12-02)**: ⏩ MOVED to Emma agent as US-E4 (deferred to future release)
+**Decision (2025-12-02)**: ⏩ MOVED to Daniel agent as US-E4 (deferred to future release)
 
 **Problem**:
-Emma (Security) can recommend against insecure designs, but can't block them. If business pressures override security, insecure code ships.
+Daniel (Security) can recommend against insecure designs, but can't block them. If business pressures override security, insecure code ships.
 
 **Solution**:
-Give Emma veto authority on **Critical security issues** (not all issues):
+Give Daniel veto authority on **Critical security issues** (not all issues):
 
-**Veto Criteria** (Emma can block deployment):
+**Veto Criteria** (Daniel can block deployment):
 1. **Critical CMMC violations** (will fail audit)
    - Example: Plaintext passwords (IA.L2-3.5.10 violation)
    - Example: No access control (AC.L2-3.1.1 violation)
@@ -212,16 +212,16 @@ Give Emma veto authority on **Critical security issues** (not all issues):
    - Example: Storing PII without encryption (GDPR violation)
    - Example: Logging credit card numbers (PCI-DSS violation)
 
-**Non-Veto** (Emma recommends, but doesn't block):
+**Non-Veto** (Daniel recommends, but doesn't block):
 - Medium/Low security issues (weak password policy, missing rate limiting)
 - Performance optimizations (caching, CDN)
 - UX improvements (2FA usability)
 
 **Workflow**:
 ```
-Stakeholder: "Ship this feature even though Emma says there's a security issue."
+Stakeholder: "Ship this feature even though Daniel says there's a security issue."
 
-Emma: "I'm invoking veto authority. This feature has:
+Daniel: "I'm invoking veto authority. This feature has:
        - Critical Issue: SQL injection in login form (OWASP A03)
        - CMMC Impact: Violates IA.L2-3.5.10 (authentication protection)
        - Business Risk: Could lead to data breach ($50k+ fine)
@@ -238,7 +238,7 @@ Stakeholder: "Yes, fix it and ship."
 
 Stakeholder: "I need to ship NOW for a critical demo."
 
-Emma: "Understood. I'm documenting this as a security exception:
+Daniel: "Understood. I'm documenting this as a security exception:
        - Waived By: [Stakeholder Name]
        - Reason: Critical customer demo
        - Acceptance: You accept data breach risk
@@ -254,26 +254,26 @@ Emma: "Understood. I'm documenting this as a security exception:
 
 **Effort**: 3 story points
 - 1 pt: Define veto criteria (Critical CMMC, Critical OWASP, Legal violations)
-- 1 pt: Update Emma agent with veto authority
+- 1 pt: Update Daniel agent with veto authority
 - 1 pt: Create security exception workflow (for stakeholder overrides)
 
 **Acceptance Criteria**:
-- [ ] Emma can block deployment on Critical security issues
-- [ ] Emma documents veto rationale (CMMC/OWASP/Legal violation)
-- [ ] Emma provides fix timeline estimate
+- [ ] Daniel can block deployment on Critical security issues
+- [ ] Daniel documents veto rationale (CMMC/OWASP/Legal violation)
+- [ ] Daniel provides fix timeline estimate
 - [ ] Stakeholder can override with signed security exception
 - [ ] All security exceptions logged in project-context.md
 
 **Validation**:
-- Test: Introduce SQL injection → Emma blocks deployment
-- Test: Stakeholder overrides → Emma documents exception
-- Test: Medium security issue → Emma recommends, doesn't block
+- Test: Introduce SQL injection → Daniel blocks deployment
+- Test: Stakeholder overrides → Daniel documents exception
+- Test: Medium security issue → Daniel recommends, doesn't block
 
 **Move Rationale**:
-- Veto authority is Emma-specific feature (not general standup feature)
-- Belongs in Emma agent PRD (US-E4)
+- Veto authority is Daniel-specific feature (not general standup feature)
+- Belongs in Daniel agent PRD (US-E4)
 - Deferred from Release 0.2 to future release (see `docs/PRD-emma-security-agent.md`)
-- Emma can still recommend Critical fixes without veto (MVP sufficient)
+- Daniel can still recommend Critical fixes without veto (MVP sufficient)
 
 ---
 
@@ -285,7 +285,7 @@ Emma: "Understood. I'm documenting this as a security exception:
 **Original Value Proposition** (all cancelled/deferred):
 - ❌ Performance: Faster CMMC lookups (hierarchical loading) - REJECTED (poor ROI)
 - ⏩ Quality: Consistent decisions (agent cross-referencing) - DEFERRED (no user validation)
-- ⏩ Security: Governance enforcement (Emma veto authority) - MOVED to Emma agent US-E4
+- ⏩ Security: Governance enforcement (Daniel veto authority) - MOVED to Daniel agent US-E4
 
 **Decision Impact**:
 - ✅ Saved 3 story points (CMMC optimization rejected)
@@ -296,7 +296,7 @@ Emma: "Understood. I'm documenting this as a security exception:
 **New Plan**:
 ```
 Release 0.1 MVP: ✅ COMPLETE (26 pts, 3.67x validation passed)
-Release 0.2 Enterprise: ⏳ IN PROGRESS (Emma agent, 18 pts, 3 weeks)
+Release 0.2 Enterprise: ⏳ IN PROGRESS (Daniel agent, 18 pts, 3 weeks)
 Release 0.3: ❌ CANCELLED (all stories premature optimizations)
 Upstream Contribution: 🚀 NEXT (after Release 0.2)
 ```
@@ -385,19 +385,19 @@ Output: David agent ready for standup participation
 
 ---
 
-### Epic 3.8: Emma Optimization (8 points) - ⏩ DEFERRED
+### Epic 3.8: Daniel Optimization (8 points) - ⏩ DEFERRED
 
 **Priority**: Should Have (performance optimization)
 **Decision (2025-12-03)**: ⏩ DEFERRED until user testing validates need
 
 **Problem**:
-Emma's comprehensive security analysis may have performance optimization opportunities. User wants to test impact before implementing changes to ensure efficacy isn't affected.
+Daniel's comprehensive security analysis may have performance optimization opportunities. User wants to test impact before implementing changes to ensure efficacy isn't affected.
 
 **Solution**:
-Identify and implement Emma optimizations ONLY after validating they don't reduce security detection accuracy.
+Identify and implement Daniel optimizations ONLY after validating they don't reduce security detection accuracy.
 
 **User Requirements**:
-1. Test any optimizations against current Emma baseline (78/78 tests passing)
+1. Test any optimizations against current Daniel baseline (78/78 tests passing)
 2. Ensure security efficacy is maintained or improved (zero regression)
 3. Measure impact on:
    - Detection accuracy (same or better)
@@ -406,15 +406,15 @@ Identify and implement Emma optimizations ONLY after validating they don't reduc
    - Test coverage (maintain 100%)
 
 **Potential Optimization Areas** (TBD after testing):
-1. CMMC hierarchical loading (see Story 0.3-S1 - rejected for standup, may revisit for Emma)
+1. CMMC hierarchical loading (see Story 0.3-S1 - rejected for standup, may revisit for Daniel)
 2. Vulnerability pattern caching (avoid re-analyzing same patterns)
 3. Threat model templates (pre-built STRIDE analysis for common features)
 4. Progressive security analysis (quick scan first, deep scan on demand)
 
 **Testing Approach**:
 ```
-1. Establish Emma baseline:
-   - Run Emma on 20 code samples (varied vulnerabilities)
+1. Establish Daniel baseline:
+   - Run Daniel on 20 code samples (varied vulnerabilities)
    - Measure: detection rate, response time, context usage
    - Target: 100% detection rate (all vulnerabilities found)
 
@@ -436,20 +436,20 @@ Identify and implement Emma optimizations ONLY after validating they don't reduc
 ```
 
 **Benefits**:
-- ✅ Faster Emma responses (better UX)
+- ✅ Faster Daniel responses (better UX)
 - ✅ Lower context usage (more efficient)
 - ✅ Maintained accuracy (zero security regression)
 - ✅ Data-driven optimization (not guessing)
 
 **Effort**: 8 story points
-- 2 pts: Establish Emma baseline (20 code samples, metrics)
+- 2 pts: Establish Daniel baseline (20 code samples, metrics)
 - 2 pts: Implement optimization 1 (TBD after testing)
 - 2 pts: Implement optimization 2 (TBD after testing)
 - 1 pt: Validation testing (ensure no regression)
 - 1 pt: Documentation (optimization decisions and trade-offs)
 
 **Acceptance Criteria**:
-- [ ] Emma baseline established (20 code samples, 100% detection)
+- [ ] Daniel baseline established (20 code samples, 100% detection)
 - [ ] Optimizations tested individually (not bulk changes)
 - [ ] All 78 tests still passing (zero regression)
 - [ ] Detection accuracy maintained or improved (100%)
@@ -457,7 +457,7 @@ Identify and implement Emma optimizations ONLY after validating they don't reduc
 - [ ] Documentation updated (optimization rationale)
 
 **Validation**:
-- Test: Run Emma on 20 code samples → 100% detection rate
+- Test: Run Daniel on 20 code samples → 100% detection rate
 - Test: Apply optimization → detection rate still 100%
 - Test: Measure response time → faster than baseline
 - Test: All 78 tests passing → zero regression
@@ -477,5 +477,5 @@ Identify and implement Emma optimizations ONLY after validating they don't reduc
 ---
 
 **Backlog Last Updated**: 2025-12-03
-**New Items Added**: 2 (CreateAgent skill, Emma optimization epic)
+**New Items Added**: 2 (CreateAgent skill, Daniel optimization epic)
 **Total Deferred Scope**: 5 + 8 = 13 story points (future work, post-0.2)

@@ -1,19 +1,19 @@
-# Emma Security Engineer
+# Daniel Security Engineer
 
 **Status:** Production Ready (100% test coverage)
 
-Emma is a security specialist agent that provides comprehensive vulnerability detection, STRIDE threat modeling, and CMMC Level 2 compliance analysis for TypeScript/JavaScript applications.
+Daniel is a security specialist agent that provides comprehensive vulnerability detection, STRIDE threat modeling, and CMMC Level 2 compliance analysis for TypeScript/JavaScript applications.
 
 ## Overview
 
-Emma combines pattern-based vulnerability detection with CMMC (Cybersecurity Maturity Model Certification) Level 2 compliance mapping and STRIDE threat modeling to provide comprehensive security analysis. Whether you're performing standalone code reviews, orchestrating multi-agent standups, or generating compliance audit trails, Emma helps you identify and remediate security issues early in the development lifecycle.
+Daniel combines pattern-based vulnerability detection with CMMC (Cybersecurity Maturity Model Certification) Level 2 compliance mapping and STRIDE threat modeling to provide comprehensive security analysis. Whether you're performing standalone code reviews, orchestrating multi-agent standups, or generating compliance audit trails, Daniel helps you identify and remediate security issues early in the development lifecycle.
 
 ### Key Features
 
 - **50+ Vulnerability Patterns**: Detects SQL injection, XSS, authentication bypass, authorization flaws, and infrastructure misconfigurations
 - **STRIDE Threat Modeling**: Categorizes threats across 6 categories (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege)
 - **CMMC Level 2 Coverage**: Maps vulnerabilities to 17 CMMC domains and 25+ practices
-- **Multi-Agent Standup**: Coordinates with other agents (Mary, Bob, Murat) for comprehensive feature analysis
+- **Multi-Agent Standup**: Coordinates with other agents (Mary, Clay, Hefley) for comprehensive feature analysis
 - **Audit Trail Generation**: Creates CMMC-compliant audit trails for security reviews
 - **Production Ready**: 100% test coverage (78/78 tests passing)
 
@@ -62,7 +62,7 @@ import { runStandup } from './src/standup/orchestrator'
 
 const result = await runStandup({
   feature: 'User authentication system',
-  roster: ['Emma', 'Mary', 'Bob', 'Murat'],
+  roster: ['Daniel', 'Mary', 'Clay', 'Hefley'],
   codeSnippet: `
     app.post('/login', async (req, res) => {
       const user = await db.query("SELECT * FROM users WHERE email = '" + req.body.email + "'")
@@ -73,15 +73,15 @@ const result = await runStandup({
   `
 })
 
-// Emma's security perspective
-console.log(result.Emma?.vulnerability)      // "SQL Injection - String Concatenation"
-console.log(result.Emma?.severity)           // "Critical"
-console.log(result.Emma?.recommendations)    // ["Use parameterized queries...", ...]
+// Daniel's security perspective
+console.log(result.Daniel?.vulnerability)      // "SQL Injection - String Concatenation"
+console.log(result.Daniel?.severity)           // "Critical"
+console.log(result.Daniel?.recommendations)    // ["Use parameterized queries...", ...]
 
 // Other agent perspectives
 console.log(result.Mary?.focus)              // "business_value"
-console.log(result.Bob?.focus)               // "capacity_planning"
-console.log(result.Murat?.focus)             // "testing"
+console.log(result.Clay?.focus)               // "capacity_planning"
+console.log(result.Hefley?.focus)             // "testing"
 
 // Team synthesis
 console.log(result.synthesis?.decision)      // "Team recommendation based on all perspectives"
@@ -93,7 +93,7 @@ console.log(result.synthesis?.decision)      // "Team recommendation based on al
 
 ### 1. Vulnerability Pattern Detection
 
-Emma detects 50+ vulnerability patterns across 5 categories:
+Daniel detects 50+ vulnerability patterns across 5 categories:
 
 #### SQL Injection (10 patterns)
 - String concatenation (`"SELECT * FROM users WHERE id = " + id`)
@@ -155,7 +155,7 @@ Emma detects 50+ vulnerability patterns across 5 categories:
 
 ### 2. STRIDE Threat Modeling
 
-Emma categorizes threats using Microsoft's STRIDE framework:
+Daniel categorizes threats using Microsoft's STRIDE framework:
 
 - **Spoofing**: Identity theft, credential theft (e.g., missing MFA)
 - **Tampering**: Data modification attacks (e.g., SQL injection, XSS)
@@ -175,7 +175,7 @@ console.log(analysis.threats)  // Array of all threats detected
 
 ### 3. CMMC Level 2 Compliance
 
-Emma maps every vulnerability to CMMC Level 2 practices across 17 domains:
+Daniel maps every vulnerability to CMMC Level 2 practices across 17 domains:
 
 | Domain Code | Domain Name | Practices |
 |------------|-------------|-----------|
@@ -201,12 +201,12 @@ Emma maps every vulnerability to CMMC Level 2 practices across 17 domains:
 
 ### 4. Multi-Agent Standup Orchestration
 
-Emma participates in multi-agent standups alongside:
+Daniel participates in multi-agent standups alongside:
 - **Mary** (Business Analyst): User value, UX impact, business requirements
-- **Bob** (Capacity Planner): Timeline estimates, resource allocation, effort sizing
-- **Murat** (Test Engineer): Test coverage, edge cases, quality assurance
+- **Clay** (Capacity Planner): Timeline estimates, resource allocation, effort sizing
+- **Hefley** (Test Engineer): Test coverage, edge cases, quality assurance
 
-Emma provides the security perspective:
+Daniel provides the security perspective:
 - STRIDE threat categorization
 - CMMC compliance requirements
 - Vulnerability severity assessment
@@ -220,7 +220,7 @@ Generate CMMC-compliant audit trails for security reviews:
 ```typescript
 const result = await runStandup({
   feature: 'Payment processing API',
-  roster: ['Emma'],
+  roster: ['Daniel'],
   designDoc: { components: ['API', 'Database', 'Auth'] }
 })
 
@@ -298,21 +298,21 @@ import { runStandup } from './src/standup/orchestrator'
 
 const result = await runStandup({
   feature: 'User password reset flow',
-  roster: ['Emma', 'Mary', 'Bob', 'Murat'],
+  roster: ['Daniel', 'Mary', 'Clay', 'Hefley'],
   description: 'Users can reset their password via email link'
 })
 
 // Security perspective
-console.log('Security Analysis:', result.Emma?.recommendations)
+console.log('Security Analysis:', result.Daniel?.recommendations)
 
 // Business perspective
 console.log('Business Value:', result.Mary?.recommendation)
 
 // Capacity perspective
-console.log('Timeline:', result.Bob?.recommendation)
+console.log('Timeline:', result.Clay?.recommendation)
 
 // Testing perspective
-console.log('Test Strategy:', result.Murat?.recommendation)
+console.log('Test Strategy:', result.Hefley?.recommendation)
 
 // Team decision
 console.log('Decision:', result.synthesis?.decision)
@@ -371,7 +371,7 @@ import { runStandup } from './src/standup/orchestrator'
 
 const result = await runStandup({
   feature: 'E-commerce checkout flow',
-  roster: ['Emma'],
+  roster: ['Daniel'],
   designDoc: {
     components: ['API Gateway', 'Payment Service', 'Database', 'Auth Service']
   }
@@ -380,8 +380,8 @@ const result = await runStandup({
 // Generate audit trail
 await result.recordAuditTrail('cmmc-audit-2025-12-04.md')
 
-console.log('CMMC Practices Checked:', result.Emma?.cmmcPracticesChecked?.length)
-console.log('Violations Found:', result.Emma?.cmmcViolations?.length)
+console.log('CMMC Practices Checked:', result.Daniel?.cmmcPracticesChecked?.length)
+console.log('Violations Found:', result.Daniel?.cmmcViolations?.length)
 ```
 
 **Audit Trail Output:**
@@ -390,7 +390,7 @@ console.log('Violations Found:', result.Emma?.cmmcViolations?.length)
 
 **Date**: 2025-12-04
 **Feature**: E-commerce checkout flow
-**Participants**: Emma
+**Participants**: Daniel
 
 ## CMMC Practices Checked (10 domains)
 - AC.L2-3.1.1 (Access Control)
@@ -418,7 +418,7 @@ console.log('Violations Found:', result.Emma?.cmmcViolations?.length)
 
 ### SQL Injection Patterns
 
-Emma detects various SQL injection vectors:
+Daniel detects various SQL injection vectors:
 
 ```typescript
 // String concatenation
@@ -496,7 +496,7 @@ npm install random-package  // No security scan
 
 ### 17 CMMC Domains (100% Coverage)
 
-Emma provides comprehensive coverage across all CMMC Level 2 domains:
+Daniel provides comprehensive coverage across all CMMC Level 2 domains:
 
 1. **Access Control (AC)** - Authorization, session management, least privilege
 2. **Awareness and Training (AT)** - Security awareness (not code-level)
@@ -572,12 +572,12 @@ analysis.threats?.forEach(threat => {
 
 ### `runStandup(context: StandupContext): Promise<StandupResult>`
 
-Orchestrates multi-agent standup with Emma providing security perspective.
+Orchestrates multi-agent standup with Daniel providing security perspective.
 
 **Parameters:**
 - `context` (StandupContext):
   - `feature` (string): Feature being discussed
-  - `roster` (string[]): Agents to include (['Emma', 'Mary', 'Bob', 'Murat'])
+  - `roster` (string[]): Agents to include (['Daniel', 'Mary', 'Clay', 'Hefley'])
   - `codeSnippet` (string, optional): Code to analyze
   - `designDoc` (object, optional): Design document with components
   - `description` (string, optional): Feature description
@@ -586,10 +586,10 @@ Orchestrates multi-agent standup with Emma providing security perspective.
 
 **Returns:** `Promise<StandupResult>`
 - `participants` (string[]): Agents that participated
-- `Emma` (AgentContribution, optional): Emma's security contribution
+- `Daniel` (AgentContribution, optional): Daniel's security contribution
 - `Mary` (AgentContribution, optional): Mary's business contribution
-- `Bob` (AgentContribution, optional): Bob's capacity contribution
-- `Murat` (AgentContribution, optional): Murat's testing contribution
+- `Clay` (AgentContribution, optional): Clay's capacity contribution
+- `Hefley` (AgentContribution, optional): Hefley's testing contribution
 - `synthesis` (object, optional): Team decision synthesis
 - `conflicts` (array): Any conflicting recommendations
 - `recordDecision(filePath)`: Method to record decision to file
@@ -599,11 +599,11 @@ Orchestrates multi-agent standup with Emma providing security perspective.
 ```typescript
 const result = await runStandup({
   feature: 'User authentication',
-  roster: ['Emma', 'Mary'],
+  roster: ['Daniel', 'Mary'],
   codeSnippet: loginCode
 })
 
-console.log(result.Emma?.vulnerability)
+console.log(result.Daniel?.vulnerability)
 console.log(result.Mary?.recommendation)
 await result.recordDecision('docs/project-context.md')
 ```

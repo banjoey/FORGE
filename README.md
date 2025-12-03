@@ -17,6 +17,30 @@ FORGE is a PAI enhancement that brings **multi-agent collaboration** to software
 - **Customizable Rosters**: Define agents for any domain (Investment Advisory, Legal, Healthcare, etc.)
 - **Multi-Agent Orchestration**: Better decisions through diverse perspectives
 
+## TL;DR - Quick Install
+
+**Step 1: Install PAI** (if not already installed)
+```bash
+# Clone Daniel Miessler's PAI
+git clone https://github.com/danielmiessler/pai.git
+cd pai/Personal_AI_Infrastructure
+
+# Run PAI installer
+./install.sh
+```
+
+**Step 2: Install FORGE**
+```bash
+# Clone FORGE
+git clone https://github.com/banjoey/FORGE.git
+cd FORGE
+
+# Run FORGE installer (includes personalization wizard)
+./install.sh
+```
+
+**That's it!** FORGE skills and agents are now available in Claude Code.
+
 ## Key Features
 
 ### 1. AgilePm Skill
@@ -162,15 +186,15 @@ cp .claude/skills/Standup/templates/custom-agent-template.md \
 
 **Example**: "Should we add OAuth2 to MVP or defer to v1.1?"
 
-1. **Murat (Product Manager)**: User value perspective
+1. **Hefley (Product Manager)**: User value perspective
    - "Solo developers don't need OAuth2 for initial adoption"
    - Recommendation: Defer to v1.1
 
-2. **Emma (Security Engineer)**: Security/compliance perspective
+2. **Daniel (Security Engineer)**: Security/compliance perspective
    - "Email/password meets CMMC requirements with MFA"
    - Recommendation: Defer OAuth2, add MFA
 
-3. **Wei (QA Lead)**: Testing complexity perspective
+3. **Amy (QA Lead)**: Testing complexity perspective
    - "OAuth2 adds 3-4 weeks of testing"
    - Recommendation: Defer to v1.1
 
@@ -183,15 +207,18 @@ cp .claude/skills/Standup/templates/custom-agent-template.md \
 ```
 FORGE/
 ├── .claude/
-│   ├── skills/          # 4 PAI-compliant skills
+│   ├── skills/          # 5 PAI-compliant skills
 │   │   ├── AgilePm/     # PRD, epics, stories, sprint planning
+│   │   ├── Daniel/      # Security analysis (50+ patterns, CMMC)
 │   │   ├── Security/    # Threat modeling, CMMC baseline
 │   │   ├── TestArchitect/ # Test strategy, coverage analysis
 │   │   └── Standup/     # Multi-agent orchestration
-│   └── agents/          # 3 default agents (Murat, Emma, Wei)
-│       ├── Murat/       # Product Manager
-│       ├── Emma/        # Security Engineer
-│       └── Wei/         # QA Lead
+│   └── agents/          # 5 default agents
+│       ├── Daniel/      # Security Engineer
+│       ├── Mary/        # Business Analyst
+│       ├── Clay/        # Tech Lead
+│       ├── Hefley/      # Product Manager
+│       └── Amy/         # QA Lead
 ├── docs/
 │   ├── PRD-FORGE.md             # FORGE's PRD (scored 10/10)
 │   ├── threat-model-FORGE.md    # FORGE's threat model (8 threats, 0 critical)
@@ -210,12 +237,13 @@ FORGE/
 
 ## Roadmap
 
-**Release 0.1 MVP** (Current, 8-10 weeks):
+**Release 0.1 MVP** (Complete):
 - ✅ AgilePm skill (CreatePrd, CreateEpics, CreateStories, SprintPlanning)
-- ✅ Security skill (ThreatModel, CmmcBaseline - 5 core CMMC domains)
+- ✅ Daniel Security skill (50+ patterns, CMMC Level 2, 89.65% coverage)
+- ✅ Security skill (ThreatModel, CmmcBaseline)
 - ✅ TestArchitect skill (CreateTestStrategy, DefineCoverage)
 - ✅ Standup skill (RunStandup, ManageContext, SynthesizeDecision)
-- ✅ 3 agents (Murat, Emma, Wei)
+- ✅ 5 agents (Daniel, Mary, Clay, Hefley, Amy)
 - ✅ Validation (3.67x better than solo)
 - ✅ Dogfooding (PRD, threat model, test strategy)
 
@@ -283,44 +311,6 @@ PAI integration components follow PAI's MIT license.
 
 ---
 
-**Status**: Release 0.2 - Phase A In Progress (Emma implementation: 48% pass rate, target 90%)
+**Status**: Release 0.1.0 Complete - Production Ready ✅
 
 **Note**: This is my first major OSS contribution project. Built with Claude Code, dogfooded with FORGE's own skills.
-
----
-
-## Release 0.2 Update: Emma Security Engineer
-
-**Sprint 1-2 Complete** (3 weeks):
-- ✅ Emma agent persona (812 lines, CMMC Level 2 integration)
-- ✅ STRIDE threat modeling framework (all 6 categories)
-- ✅ 72 automated tests (12 acceptance + 60 security)
-- ✅ CMMC compliance (11 of 17 domains, 20 practices tested)
-- ✅ Test-driven development (ATDD framework for LLM agents)
-
-### Emma's Capabilities
-
-**Security Analysis**:
-- STRIDE threat modeling (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege)
-- CMMC Level 2 enforcement (110 practices across 17 domains)
-- OWASP Top 10 vulnerability detection
-- Risk-based prioritization (Critical/High/Medium/Low)
-
-**Test Coverage** (60 security tests):
-- SQL Injection (10 tests)
-- XSS (10 tests)
-- Authentication Bypass (10 tests)
-- Authorization Flaws (10 tests)
-- CMMC Violations (20 tests)
-
-**Success Criteria**: Emma catches ≥54/60 vulnerabilities (90%)
-
-### Documentation
-
-**Architecture & Contribution**:
-- `ARCHITECTURE.md` - Technical architecture, integration with PAI
-- `CONTRIBUTION_PROPOSAL.md` - Upstream contribution to PAI ecosystem
-- `docs/sprint-2-review.md` - Sprint retrospective, lessons learned
-- `docs/emma-test-suite-summary.md` - Complete test documentation
-
-**For detailed Emma documentation**, see `.claude/skills/Standup/agents/emma-security-engineer.md` (32KB persona)

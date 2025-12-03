@@ -13,7 +13,7 @@ FORGE is a multi-agent collaboration system built entirely on PAI's skills frame
 
 **What we're contributing**:
 1. **Standup Skill** - Multi-agent orchestration (core innovation)
-2. **Specialist Agents** - Emma (Security), Murat (Test), Mary (Business), Bob (Scrum)
+2. **Specialist Agents** - Daniel (Security), Hefley (Test), Mary (Business), Clay (Scrum)
 3. **Domain Skills** - AgilePm, Security, TestArchitect
 4. **ATDD Framework** - Test-driven agent development patterns
 
@@ -63,17 +63,17 @@ Mary (Business Analyst):
  Success metric: <2 second payment flow.
  Priority: Must-Have for Q4 revenue goals."
 
-Bob (Scrum Master):
+Clay (Scrum Master):
 "Timeline: 2 weeks (10 story points).
  Dependencies: Stripe integration (3rd party).
  Risk: Payment failures → customer support load."
 
-Murat (Test Architect):
+Hefley (Test Architect):
 "Test strategy: Contract tests (Stripe API), integration tests (payment flow).
  Risk score: 4.5/5 (financial transaction = high risk).
  Coverage: 90% required (payment-critical)."
 
-Emma (Security Engineer):
+Daniel (Security Engineer):
 "STRIDE threats:
  - Tampering: SQL injection in payment amount
  - Information Disclosure: Credit card data in logs
@@ -124,15 +124,15 @@ FORGE (new skills)
 1. **Invocation**: `/standup "Design payment API"`
 2. **Agent Round Robin**:
    - Mary speaks first (user value)
-   - Bob speaks second (capacity)
-   - Murat speaks third (testing)
-   - Emma speaks fourth (security)
+   - Clay speaks second (capacity)
+   - Hefley speaks third (testing)
+   - Daniel speaks fourth (security)
 3. **Synthesis**: Combine perspectives into action plan
 4. **Decision Recording**: Log to `project-context.md` (audit trail)
 
 **Agent Personas** (`.claude/skills/Standup/agents/`):
 - Each agent has behavioral traits, decision framework, communication style
-- Example: Emma (Security Engineer) uses STRIDE threat modeling, enforces CMMC Level 2
+- Example: Daniel (Security Engineer) uses STRIDE threat modeling, enforces CMMC Level 2
 
 ---
 
@@ -177,15 +177,15 @@ Standup/
 | Agent | Role | Expertise | Persona Size |
 |-------|------|-----------|--------------|
 | **Mary** | Business Analyst | User value, requirements | 19KB |
-| **Bob** | Scrum Master | Sprint planning, capacity | 18KB |
-| **Murat** | Test Architect | ATDD, risk-based testing | 20KB |
-| **Emma** | Security Engineer | STRIDE, CMMC compliance | 32KB |
+| **Clay** | Scrum Master | Sprint planning, capacity | 18KB |
+| **Hefley** | Test Architect | ATDD, risk-based testing | 20KB |
+| **Daniel** | Security Engineer | STRIDE, CMMC compliance | 32KB |
 
 **Why these agents**:
 - **Mary**: Ensures features solve user problems (not tech for tech's sake)
-- **Bob**: Ensures delivery is realistic (timeline, capacity, dependencies)
-- **Murat**: Ensures quality is built-in (ATDD, not QA afterthought)
-- **Emma**: Ensures security by design (STRIDE, CMMC, OWASP Top 10)
+- **Clay**: Ensures delivery is realistic (timeline, capacity, dependencies)
+- **Hefley**: Ensures quality is built-in (ATDD, not QA afterthought)
+- **Daniel**: Ensures security by design (STRIDE, CMMC, OWASP Top 10)
 
 **Agent design patterns** (reusable):
 - Behavioral traits (3-5 key characteristics)
@@ -221,31 +221,31 @@ Standup/
 
 **Solution**: ATDD with semantic similarity
 ```typescript
-// Acceptance test for Emma (Security Engineer)
-test('Emma identifies SQL injection', async () => {
+// Acceptance test for Daniel (Security Engineer)
+test('Daniel identifies SQL injection', async () => {
   const code = `
     const query = "SELECT * FROM users WHERE email = '" + email + "'"
   `
 
-  const result = await runStandup({ codeSnippet: code, roster: ['Emma'] })
+  const result = await runStandup({ codeSnippet: code, roster: ['Daniel'] })
 
   // Deterministic checks
-  expect(result.Emma.strideCategory).toBe('Tampering')  // ✅ Exact match
-  expect(result.Emma.severity).toBe('Critical')         // ✅ Exact match
-  expect(result.Emma.cmmc).toBe('SI.L2-3.14.6')        // ✅ Exact match
+  expect(result.Daniel.strideCategory).toBe('Tampering')  // ✅ Exact match
+  expect(result.Daniel.severity).toBe('Critical')         // ✅ Exact match
+  expect(result.Daniel.cmmc).toBe('SI.L2-3.14.6')        // ✅ Exact match
 
   // Semantic similarity (flexible for LLM outputs)
-  expect(result.Emma.threats.join(' ').toLowerCase())
+  expect(result.Daniel.threats.join(' ').toLowerCase())
     .toMatch(/sql injection|sql|injection/)  // ✅ Keyword matching
 })
 ```
 
 **Test Coverage**:
-- **Acceptance tests**: 12 scenarios (Emma participation, STRIDE, CMMC)
+- **Acceptance tests**: 12 scenarios (Daniel participation, STRIDE, CMMC)
 - **Security tests**: 60 vulnerabilities (SQL, XSS, Auth, Authz, CMMC)
 - **Total**: 72 automated tests
 
-**Success criteria**: Emma catches ≥54/60 vulnerabilities (90%)
+**Success criteria**: Daniel catches ≥54/60 vulnerabilities (90%)
 
 **Value to PAI**: Reusable pattern for testing any LLM-based agent
 
@@ -257,14 +257,14 @@ test('Emma identifies SQL injection', async () => {
 
 ### Dogfooding Session 1: Planning Document Review
 **Date**: Sprint 1 Prep
-**Roster**: Mary, Bob, Murat
-**Input**: Emma agent planning documents (PRD, sprint plan, test suite)
+**Roster**: Mary, Clay, Hefley
+**Input**: Daniel agent planning documents (PRD, sprint plan, test suite)
 **Output**: **7 issues caught** before Sprint 1 started
 
 **Issues found**:
 - Vague success metrics (Mary)
-- No iteration buffer (Bob)
-- 100 tests in 1.5 days unrealistic (Murat)
+- No iteration buffer (Clay)
+- 100 tests in 1.5 days unrealistic (Hefley)
 
 **Result**: Updated plan, Sprint 1 completed successfully
 
@@ -272,14 +272,14 @@ test('Emma identifies SQL injection', async () => {
 
 ### Dogfooding Session 2: Sprint 2 Plan Review
 **Date**: Sprint 2 Prep
-**Roster**: Mary, Bob, Murat
+**Roster**: Mary, Clay, Hefley
 **Input**: Sprint 2 plan (Days 11-16)
 **Output**: **8 issues caught** before Sprint 2 started
 
 **Issues found**:
 - Missing US-E3 acceptance tests (Mary)
-- CMMC dependency unclear (Bob)
-- No Day 12 validation gate (Murat)
+- CMMC dependency unclear (Clay)
+- No Day 12 validation gate (Hefley)
 
 **Result**: Fixed all 8 issues, Sprint 2 finished 3 days early
 
@@ -309,7 +309,7 @@ test('Emma identifies SQL injection', async () => {
 > /researcher "Find Stripe docs"     # Single agent (researcher)
 
 # FORGE skills (new)
-> /standup "Design payment API"      # Multi-agent (Mary, Bob, Murat, Emma)
+> /standup "Design payment API"      # Multi-agent (Mary, Clay, Hefley, Daniel)
 ```
 
 **User chooses**: When to use standup (complex decisions) vs single agent (simple tasks).
@@ -340,10 +340,10 @@ test('Emma identifies SQL injection', async () => {
 
 **Benefits**:
 1. **Better decisions**: 2-3x more issues caught (proven via dogfooding)
-2. **Security by design**: Emma enforces CMMC Level 2, STRIDE modeling
-3. **Quality by design**: Murat enforces ATDD, risk-based testing
+2. **Security by design**: Daniel enforces CMMC Level 2, STRIDE modeling
+3. **Quality by design**: Hefley enforces ATDD, risk-based testing
 4. **Business alignment**: Mary ensures features solve user pain
-5. **Realistic planning**: Bob ensures deliverables match capacity
+5. **Realistic planning**: Clay ensures deliverables match capacity
 
 **When to use**:
 - Designing new features (not simple bug fixes)
@@ -374,7 +374,7 @@ test('Emma identifies SQL injection', async () => {
 ### What's Complete ✅
 
 1. **Architecture**: Fully documented (ARCHITECTURE.md)
-2. **Agent Personas**: 4 specialists (Mary, Bob, Murat, Emma) - 89KB total
+2. **Agent Personas**: 4 specialists (Mary, Clay, Hefley, Daniel) - 89KB total
 3. **Skills**: 4 skills (Standup, AgilePm, Security, TestArchitect)
 4. **Tests**: 72 automated tests (12 acceptance + 60 security)
 5. **Documentation**: PRD, sprint reviews, test suite summary
@@ -384,12 +384,12 @@ test('Emma identifies SQL injection', async () => {
 
 ### What's Pending ⏳
 
-1. **Implementation**: Emma's security review logic (TDD green phase)
+1. **Implementation**: Daniel's security review logic (TDD green phase)
    - Status: Tests written (red phase), implementation pending
    - Effort: 3-5 days
    - Note: Tests **are** documentation (executable specifications)
 
-2. **Additional Agents**: Wei (DevOps), others as needed
+2. **Additional Agents**: Amy (DevOps), others as needed
    - Status: Template provided, easy to extend
    - Effort: 1-2 days per agent
 
@@ -399,19 +399,19 @@ test('Emma identifies SQL injection', async () => {
 
 **Tests are executable specifications**:
 ```typescript
-// This test documents exactly what Emma should do
-test('Emma detects SQL injection', async () => {
+// This test documents exactly what Daniel should do
+test('Daniel detects SQL injection', async () => {
   const code = `const query = "SELECT * FROM users WHERE email = '" + email + "'"`
-  const result = await runStandup({ codeSnippet: code, roster: ['Emma'] })
+  const result = await runStandup({ codeSnippet: code, roster: ['Daniel'] })
 
-  expect(result.Emma.vulnerability).toMatch(/sql injection/)
-  expect(result.Emma.cmmc).toBe('SI.L2-3.14.6')
-  expect(result.Emma.mitigation).toMatch(/parameterized/)
+  expect(result.Daniel.vulnerability).toMatch(/sql injection/)
+  expect(result.Daniel.cmmc).toBe('SI.L2-3.14.6')
+  expect(result.Daniel.mitigation).toMatch(/parameterized/)
 })
 ```
 
 **Value of tests without implementation**:
-1. **Clear requirements** (what Emma should detect)
+1. **Clear requirements** (what Daniel should detect)
 2. **Success criteria** (≥54/60 vulnerabilities = 90%)
 3. **Integration points** (how agents interact)
 4. **Validation ready** (run tests once implemented)
@@ -426,7 +426,7 @@ test('Emma detects SQL injection', async () => {
 
 **What we're contributing**:
 - ✅ Standup Skill (multi-agent orchestration)
-- ✅ 4 Specialist Agents (Mary, Bob, Murat, Emma)
+- ✅ 4 Specialist Agents (Mary, Clay, Hefley, Daniel)
 - ✅ 3 Domain Skills (AgilePm, Security, TestArchitect)
 - ✅ ATDD Framework (72 tests)
 - ✅ Documentation (architecture, PRD, contribution proposal)
@@ -440,8 +440,8 @@ test('Emma detects SQL injection', async () => {
 ### Phase 2: Implementation (Post-Contribution)
 
 **After upstream acceptance**:
-1. Implement Emma's security review logic (TDD green phase)
-2. Add Wei (DevOps Engineer) agent
+1. Implement Daniel's security review logic (TDD green phase)
+2. Add Amy (DevOps Engineer) agent
 3. Parallel agent invocation (performance optimization)
 4. Agent voting (conflict resolution)
 5. Standup history (review past decisions)
@@ -489,7 +489,7 @@ test('Emma detects SQL injection', async () => {
 ### For FORGE
 
 **Validation**:
-- Target: Emma catches ≥54/60 vulnerabilities (90%)
+- Target: Daniel catches ≥54/60 vulnerabilities (90%)
 - Metric: Automated test suite
 
 **Dogfooding**:

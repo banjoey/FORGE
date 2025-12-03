@@ -108,7 +108,7 @@ Examples: "do this", "perform that"
 
 ### 3. Security Skill (Daniel)
 **Files to Review**:
-- `.claude/skills/Daniel/SKILL.md` (formerly Emma)
+- `.claude/skills/Daniel/SKILL.md` (formerly Daniel)
 - `.claude/skills/Daniel/workflows/` (4 workflows)
 - `src/daniel/` (security review logic)
 - `tests/daniel-*.test.ts` (78 security tests)

@@ -13,7 +13,7 @@ If CMMC integration is broken, we won't discover it until Day 13 (too late). Thi
 
 ---
 
-## Manual Test 1: Hardcoded JWT Secret → Emma References IA.L2-3.5.10
+## Manual Test 1: Hardcoded JWT Secret → Daniel References IA.L2-3.5.10
 
 ### Test Code
 ```typescript
@@ -36,22 +36,22 @@ const analysis = await reviewCode(code)
 ```
 
 ### Pass Criteria
-- Emma detects hardcoded secret ✅
-- Emma cites CMMC IA.L2-3.5.10 ✅
-- Emma provides actionable mitigation (environment variables or secret manager) ✅
+- Daniel detects hardcoded secret ✅
+- Daniel cites CMMC IA.L2-3.5.10 ✅
+- Daniel provides actionable mitigation (environment variables or secret manager) ✅
 
 ### If Test Fails
-**Root Cause**: Emma not connecting to CMMC knowledge base
+**Root Cause**: Daniel not connecting to CMMC knowledge base
 
 **Fix**:
-1. Verify Emma persona file has CMMC Knowledge Base Integration section
+1. Verify Daniel persona file has CMMC Knowledge Base Integration section
 2. Check if `.claude/skills/Security/knowledge/cmmc-all-domains.md` path is correct
 3. Verify IA.L2-3.5.10 exists in knowledge base
 4. Re-test
 
 ---
 
-## Manual Test 2: Missing Authentication → Emma References AC.L2-3.1.1
+## Manual Test 2: Missing Authentication → Daniel References AC.L2-3.1.1
 
 ### Test Code
 ```typescript
@@ -77,22 +77,22 @@ const analysis = await reviewCode(code)
 ```
 
 ### Pass Criteria
-- Emma detects missing authentication ✅
-- Emma cites CMMC AC.L2-3.1.1 ✅
-- Emma provides actionable mitigation (auth middleware) ✅
+- Daniel detects missing authentication ✅
+- Daniel cites CMMC AC.L2-3.1.1 ✅
+- Daniel provides actionable mitigation (auth middleware) ✅
 
 ### If Test Fails
-**Root Cause**: Emma not mapping vulnerabilities to CMMC practices
+**Root Cause**: Daniel not mapping vulnerabilities to CMMC practices
 
 **Fix**:
-1. Review Emma's "Violation Detection and CMMC Mapping" section
+1. Review Daniel's "Violation Detection and CMMC Mapping" section
 2. Verify AC.L2-3.1.1 in knowledge base
-3. Check Emma's example responses cite CMMC practices
+3. Check Daniel's example responses cite CMMC practices
 4. Re-test
 
 ---
 
-## Manual Test 3: CMMC Practice Lookup → Emma Retrieves from Knowledge Base
+## Manual Test 3: CMMC Practice Lookup → Daniel Retrieves from Knowledge Base
 
 ### Test Query
 ```typescript
@@ -111,7 +111,7 @@ const practice = await lookupCMMCPractice('AC.L2-3.1.1')
 ```
 
 ### Pass Criteria
-- Emma can lookup practice by ID ✅
+- Daniel can lookup practice by ID ✅
 - Practice details retrieved from knowledge base ✅
 - All fields populated (ID, domain, requirement, implementation, evidence) ✅
 
@@ -122,7 +122,7 @@ const practice = await lookupCMMCPractice('AC.L2-3.1.1')
 1. Verify `.claude/skills/Security/knowledge/cmmc-all-domains.md` exists
 2. Read file and verify AC.L2-3.1.1 practice is documented
 3. Check practice format matches expected structure
-4. Verify Emma persona references correct file path
+4. Verify Daniel persona references correct file path
 5. Re-test
 
 ---
@@ -132,9 +132,9 @@ const practice = await lookupCMMCPractice('AC.L2-3.1.1')
 ### If All 3 Tests Pass ✅
 ```
 ✅ CMMC integration working
-✅ Emma can detect violations
-✅ Emma cites correct CMMC practices
-✅ Emma can lookup practices from knowledge base
+✅ Daniel can detect violations
+✅ Daniel cites correct CMMC practices
+✅ Daniel can lookup practices from knowledge base
 
 Action: Proceed to Day 13 (complete security test suite)
 ```
@@ -156,9 +156,9 @@ Action:
 
 **Day 12 Validation Gate** (end of day):
 
-- [ ] Test 1: Hardcoded JWT secret → Emma references IA.L2-3.5.10 ✅
-- [ ] Test 2: Missing authentication → Emma references AC.L2-3.1.1 ✅
-- [ ] Test 3: CMMC practice lookup → Emma retrieves from knowledge base ✅
+- [ ] Test 1: Hardcoded JWT secret → Daniel references IA.L2-3.5.10 ✅
+- [ ] Test 2: Missing authentication → Daniel references AC.L2-3.1.1 ✅
+- [ ] Test 3: CMMC practice lookup → Daniel retrieves from knowledge base ✅
 
 **Validation Result**:
 - [ ] ✅ All 3 tests pass → Proceed to Day 13
@@ -173,9 +173,9 @@ Action:
 
 If time permits, run these additional sanity checks:
 
-### Check 1: Emma References CMMC in All Domains
+### Check 1: Daniel References CMMC in All Domains
 ```bash
-# Verify Emma persona has all 17 CMMC domains documented
+# Verify Daniel persona has all 17 CMMC domains documented
 grep -c "^-.*\*\*" .claude/skills/Standup/agents/emma-security-engineer.md
 
 # Expected: 17 (one for each CMMC domain)

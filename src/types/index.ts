@@ -9,7 +9,7 @@
 // ============================================================================
 
 /**
- * Security analysis result from Emma's reviewCode() function
+ * Security analysis result from Daniel's reviewCode() function
  */
 export interface SecurityAnalysis {
   /** Whether a vulnerability was detected */
@@ -178,7 +178,7 @@ export interface StandupContext {
   /** Feature or decision being discussed */
   feature: string
 
-  /** Agent roster (e.g., ['Mary', 'Bob', 'Murat', 'Emma']). If not provided, smart defaults will be suggested based on feature. */
+  /** Agent roster (e.g., ['Mary', 'Clay', 'Hefley', 'Daniel']). If not provided, smart defaults will be suggested based on feature. */
   roster?: string[]
 
   /** Feature description (optional) */
@@ -252,7 +252,7 @@ export interface AgentContribution {
   /** Agent's focus area */
   focus?: string
 
-  /** Security-specific fields (Emma) */
+  /** Security-specific fields (Daniel) */
   strideCategory?: StrideCategory
   strideCategories?: StrideCategory[]
   threats?: string[] | Array<{ description: string; priority: SeverityLevel; timeline: string; mitigation: string }>
@@ -289,14 +289,14 @@ export interface AgentContribution {
     decisions?: any[]
   }
 
-  /** Bob (Tech Lead) specific fields */
+  /** Clay (Tech Lead) specific fields */
   timeline?: string
   risk?: string
 
-  /** Murat (Product Manager) specific fields */
+  /** Hefley (Product Manager) specific fields */
   priority?: string
 
-  /** Wei (QA Lead) specific fields */
+  /** Amy (QA Lead) specific fields */
   testRequirements?: {
     unit?: number
     integration?: number

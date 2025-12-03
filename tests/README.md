@@ -1,6 +1,6 @@
-# Emma Agent: Acceptance Tests
+# Daniel Agent: Acceptance Tests
 
-**Purpose**: ATDD (Acceptance Test-Driven Development) for Emma (Security Engineer) agent
+**Purpose**: ATDD (Acceptance Test-Driven Development) for Daniel (Security Engineer) agent
 **Coverage**: 12 scenarios across US-E1 (Standup), US-E2 (STRIDE), and US-E3 (CMMC)
 **Test Framework**: Jest with TypeScript
 
@@ -10,26 +10,26 @@
 
 ### emma-us-e1-standup.test.ts (4 scenarios)
 
-**US-E1**: Emma Participates in Security Standups (5 points)
+**US-E1**: Daniel Participates in Security Standups (5 points)
 
-1. **Scenario 1**: Emma joins standup on authentication feature
-   - Verifies Emma provides security perspective
+1. **Scenario 1**: Daniel joins standup on authentication feature
+   - Verifies Daniel provides security perspective
    - Checks STRIDE category identification (Spoofing for auth)
    - Validates CMMC practice references (IA.L2-3.5.10)
    - Uses keyword matching for non-deterministic LLM outputs
 
-2. **Scenario 2**: Emma defers to Mary on UX questions
-   - Verifies Emma recognizes questions outside her domain
-   - Checks Emma still provides security perspective
-   - Validates Emma defers to appropriate agent (Mary for UX)
+2. **Scenario 2**: Daniel defers to Mary on UX questions
+   - Verifies Daniel recognizes questions outside her domain
+   - Checks Daniel still provides security perspective
+   - Validates Daniel defers to appropriate agent (Mary for UX)
 
-3. **Scenario 3**: Emma provides actionable recommendations
+3. **Scenario 3**: Daniel provides actionable recommendations
    - Identifies HTTP threat (credentials in transit)
    - Recommends HTTPS/TLS with implementation guidance
    - Validates recommendations are actionable (not vague)
    - References CMMC SC.L2-3.13.8
 
-4. **Scenario 4**: Emma logs decisions in project-context.md
+4. **Scenario 4**: Daniel logs decisions in project-context.md
    - Verifies decisions are recorded with metadata
    - Checks CMMC practice references are logged
    - Validates audit trail (date, participants, status)
@@ -38,61 +38,61 @@
 
 ### emma-us-e2-stride.test.ts (4 scenarios + 1 integration)
 
-**US-E2**: Emma Performs STRIDE Threat Modeling (8 points)
+**US-E2**: Daniel Performs STRIDE Threat Modeling (8 points)
 
-5. **Scenario 5**: Emma performs complete STRIDE analysis
+5. **Scenario 5**: Daniel performs complete STRIDE analysis
    - Analyzes all 6 STRIDE categories (S/T/R/I/D/E)
    - Provides mitigations for each threat
    - Prioritizes by risk (Critical/High/Medium/Low)
    - Validates payment API gets Critical priority
 
-6. **Scenario 6**: Emma identifies SQL injection
+6. **Scenario 6**: Daniel identifies SQL injection
    - Detects SQL injection in code review
    - Classifies as Tampering (STRIDE)
    - Marks as Critical severity (OWASP A03)
    - Recommends parameterized queries with code example
 
-7. **Scenario 7**: Emma prioritizes threats by risk
+7. **Scenario 7**: Daniel prioritizes threats by risk
    - Categorizes 10+ threats by risk level
    - Assigns appropriate timelines (Critical=immediate, High=sprint, Medium=30 days)
    - Recommends fixing Critical/High first
 
-8. **Scenario 8**: Emma documents threat model
+8. **Scenario 8**: Daniel documents threat model
    - Creates threat-models/payment-api-stride.md
    - Includes data flow diagram
    - Documents all STRIDE categories
    - References CMMC practices
 
-**Integration Test**: Emma collaborates with Mary/Bob/Murat
+**Integration Test**: Daniel collaborates with Mary/Clay/Hefley
    - Verifies 4-agent standup works
    - Each agent provides unique perspective
-   - Emma complements others (no conflicts)
+   - Daniel complements others (no conflicts)
    - Synthesis combines all perspectives
 
 ---
 
 ### emma-us-e3-cmmc.test.ts (4 scenarios)
 
-**US-E3**: Emma Enforces CMMC Compliance (5 points)
+**US-E3**: Daniel Enforces CMMC Compliance (5 points)
 
-9. **Scenario 9**: Emma looks up CMMC practice by ID
-   - Validates Emma can lookup any of 110 CMMC Level 2 practices
+9. **Scenario 9**: Daniel looks up CMMC practice by ID
+   - Validates Daniel can lookup any of 110 CMMC Level 2 practices
    - Checks practice structure (ID, domain, requirement, implementation, evidence)
    - Tests AC.L2-3.1.1, IA.L2-3.5.10, SC.L2-3.13.8, SI.L2-3.14.6
 
-10. **Scenario 10**: Emma detects CMMC violations
+10. **Scenario 10**: Daniel detects CMMC violations
     - Tests 4 violation types: missing auth, hardcoded password, HTTP, no input validation
-    - Verifies Emma cites specific CMMC practice violated
+    - Verifies Daniel cites specific CMMC practice violated
     - Validates remediation guidance is actionable
     - Checks severity assignment (Critical/High/Medium/Low)
 
-11. **Scenario 11**: Emma enforces all 17 CMMC domains
-    - Validates Emma checks practices from all 17 domains (AC, AT, AU, CA, CM, CP, IA, IR, MA, MP, PE, PS, RA, RE, SA, SC, SI)
-    - Verifies Emma prioritizes Critical domains (AC, IA, SC, SI, AU)
+11. **Scenario 11**: Daniel enforces all 17 CMMC domains
+    - Validates Daniel checks practices from all 17 domains (AC, AT, AU, CA, CM, CP, IA, IR, MA, MP, PE, PS, RA, RE, SA, SC, SI)
+    - Verifies Daniel prioritizes Critical domains (AC, IA, SC, SI, AU)
     - Tests comprehensive security review across multiple domains
     - Ensures at least 10 of 17 domains checked for high-sensitivity features
 
-12. **Scenario 12**: Emma creates CMMC audit trail
+12. **Scenario 12**: Daniel creates CMMC audit trail
     - Validates audit trail structure (date, participants, practices checked, violations found, decisions, status)
     - Checks audit trail is logged to project-context.md
     - Verifies machine-readable format for CMMC compliance reporting
@@ -107,7 +107,7 @@
 npm install --save-dev jest @types/jest ts-jest typescript
 ```
 
-### Run All Emma Tests
+### Run All Daniel Tests
 ```bash
 npm test emma
 ```
@@ -130,26 +130,26 @@ npm test -- --coverage
 
 ### Non-Deterministic LLM Outputs
 
-**Challenge**: Emma is an AI agent (LLM-based). Responses aren't deterministic.
+**Challenge**: Daniel is an AI agent (LLM-based). Responses aren't deterministic.
 
 **Solution**: Use semantic similarity instead of exact string matching
 
 **Approach 1**: STRIDE Category + Severity (Most deterministic)
 ```typescript
-expect(result.Emma.strideCategory).toBe('Spoofing')  // ✅ Deterministic
-expect(result.Emma.severity).toBe('Critical')        // ✅ Deterministic
+expect(result.Daniel.strideCategory).toBe('Spoofing')  // ✅ Deterministic
+expect(result.Daniel.severity).toBe('Critical')        // ✅ Deterministic
 ```
 
 **Approach 2**: Keyword Matching (Flexible)
 ```typescript
-const threatsText = result.Emma.threats.join(' ').toLowerCase()
+const threatsText = result.Daniel.threats.join(' ').toLowerCase()
 expect(threatsText).toMatch(/credential|authentication|spoofing/)  // ✅ Flexible
 ```
 
 **Approach 3**: Semantic Similarity (Advanced, not implemented yet)
 ```typescript
 const similarity = cosineSimilarity(
-  getEmbedding(result.Emma.threats[0]),
+  getEmbedding(result.Daniel.threats[0]),
   getEmbedding('authentication threats')
 )
 expect(similarity).toBeGreaterThan(0.8)  // 80% similar
@@ -161,17 +161,17 @@ expect(similarity).toBeGreaterThan(0.8)  // 80% similar
 
 ## Test Coverage
 
-### US-E1: Emma Participates in Standups (5 points)
-- ✅ Scenario 1: Emma joins standup (core functionality)
-- ✅ Scenario 2: Emma defers to other agents (collaboration)
-- ✅ Scenario 3: Emma provides actionable recommendations (quality)
-- ✅ Scenario 4: Emma logs decisions (audit trail)
+### US-E1: Daniel Participates in Standups (5 points)
+- ✅ Scenario 1: Daniel joins standup (core functionality)
+- ✅ Scenario 2: Daniel defers to other agents (collaboration)
+- ✅ Scenario 3: Daniel provides actionable recommendations (quality)
+- ✅ Scenario 4: Daniel logs decisions (audit trail)
 
 **Coverage**: 4 of 4 scenarios (100%)
 
 ---
 
-### US-E2: Emma Performs STRIDE (8 points)
+### US-E2: Daniel Performs STRIDE (8 points)
 - ✅ Scenario 5: Complete STRIDE analysis (all 6 categories)
 - ✅ Scenario 6: SQL injection detection (specific threat)
 - ✅ Scenario 7: Risk prioritization (Critical/High/Medium/Low)
@@ -181,7 +181,7 @@ expect(similarity).toBeGreaterThan(0.8)  // 80% similar
 
 ---
 
-### US-E3: Emma Enforces CMMC (5 points)
+### US-E3: Daniel Enforces CMMC (5 points)
 - ✅ Scenario 9: CMMC practice lookup
 - ✅ Scenario 10: CMMC violation detection
 - ✅ Scenario 11: All 17 domains enforced
@@ -202,7 +202,7 @@ expect(similarity).toBeGreaterThan(0.8)  // 80% similar
 **Sprint 2 (US-E3)**:
 - [x] 4 additional scenarios for CMMC compliance ✅
 - [x] Total: 12 scenarios automated ✅
-- [ ] Emma catches ≥54 of 60 security vulnerabilities (90%)
+- [ ] Daniel catches ≥54 of 60 security vulnerabilities (90%)
 
 ---
 
@@ -210,11 +210,11 @@ expect(similarity).toBeGreaterThan(0.8)  // 80% similar
 
 **Current Status**: ✅ Tests written (TDD red phase)
 - Tests define expected behavior
-- Emma agent persona created
+- Daniel agent persona created
 - STRIDE framework documented
 - RunStandup.md updated for 4-agent roster
 
-**Next Steps**: Implement Emma agent to make tests pass (TDD green phase)
+**Next Steps**: Implement Daniel agent to make tests pass (TDD green phase)
 1. Standup orchestrator integration
 2. STRIDE threat modeling implementation
 3. CMMC practice lookup (Sprint 2)
@@ -225,9 +225,9 @@ expect(similarity).toBeGreaterThan(0.8)  // 80% similar
 ## ATDD Compliance
 
 **Test-Driven Development Cycle**:
-1. ✅ **Red**: Write failing tests (current state - tests written, Emma not fully implemented)
-2. ⏳ **Green**: Implement Emma agent to make tests pass
-3. ⏳ **Refactor**: Improve Emma's prompts, add context, optimize
+1. ✅ **Red**: Write failing tests (current state - tests written, Daniel not fully implemented)
+2. ⏳ **Green**: Implement Daniel agent to make tests pass
+3. ⏳ **Refactor**: Improve Daniel's prompts, add context, optimize
 
 **All acceptance criteria follow Given-When-Then format**:
 - **Given**: Initial conditions

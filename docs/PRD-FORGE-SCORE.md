@@ -42,7 +42,7 @@
 - ✅ All components identified and described:
   - PAI Core (existing, unchanged)
   - Skills (AgilePm, Security, TestArchitect, Standup)
-  - Agents (Murat, Emma, Wei)
+  - Agents (Hefley, Daniel, Amy)
   - Standup Orchestrator
 - ✅ Technology choices justified:
   - "PAI `.claude/skills/` standard" (follows existing conventions)

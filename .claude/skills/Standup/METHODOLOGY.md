@@ -8,12 +8,12 @@ This document explains the principles, approach, and workflow sequence for FORGE
 
 **Principle**: Multiple specialist perspectives identify 2-3x more issues than solo agent mode.
 
-**Evidence**: A/B testing showed standup mode (Murat + Emma + Wei) found **3.67x more issues** than solo mode (Murat only) on the same decision.
+**Evidence**: A/B testing showed standup mode (Hefley + Daniel + Amy) found **3.67x more issues** than solo mode (Hefley only) on the same decision.
 
 **Why It Works**:
-- **Murat** (Product Manager): Sees user value, prioritization, business impact
-- **Emma** (Security Engineer): Sees security threats, compliance gaps, attack surface
-- **Wei** (QA Lead): Sees testability, quality gates, coverage needs
+- **Hefley** (Product Manager): Sees user value, prioritization, business impact
+- **Daniel** (Security Engineer): Sees security threats, compliance gaps, attack surface
+- **Amy** (QA Lead): Sees testability, quality gates, coverage needs
 
 **Result**: Each agent finds issues the others don't (complementary expertise).
 
@@ -33,7 +33,7 @@ This document explains the principles, approach, and workflow sequence for FORGE
 
 **Is Synthesis**:
 - Find solution that addresses all perspectives
-- Example: "Ship email/password now (Murat's speed), add MFA (Emma's security), defer OAuth2 to v1.1 (Wei's testing complexity)"
+- Example: "Ship email/password now (Hefley's speed), add MFA (Daniel's security), defer OAuth2 to v1.1 (Amy's testing complexity)"
 - Result: Faster than full OAuth2, more secure than basic email/password, testable in timeframe
 
 **Facilitation Techniques**:
@@ -49,25 +49,25 @@ This document explains the principles, approach, and workflow sequence for FORGE
 **Principle**: Agents speak in a defined order for coherent conversation.
 
 **Discussion Order**:
-1. **Product Manager (Murat)** speaks first
+1. **Product Manager (Hefley)** speaks first
    - Sets user value context
    - Applies MoSCoW prioritization
    - Frames business impact
 
-2. **Security Engineer (Emma)** speaks second
+2. **Security Engineer (Daniel)** speaks second
    - Identifies security threats
    - Checks compliance requirements
    - Can veto critical vulnerabilities
 
-3. **QA Lead (Wei)** speaks third
+3. **QA Lead (Amy)** speaks third
    - Assesses testability
    - Defines quality gates
    - Estimates testing complexity
 
 **Why This Order**:
-- Murat frames value (prevents security-for-security's-sake)
-- Emma can veto before testing investment (prevents wasted effort on insecure design)
-- Wei has final quality check (ensures shippable quality)
+- Hefley frames value (prevents security-for-security's-sake)
+- Daniel can veto before testing investment (prevents wasted effort on insecure design)
+- Amy has final quality check (ensures shippable quality)
 
 **Flexibility**: Order can change for domain-specific rosters (e.g., Compliance Officer speaks first for regulatory decisions).
 
@@ -100,9 +100,9 @@ This document explains the principles, approach, and workflow sequence for FORGE
 **Principle**: Standup is domain-agnostic. Define agents for any field.
 
 **Default Roster** (Software Development):
-- Murat (Product Manager)
-- Emma (Security Engineer)
-- Wei (QA Lead)
+- Hefley (Product Manager)
+- Daniel (Security Engineer)
+- Amy (QA Lead)
 
 **Custom Rosters** (Your Domain):
 - **Investment Advisory**: Financial Analyst, Compliance Officer, Client Advisor
@@ -144,9 +144,9 @@ Create `.claude/agents/[AgentName]/agent.md` with:
 2. Load project-context.md (shared context)
    ↓
 3. Agent discussion round
-   - Murat: User value, prioritization, business impact
-   - Emma: Security threats, compliance, veto authority
-   - Wei: Testability, quality gates, coverage
+   - Hefley: User value, prioritization, business impact
+   - Daniel: Security threats, compliance, veto authority
+   - Amy: Testability, quality gates, coverage
    ↓
 4. Collaborative discussion (if agents disagree)
    - Facilitate consensus using synthesis techniques
@@ -173,7 +173,7 @@ Standup is inspired by:
 
 ### Wisdom of Crowds (James Surowiecki)
 - **Concept**: Diverse, independent opinions aggregate to better decision
-- **Applied**: Murat/Emma/Wei have diverse expertise, independent perspectives
+- **Applied**: Hefley/Daniel/Amy have diverse expertise, independent perspectives
 - **Caveat**: Synthesis required (not simple averaging)
 
 ### Scrum Daily Standup (Agile)
@@ -183,7 +183,7 @@ Standup is inspired by:
 
 ### Red Team / Blue Team (Security)
 - **Concept**: Adversarial teams find more vulnerabilities
-- **Applied**: Emma plays "security advocate", Murat plays "speed advocate", Wei plays "quality advocate"
+- **Applied**: Daniel plays "security advocate", Hefley plays "speed advocate", Amy plays "quality advocate"
 - **Result**: Tension surfaces trade-offs, leads to better synthesis
 
 ---
@@ -195,8 +195,8 @@ Standup is inspired by:
 **Hypothesis**: Standup finds 2-3x more issues than solo agent mode
 
 **Validation Method**: A/B testing on same decision
-- **Solo mode**: Ask one agent (e.g., just Murat)
-- **Standup mode**: Ask all three agents (Murat + Emma + Wei)
+- **Solo mode**: Ask one agent (e.g., just Hefley)
+- **Standup mode**: Ask all three agents (Hefley + Daniel + Amy)
 
 **Result** (validated 2025-12-02):
 - Solo mode: 3 issues found (discoverability)
@@ -226,7 +226,7 @@ Standup is inspired by:
 
 **Indicators**:
 - Users return to standup for complex decisions
-- Users cite agent perspectives in their thinking ("Emma would say...")
+- Users cite agent perspectives in their thinking ("Daniel would say...")
 - Users create custom agents (extending to new domains)
 
 **Measurement**: Adoption rate, custom agent creation, feedback
@@ -240,9 +240,9 @@ Standup is inspired by:
 **Trigger**: New PRD created (AgilePm skill)
 
 **Focus**:
-- Murat: Feature prioritization correct? User value clear?
-- Emma: Security requirements included? CMMC gaps?
-- Wei: Acceptance criteria testable? Test strategy defined?
+- Hefley: Feature prioritization correct? User value clear?
+- Daniel: Security requirements included? CMMC gaps?
+- Amy: Acceptance criteria testable? Test strategy defined?
 
 **Output**: PRD with agent feedback, updated prioritization
 
@@ -253,9 +253,9 @@ Standup is inspired by:
 **Trigger**: Designing new system or major feature
 
 **Focus**:
-- Murat: Architecture supports product vision? Over-engineered?
-- Emma: Trust boundaries identified? STRIDE applied? Defense-in-depth?
-- Wei: Architecture testable? Dependencies mockable?
+- Hefley: Architecture supports product vision? Over-engineered?
+- Daniel: Trust boundaries identified? STRIDE applied? Defense-in-depth?
+- Amy: Architecture testable? Dependencies mockable?
 
 **Output**: Threat model, test strategy, architecture decision
 
@@ -266,9 +266,9 @@ Standup is inspired by:
 **Trigger**: Deciding Must Have vs Should Have for MVP
 
 **Focus**:
-- Murat: MoSCoW prioritization (Must/Should/Could/Won't)
-- Emma: Critical security features that can't be deferred
-- Wei: Features requiring extensive testing (defer if not Must Have)
+- Hefley: MoSCoW prioritization (Must/Should/Could/Won't)
+- Daniel: Critical security features that can't be deferred
+- Amy: Features requiring extensive testing (defer if not Must Have)
 
 **Output**: Prioritized feature list, MVP scope finalized
 
@@ -279,9 +279,9 @@ Standup is inspired by:
 **Trigger**: Reviewing security-sensitive feature (auth, payment, data)
 
 **Focus**:
-- Emma: STRIDE threats, CMMC practices, mitigations (leads discussion)
-- Murat: Security vs time-to-market trade-offs
-- Wei: Security test strategy (OWASP ZAP, penetration testing)
+- Daniel: STRIDE threats, CMMC practices, mitigations (leads discussion)
+- Hefley: Security vs time-to-market trade-offs
+- Amy: Security test strategy (OWASP ZAP, penetration testing)
 
 **Output**: Threat model, security requirements, test plan
 
@@ -322,7 +322,7 @@ Standup is inspired by:
 
 ### ❌ Anti-Pattern 4: Ignoring Agent Veto
 
-**Problem**: Emma vetoes (critical vulnerability), ship anyway
+**Problem**: Daniel vetoes (critical vulnerability), ship anyway
 
 **Why It Fails**: Ships insecure code, defeats purpose of security review
 

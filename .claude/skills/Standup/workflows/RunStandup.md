@@ -4,7 +4,7 @@
 
 **Input**: Decision context (PRD review, architecture design, feature prioritization, etc.)
 
-**Output**: Synthesized recommendations from Mary (Business Analyst), Bob (Scrum Master), and Murat (Test Architect) with decision recorded in project-context.md
+**Output**: Synthesized recommendations from Mary (Business Analyst), Clay (Scrum Master), and Hefley (Test Architect) with decision recorded in project-context.md
 
 ---
 
@@ -28,33 +28,33 @@ FORGE automatically suggests the right experts based on your feature context:
 
 | Feature Type | Auto-Suggested Roster | Why |
 |--------------|----------------------|-----|
-| Authentication | Emma, Mary, Bob, Murat, Wei | Critical feature - full team review |
-| Security/Vulnerabilities | Emma, Bob, Wei | Security-focused: threat + implementation + security tests |
-| UX/User Experience | Mary, Emma, Bob, Wei | UX-focused: user research + security review + implementation |
-| Database/SQL | Emma, Bob, Wei | Database-focused: SQL injection + implementation + testing |
-| Architecture/Design | Bob, Mary, Murat, Wei | Architecture-focused: tech lead + business impact + priority |
-| Testing/QA | Wei, Emma, Bob | QA-focused: test strategy + security tests + implementation |
-| Timeline/Estimates | Bob, Murat, Wei | Planning-focused: tech lead + priority + test time |
-| Prioritization | Murat, Mary, Bob | Prioritization-focused: product + UX + tech feasibility |
+| Authentication | Daniel, Mary, Clay, Hefley, Amy | Critical feature - full team review |
+| Security/Vulnerabilities | Daniel, Clay, Amy | Security-focused: threat + implementation + security tests |
+| UX/User Experience | Mary, Daniel, Clay, Amy | UX-focused: user research + security review + implementation |
+| Database/SQL | Daniel, Clay, Amy | Database-focused: SQL injection + implementation + testing |
+| Architecture/Design | Clay, Mary, Hefley, Amy | Architecture-focused: tech lead + business impact + priority |
+| Testing/QA | Amy, Daniel, Clay | QA-focused: test strategy + security tests + implementation |
+| Timeline/Estimates | Clay, Hefley, Amy | Planning-focused: tech lead + priority + test time |
+| Prioritization | Hefley, Mary, Clay | Prioritization-focused: product + UX + tech feasibility |
 
 **Question Context Override** ✅ **IMPLEMENTED**
 Questions override feature patterns for focused discussions:
-- "How long will this take?" → Bob, Murat, Wei (timeline focus)
-- "How many tests do we need?" → Wei, Emma, Bob (testing focus)
-- "Should we build this?" → Murat, Mary, Bob (prioritization focus)
+- "How long will this take?" → Clay, Hefley, Amy (timeline focus)
+- "How many tests do we need?" → Amy, Daniel, Clay (testing focus)
+- "Should we build this?" → Hefley, Mary, Clay (prioritization focus)
 
 **Manual Override** ✅ **IMPLEMENTED**
 Explicitly specify roster to override smart defaults:
 ```typescript
-runStandup({ feature: 'Auth', roster: ['Emma', 'Bob'] }) // Override: only Emma + Bob
+runStandup({ feature: 'Auth', roster: ['Daniel', 'Clay'] }) // Override: only Daniel + Clay
 ```
 
 ### Software Development Roster
-- **Emma** (Security Engineer): STRIDE threat modeling, CMMC Level 2 compliance, OWASP Top 10 prevention
+- **Daniel** (Security Engineer): STRIDE threat modeling, CMMC Level 2 compliance, OWASP Top 10 prevention
 - **Mary** (Business Analyst): User value, UX design, user research, business priorities, stakeholder communication
-- **Bob** (Tech Lead): Technical feasibility, timeline estimates (Claude-time), capacity planning, risk assessment
-- **Murat** (Product Manager): User value, business priorities, MVP scoping, MoSCoW prioritization
-- **Wei** (QA Lead): Test strategy, testability, quality gates, ATDD, risk-based testing
+- **Clay** (Tech Lead): Technical feasibility, timeline estimates (Claude-time), capacity planning, risk assessment
+- **Hefley** (Product Manager): User value, business priorities, MVP scoping, MoSCoW prioritization
+- **Amy** (QA Lead): Test strategy, testability, quality gates, ATDD, risk-based testing
 
 ### Custom Rosters (Your Domain)
 You can define custom agent rosters for different domains:
@@ -80,7 +80,7 @@ Create a `.claude/agents/[AgentName]/agent.md` file with:
 1. **Auto-suggest** (default): FORGE analyzes feature context and suggests appropriate roster
 2. **Question override**: Questions like "How long?" override feature patterns
 3. **Manual override**: Explicitly specify roster to override auto-suggestion
-4. **Fallback**: If no match, suggests full team (Emma, Mary, Bob, Murat, Wei)
+4. **Fallback**: If no match, suggests full team (Daniel, Mary, Clay, Hefley, Amy)
 
 ---
 
@@ -110,7 +110,7 @@ Create a `.claude/agents/[AgentName]/agent.md` file with:
 ### ❌ Don't Use Standup For:
 
 **Simple Decisions**:
-- Single-perspective questions ("What's the best way to hash passwords?" → Ask Emma directly)
+- Single-perspective questions ("What's the best way to hash passwords?" → Ask Daniel directly)
 - Implementation details ("How do I write a Jest test?" → Standard documentation)
 - Debugging ("Why is this test failing?" → Solo troubleshooting)
 
@@ -187,9 +187,9 @@ Constraint: CMMC Level 2 compliance required (DoD contractors)
 3. [Question 3]
 
 **Requesting Input From**:
-- Murat: [Specific product/prioritization question]
-- Emma: [Specific security/compliance question]
-- Wei: [Specific testing/quality question]
+- Hefley: [Specific product/prioritization question]
+- Daniel: [Specific security/compliance question]
+- Amy: [Specific testing/quality question]
 ```
 
 **Example**:
@@ -213,9 +213,9 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 3. Will lack of OAuth2 hurt user acquisition in month 1?
 
 **Requesting Input From**:
-- Murat: Is OAuth2 Must Have or Should Have for our primary persona?
-- Emma: Does email/password meet security/CMMC requirements for MVP?
-- Wei: What's the testing complexity difference (email/password vs OAuth2)?
+- Hefley: Is OAuth2 Must Have or Should Have for our primary persona?
+- Daniel: Does email/password meet security/CMMC requirements for MVP?
+- Amy: What's the testing complexity difference (email/password vs OAuth2)?
 ```
 
 ---
@@ -224,32 +224,32 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 **Action**: Each agent provides their perspective
 
-**Discussion Order** (Default roster: Mary/Bob/Murat/Emma):
+**Discussion Order** (Default roster: Mary/Clay/Hefley/Daniel):
 1. **Mary (Business Analyst)** speaks first
    - User value perspective
    - Business priorities (MoSCoW)
    - Success metrics
 
-2. **Bob (Scrum Master)** speaks second
+2. **Clay (Scrum Master)** speaks second
    - Sprint capacity and timeline
    - Dependencies and risks
    - Process implications
 
-3. **Murat (Test Architect)** speaks third
+3. **Hefley (Test Architect)** speaks third
    - Test strategy and ATDD requirements
    - Risk-based testing approach
    - Quality gates
 
-4. **Emma (Security Engineer)** speaks fourth (when included)
+4. **Daniel (Security Engineer)** speaks fourth (when included)
    - Security threats (STRIDE)
    - CMMC compliance
    - Risk mitigation
 
 **Why This Order**:
 - Mary frames user value and business impact (sets context)
-- Bob assesses feasibility and timeline (practical constraints)
-- Murat defines quality requirements (testing strategy)
-- Emma identifies security concerns last (can veto if Critical)
+- Clay assesses feasibility and timeline (practical constraints)
+- Hefley defines quality requirements (testing strategy)
+- Daniel identifies security concerns last (can veto if Critical)
 
 ---
 
@@ -276,10 +276,10 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 ---
 
-#### Bob's Response Format:
+#### Clay's Response Format:
 
 ```markdown
-### Bob's Perspective (Scrum Master)
+### Clay's Perspective (Scrum Master)
 
 **Capacity Analysis**:
 - Estimated effort: [Story points]
@@ -301,10 +301,10 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 ---
 
-#### Murat's Response Format:
+#### Hefley's Response Format:
 
 ```markdown
-### Murat's Perspective (Test Architect)
+### Hefley's Perspective (Test Architect)
 
 **Risk Assessment**:
 - Risk level: Critical / High / Medium / Low
@@ -329,10 +329,10 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 ---
 
-#### Emma's Response Format:
+#### Daniel's Response Format:
 
 ```markdown
-### Emma's Perspective (Security Engineer)
+### Daniel's Perspective (Security Engineer)
 
 **Security Threats** (STRIDE):
 - Spoofing: [Threat and mitigation]
@@ -356,10 +356,10 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 ---
 
-#### Wei's Response Format:
+#### Amy's Response Format:
 
 ```markdown
-### Wei's Perspective (QA Lead)
+### Amy's Perspective (QA Lead)
 
 **Testability Analysis**:
 - Design is testable: Yes / No / With modifications
@@ -390,9 +390,9 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 **Conflict Scenarios**:
 
-#### Scenario 1: Murat vs Emma (Speed vs Security)
-**Murat**: "Ship email/password only (faster)"
-**Emma**: "Need OAuth2 for enterprise security"
+#### Scenario 1: Hefley vs Daniel (Speed vs Security)
+**Hefley**: "Ship email/password only (faster)"
+**Daniel**: "Need OAuth2 for enterprise security"
 
 **Facilitation**:
 - What's the security risk of email/password for our persona (solo developers)?
@@ -403,9 +403,9 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 ---
 
-#### Scenario 2: Emma vs Wei (Security vs Testability)
-**Emma**: "Encrypt all data at rest with custom crypto"
-**Wei**: "Custom crypto is hard to test; use proven library"
+#### Scenario 2: Daniel vs Amy (Security vs Testability)
+**Daniel**: "Encrypt all data at rest with custom crypto"
+**Amy**: "Custom crypto is hard to test; use proven library"
 
 **Facilitation**:
 - Can we use FIPS-validated library (secure + testable)?
@@ -415,9 +415,9 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 ---
 
-#### Scenario 3: Murat vs Wei (Speed vs Quality)
-**Murat**: "Ship with 60% coverage to save time"
-**Wei**: "Critical code needs 90% coverage"
+#### Scenario 3: Hefley vs Amy (Speed vs Quality)
+**Hefley**: "Ship with 60% coverage to save time"
+**Amy**: "Critical code needs 90% coverage"
 
 **Facilitation**:
 - What's the risk level of this code? (Critical / High / Medium / Low)
@@ -437,25 +437,25 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 # Standup Decision: [Decision Title]
 
 **Date**: YYYY-MM-DD
-**Participants**: Murat (PM), Emma (Security), Wei (QA)
+**Participants**: Hefley (PM), Daniel (Security), Amy (QA)
 **Context**: [Brief context from Step 2]
 
 ---
 
 ## Agent Perspectives Summary
 
-**Murat (Product Manager)**:
+**Hefley (Product Manager)**:
 - Prioritization: [Must Have / Should Have / Could Have / Won't Have]
 - User value: [Key user benefit]
 - Recommendation: [Ship now / Defer / Reject]
 
-**Emma (Security Engineer)**:
+**Daniel (Security Engineer)**:
 - Security risk: [Critical / High / Medium / Low]
 - CMMC compliance: [Practices addressed, gaps identified]
 - Veto: [Yes / No]
 - Recommendation: [Approve / Approve with mitigations / Veto]
 
-**Wei (QA Lead)**:
+**Amy (QA Lead)**:
 - Test complexity: [Low / Medium / High]
 - Coverage target: [90% / 80% / 70% / 50%]
 - Testability: [Testable / Needs modifications / Untestable]
@@ -514,7 +514,7 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 ### Decision: [Title] (YYYY-MM-DD)
 - **Decision**: [One-line summary]
 - **Rationale**: [Why this choice?]
-- **Participants**: Murat (PM), Emma (Security), Wei (QA)
+- **Participants**: Hefley (PM), Daniel (Security), Amy (QA)
 - **Trade-offs**: [What we gained vs what we deferred]
 - **Owner**: [Who owns implementation]
 - **Status**: Approved | In Progress | Complete
@@ -536,12 +536,12 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 **Trigger**: New PRD created (AgilePm skill)
 
-**Participants**: Murat, Emma, Wei
+**Participants**: Hefley, Daniel, Amy
 
 **Discussion Focus**:
-- Murat: Are features prioritized correctly? Is user value clear?
-- Emma: Are security requirements included? Any CMMC gaps?
-- Wei: Are acceptance criteria testable? Test strategy defined?
+- Hefley: Are features prioritized correctly? Is user value clear?
+- Daniel: Are security requirements included? Any CMMC gaps?
+- Amy: Are acceptance criteria testable? Test strategy defined?
 
 **Output**: PRD with agent feedback, updated feature prioritization
 
@@ -551,12 +551,12 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 **Trigger**: Designing new system or major feature
 
-**Participants**: Murat, Emma, Wei
+**Participants**: Hefley, Daniel, Amy
 
 **Discussion Focus**:
-- Murat: Does architecture support product vision? Over-engineered?
-- Emma: Trust boundaries identified? STRIDE applied? Defense-in-depth?
-- Wei: Architecture testable? Mockable dependencies?
+- Hefley: Does architecture support product vision? Over-engineered?
+- Daniel: Trust boundaries identified? STRIDE applied? Defense-in-depth?
+- Amy: Architecture testable? Mockable dependencies?
 
 **Output**: Threat model, test strategy, architecture decision recorded
 
@@ -566,12 +566,12 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 **Trigger**: Deciding Must Have vs Should Have for MVP
 
-**Participants**: Murat, Emma, Wei
+**Participants**: Hefley, Daniel, Amy
 
 **Discussion Focus**:
-- Murat: MoSCoW prioritization (Must/Should/Could/Won't)
-- Emma: Critical security features that can't be deferred
-- Wei: Features that require extensive testing (defer if not Must Have)
+- Hefley: MoSCoW prioritization (Must/Should/Could/Won't)
+- Daniel: Critical security features that can't be deferred
+- Amy: Features that require extensive testing (defer if not Must Have)
 
 **Output**: Prioritized feature list, MVP scope finalized
 
@@ -581,12 +581,12 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 
 **Trigger**: Reviewing security-sensitive feature (auth, payment, data handling)
 
-**Participants**: Murat, Emma, Wei (Emma leads)
+**Participants**: Hefley, Daniel, Amy (Daniel leads)
 
 **Discussion Focus**:
-- Emma: STRIDE threats, CMMC practices, mitigations
-- Murat: Security vs time-to-market trade-offs
-- Wei: Security test strategy (OWASP ZAP, penetration testing)
+- Daniel: STRIDE threats, CMMC practices, mitigations
+- Hefley: Security vs time-to-market trade-offs
+- Amy: Security test strategy (OWASP ZAP, penetration testing)
 
 **Output**: Threat model, security requirements, test plan
 
@@ -618,8 +618,8 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 **Hypothesis**: Standup finds 2-3x more issues than solo agent mode
 
 **Test Method**: A/B comparison on same decision
-- **Solo mode**: Ask one agent (e.g., just Murat)
-- **Standup mode**: Ask all three agents (Murat, Emma, Wei)
+- **Solo mode**: Ask one agent (e.g., just Hefley)
+- **Standup mode**: Ask all three agents (Hefley, Daniel, Amy)
 
 **Issues Tracked**:
 - Security vulnerabilities identified
@@ -633,14 +633,14 @@ Ship email/password for MVP, add OAuth2 in v1.1 if user demand exists.
 ```
 Decision: Design user authentication
 
-Solo Mode (Murat only):
+Solo Mode (Hefley only):
 - Issues found: 3 (prioritization, user value, scope)
 
-Standup Mode (Murat + Emma + Wei):
+Standup Mode (Hefley + Daniel + Amy):
 - Issues found: 9
-  - Murat: 3 (same as solo)
-  - Emma: 4 (SQL injection, weak passwords, no audit logs, missing MFA)
-  - Wei: 2 (testability concerns, coverage targets)
+  - Hefley: 3 (same as solo)
+  - Daniel: 4 (SQL injection, weak passwords, no audit logs, missing MFA)
+  - Amy: 2 (testability concerns, coverage targets)
 
 Result: 3x more issues found in standup ✅
 ```
@@ -655,12 +655,12 @@ Result: 3x more issues found in standup ✅
 - **User stories created** → Standup adds security/test requirements
 
 ### Security Skill
-- **Threat model needed** → Emma leads standup on security review
-- **CMMC baseline** → Emma ensures compliance in decisions
+- **Threat model needed** → Daniel leads standup on security review
+- **CMMC baseline** → Daniel ensures compliance in decisions
 
 ### TestArchitect Skill
-- **Test strategy needed** → Wei defines testing approach in standup
-- **Coverage gaps** → Wei recommends improvement plan in standup
+- **Test strategy needed** → Amy defines testing approach in standup
+- **Coverage gaps** → Amy recommends improvement plan in standup
 
 ---
 

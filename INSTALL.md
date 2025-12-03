@@ -42,7 +42,7 @@ cd FORGE
 2. ✅ Validates FORGE directory structure
 3. ✅ Creates PAI directories if needed
 4. ✅ Installs 4 skills: AgilePm, Security, TestArchitect, Standup
-5. ✅ Installs all agents (Murat, Emma, Wei, etc.)
+5. ✅ Installs all agents (Hefley, Daniel, Amy, etc.)
 6. ✅ Verifies installation
 
 **Install methods**:
@@ -97,7 +97,7 @@ ls ~/.claude/skills/
 ls ~/.claude/agents/
 
 # Expected output:
-# Murat  Emma  Wei  (and any custom agents)
+# Hefley  Daniel  Amy  (and any custom agents)
 ```
 
 ---
@@ -134,16 +134,16 @@ Problem: Existing task managers are too complex
 
 ---
 
-### Test 4: Emma CLI (Optional)
+### Test 4: Daniel CLI (Optional)
 
-If you want to use Emma's command-line security scanner:
+If you want to use Daniel's command-line security scanner:
 
 ```bash
-# Install Emma CLI globally (from FORGE directory)
+# Install Daniel CLI globally (from FORGE directory)
 npm install
 npm link
 
-# Test Emma CLI
+# Test Daniel CLI
 emma-scan --help
 
 # Scan a file
@@ -153,7 +153,7 @@ emma-scan src/auth/login.ts
 emma-scan --stride src/payment.ts
 ```
 
-**Expected output**: Emma security scan results with vulnerability findings
+**Expected output**: Daniel security scan results with vulnerability findings
 
 **Alternative (without global install)**:
 ```bash
@@ -174,7 +174,7 @@ npm run emma:stride src/payment.ts
 | **Security** | ThreatModel, CmmcBaseline, SecurityReview | Security engineering |
 | **TestArchitect** | CreateTestStrategy, DefineCoverage, ATDD | Test strategy and quality |
 | **Standup** | RunStandup, SynthesizeDecision, ManageContext | Multi-agent orchestration |
-| **Emma** | ScanCode, PerformSTRIDE, GenerateAudit, RunStandup | Security scanning with CMMC Level 2 compliance (CLI + PAI skill) |
+| **Daniel** | ScanCode, PerformSTRIDE, GenerateAudit, RunStandup | Security scanning with CMMC Level 2 compliance (CLI + PAI skill) |
 
 ---
 
@@ -182,9 +182,9 @@ npm run emma:stride src/payment.ts
 
 | Agent | Role | Expertise |
 |-------|------|-----------|
-| **Murat** | Product Manager | User value, MoSCoW prioritization, requirements |
-| **Emma** | Security Engineer | STRIDE, CMMC Level 2, OWASP Top 10 |
-| **Wei** | QA Lead | ATDD, test strategy, risk-based testing |
+| **Hefley** | Product Manager | User value, MoSCoW prioritization, requirements |
+| **Daniel** | Security Engineer | STRIDE, CMMC Level 2, OWASP Top 10 |
+| **Amy** | QA Lead | ATDD, test strategy, risk-based testing |
 
 *Additional custom agents may be included based on FORGE version*
 
@@ -201,9 +201,9 @@ npm run emma:stride src/payment.ts
 │   ├── Standup/           # FORGE skill
 │   └── [Other PAI skills] # Existing PAI skills (unchanged)
 ├── agents/
-│   ├── Murat/             # FORGE agent
-│   ├── Emma/              # FORGE agent
-│   ├── Wei/               # FORGE agent
+│   ├── Hefley/             # FORGE agent
+│   ├── Daniel/              # FORGE agent
+│   ├── Amy/               # FORGE agent
 │   └── [Other PAI agents] # Existing PAI agents (unchanged)
 ```
 
@@ -241,9 +241,9 @@ rm -rf ~/.claude/skills/TestArchitect
 rm -rf ~/.claude/skills/Standup
 
 # Remove agents
-rm -rf ~/.claude/agents/Murat
-rm -rf ~/.claude/agents/Emma
-rm -rf ~/.claude/agents/Wei
+rm -rf ~/.claude/agents/Hefley
+rm -rf ~/.claude/agents/Daniel
+rm -rf ~/.claude/agents/Amy
 ```
 
 **Note**: This does NOT affect other PAI skills or agents
@@ -292,23 +292,23 @@ If missing, re-run install script.
 
 ### Issue 3: Agent not found in standup
 
-**Symptom**: Standup can't find Murat, Emma, or Wei
+**Symptom**: Standup can't find Hefley, Daniel, or Amy
 
 **Solutions**:
 
 **Check agent symlink**:
 ```bash
-ls -la ~/.claude/agents/Murat
+ls -la ~/.claude/agents/Hefley
 ```
 
 **Verify agent.md exists**:
 ```bash
-cat ~/.claude/agents/Murat/agent.md
+cat ~/.claude/agents/Hefley/agent.md
 ```
 
 If missing, reinstall agents:
 ```bash
-ln -s /full/path/to/FORGE/.claude/agents/Murat ~/.claude/agents/
+ln -s /full/path/to/FORGE/.claude/agents/Hefley ~/.claude/agents/
 ```
 
 ---
@@ -461,7 +461,7 @@ claude                 # Start Claude Code
 
 **Last Updated**: 2025-12-03
 **FORGE Version**: Release 0.2 - Production Ready
-- Emma Security Engineer: 100% test coverage (78/78 tests)
-- Emma CLI tool: Command-line security scanning
-- Emma PAI Skill: Integrated with Claude Code
+- Daniel Security Engineer: 100% test coverage (78/78 tests)
+- Daniel CLI tool: Command-line security scanning
+- Daniel PAI Skill: Integrated with Claude Code
 - GitHub Actions: Automated CI/CD security scanning

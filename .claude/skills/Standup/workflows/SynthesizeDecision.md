@@ -2,7 +2,7 @@
 
 **Purpose**: Combine multiple agent perspectives into a single, actionable decision
 
-**Input**: Agent perspectives from Murat (PM), Emma (Security), and Wei (QA)
+**Input**: Agent perspectives from Hefley (PM), Daniel (Security), and Amy (QA)
 
 **Output**: Synthesized decision with consensus, action items, and rationale
 
@@ -13,7 +13,7 @@
 **Decision Synthesis** is the art of combining multiple perspectives into a coherent decision that's better than any single perspective.
 
 **Not**: Majority vote (2 agents agree, 1 loses)
-**Not**: First opinion wins (Murat speaks first, his view dominates)
+**Not**: First opinion wins (Hefley speaks first, his view dominates)
 **Not**: Averaging (compromise that satisfies no one)
 
 **Is**: Finding the decision that best serves user value + security + quality collectively
@@ -35,9 +35,9 @@
 - Surface trade-offs explicitly (not hidden)
 
 **Example**:
-- **Murat alone**: "Ship with no MFA" (fast but insecure)
-- **Emma alone**: "Require hardware tokens for MFA" (secure but slow, expensive)
-- **Wei alone**: "Comprehensive MFA testing suite" (thorough but delays)
+- **Hefley alone**: "Ship with no MFA" (fast but insecure)
+- **Daniel alone**: "Require hardware tokens for MFA" (secure but slow, expensive)
+- **Amy alone**: "Comprehensive MFA testing suite" (thorough but delays)
 - **Synthesis**: "Ship with TOTP MFA (app-based), defer hardware tokens to v1.1" (fast, secure enough, testable)
 
 ---
@@ -59,9 +59,9 @@
 **Decision Context**: Should we use HTTPS for all traffic?
 
 **Agent Responses**:
-- Murat: "HTTPS is standard practice, doesn't delay MVP"
-- Emma: "HTTPS is critical security requirement (CMMC SC.L2-3.13.1)"
-- Wei: "HTTPS doesn't affect testability, recommend"
+- Hefley: "HTTPS is standard practice, doesn't delay MVP"
+- Daniel: "HTTPS is critical security requirement (CMMC SC.L2-3.13.1)"
+- Amy: "HTTPS doesn't affect testability, recommend"
 
 **Synthesis**: ✅ All agents agree → Decision: Use HTTPS everywhere
 ```
@@ -77,18 +77,18 @@
 **Conflict Types**:
 
 #### Type 1: Direct Conflict (mutually exclusive)
-- Murat: "Ship feature A"
-- Emma: "Ship feature B (A is insecure)"
+- Hefley: "Ship feature A"
+- Daniel: "Ship feature B (A is insecure)"
 - **Cannot do both**: Must choose A or B
 
 #### Type 2: Priority Conflict (different rankings)
-- Murat: "Feature A is Must Have, B is Should Have"
-- Emma: "Feature B is Must Have (security), A is Should Have"
+- Hefley: "Feature A is Must Have, B is Should Have"
+- Daniel: "Feature B is Must Have (security), A is Should Have"
 - **Can do both eventually**: Disagree on order
 
 #### Type 3: Scope Conflict (different definitions of done)
-- Murat: "Ship basic version"
-- Wei: "Need comprehensive test suite (delays by 2 weeks)"
+- Hefley: "Ship basic version"
+- Amy: "Need comprehensive test suite (delays by 2 weeks)"
 - **Can compromise**: Find middle ground
 
 **Example Conflict**:
@@ -97,9 +97,9 @@
 **Decision Context**: Should we add OAuth2 to MVP?
 
 **Agent Responses**:
-- Murat: "Defer OAuth2 to v1.1 (saves 3 weeks, MVP is email/password)"
-- Emma: "Need OAuth2 for enterprise security (CMMC IA.L2-3.5.10)"
-- Wei: "OAuth2 adds 40% testing complexity"
+- Hefley: "Defer OAuth2 to v1.1 (saves 3 weeks, MVP is email/password)"
+- Daniel: "Need OAuth2 for enterprise security (CMMC IA.L2-3.5.10)"
+- Amy: "OAuth2 adds 40% testing complexity"
 
 **Conflict Type**: Priority Conflict (all want OAuth2 eventually, disagree on timing)
 ```
@@ -210,14 +210,14 @@ Phase 2 (v1.1, 10 weeks later):
 
 **Rationale** (How Agent Perspectives Align):
 
-**Murat's Contribution (Product/Business)**:
-[What Murat's perspective adds to the decision]
+**Hefley's Contribution (Product/Business)**:
+[What Hefley's perspective adds to the decision]
 
-**Emma's Contribution (Security/Compliance)**:
-[What Emma's perspective adds to the decision]
+**Daniel's Contribution (Security/Compliance)**:
+[What Daniel's perspective adds to the decision]
 
-**Wei's Contribution (Quality/Testability)**:
-[What Wei's perspective adds to the decision]
+**Amy's Contribution (Quality/Testability)**:
+[What Amy's perspective adds to the decision]
 
 **Why This Decision is Better Than Any Single Perspective**:
 [How synthesis creates value beyond individual opinions]
@@ -240,20 +240,20 @@ Phase 2 (v1.1, 10 weeks later):
 
 **Rationale**:
 
-**Murat's Contribution**:
+**Hefley's Contribution**:
 Primary persona (solo developers) needs fast access to FORGE. Email/password gets them started in 2 weeks vs 5 weeks for OAuth2. Success metric is 50 users in month 1, achievable with email/password.
 
-**Emma's Contribution**:
+**Daniel's Contribution**:
 TOTP MFA meets CMMC IA.L2-3.5.3 (multi-factor authentication for privileged users). Email/password + MFA provides acceptable security for MVP, no critical CMMC gaps. OAuth2 can be added in v1.1 for enhanced enterprise security.
 
-**Wei's Contribution**:
+**Amy's Contribution**:
 Email/password + TOTP has 40% less testing complexity than OAuth2 (fewer integration points, no third-party dependency testing). Achievable coverage target of 90% in 1 week vs 2 weeks for OAuth2.
 
 **Why This Decision is Better Than Any Single Perspective**:
-- Murat alone would ship email/password without MFA (fast but insecure)
-- Emma alone would require OAuth2 + hardware tokens (secure but slow, over-engineered for MVP)
-- Wei alone would focus only on testability (missing user value and security perspectives)
-- **Synthesis**: Fast time-to-market (Murat) + Acceptable security (Emma) + Testable (Wei) = Optimal MVP
+- Hefley alone would ship email/password without MFA (fast but insecure)
+- Daniel alone would require OAuth2 + hardware tokens (secure but slow, over-engineered for MVP)
+- Amy alone would focus only on testability (missing user value and security perspectives)
+- **Synthesis**: Fast time-to-market (Hefley) + Acceptable security (Daniel) + Testable (Amy) = Optimal MVP
 
 **Trade-offs**:
 - ✅ **Gain**: 3 weeks faster to MVP, acceptable security (meets CMMC), testable in 1 week
@@ -292,11 +292,11 @@ Email/password + TOTP has 40% less testing complexity than OAuth2 (fewer integra
 ```markdown
 ## Dissenting Opinion
 
-**Agent**: Emma (Security Engineer)
+**Agent**: Daniel (Security Engineer)
 **Concern**: Email/password + TOTP is not enterprise-grade security; OAuth2 should be Must Have for MVP
 **Alternative Recommendation**: Delay MVP by 3 weeks, ship with OAuth2 from Day 1
 **Why Overridden**:
-- Murat + Wei consensus: MVP timeline is critical constraint (8 weeks)
+- Hefley + Amy consensus: MVP timeline is critical constraint (8 weeks)
 - TOTP MFA meets CMMC Level 2 requirements (acceptable risk)
 - Primary persona (solo developers) doesn't require OAuth2 for adoption
 
@@ -352,7 +352,7 @@ Email/password + TOTP has 40% less testing complexity than OAuth2 (fewer integra
      - [ ] Unit test coverage ≥90%
 
 3. [ ] **Security testing**
-   - **Owner**: Emma (Security)
+   - **Owner**: Daniel (Security)
    - **Due**: 2025-12-20 (3 weeks)
    - **Acceptance Criteria**:
      - [ ] OWASP ZAP scan passes (no critical/high vulnerabilities)
@@ -360,7 +360,7 @@ Email/password + TOTP has 40% less testing complexity than OAuth2 (fewer integra
      - [ ] TOTP timing attack prevention validated
 
 4. [ ] **Track OAuth2 feature requests**
-   - **Owner**: Murat (PM)
+   - **Owner**: Hefley (PM)
    - **Due**: Ongoing (monthly review)
    - **Acceptance Criteria**:
      - [ ] Survey beta users: "Do you need OAuth2?"
@@ -391,11 +391,11 @@ Email/password + TOTP has 40% less testing complexity than OAuth2 (fewer integra
 **Scenario**: 2 agents recommend A, 1 agent recommends B
 
 **Example**:
-- Murat + Wei: "Ship with 80% coverage"
-- Emma: "Need 90% coverage for security"
+- Hefley + Amy: "Ship with 80% coverage"
+- Daniel: "Need 90% coverage for security"
 
 **Synthesis**:
-- Explore dissenting opinion (why does Emma want 90%?)
+- Explore dissenting opinion (why does Daniel want 90%?)
 - Find compromise (risk-based coverage: 90% for auth, 80% for utils)
 - Document dissent if unresolved
 
@@ -408,9 +408,9 @@ Email/password + TOTP has 40% less testing complexity than OAuth2 (fewer integra
 **Scenario**: Each agent has different recommendation
 
 **Example**:
-- Murat: "Ship feature A"
-- Emma: "Ship feature B (A is insecure)"
-- Wei: "Ship feature C (A and B are hard to test)"
+- Hefley: "Ship feature A"
+- Daniel: "Ship feature B (A is insecure)"
+- Amy: "Ship feature C (A and B are hard to test)"
 
 **Synthesis**:
 - Find common ground (what do all agree on?)
@@ -424,10 +424,10 @@ Email/password + TOTP has 40% less testing complexity than OAuth2 (fewer integra
 
 ### Pattern 4: Veto (Critical Issue)
 
-**Scenario**: One agent exercises veto (typically Emma on critical security)
+**Scenario**: One agent exercises veto (typically Daniel on critical security)
 
 **Example**:
-- Emma: "This design exposes all user passwords. I veto this approach."
+- Daniel: "This design exposes all user passwords. I veto this approach."
 
 **Synthesis**:
 - Veto cannot be overridden (critical security/quality issue)
@@ -447,16 +447,16 @@ Email/password + TOTP has 40% less testing complexity than OAuth2 (fewer integra
 **Fix**: Explore WHY the dissenting agent disagrees (may have valid concern)
 
 **Example**:
-- Murat + Wei: "Ship without audit logs"
-- Emma: "Need audit logs for CMMC compliance"
+- Hefley + Amy: "Ship without audit logs"
+- Daniel: "Need audit logs for CMMC compliance"
 - **Bad Synthesis**: 2 vs 1, ship without audit logs
-- **Good Synthesis**: Explore Emma's concern → Audit logs required for CMMC AU.L2-3.3.1 → Ship with audit logs
+- **Good Synthesis**: Explore Daniel's concern → Audit logs required for CMMC AU.L2-3.3.1 → Ship with audit logs
 
 ---
 
 ### Mistake 2: Averaging (Compromises That Satisfy No One)
 
-**Problem**: "Murat wants 50% coverage, Wei wants 90%, so let's do 70%" (arbitrary middle)
+**Problem**: "Hefley wants 50% coverage, Amy wants 90%, so let's do 70%" (arbitrary middle)
 
 **Fix**: Use risk-based approach (different coverage for different code)
 
@@ -468,13 +468,13 @@ Email/password + TOTP has 40% less testing complexity than OAuth2 (fewer integra
 
 ### Mistake 3: First Opinion Wins
 
-**Problem**: Murat speaks first, his view dominates (others don't challenge)
+**Problem**: Hefley speaks first, his view dominates (others don't challenge)
 
 **Fix**: Ensure all agents speak fully, then synthesize
 
 **Example**:
-- **Bad**: Murat says "ship fast", others nod along
-- **Good**: Murat speaks (product view), Emma speaks (security view), Wei speaks (quality view), then synthesize all three
+- **Bad**: Hefley says "ship fast", others nod along
+- **Good**: Hefley speaks (product view), Daniel speaks (security view), Amy speaks (quality view), then synthesize all three
 
 ---
 
@@ -485,8 +485,8 @@ Email/password + TOTP has 40% less testing complexity than OAuth2 (fewer integra
 **Fix**: Document dissent, define revisit trigger
 
 **Example**:
-- **Bad**: Emma objects to lack of OAuth2, decision proceeds, concern ignored
-- **Good**: Emma's objection documented, revisit trigger defined (if >20% users request OAuth2)
+- **Bad**: Daniel objects to lack of OAuth2, decision proceeds, concern ignored
+- **Good**: Daniel's objection documented, revisit trigger defined (if >20% users request OAuth2)
 
 ---
 

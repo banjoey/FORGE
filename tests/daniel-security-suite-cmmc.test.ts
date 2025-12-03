@@ -1,9 +1,9 @@
 /**
- * Emma Security Test Suite: CMMC Violations (20 tests total)
+ * Daniel Security Test Suite: CMMC Violations (20 tests total)
  *
- * Purpose: Validate Emma's CMMC Level 2 compliance enforcement
+ * Purpose: Validate Daniel's CMMC Level 2 compliance enforcement
  * Scope: 20 CMMC violation tests across Critical domains (AC, IA, SC, SI, AU)
- * Success Criteria: Emma catches ≥18 of 20 violations (90%)
+ * Success Criteria: Daniel catches ≥18 of 20 violations (90%)
  *
  * Test Distribution:
  * - Days 12 (front-loaded): 10 CMMC tests (this file, first 10 tests)

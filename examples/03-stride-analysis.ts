@@ -1,7 +1,7 @@
 /**
  * Example 3: STRIDE Threat Modeling
  *
- * This example demonstrates how to use Emma for comprehensive STRIDE threat
+ * This example demonstrates how to use Daniel for comprehensive STRIDE threat
  * modeling, which identifies all security threats across 6 categories.
  */
 
@@ -9,7 +9,7 @@ import { performSTRIDE } from '../src/daniel/security-review'
 import type { StrideCategory } from '../src/types'
 
 async function strideAnalysis() {
-  console.log('=== Emma Security Review - STRIDE Threat Modeling ===\n')
+  console.log('=== Daniel Security Review - STRIDE Threat Modeling ===\n')
 
   // Example: Payment transfer endpoint with multiple vulnerabilities
   console.log('Scenario: Analyzing payment transfer endpoint\n')

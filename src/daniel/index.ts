@@ -1,7 +1,7 @@
 /**
- * Emma Security Engineer Module
+ * Daniel Security Engineer Module
  *
- * Exports all Emma security functionality
+ * Exports all Daniel security functionality
  */
 
 export { reviewCode, performSTRIDE } from './security-review'

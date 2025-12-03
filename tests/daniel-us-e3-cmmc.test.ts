@@ -1,9 +1,9 @@
 /**
- * Acceptance Tests: US-E3 - Emma Enforces CMMC Compliance
+ * Acceptance Tests: US-E3 - Daniel Enforces CMMC Compliance
  *
  * User Story:
  * As a developer building software for DoD contractors
- * I want Emma to enforce CMMC Level 2 compliance (110 practices)
+ * I want Daniel to enforce CMMC Level 2 compliance (110 practices)
  * So that I meet DoD cybersecurity requirements
  */
 
@@ -12,22 +12,22 @@ import { runStandup } from '../src/standup/orchestrator'
 import { lookupCMMCPractice } from '../src/daniel/cmmc'
 import { StandupContext, StandupResult, CMMCPractice } from '../src/types'
 
-describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
+describe('US-E3: Daniel Enforces CMMC Compliance (5 points)', () => {
 
   /**
-   * Scenario 9: Emma looks up CMMC practice by ID
+   * Scenario 9: Daniel looks up CMMC practice by ID
    *
    * Given: Developer asks "What is CMMC AC.L2-3.1.1?"
-   * When: Emma looks up practice
-   * Then: Emma returns practice definition:
+   * When: Daniel looks up practice
+   * Then: Daniel returns practice definition:
    *   - ID: AC.L2-3.1.1
    *   - Domain: Access Control (AC)
    *   - Requirement: "Limit system access to authorized users"
    *   - Implementation guidance
    *   - Evidence requirements
-   * And: Emma can look up any of 110 Level 2 practices
+   * And: Daniel can look up any of 110 Level 2 practices
    */
-  test('Scenario 9: Emma looks up CMMC practice by ID', async () => {
+  test('Scenario 9: Daniel looks up CMMC practice by ID', async () => {
     // Test Case 1: Access Control practice
     const practice1: CMMCPractice = await lookupCMMCPractice('AC.L2-3.1.1')
 
@@ -62,18 +62,18 @@ describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
     expect(practice4.domainCode).toBe('SI')
     expect(practice4.requirement).toMatch(/input validation|malicious.*input/i)
 
-    // Verify Emma can look up any of the 110 practices (spot check 4 of 110)
+    // Verify Daniel can look up any of the 110 practices (spot check 4 of 110)
     // Full validation: All 110 practices accessible from knowledge base
   })
 
   /**
-   * Scenario 10: Emma detects CMMC violation
+   * Scenario 10: Daniel detects CMMC violation
    *
    * Given: Developer proposes code that violates CMMC
-   * When: Emma reviews code
-   * Then: Emma identifies CMMC violation
-   * And: Emma cites specific CMMC practice violated
-   * And: Emma provides remediation guidance
+   * When: Daniel reviews code
+   * Then: Daniel identifies CMMC violation
+   * And: Daniel cites specific CMMC practice violated
+   * And: Daniel provides remediation guidance
    *
    * Test Cases:
    * 1. Missing authentication → Violates AC.L2-3.1.1
@@ -81,7 +81,7 @@ describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
    * 3. HTTP (not HTTPS) → Violates SC.L2-3.13.8
    * 4. No input validation → Violates SI.L2-3.14.6
    */
-  test('Scenario 10: Emma detects CMMC violations', async () => {
+  test('Scenario 10: Daniel detects CMMC violations', async () => {
     // Violation 1: Missing authentication
     const missingAuthCode = `
       app.get('/admin/users', async (req, res) => {
@@ -94,15 +94,15 @@ describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
     const context1: StandupContext = {
       feature: 'Admin API endpoint',
       codeSnippet: missingAuthCode,
-      roster: ['Mary', 'Bob', 'Murat', 'Emma']
+      roster: ['Mary', 'Clay', 'Hefley', 'Daniel']
     }
 
     const result1: StandupResult = await runStandup(context1)
 
-    expect(result1.Emma.cmmcViolations).toBeDefined()
-    expect(result1.Emma.cmmcViolations.length).toBeGreaterThan(0)
+    expect(result1.Daniel.cmmcViolations).toBeDefined()
+    expect(result1.Daniel.cmmcViolations.length).toBeGreaterThan(0)
 
-    const authViolation = result1.Emma.cmmcViolations.find(v =>
+    const authViolation = result1.Daniel.cmmcViolations.find(v =>
       v.practice.startsWith('AC.L2-3.1')
     )
     expect(authViolation).toBeDefined()
@@ -120,12 +120,12 @@ describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
     const context2: StandupContext = {
       feature: 'Authentication logic',
       codeSnippet: hardcodedPasswordCode,
-      roster: ['Mary', 'Bob', 'Murat', 'Emma']
+      roster: ['Mary', 'Clay', 'Hefley', 'Daniel']
     }
 
     const result2: StandupResult = await runStandup(context2)
 
-    const passwordViolation = result2.Emma.cmmcViolations.find(v =>
+    const passwordViolation = result2.Daniel.cmmcViolations.find(v =>
       v.practice.startsWith('IA.L2-3.5')
     )
     expect(passwordViolation).toBeDefined()
@@ -142,12 +142,12 @@ describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
     const context3: StandupContext = {
       feature: 'Server configuration',
       codeSnippet: httpCode,
-      roster: ['Mary', 'Bob', 'Murat', 'Emma']
+      roster: ['Mary', 'Clay', 'Hefley', 'Daniel']
     }
 
     const result3: StandupResult = await runStandup(context3)
 
-    const httpsViolation = result3.Emma.cmmcViolations.find(v =>
+    const httpsViolation = result3.Daniel.cmmcViolations.find(v =>
       v.practice.startsWith('SC.L2-3.13')
     )
     expect(httpsViolation).toBeDefined()
@@ -161,12 +161,12 @@ describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
     const context4: StandupContext = {
       feature: 'Database query',
       codeSnippet: noValidationCode,
-      roster: ['Mary', 'Bob', 'Murat', 'Emma']
+      roster: ['Mary', 'Clay', 'Hefley', 'Daniel']
     }
 
     const result4: StandupResult = await runStandup(context4)
 
-    const validationViolation = result4.Emma.cmmcViolations.find(v =>
+    const validationViolation = result4.Daniel.cmmcViolations.find(v =>
       v.practice.startsWith('SI.L2-3.14')
     )
     expect(validationViolation).toBeDefined()
@@ -174,11 +174,11 @@ describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
   })
 
   /**
-   * Scenario 11: Emma enforces all 17 CMMC domains
+   * Scenario 11: Daniel enforces all 17 CMMC domains
    *
-   * Given: Emma performs comprehensive security review
-   * When: Emma analyzes feature across all security domains
-   * Then: Emma checks practices from all 17 CMMC domains:
+   * Given: Daniel performs comprehensive security review
+   * When: Daniel analyzes feature across all security domains
+   * Then: Daniel checks practices from all 17 CMMC domains:
    *   1. AC - Access Control
    *   2. AT - Awareness and Training
    *   3. AU - Audit and Accountability
@@ -196,9 +196,9 @@ describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
    *   15. SA - System and Services Acquisition
    *   16. SC - System and Communications Protection
    *   17. SI - System and Information Integrity
-   * And: Emma prioritizes Critical domains (AC, IA, SC, SI, AU)
+   * And: Daniel prioritizes Critical domains (AC, IA, SC, SI, AU)
    */
-  test('Scenario 11: Emma enforces all 17 CMMC domains', async () => {
+  test('Scenario 11: Daniel enforces all 17 CMMC domains', async () => {
     const comprehensiveFeature = {
       name: 'Enterprise Authentication System',
       components: [
@@ -218,14 +218,14 @@ describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
       feature: 'Enterprise Authentication System',
       description: 'Complete auth system with audit, backup, incident response',
       designDoc: comprehensiveFeature,
-      roster: ['Mary', 'Bob', 'Murat', 'Emma']
+      roster: ['Mary', 'Clay', 'Hefley', 'Daniel']
     }
 
     const result: StandupResult = await runStandup(context)
 
-    // Emma should check practices from all 17 domains
+    // Daniel should check practices from all 17 domains
     const domainsChecked = new Set(
-      result.Emma.cmmcPracticesChecked.map(p => p.domainCode)
+      result.Daniel.cmmcPracticesChecked.map(p => p.domainCode)
     )
 
     // Critical domains (must be checked)
@@ -244,27 +244,27 @@ describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
     // At least 10 of 17 domains should be checked for comprehensive feature
     expect(domainsChecked.size).toBeGreaterThanOrEqual(10)
 
-    // Emma should prioritize Critical domain violations
-    const criticalViolations = result.Emma.cmmcViolations.filter(v =>
+    // Daniel should prioritize Critical domain violations
+    const criticalViolations = result.Daniel.cmmcViolations.filter(v =>
       ['AC', 'IA', 'SC', 'SI', 'AU'].includes(v.domainCode) &&
       v.severity === 'Critical'
     )
 
     expect(criticalViolations.length).toBeGreaterThan(0)
 
-    // Emma should recommend fixing Critical domains first
-    const priorityRec = result.Emma.recommendations.find(rec =>
+    // Daniel should recommend fixing Critical domains first
+    const priorityRec = result.Daniel.recommendations.find(rec =>
       rec.toLowerCase().match(/critical.*first|ac\.|ia\.|sc\.|si\.|au\./)
     )
     expect(priorityRec).toBeDefined()
   })
 
   /**
-   * Scenario 12: Emma creates CMMC audit trail
+   * Scenario 12: Daniel creates CMMC audit trail
    *
-   * Given: Emma identifies CMMC violations during standup
+   * Given: Daniel identifies CMMC violations during standup
    * When: Standup completes
-   * Then: Emma logs CMMC audit trail to project-context.md:
+   * Then: Daniel logs CMMC audit trail to project-context.md:
    *   - Date and participants
    *   - CMMC practices checked
    *   - Violations found (practice ID, severity, remediation)
@@ -272,7 +272,7 @@ describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
    *   - Status (Open, In Progress, Resolved)
    * And: Audit trail is structured for CMMC compliance reporting
    */
-  test('Scenario 12: Emma creates CMMC audit trail', async () => {
+  test('Scenario 12: Daniel creates CMMC audit trail', async () => {
     const sqlInjectionCode = `
       const query = "SELECT * FROM users WHERE id = " + userId
       const result = await db.execute(query)
@@ -281,20 +281,20 @@ describe('US-E3: Emma Enforces CMMC Compliance (5 points)', () => {
     const context: StandupContext = {
       feature: 'User lookup API',
       codeSnippet: sqlInjectionCode,
-      roster: ['Mary', 'Bob', 'Murat', 'Emma'],
+      roster: ['Mary', 'Clay', 'Hefley', 'Daniel'],
       projectContext: 'docs/project-context.md'
     }
 
     const result: StandupResult = await runStandup(context)
 
-    // Emma should create audit trail entry
-    expect(result.Emma.auditTrail).toBeDefined()
+    // Daniel should create audit trail entry
+    expect(result.Daniel.auditTrail).toBeDefined()
 
-    const auditEntry = result.Emma.auditTrail
+    const auditEntry = result.Daniel.auditTrail
 
     // Audit trail should include metadata
     expect(auditEntry.date).toMatch(/\d{4}-\d{2}-\d{2}/)  // ISO date
-    expect(auditEntry.participants).toEqual(['Mary', 'Bob', 'Murat', 'Emma'])
+    expect(auditEntry.participants).toEqual(['Mary', 'Clay', 'Hefley', 'Daniel'])
     expect(auditEntry.feature).toBe('User lookup API')
 
     // Audit trail should document CMMC practices checked

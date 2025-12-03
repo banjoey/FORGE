@@ -47,15 +47,15 @@ Output: Prioritization decision (Must Have / Should Have / Could Have / Won't Ha
 ```
 User: "Review this authentication feature design"
 Skill loads: Standup → RunStandup workflow
-Smart roster: Emma, Mary, Bob, Murat, Wei (full team - critical feature)
+Smart roster: Daniel, Mary, Clay, Hefley, Amy (full team - critical feature)
 Process:
   1. Load project context
   2. Auto-detect: authentication = critical feature → suggest full team
-  3. Emma: Security threats (credential storage, session management)
+  3. Daniel: Security threats (credential storage, session management)
   4. Mary: User experience (signup friction, password reset flow)
-  5. Bob: Timeline estimates (6h for email/password, 9h for OAuth2)
-  6. Murat: Business priority (MVP vs v1.1)
-  7. Wei: Test requirements (60 tests - 25 unit + 12 integration + 8 E2E + 15 security)
+  5. Clay: Timeline estimates (6h for email/password, 9h for OAuth2)
+  6. Hefley: Business priority (MVP vs v1.1)
+  7. Amy: Test requirements (60 tests - 25 unit + 12 integration + 8 E2E + 15 security)
   8. Synthesize: Team consensus with conflict resolution
 Output: Multi-perspective design review with actionable recommendations
 ```
@@ -116,31 +116,31 @@ FORGE automatically suggests the right experts based on your feature context:
 
 | Feature Type | Suggested Roster | Why |
 |--------------|------------------|-----|
-| Authentication | Emma, Mary, Bob, Murat, Wei | Critical feature - full team review |
-| Security/Vulnerabilities | Emma, Bob, Wei | Security-focused: threat + implementation + security tests |
-| UX/User Experience | Mary, Emma, Bob, Wei | UX-focused: user research + security review + implementation |
-| Database/SQL | Emma, Bob, Wei | Database-focused: SQL injection + implementation + testing |
-| Architecture/Design | Bob, Mary, Murat, Wei | Architecture-focused: tech lead + business impact + priority |
-| Testing/QA | Wei, Emma, Bob | QA-focused: test strategy + security tests + implementation |
-| Timeline/Estimates | Bob, Murat, Wei | Planning-focused: tech lead + priority + test time |
-| Prioritization | Murat, Mary, Bob | Prioritization-focused: product + UX + tech feasibility |
+| Authentication | Daniel, Mary, Clay, Hefley, Amy | Critical feature - full team review |
+| Security/Vulnerabilities | Daniel, Clay, Amy | Security-focused: threat + implementation + security tests |
+| UX/User Experience | Mary, Daniel, Clay, Amy | UX-focused: user research + security review + implementation |
+| Database/SQL | Daniel, Clay, Amy | Database-focused: SQL injection + implementation + testing |
+| Architecture/Design | Clay, Mary, Hefley, Amy | Architecture-focused: tech lead + business impact + priority |
+| Testing/QA | Amy, Daniel, Clay | QA-focused: test strategy + security tests + implementation |
+| Timeline/Estimates | Clay, Hefley, Amy | Planning-focused: tech lead + priority + test time |
+| Prioritization | Hefley, Mary, Clay | Prioritization-focused: product + UX + tech feasibility |
 
 **Question Context Override**: Questions override feature patterns
-- "How long?" → Bob, Murat, Wei (timeline focus)
-- "How many tests?" → Wei, Emma, Bob (testing focus)
-- "Should we build this?" → Murat, Mary, Bob (prioritization focus)
+- "How long?" → Clay, Hefley, Amy (timeline focus)
+- "How many tests?" → Amy, Daniel, Clay (testing focus)
+- "Should we build this?" → Hefley, Mary, Clay (prioritization focus)
 
 **Manual Override**: Explicitly specify roster to override smart defaults
 ```typescript
-runStandup({ feature: 'Auth', roster: ['Emma', 'Bob'] }) // Override: only Emma + Bob
+runStandup({ feature: 'Auth', roster: ['Daniel', 'Clay'] }) // Override: only Daniel + Clay
 ```
 
 ### Software Development Roster
-- **Emma** (Security Engineer): Security threats, CMMC compliance, secure design
+- **Daniel** (Security Engineer): Security threats, CMMC compliance, secure design
 - **Mary** (Business Analyst): User value, UX design, user research, stakeholder communication
-- **Bob** (Tech Lead): Technical feasibility, timeline estimates (Claude-time), capacity planning
-- **Murat** (Product Manager): User value, business priorities, MVP scoping, MoSCoW prioritization
-- **Wei** (QA Lead): Test strategy, testability, quality gates, ATDD
+- **Clay** (Tech Lead): Technical feasibility, timeline estimates (Claude-time), capacity planning
+- **Hefley** (Product Manager): User value, business priorities, MVP scoping, MoSCoW prioritization
+- **Amy** (QA Lead): Test strategy, testability, quality gates, ATDD
 
 ### Custom Rosters (Your Domain)
 Define your own agent rosters for different domains:
@@ -158,8 +158,8 @@ Use `templates/custom-agent-template.md` to define new agents with:
 ## Integration
 
 - Works with AgilePm skill (standup reviews PRDs, prioritizes epics)
-- Works with Security skill (Emma uses threat modeling in standup)
-- Works with TestArchitect skill (Wei defines test strategy in standup)
+- Works with Security skill (Daniel uses threat modeling in standup)
+- Works with TestArchitect skill (Amy defines test strategy in standup)
 - Generates project-context.md (project "bible" for all agents)
 - Records decisions with rationale (audit trail for compliance)
 
@@ -167,7 +167,7 @@ Use `templates/custom-agent-template.md` to define new agents with:
 
 This skill follows multi-agent orchestration principles:
 - **Diverse perspectives**: Multiple specialists find more issues than solo agent
-- **Smart roster selection**: Auto-suggest experts based on feature context (authentication → full team, security → Emma/Bob/Wei)
+- **Smart roster selection**: Auto-suggest experts based on feature context (authentication → full team, security → Daniel/Clay/Amy)
 - **Structured discussion**: Each agent speaks in turn, providing their unique expertise
 - **Synthesis over voting**: Find consensus that's better than any single perspective
 - **Decision documentation**: Record rationale in project-context.md

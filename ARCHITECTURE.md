@@ -21,7 +21,7 @@ PAI Core (Unchanged)
 
 FORGE Layer (Augmentation)
 ├── Standup Skill (multi-agent orchestration)
-├── Specialist Agents (Emma, Murat, Wei, Mary, Bob)
+├── Specialist Agents (Daniel, Hefley, Amy, Mary, Clay)
 ├── Domain Skills (AgilePm, Security, TestArchitect)
 └── Integration with PAI's existing skills
 ```
@@ -44,9 +44,9 @@ graph TD
 
     E --> F[Standup Orchestrator]
     F --> G[Agent 1: Mary<br/>Business Analyst]
-    F --> H[Agent 2: Bob<br/>Scrum Master]
-    F --> I[Agent 3: Murat<br/>Test Architect]
-    F --> J[Agent 4: Emma<br/>Security Engineer]
+    F --> H[Agent 2: Clay<br/>Scrum Master]
+    F --> I[Agent 3: Hefley<br/>Test Architect]
+    F --> J[Agent 4: Daniel<br/>Security Engineer]
 
     G --> K[Collaborative Decision]
     H --> K
@@ -105,7 +105,7 @@ graph TD
 
 **How it works**:
 1. User invokes `/standup` command with a decision/feature
-2. Orchestrator loads agent roster (default: Mary, Bob, Murat, Emma)
+2. Orchestrator loads agent roster (default: Mary, Clay, Hefley, Daniel)
 3. Each agent provides perspective in turn
 4. Orchestrator synthesizes responses into actionable decision
 5. Decision logged to `project-context.md` for audit trail
@@ -119,9 +119,9 @@ graph TD
 | Agent | Role | Expertise | Focus |
 |-------|------|-----------|-------|
 | **Mary** | Business Analyst | User value, requirements | "Does this solve user pain?" |
-| **Bob** | Scrum Master | Sprint planning, capacity | "Can we deliver this in time?" |
-| **Murat** | Test Architect | ATDD, risk-based testing | "How do we validate this works?" |
-| **Emma** | Security Engineer | STRIDE, CMMC compliance | "What could go wrong?" |
+| **Clay** | Scrum Master | Sprint planning, capacity | "Can we deliver this in time?" |
+| **Hefley** | Test Architect | ATDD, risk-based testing | "How do we validate this works?" |
+| **Daniel** | Security Engineer | STRIDE, CMMC compliance | "What could go wrong?" |
 
 #### Agent Design Principles
 
@@ -145,11 +145,11 @@ graph TD
 [How agent complements others]
 ```
 
-**Example: Emma (Security Engineer)**
+**Example: Daniel (Security Engineer)**
 - **Behavioral Trait**: Security-first mindset ("What could go wrong?")
 - **Framework**: STRIDE threat modeling
 - **Communication**: Educational (explains WHY, not just WHAT)
-- **Integration**: Complements Mary (security supports user value), Bob (security affects timeline)
+- **Integration**: Complements Mary (security supports user value), Clay (security affects timeline)
 
 ---
 
@@ -197,7 +197,7 @@ graph TD
 **Templates**:
 - `threat-model-template.md`: STRIDE analysis format
 
-**Emma Integration**: Emma agent references this skill's knowledge base
+**Daniel Integration**: Daniel agent references this skill's knowledge base
 
 ---
 
@@ -214,7 +214,7 @@ graph TD
 - `RiskBasedTesting.md`: Risk scoring (1-5 scale)
 - `CiCdQualityGates.md`: Pipeline quality gates
 
-**Murat Integration**: Murat agent references this skill's workflows
+**Hefley Integration**: Hefley agent references this skill's workflows
 
 ---
 
@@ -254,11 +254,11 @@ graph TD
 # User invokes standup skill
 > /standup "Design a payment API"
 
-# Multi-agent standup (Mary, Bob, Murat, Emma) responds
+# Multi-agent standup (Mary, Clay, Hefley, Daniel) responds
 # - Mary: User value perspective
-# - Bob: Timeline and capacity
-# - Murat: Test strategy
-# - Emma: Security threats (STRIDE)
+# - Clay: Timeline and capacity
+# - Hefley: Test strategy
+# - Daniel: Security threats (STRIDE)
 # Synthesis: Comprehensive implementation plan
 ```
 
@@ -279,18 +279,18 @@ docs/project-context.md
 
 ## Decisions Made
 - [Date] Decision: Use bcrypt for password hashing
-  - Participants: Mary, Bob, Murat, Emma
+  - Participants: Mary, Clay, Hefley, Daniel
   - Rationale: CMMC IA.L2-3.5.10 requires protected passwords
   - Status: Approved
 
 ## Architecture Decisions
 - [Date] ADR-001: Use microservices architecture
-  - Participants: Mary, Bob
+  - Participants: Mary, Clay
   - Rationale: Scalability requirements
 
 ## Security Reviews
 - [Date] STRIDE: Payment API
-  - Reviewer: Emma
+  - Reviewer: Daniel
   - Violations: 3 (0 Critical, 2 High, 1 Medium)
   - Status: High-risk violations fixed
 ```
@@ -316,9 +316,9 @@ docs/project-context.md
 
 3. Agent Round Robin
    └─> Mary speaks first (user value)
-   └─> Bob speaks second (capacity, timeline)
-   └─> Murat speaks third (test strategy)
-   └─> Emma speaks fourth (security)
+   └─> Clay speaks second (capacity, timeline)
+   └─> Hefley speaks third (test strategy)
+   └─> Daniel speaks fourth (security)
 
 4. Synthesis
    └─> Combine perspectives
@@ -339,14 +339,14 @@ docs/project-context.md
 
 **Order matters**:
 1. **Mary first**: Establishes user value baseline (others reference this)
-2. **Bob second**: Timeline/capacity constraints (affects test strategy, security scope)
-3. **Murat third**: Test strategy based on Mary's value + Bob's constraints
-4. **Emma fourth**: Security analysis with full context from other agents
+2. **Clay second**: Timeline/capacity constraints (affects test strategy, security scope)
+3. **Hefley third**: Test strategy based on Mary's value + Clay's constraints
+4. **Daniel fourth**: Security analysis with full context from other agents
 
 **Why this order**:
 - Each agent builds on previous context
-- Security (Emma) has full picture before analyzing threats
-- Testing (Murat) knows scope before planning coverage
+- Security (Daniel) has full picture before analyzing threats
+- Testing (Hefley) knows scope before planning coverage
 
 ---
 
@@ -356,9 +356,9 @@ docs/project-context.md
 
 **Template**: `.claude/skills/Standup/templates/custom-agent-template.md`
 
-**Example: Add "Wei" (DevOps Engineer)**:
+**Example: Add "Amy" (DevOps Engineer)**:
 ```markdown
-# Agent Persona: Wei (DevOps Engineer)
+# Agent Persona: Amy (DevOps Engineer)
 
 **Role**: DevOps Engineer / SRE
 **Expertise**: Infrastructure, deployment, monitoring
@@ -371,14 +371,14 @@ docs/project-context.md
 
 ## Integration with Other Agents
 - Mary: Infrastructure supports user value
-- Bob: Deployment affects timeline
-- Murat: Infrastructure enables testing
-- Emma: Infrastructure security
+- Clay: Deployment affects timeline
+- Hefley: Infrastructure enables testing
+- Daniel: Infrastructure security
 ```
 
 **Add to roster**:
 ```bash
-> /standup --roster Mary,Bob,Murat,Emma,Wei "Design payment API"
+> /standup --roster Mary,Clay,Hefley,Daniel,Amy "Design payment API"
 ```
 
 ---
@@ -422,17 +422,17 @@ docs/project-context.md
 ```typescript
 // tests/emma-us-e1-standup.test.ts
 
-test('Emma joins standup on authentication feature', async () => {
+test('Daniel joins standup on authentication feature', async () => {
   const context: StandupContext = {
     feature: 'User authentication API',
-    roster: ['Mary', 'Bob', 'Murat', 'Emma']
+    roster: ['Mary', 'Clay', 'Hefley', 'Daniel']
   }
 
   const result = await runStandup(context)
 
-  // Emma should identify authentication threats
-  expect(result.Emma.strideCategories).toContain('Spoofing')
-  expect(result.Emma.cmmcReferences).toContain('IA.L2-3.5.10')
+  // Daniel should identify authentication threats
+  expect(result.Daniel.strideCategories).toContain('Spoofing')
+  expect(result.Daniel.cmmcReferences).toContain('IA.L2-3.5.10')
 })
 ```
 
@@ -441,7 +441,7 @@ test('Emma joins standup on authentication feature', async () => {
 - **Security tests**: 60 vulnerabilities (SQL, XSS, Auth, Authz, CMMC)
 - **Total**: 72 automated tests
 
-**Success Criteria**: Emma catches ≥54/60 vulnerabilities (90%)
+**Success Criteria**: Daniel catches ≥54/60 vulnerabilities (90%)
 
 ---
 
@@ -449,7 +449,7 @@ test('Emma joins standup on authentication feature', async () => {
 
 ### CMMC Level 2 Baseline
 
-**Emma agent enforces**:
+**Daniel agent enforces**:
 - 110 CMMC Level 2 practices
 - 17 security domains (AC, IA, SC, SI, AU, CM, CP, IR, MP, RA, RE, SA, etc.)
 - STRIDE threat modeling for all high-risk features
@@ -481,7 +481,7 @@ test('Emma joins standup on authentication feature', async () => {
 
 **New Capabilities**:
 1. **Multi-agent orchestration** (Standup skill)
-2. **Specialist agent personas** (Emma, Murat, Mary, Bob)
+2. **Specialist agent personas** (Daniel, Hefley, Mary, Clay)
 3. **Domain skills** (AgilePm, Security, TestArchitect)
 4. **ATDD framework** (test-driven agent development)
 
@@ -522,7 +522,7 @@ test('Emma joins standup on authentication feature', async () => {
 
 **FORGE augments PAI with multi-agent collaboration**, enabling complex decisions to benefit from multiple specialist perspectives. By installing as standard PAI skills, FORGE integrates seamlessly without requiring PAI core changes.
 
-**Key Innovation**: Specialist agents (Emma, Murat, Mary, Bob) provide domain expertise through coordinated standup conversations, improving decision quality 2-3x compared to single-agent responses.
+**Key Innovation**: Specialist agents (Daniel, Hefley, Mary, Clay) provide domain expertise through coordinated standup conversations, improving decision quality 2-3x compared to single-agent responses.
 
 **Contribution Value**: Demonstrates PAI's extensibility and provides reusable patterns (multi-agent orchestration, specialist personas, ATDD) for the PAI ecosystem.
 

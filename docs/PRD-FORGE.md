@@ -14,7 +14,7 @@ FORGE solves this by introducing "standup" conversations where multiple speciali
 
 **Key Innovation**: FORGE augments PAI without replacing it. It adds:
 - **Skills** (AgilePm, Security, TestArchitect) - capabilities for structured workflows
-- **Agents** (Murat, Emma, Wei) - specialized personalities for standup conversations
+- **Agents** (Hefley, Daniel, Amy) - specialized personalities for standup conversations
 - **Standup Orchestration** - multi-agent conversation layer for collaborative decisions
 
 Success will be measured by:
@@ -44,9 +44,9 @@ graph TD
     F --> H[Security Skill]
     F --> I[TestArchitect Skill]
 
-    G --> J[Murat Agent<br/>Product Manager]
-    H --> K[Emma Agent<br/>Security Engineer]
-    I --> L[Wei Agent<br/>QA Lead]
+    G --> J[Hefley Agent<br/>Product Manager]
+    H --> K[Daniel Agent<br/>Security Engineer]
+    I --> L[Amy Agent<br/>QA Lead]
 
     J --> M[Collaborative Decision]
     K --> M
@@ -77,9 +77,9 @@ graph TD
    - **Standup**: Multi-agent orchestration, conversation coordination, decision synthesis
 
 2. **Agents** (Personalities):
-   - **Murat** (Product Manager): User value, business priorities, product vision
-   - **Emma** (Security Engineer): Security requirements, CMMC compliance, threat modeling
-   - **Wei** (QA Lead): Test strategy, quality gates, testability analysis
+   - **Hefley** (Product Manager): User value, business priorities, product vision
+   - **Daniel** (Security Engineer): Security requirements, CMMC compliance, threat modeling
+   - **Amy** (QA Lead): Test strategy, quality gates, testability analysis
 
 3. **Standup Orchestrator**:
    - Routes complex decisions to multi-agent conversations
@@ -124,17 +124,17 @@ graph TD
 #### EPIC-002: Standup Agents
 **User Value**: Specialist perspectives in every technical decision
 
-1. **Murat Agent (Product Manager)**
+1. **Hefley Agent (Product Manager)**
    - Personality: User-centric, prioritizes business value
    - Expertise: Product vision, user personas, MVP scoping
    - Triggers: PRD creation, epic prioritization, scope decisions
 
-2. **Emma Agent (Security Engineer)**
+2. **Daniel Agent (Security Engineer)**
    - Personality: Security-first, CMMC-aware, proactive threat modeling
    - Expertise: OWASP Top 10, CMMC Level 2, threat modeling
    - Triggers: Architecture design, user story creation, API design
 
-3. **Wei Agent (QA Lead)**
+3. **Amy Agent (QA Lead)**
    - Personality: Quality-focused, testability-driven, risk-aware
    - Expertise: Test automation, ATDD, risk-based testing
    - Triggers: User story creation, technical design, deployment planning
@@ -174,7 +174,7 @@ graph TD
    - User Value: Tests written before code, reducing rework
 2. **Risk Scoring Automation**
    - User Value: Automatically identify high-risk stories requiring more tests
-3. **Murat Behavioral Validation**
+3. **Hefley Behavioral Validation**
    - User Value: Verify agents behave as expected (persona consistency)
 4. **Standup Quality Metrics**
    - User Value: Measure standup effectiveness (issues found, time saved)
@@ -227,9 +227,9 @@ graph TD
 - [ ] Validation Gate (Week 4): Threat model for FORGE itself
 
 #### Sprint 3 (Weeks 5-6): Standup Agents
-- [ ] Story 3.1: Murat agent definition (3 pts)
-- [ ] Story 3.2: Emma agent definition (3 pts)
-- [ ] Story 3.3: Wei agent definition (3 pts)
+- [ ] Story 3.1: Hefley agent definition (3 pts)
+- [ ] Story 3.2: Daniel agent definition (3 pts)
+- [ ] Story 3.3: Amy agent definition (3 pts)
 - [ ] Validation Gate (Week 6): Agent persona validation
 
 #### Sprint 4 (Weeks 7-8): Standup Orchestration
@@ -256,7 +256,7 @@ graph TD
 #### Testing Stories (10 pts)
 - [ ] T-1: ATDD enforcement mechanism (3 pts)
 - [ ] T-2: Risk scoring automation (3 pts)
-- [ ] T-3: Murat behavioral validation (2 pts)
+- [ ] T-3: Hefley behavioral validation (2 pts)
 - [ ] T-4: Standup quality metrics (1 pt)
 - [ ] T-5: PRD quality rubric enforcement (1 pt)
 
@@ -383,7 +383,7 @@ Create a PRD for user authentication system
 standup_flow:
   1. User triggers standup: "Review this architecture design"
   2. Standup orchestrator loads project-context.md
-  3. Orchestrator spawns agents: Murat, Emma, Wei
+  3. Orchestrator spawns agents: Hefley, Daniel, Amy
   4. Each agent reviews design and provides feedback
   5. Orchestrator synthesizes feedback into decision
   6. Decision recorded in project-context.md
@@ -410,7 +410,7 @@ standup_flow:
 
 3. **Security Coverage** (CMMC compliance)
    - Target: **0 critical security gaps** in production code
-   - Measurement: Emma agent veto count (should catch all critical issues)
+   - Measurement: Daniel agent veto count (should catch all critical issues)
    - CMMC Level 2: 110 practices (Release 0.2)
    - Gate: If critical gaps slip through, improve Security skill
 
@@ -449,7 +449,7 @@ standup_flow:
 | Risk | Impact | Probability | Mitigation |
 |------|--------|-------------|------------|
 | **Standup doesn't find 2-3x issues** (fails validation) | High | Medium | A/B test early (Week 8), pivot orchestration if needed |
-| **Agent personalities not consistent** (behave out of character) | Medium | Medium | T-3: Murat behavioral validation (Release 0.2) |
+| **Agent personalities not consistent** (behave out of character) | Medium | Medium | T-3: Hefley behavioral validation (Release 0.2) |
 | **CMMC coverage too complex** (110 practices is large scope) | Medium | Medium | Start with 5 domains (MVP), expand in Release 0.2 |
 | **PAI upstream rejects contribution** (architectural mismatch) | Medium | Low | Engage PAI maintainers early, ensure zero breaking changes |
 | **Timeline underestimated** (solo developer, 164 pts) | Medium | High | Already mitigated: phased releases, realistic velocity (8-10 pts/week) |
@@ -493,7 +493,7 @@ standup_flow:
 - Goals: Pass CMMC audits, implement security controls correctly
 - Pain Points: "CMMC has 110 practices; I don't know which apply to my feature"
 - Needs: Automated CMMC guidance per feature
-- FORGE Value: Emma agent maps features to CMMC practices automatically
+- FORGE Value: Daniel agent maps features to CMMC practices automatically
 
 ### References
 

@@ -8,7 +8,7 @@
 - Primary users: Solo developers and small teams
 - Current plan: Email/password authentication
 
-**Roster**: Mary (Business Analyst), Bob (Scrum Master), Murat (Test Architect), Emma (Security Engineer)
+**Roster**: Mary (Business Analyst), Clay (Scrum Master), Hefley (Test Architect), Daniel (Security Engineer)
 
 ---
 
@@ -46,9 +46,9 @@
 
 ---
 
-### Bob (Scrum Master) - Timeline and Capacity Perspective
+### Clay (Scrum Master) - Timeline and Capacity Perspective
 
-**Bob's Analysis**:
+**Clay's Analysis**:
 
 "Current sprint status: We're in Sprint 2 of 8 (Week 3). Let's look at capacity and dependencies.
 
@@ -88,9 +88,9 @@
 
 ---
 
-### Murat (Test Architect) - Testing Perspective
+### Hefley (Test Architect) - Testing Perspective
 
-**Murat's Analysis**:
+**Hefley's Analysis**:
 
 "Let's assess the testability and quality impact of OAuth2.
 
@@ -131,9 +131,9 @@
 
 ---
 
-### Emma (Security Engineer) - Security Perspective
+### Daniel (Security Engineer) - Security Perspective
 
-**Emma's Analysis**:
+**Daniel's Analysis**:
 
 "Let's perform a STRIDE analysis on both approaches.
 
@@ -201,7 +201,7 @@
 
 ## Synthesis: Collaborative Decision
 
-**Participants**: Mary, Bob, Murat, Emma
+**Participants**: Mary, Clay, Hefley, Daniel
 
 **Consensus**: **Defer OAuth2 to v1.1, ship email/password + MFA for MVP**
 
@@ -210,9 +210,9 @@
 | Perspective | Key Insight | Impact |
 |-------------|-------------|--------|
 | **Mary (User Value)** | Solo developers don't need OAuth2 for adoption | MoSCoW: Should Have (not Must Have) |
-| **Bob (Timeline)** | OAuth2 adds 3 weeks (16 story points + 5 dependencies) | MVP delayed by 3 weeks → unacceptable |
-| **Murat (Testing)** | OAuth2 testing is complex and flaky (external APIs) | 3 weeks testing effort for non-critical feature |
-| **Emma (Security)** | Email/password + MFA meets CMMC Level 2 requirements | OAuth2 adds attack surface without critical benefit |
+| **Clay (Timeline)** | OAuth2 adds 3 weeks (16 story points + 5 dependencies) | MVP delayed by 3 weeks → unacceptable |
+| **Hefley (Testing)** | OAuth2 testing is complex and flaky (external APIs) | 3 weeks testing effort for non-critical feature |
+| **Daniel (Security)** | Email/password + MFA meets CMMC Level 2 requirements | OAuth2 adds attack surface without critical benefit |
 
 ---
 
@@ -261,7 +261,7 @@
 
 ### Decision: Defer OAuth2 to v1.1, ship email/password + MFA for MVP
 **Date**: 2025-12-02
-**Participants**: Mary (Business Analyst), Bob (Scrum Master), Murat (Test Architect), Emma (Security Engineer)
+**Participants**: Mary (Business Analyst), Clay (Scrum Master), Hefley (Test Architect), Daniel (Security Engineer)
 
 **Context**: Deciding authentication approach for MVP
 
@@ -269,9 +269,9 @@
 
 **Rationale**:
 - **User Value (Mary)**: Solo developers (primary persona) don't need OAuth2 for adoption
-- **Timeline (Bob)**: OAuth2 adds 21 story points (3 weeks) → unacceptable MVP delay
-- **Testing (Murat)**: OAuth2 testing complex and flaky (external APIs, 26 tests vs 10)
-- **Security (Emma)**: Email/password + MFA meets CMMC Level 2, OAuth2 adds attack surface
+- **Timeline (Clay)**: OAuth2 adds 21 story points (3 weeks) → unacceptable MVP delay
+- **Testing (Hefley)**: OAuth2 testing complex and flaky (external APIs, 26 tests vs 10)
+- **Security (Daniel)**: Email/password + MFA meets CMMC Level 2, OAuth2 adds attack surface
 
 **Implementation**:
 - Bcrypt password hashing (IA.L2-3.5.10)
@@ -292,9 +292,9 @@
 ## Outcome: Multi-Agent Value
 
 **Issues Found by Standup** (vs solo decision):
-1. **Timeline impact** (Bob): 21 story points (not obvious 16), 3-week delay
-2. **Testing complexity** (Murat): Flaky OAuth E2E tests, 3 weeks effort
-3. **Security trade-off** (Emma): Email/password + MFA meets CMMC, OAuth adds attack surface
+1. **Timeline impact** (Clay): 21 story points (not obvious 16), 3-week delay
+2. **Testing complexity** (Hefley): Flaky OAuth E2E tests, 3 weeks effort
+3. **Security trade-off** (Daniel): Email/password + MFA meets CMMC, OAuth adds attack surface
 4. **User value** (Mary): OAuth is "nice-to-have", not "must-have" for solo developers
 
 **Solo AI might have missed**:

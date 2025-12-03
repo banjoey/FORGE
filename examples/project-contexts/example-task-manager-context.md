@@ -60,7 +60,7 @@
 
 ### Decision 1: Defer OAuth2 to v1.1, ship email/password + MFA for MVP
 **Date**: 2025-12-02
-**Participants**: Mary (Business Analyst), Bob (Scrum Master), Murat (Test Architect), Emma (Security Engineer)
+**Participants**: Mary (Business Analyst), Clay (Scrum Master), Hefley (Test Architect), Daniel (Security Engineer)
 
 **Context**: Deciding authentication approach for MVP
 
@@ -68,9 +68,9 @@
 
 **Rationale**:
 - **User Value (Mary)**: Solo developers (primary persona) don't need OAuth2 for initial adoption. MoSCoW: Should Have (not Must Have)
-- **Timeline (Bob)**: OAuth2 adds 21 story points (3 weeks delay) due to dependencies (HTTPS setup, Redis session management)
-- **Testing (Murat)**: OAuth2 testing is complex and flaky (external API mocking, 26 tests vs 10 tests, 5 days vs 2 days)
-- **Security (Emma)**: Email/password + MFA meets CMMC Level 2 requirements. OAuth2 adds attack surface (3 endpoints vs 1) without critical security benefit
+- **Timeline (Clay)**: OAuth2 adds 21 story points (3 weeks delay) due to dependencies (HTTPS setup, Redis session management)
+- **Testing (Hefley)**: OAuth2 testing is complex and flaky (external API mocking, 26 tests vs 10 tests, 5 days vs 2 days)
+- **Security (Daniel)**: Email/password + MFA meets CMMC Level 2 requirements. OAuth2 adds attack surface (3 endpoints vs 1) without critical security benefit
 
 **Implementation**:
 - ✅ Bcrypt password hashing, 12 rounds minimum (IA.L2-3.5.10)
@@ -90,16 +90,16 @@
 
 ### Decision 2: Use PostgreSQL over MongoDB
 **Date**: 2025-11-25
-**Participants**: Bob (Scrum Master), Murat (Test Architect), Emma (Security Engineer)
+**Participants**: Clay (Scrum Master), Hefley (Test Architect), Daniel (Security Engineer)
 
 **Context**: Choosing database for task management (relational vs document store)
 
 **Decision**: Use PostgreSQL 15 (relational database)
 
 **Rationale**:
-- **Data Model (Bob)**: Task relationships are relational (tasks → sprints → projects → users). PostgreSQL foreign keys enforce data integrity.
-- **Testing (Murat)**: PostgreSQL transactions enable reliable integration tests. Rollback on failure.
-- **Security (Emma)**: PostgreSQL has robust access control, parameterized queries prevent SQL injection (SI.L2-3.14.6)
+- **Data Model (Clay)**: Task relationships are relational (tasks → sprints → projects → users). PostgreSQL foreign keys enforce data integrity.
+- **Testing (Hefley)**: PostgreSQL transactions enable reliable integration tests. Rollback on failure.
+- **Security (Daniel)**: PostgreSQL has robust access control, parameterized queries prevent SQL injection (SI.L2-3.14.6)
 
 **Alternatives Considered**:
 - MongoDB: Good for flexible schemas, but task data is structured (sprints, users, tasks have fixed fields)
@@ -120,7 +120,7 @@
 
 ### Decision 3: Defer real-time collaboration to v1.1
 **Date**: 2025-11-28
-**Participants**: Mary (Business Analyst), Bob (Scrum Master), Murat (Test Architect), Emma (Security Engineer)
+**Participants**: Mary (Business Analyst), Clay (Scrum Master), Hefley (Test Architect), Daniel (Security Engineer)
 
 **Context**: Should MVP include real-time collaboration (multiple users editing same task simultaneously)?
 
@@ -128,9 +128,9 @@
 
 **Rationale**:
 - **User Value (Mary)**: Primary persona is solo developers (not teams). Real-time collaboration is valuable for v1.1 (team features) but not Must Have for MVP.
-- **Timeline (Bob)**: Real-time collaboration requires WebSockets, Redis pub/sub, conflict resolution → 13 story points (2 weeks)
-- **Testing (Murat)**: Real-time features are hard to test: race conditions, connection drops, conflict resolution edge cases → 3 weeks testing
-- **Security (Emma)**: WebSockets add attack surface: connection hijacking, authorization per message, DoS via connection flood → 5 additional CMMC practices
+- **Timeline (Clay)**: Real-time collaboration requires WebSockets, Redis pub/sub, conflict resolution → 13 story points (2 weeks)
+- **Testing (Hefley)**: Real-time features are hard to test: race conditions, connection drops, conflict resolution edge cases → 3 weeks testing
+- **Security (Daniel)**: WebSockets add attack surface: connection hijacking, authorization per message, DoS via connection flood → 5 additional CMMC practices
 
 **Implementation (MVP)**:
 - Simple CRUD API (REST)
@@ -154,7 +154,7 @@
 
 ### Security Review 1: Authentication API (STRIDE)
 **Date**: 2025-12-02
-**Reviewer**: Emma (Security Engineer)
+**Reviewer**: Daniel (Security Engineer)
 **Scope**: `/api/auth/*` endpoints (login, signup, logout, MFA)
 
 **STRIDE Analysis**:
@@ -187,7 +187,7 @@
 
 ### Security Review 2: CMMC Baseline
 **Date**: 2025-12-02
-**Reviewer**: Emma (Security Engineer)
+**Reviewer**: Daniel (Security Engineer)
 **Scope**: MVP features (authentication, task management)
 
 **CMMC Level 2 Compliance** (71 practices assessed):

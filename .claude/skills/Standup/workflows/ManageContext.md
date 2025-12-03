@@ -131,7 +131,7 @@ CUI//SP-CTI
 ### Decision: [Title] (YYYY-MM-DD)
 - **Decision**: [One-line summary of what was decided]
 - **Rationale**: [Why this choice? How did agent perspectives align?]
-- **Participants**: Murat (PM), Emma (Security), Wei (QA)
+- **Participants**: Hefley (PM), Daniel (Security), Amy (QA)
 - **Trade-offs**: [What we gained vs what we deferred]
 - **Owner**: [Who owns implementation]
 - **Date**: YYYY-MM-DD
@@ -144,11 +144,11 @@ CUI//SP-CTI
 ### Decision: Ship email/password auth for MVP, defer OAuth2 to v1.1 (2025-12-02)
 - **Decision**: Implement email/password authentication for MVP, add OAuth2 in v1.1 if user demand exists
 - **Rationale**:
-  - Murat: Primary persona (solo developers) doesn't require OAuth2 for initial adoption. Email/password delivers value in 2 weeks vs 5 weeks for OAuth2.
-  - Emma: Email/password meets CMMC IA practices if we add MFA (TOTP). No critical security gap.
-  - Wei: Email/password has 40% less testing complexity (simpler to reach 90% coverage target).
+  - Hefley: Primary persona (solo developers) doesn't require OAuth2 for initial adoption. Email/password delivers value in 2 weeks vs 5 weeks for OAuth2.
+  - Daniel: Email/password meets CMMC IA practices if we add MFA (TOTP). No critical security gap.
+  - Amy: Email/password has 40% less testing complexity (simpler to reach 90% coverage target).
   - Consensus: Ship faster with acceptable security, enhance if users request OAuth2.
-- **Participants**: Murat (PM), Emma (Security), Wei (QA)
+- **Participants**: Hefley (PM), Daniel (Security), Amy (QA)
 - **Trade-offs**:
   - Gained: 3 weeks faster to MVP, simpler testing
   - Deferred: OAuth2 integration (tracked as v1.1 feature)
@@ -578,7 +578,7 @@ Rationale: Faster time-to-market (2 weeks vs 5 weeks), meets CMMC
 requirements with TOTP MFA, primary persona (solo developers) doesn't
 require OAuth2 for initial adoption.
 
-Participants: Murat (PM), Emma (Security), Wei (QA)
+Participants: Hefley (PM), Daniel (Security), Amy (QA)
 Date: 2025-12-02
 Status: Approved"
 ```

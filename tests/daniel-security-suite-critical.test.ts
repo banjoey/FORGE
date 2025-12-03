@@ -1,9 +1,9 @@
 /**
- * Emma Security Test Suite: Critical Vulnerabilities (30 tests)
+ * Daniel Security Test Suite: Critical Vulnerabilities (30 tests)
  *
- * Purpose: Validate Emma's 90% detection rate on known vulnerabilities
+ * Purpose: Validate Daniel's 90% detection rate on known vulnerabilities
  * Scope: 30 Critical tests (SQL Injection, XSS, Authentication Bypass)
- * Success Criteria: Emma catches ≥27 of 30 tests (90%)
+ * Success Criteria: Daniel catches ≥27 of 30 tests (90%)
  *
  * Full suite: 60 tests total (30 Critical + 20 CMMC + 10 Authz in Sprint 2)
  */

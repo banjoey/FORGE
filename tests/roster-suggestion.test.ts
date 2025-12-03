@@ -17,102 +17,102 @@ describe('Smart Roster Suggestion', () => {
    * Authentication features should get full team
    * (Critical feature needs all perspectives: security, UX, timeline, priority, testing)
    */
-  test('Authentication feature → Full team (Emma, Mary, Bob, Murat, Wei)', () => {
-    expect(suggestRoster('User authentication')).toEqual(['Emma', 'Mary', 'Bob', 'Murat', 'Wei'])
-    expect(suggestRoster('Login API')).toEqual(['Emma', 'Mary', 'Bob', 'Murat', 'Wei'])
-    expect(suggestRoster('OAuth2 integration')).toEqual(['Emma', 'Mary', 'Bob', 'Murat', 'Wei'])
-    expect(suggestRoster('Password reset flow')).toEqual(['Emma', 'Mary', 'Bob', 'Murat', 'Wei'])
-    expect(suggestRoster('Two-factor authentication')).toEqual(['Emma', 'Mary', 'Bob', 'Murat', 'Wei'])
-    expect(suggestRoster('MFA setup')).toEqual(['Emma', 'Mary', 'Bob', 'Murat', 'Wei'])
-    expect(suggestRoster('Session management')).toEqual(['Emma', 'Mary', 'Bob', 'Murat', 'Wei'])
+  test('Authentication feature → Full team (Daniel, Mary, Clay, Hefley, Amy)', () => {
+    expect(suggestRoster('User authentication')).toEqual(['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy'])
+    expect(suggestRoster('Login API')).toEqual(['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy'])
+    expect(suggestRoster('OAuth2 integration')).toEqual(['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy'])
+    expect(suggestRoster('Password reset flow')).toEqual(['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy'])
+    expect(suggestRoster('Two-factor authentication')).toEqual(['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy'])
+    expect(suggestRoster('MFA setup')).toEqual(['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy'])
+    expect(suggestRoster('Session management')).toEqual(['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy'])
   })
 
   /**
    * Security features should get security-focused team
-   * (Emma for security analysis, Bob for implementation, Wei for security testing)
+   * (Daniel for security analysis, Clay for implementation, Amy for security testing)
    */
-  test('Security feature → Security team (Emma, Bob, Wei)', () => {
-    expect(suggestRoster('Security audit')).toEqual(['Emma', 'Bob', 'Wei'])
-    expect(suggestRoster('Vulnerability assessment')).toEqual(['Emma', 'Bob', 'Wei'])
-    expect(suggestRoster('SQL injection fix')).toEqual(['Emma', 'Bob', 'Wei'])
-    expect(suggestRoster('XSS prevention')).toEqual(['Emma', 'Bob', 'Wei'])
-    expect(suggestRoster('CSRF protection')).toEqual(['Emma', 'Bob', 'Wei'])
-    expect(suggestRoster('Threat modeling')).toEqual(['Emma', 'Bob', 'Wei'])
+  test('Security feature → Security team (Daniel, Clay, Amy)', () => {
+    expect(suggestRoster('Security audit')).toEqual(['Daniel', 'Clay', 'Amy'])
+    expect(suggestRoster('Vulnerability assessment')).toEqual(['Daniel', 'Clay', 'Amy'])
+    expect(suggestRoster('SQL injection fix')).toEqual(['Daniel', 'Clay', 'Amy'])
+    expect(suggestRoster('XSS prevention')).toEqual(['Daniel', 'Clay', 'Amy'])
+    expect(suggestRoster('CSRF protection')).toEqual(['Daniel', 'Clay', 'Amy'])
+    expect(suggestRoster('Threat modeling')).toEqual(['Daniel', 'Clay', 'Amy'])
   })
 
   /**
    * UX features should get UX-focused team
-   * (Mary for UX analysis, Emma for security review, Bob for implementation, Wei for testing)
+   * (Mary for UX analysis, Daniel for security review, Clay for implementation, Amy for testing)
    */
-  test('UX feature → UX team (Mary, Emma, Bob, Wei)', () => {
-    expect(suggestRoster('User experience improvements')).toEqual(['Mary', 'Emma', 'Bob', 'Wei'])
-    expect(suggestRoster('UI redesign')).toEqual(['Mary', 'Emma', 'Bob', 'Wei'])
-    expect(suggestRoster('Interface navigation')).toEqual(['Mary', 'Emma', 'Bob', 'Wei'])
-    expect(suggestRoster('Design system')).toEqual(['Mary', 'Emma', 'Bob', 'Wei'])
-    expect(suggestRoster('Usability testing')).toEqual(['Mary', 'Emma', 'Bob', 'Wei'])
+  test('UX feature → UX team (Mary, Daniel, Clay, Amy)', () => {
+    expect(suggestRoster('User experience improvements')).toEqual(['Mary', 'Daniel', 'Clay', 'Amy'])
+    expect(suggestRoster('UI redesign')).toEqual(['Mary', 'Daniel', 'Clay', 'Amy'])
+    expect(suggestRoster('Interface navigation')).toEqual(['Mary', 'Daniel', 'Clay', 'Amy'])
+    expect(suggestRoster('Design system')).toEqual(['Mary', 'Daniel', 'Clay', 'Amy'])
+    expect(suggestRoster('Usability testing')).toEqual(['Mary', 'Daniel', 'Clay', 'Amy'])
   })
 
   /**
    * Database features should get database-focused team
-   * (Emma for SQL injection, Bob for implementation, Wei for testing)
+   * (Daniel for SQL injection, Clay for implementation, Amy for testing)
    */
-  test('Database feature → Database team (Emma, Bob, Wei)', () => {
-    expect(suggestRoster('Database schema design')).toEqual(['Emma', 'Bob', 'Wei'])
-    expect(suggestRoster('SQL query optimization')).toEqual(['Emma', 'Bob', 'Wei'])
-    expect(suggestRoster('Database migration')).toEqual(['Emma', 'Bob', 'Wei'])
+  test('Database feature → Database team (Daniel, Clay, Amy)', () => {
+    expect(suggestRoster('Database schema design')).toEqual(['Daniel', 'Clay', 'Amy'])
+    expect(suggestRoster('SQL query optimization')).toEqual(['Daniel', 'Clay', 'Amy'])
+    expect(suggestRoster('Database migration')).toEqual(['Daniel', 'Clay', 'Amy'])
   })
 
   /**
    * Architecture features should get architecture-focused team
-   * (Bob for tech lead, Mary for user impact, Murat for priority, Wei for testing)
+   * (Clay for tech lead, Mary for user impact, Hefley for priority, Amy for testing)
    */
-  test('Architecture feature → Architecture team (Bob, Mary, Murat, Wei)', () => {
-    expect(suggestRoster('System architecture')).toEqual(['Bob', 'Mary', 'Murat', 'Wei'])
-    expect(suggestRoster('Design pattern selection')).toEqual(['Bob', 'Mary', 'Murat', 'Wei'])
-    expect(suggestRoster('Refactoring plan')).toEqual(['Bob', 'Mary', 'Murat', 'Wei'])
-    expect(suggestRoster('Technical debt reduction')).toEqual(['Bob', 'Mary', 'Murat', 'Wei'])
-    expect(suggestRoster('Microservices architecture')).toEqual(['Bob', 'Mary', 'Murat', 'Wei'])
+  test('Architecture feature → Architecture team (Clay, Mary, Hefley, Amy)', () => {
+    expect(suggestRoster('System architecture')).toEqual(['Clay', 'Mary', 'Hefley', 'Amy'])
+    expect(suggestRoster('Design pattern selection')).toEqual(['Clay', 'Mary', 'Hefley', 'Amy'])
+    expect(suggestRoster('Refactoring plan')).toEqual(['Clay', 'Mary', 'Hefley', 'Amy'])
+    expect(suggestRoster('Technical debt reduction')).toEqual(['Clay', 'Mary', 'Hefley', 'Amy'])
+    expect(suggestRoster('Microservices architecture')).toEqual(['Clay', 'Mary', 'Hefley', 'Amy'])
   })
 
   /**
    * Testing features should get QA-focused team
-   * (Wei for QA lead, Emma for security tests, Bob for implementation)
+   * (Amy for QA lead, Daniel for security tests, Clay for implementation)
    */
-  test('Testing feature → QA team (Wei, Emma, Bob)', () => {
-    expect(suggestRoster('Test strategy')).toEqual(['Wei', 'Emma', 'Bob'])
-    expect(suggestRoster('QA automation')).toEqual(['Wei', 'Emma', 'Bob'])
-    expect(suggestRoster('Quality assurance')).toEqual(['Wei', 'Emma', 'Bob'])
-    expect(suggestRoster('Code coverage')).toEqual(['Wei', 'Emma', 'Bob'])
+  test('Testing feature → QA team (Amy, Daniel, Clay)', () => {
+    expect(suggestRoster('Test strategy')).toEqual(['Amy', 'Daniel', 'Clay'])
+    expect(suggestRoster('QA automation')).toEqual(['Amy', 'Daniel', 'Clay'])
+    expect(suggestRoster('Quality assurance')).toEqual(['Amy', 'Daniel', 'Clay'])
+    expect(suggestRoster('Code coverage')).toEqual(['Amy', 'Daniel', 'Clay'])
   })
 
   /**
    * Timeline/capacity questions should get planning team
-   * (Bob for estimates, Murat for priority, Wei for test time)
+   * (Clay for estimates, Hefley for priority, Amy for test time)
    */
-  test('Timeline question → Planning team (Bob, Murat, Wei)', () => {
-    expect(suggestRoster('Timeline estimate')).toEqual(['Bob', 'Murat', 'Wei'])
-    expect(suggestRoster('Capacity planning')).toEqual(['Bob', 'Murat', 'Wei'])
-    expect(suggestRoster('How long will this take?', 'How long will this take?')).toEqual(['Bob', 'Murat', 'Wei'])
+  test('Timeline question → Planning team (Clay, Hefley, Amy)', () => {
+    expect(suggestRoster('Timeline estimate')).toEqual(['Clay', 'Hefley', 'Amy'])
+    expect(suggestRoster('Capacity planning')).toEqual(['Clay', 'Hefley', 'Amy'])
+    expect(suggestRoster('How long will this take?', 'How long will this take?')).toEqual(['Clay', 'Hefley', 'Amy'])
   })
 
   /**
    * Prioritization questions should get prioritization team
-   * (Murat for product, Mary for UX, Bob for tech feasibility)
+   * (Hefley for product, Mary for UX, Clay for tech feasibility)
    */
-  test('Prioritization question → Prioritization team (Murat, Mary, Bob)', () => {
-    expect(suggestRoster('Priority assessment')).toEqual(['Murat', 'Mary', 'Bob'])
-    expect(suggestRoster('Business value')).toEqual(['Murat', 'Mary', 'Bob'])
-    expect(suggestRoster('Product roadmap')).toEqual(['Murat', 'Mary', 'Bob'])
-    expect(suggestRoster('MVP features')).toEqual(['Murat', 'Mary', 'Bob'])
-    expect(suggestRoster('Should we build this?', 'Should we build this?')).toEqual(['Murat', 'Mary', 'Bob'])
+  test('Prioritization question → Prioritization team (Hefley, Mary, Clay)', () => {
+    expect(suggestRoster('Priority assessment')).toEqual(['Hefley', 'Mary', 'Clay'])
+    expect(suggestRoster('Business value')).toEqual(['Hefley', 'Mary', 'Clay'])
+    expect(suggestRoster('Product roadmap')).toEqual(['Hefley', 'Mary', 'Clay'])
+    expect(suggestRoster('MVP features')).toEqual(['Hefley', 'Mary', 'Clay'])
+    expect(suggestRoster('Should we build this?', 'Should we build this?')).toEqual(['Hefley', 'Mary', 'Clay'])
   })
 
   /**
    * Unknown features should get full team by default
    */
   test('Unknown feature → Full team (default)', () => {
-    expect(suggestRoster('Some random feature')).toEqual(['Emma', 'Mary', 'Bob', 'Murat', 'Wei'])
-    expect(suggestRoster('Mystery task')).toEqual(['Emma', 'Mary', 'Bob', 'Murat', 'Wei'])
+    expect(suggestRoster('Some random feature')).toEqual(['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy'])
+    expect(suggestRoster('Mystery task')).toEqual(['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy'])
   })
 
   /**
@@ -127,7 +127,7 @@ describe('Smart Roster Suggestion', () => {
     const result = await runStandup(context)
 
     // Should suggest full team for authentication feature
-    expect(result.participants).toEqual(['Emma', 'Mary', 'Bob', 'Murat', 'Wei'])
+    expect(result.participants).toEqual(['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy'])
   })
 
   /**
@@ -136,13 +136,13 @@ describe('Smart Roster Suggestion', () => {
   test('Explicit roster provided → Uses provided roster', async () => {
     const context: StandupContext = {
       feature: 'User authentication API',
-      roster: ['Emma', 'Bob']  // Explicit override - only Emma and Bob
+      roster: ['Daniel', 'Clay']  // Explicit override - only Daniel and Clay
     }
 
     const result = await runStandup(context)
 
     // Should use provided roster (not smart default)
-    expect(result.participants).toEqual(['Emma', 'Bob'])
+    expect(result.participants).toEqual(['Daniel', 'Clay'])
   })
 
   /**
@@ -150,22 +150,22 @@ describe('Smart Roster Suggestion', () => {
    */
   test('Question context influences roster', () => {
     // Testing question → QA team
-    expect(suggestRoster('Login API', 'How many tests do we need?')).toEqual(['Wei', 'Emma', 'Bob'])
+    expect(suggestRoster('Login API', 'How many tests do we need?')).toEqual(['Amy', 'Daniel', 'Clay'])
 
     // Timeline question → Planning team
-    expect(suggestRoster('Login API', 'How long will this take?')).toEqual(['Bob', 'Murat', 'Wei'])
+    expect(suggestRoster('Login API', 'How long will this take?')).toEqual(['Clay', 'Hefley', 'Amy'])
 
     // Prioritization question → Prioritization team
-    expect(suggestRoster('Login API', 'Should we build this feature?')).toEqual(['Murat', 'Mary', 'Bob'])
+    expect(suggestRoster('Login API', 'Should we build this feature?')).toEqual(['Hefley', 'Mary', 'Clay'])
   })
 
   /**
    * Case-insensitive matching
    */
   test('Case-insensitive feature matching', () => {
-    expect(suggestRoster('USER AUTHENTICATION')).toEqual(['Emma', 'Mary', 'Bob', 'Murat', 'Wei'])
-    expect(suggestRoster('Security Audit')).toEqual(['Emma', 'Bob', 'Wei'])
-    expect(suggestRoster('UX Design')).toEqual(['Mary', 'Emma', 'Bob', 'Wei'])
+    expect(suggestRoster('USER AUTHENTICATION')).toEqual(['Daniel', 'Mary', 'Clay', 'Hefley', 'Amy'])
+    expect(suggestRoster('Security Audit')).toEqual(['Daniel', 'Clay', 'Amy'])
+    expect(suggestRoster('UX Design')).toEqual(['Mary', 'Daniel', 'Clay', 'Amy'])
   })
 
 })

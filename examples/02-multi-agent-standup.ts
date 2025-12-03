@@ -2,14 +2,14 @@
  * Example 2: Multi-Agent Standup
  *
  * This example demonstrates how to orchestrate a multi-agent standup where
- * Emma provides security perspective alongside Mary (Business), Bob (Capacity),
- * and Murat (Testing).
+ * Daniel provides security perspective alongside Mary (Business), Clay (Capacity),
+ * and Hefley (Testing).
  */
 
 import { runStandup } from '../src/standup/orchestrator'
 
 async function multiAgentStandup() {
-  console.log('=== Emma Security Review - Multi-Agent Standup ===\n')
+  console.log('=== Daniel Security Review - Multi-Agent Standup ===\n')
 
   // Scenario: Team is discussing a new user authentication feature
   console.log('Scenario: Reviewing user authentication implementation\n')
@@ -30,24 +30,24 @@ async function multiAgentStandup() {
 
   const result = await runStandup({
     feature: 'User authentication system',
-    roster: ['Emma', 'Mary', 'Bob', 'Murat'],
+    roster: ['Daniel', 'Mary', 'Clay', 'Hefley'],
     codeSnippet,
     description: 'Login endpoint for user authentication'
   })
 
   console.log(`Participants: ${result.participants.join(', ')}\n`)
 
-  // Emma's Security Perspective
-  if (result.Emma) {
-    console.log('👤 Emma (Security Engineer):')
-    console.log(`   Focus: ${result.Emma.focus}`)
-    console.log(`   Vulnerability: ${result.Emma.vulnerability}`)
-    console.log(`   STRIDE Category: ${result.Emma.strideCategory}`)
-    console.log(`   Severity: ${result.Emma.severity}`)
-    console.log(`   CMMC Practice: ${result.Emma.cmmc}`)
-    console.log(`   OWASP Reference: ${result.Emma.owaspReference}`)
+  // Daniel's Security Perspective
+  if (result.Daniel) {
+    console.log('👤 Daniel (Security Engineer):')
+    console.log(`   Focus: ${result.Daniel.focus}`)
+    console.log(`   Vulnerability: ${result.Daniel.vulnerability}`)
+    console.log(`   STRIDE Category: ${result.Daniel.strideCategory}`)
+    console.log(`   Severity: ${result.Daniel.severity}`)
+    console.log(`   CMMC Practice: ${result.Daniel.cmmc}`)
+    console.log(`   OWASP Reference: ${result.Daniel.owaspReference}`)
     console.log(`\n   Recommendations:`)
-    result.Emma.recommendations?.forEach((rec, i) => {
+    result.Daniel.recommendations?.forEach((rec, i) => {
       console.log(`   ${i + 1}. ${rec}`)
     })
     console.log('')
@@ -62,21 +62,21 @@ async function multiAgentStandup() {
     console.log('')
   }
 
-  // Bob's Capacity Perspective
-  if (result.Bob) {
-    console.log('👤 Bob (Capacity Planner):')
-    console.log(`   Focus: ${result.Bob.focus}`)
-    console.log(`   Analysis: ${result.Bob.analysis}`)
-    console.log(`   Recommendation: ${result.Bob.recommendation}`)
+  // Clay's Capacity Perspective
+  if (result.Clay) {
+    console.log('👤 Clay (Capacity Planner):')
+    console.log(`   Focus: ${result.Clay.focus}`)
+    console.log(`   Analysis: ${result.Clay.analysis}`)
+    console.log(`   Recommendation: ${result.Clay.recommendation}`)
     console.log('')
   }
 
-  // Murat's Testing Perspective
-  if (result.Murat) {
-    console.log('👤 Murat (Test Engineer):')
-    console.log(`   Focus: ${result.Murat.focus}`)
-    console.log(`   Analysis: ${result.Murat.analysis}`)
-    console.log(`   Recommendation: ${result.Murat.recommendation}`)
+  // Hefley's Testing Perspective
+  if (result.Hefley) {
+    console.log('👤 Hefley (Test Engineer):')
+    console.log(`   Focus: ${result.Hefley.focus}`)
+    console.log(`   Analysis: ${result.Hefley.analysis}`)
+    console.log(`   Recommendation: ${result.Hefley.recommendation}`)
     console.log('')
   }
 

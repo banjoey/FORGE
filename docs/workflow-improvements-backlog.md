@@ -23,7 +23,7 @@ After any session that generates action items (standup, planning, PRD review):
 
 ```
 Claude: "This session identified 5 action items:
-  1. Update Emma PRD with MoSCoW prioritization
+  1. Update Daniel PRD with MoSCoW prioritization
   2. Write Given-When-Then acceptance criteria for US-E1, E2, E3
   3. Create security issue test suite (100 vulnerabilities)
   4. Update sprint plan (2 sprints, 3 weeks)

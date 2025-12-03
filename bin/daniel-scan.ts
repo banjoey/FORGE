@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Emma Security Scanner CLI
+ * Daniel Security Scanner CLI
  *
  * Usage:
  *   emma-scan <file>                  # Scan a single file
@@ -141,7 +141,7 @@ async function scanStdin(options: ScanOptions = {}): Promise<void> {
   if (options.json) {
     console.log(JSON.stringify(analysis, null, 2))
   } else {
-    console.log('\nEmma Security Scan Results:\n')
+    console.log('\nDaniel Security Scan Results:\n')
     if (analysis.detected) {
       console.log(`❌ ${analysis.vulnerability} (${analysis.severity})`)
       console.log(`   CMMC: ${analysis.cmmc}`)
@@ -155,7 +155,7 @@ async function scanStdin(options: ScanOptions = {}): Promise<void> {
 
 function showHelp(): void {
   console.log(`
-Emma Security Scanner - CMMC Level 2 Compliance & STRIDE Threat Modeling
+Daniel Security Scanner - CMMC Level 2 Compliance & STRIDE Threat Modeling
 
 Usage:
   emma-scan <file>                 Scan a single file

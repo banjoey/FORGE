@@ -111,7 +111,7 @@ FORGE/
 │   │   │   └── METHODOLOGY.md  # Skill principles and approach
 │   │   └── [OtherSkills]/
 │   └── agents/              # Agent definitions
-│       ├── Murat/
+│       ├── Hefley/
 │       │   └── agent.md     # Agent persona, expertise, communication style
 │       └── [OtherAgents]/
 ├── docs/
@@ -255,9 +255,9 @@ triggers: Trigger 1, Trigger 2, Trigger 3
 ### Agent Persona Consistency
 
 Agents must be **consistent and distinct**:
-- Use catchphrases (Murat: "What problem are we solving?")
-- Apply consistent frameworks (Emma: STRIDE, Wei: Test Pyramid)
-- Maintain personality (Murat: ruthless prioritizer, Emma: security-first, Wei: test-first)
+- Use catchphrases (Hefley: "What problem are we solving?")
+- Apply consistent frameworks (Daniel: STRIDE, Amy: Test Pyramid)
+- Maintain personality (Hefley: ruthless prioritizer, Daniel: security-first, Amy: test-first)
 
 ### Custom Agent Template
 
