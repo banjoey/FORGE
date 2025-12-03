@@ -13,6 +13,9 @@ Test strategy before code: prevent defects through acceptance test-driven develo
 |----------|-------------|--------|
 | CreateTestStrategy | Planning new feature or sprint | Comprehensive test strategy with test types and coverage targets |
 | DefineCoverage | Analyzing existing code or setting quality gates | Coverage analysis report with gaps and improvement plan |
+| AcceptanceTestDrivenDevelopment | Starting development on user story | Acceptance tests in Given-When-Then format, test automation code |
+| RiskBasedTesting | Prioritizing test efforts for sprint/release | Risk matrix with coverage targets by risk level, test effort allocation |
+| CiCdQualityGates | Setting up or improving CI/CD pipeline | Quality gate definitions, CI/CD configuration (GitHub Actions/GitLab CI) |
 
 ## Examples
 
@@ -35,6 +38,27 @@ Output: Coverage report (65% → 85% target), gap analysis, improvement plan
 User: "What tests do we need for password reset feature?"
 Skill loads: TestArchitect → CreateTestStrategy workflow (focused on password reset)
 Output: Test scenarios (happy path, expired token, invalid email, etc.)
+```
+
+### Example 4: Write acceptance tests for user story
+```
+User: "Write acceptance tests for US-42 (password reset)"
+Skill loads: TestArchitect → AcceptanceTestDrivenDevelopment workflow
+Output: Given-When-Then scenarios, Playwright/Cypress test automation code, test data fixtures
+```
+
+### Example 5: Assess risk and prioritize testing
+```
+User: "What should we focus testing on this sprint?"
+Skill loads: TestArchitect → RiskBasedTesting workflow
+Output: Risk matrix (auth=Critical 90%, cart=Medium 70%), test effort allocation (40 hours)
+```
+
+### Example 6: Set up CI/CD quality gates
+```
+User: "Configure quality gates for GitHub Actions"
+Skill loads: TestArchitect → CiCdQualityGates workflow
+Output: GitHub Actions YAML config, coverage thresholds, security gates, bundle size limits
 ```
 
 ## Integration
