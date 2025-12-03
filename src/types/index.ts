@@ -178,8 +178,8 @@ export interface StandupContext {
   /** Feature or decision being discussed */
   feature: string
 
-  /** Agent roster (e.g., ['Mary', 'Bob', 'Murat', 'Emma']) */
-  roster: string[]
+  /** Agent roster (e.g., ['Mary', 'Bob', 'Murat', 'Emma']). If not provided, smart defaults will be suggested based on feature. */
+  roster?: string[]
 
   /** Feature description (optional) */
   description?: string

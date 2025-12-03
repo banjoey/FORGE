@@ -9,19 +9,147 @@ import { reviewCode } from '../emma/security-review'
 import { promises as fs } from 'fs'
 
 /**
+ * Suggest smart roster based on feature context
+ *
+ * @param feature - Feature name or description
+ * @param question - Optional question being asked
+ * @returns Array of recommended agent names
+ */
+export function suggestRoster(feature: string, question?: string): string[] {
+  const featureLower = feature.toLowerCase()
+  const questionLower = question?.toLowerCase() || ''
+
+  // PRIORITY 1: Check question context first (overrides feature keywords)
+
+  // Testing questions
+  if (questionLower.includes('how many tests') || questionLower.includes('test')) {
+    return ['Wei', 'Emma', 'Bob'] // QA lead + security tests + implementation
+  }
+
+  // Timeline questions
+  if (questionLower.includes('how long') || questionLower.includes('timeline') || questionLower.includes('estimate')) {
+    return ['Bob', 'Murat', 'Wei'] // Tech lead + priority + test time
+  }
+
+  // Prioritization questions
+  if (questionLower.includes('should we build') || questionLower.includes('priority') || questionLower.includes('value')) {
+    return ['Murat', 'Mary', 'Bob'] // Product + UX + tech feasibility
+  }
+
+  // PRIORITY 2: Check feature keywords (specific to general)
+
+  // Authentication/authorization features (critical - need full team)
+  if (
+    featureLower.includes('auth') ||
+    featureLower.includes('login') ||
+    featureLower.includes('password') ||
+    featureLower.includes('2fa') ||
+    featureLower.includes('mfa') ||
+    featureLower.includes('oauth') ||
+    featureLower.includes('session')
+  ) {
+    return ['Emma', 'Mary', 'Bob', 'Murat', 'Wei'] // Full team - critical feature
+  }
+
+  // Security/vulnerability focus (specific)
+  if (
+    featureLower.includes('security') ||
+    featureLower.includes('vulnerability') ||
+    featureLower.includes('threat') ||
+    featureLower.includes('sql injection') ||
+    featureLower.includes('xss') ||
+    featureLower.includes('csrf')
+  ) {
+    return ['Emma', 'Bob', 'Wei'] // Security-focused team
+  }
+
+  // Database/data features (specific - check before "design" patterns)
+  if (
+    featureLower.includes('database') ||
+    featureLower.includes('sql') ||
+    featureLower.includes('query') ||
+    featureLower.includes('schema') ||
+    featureLower.includes('migration')
+  ) {
+    return ['Emma', 'Bob', 'Wei'] // Security (SQL injection) + implementation + testing
+  }
+
+  // Testing/QA focus (specific) - but exclude "usability testing" which is UX
+  if (
+    !featureLower.includes('usability') &&
+    (featureLower.includes('test') ||
+    featureLower.includes('qa') ||
+    featureLower.includes('quality') ||
+    featureLower.includes('coverage'))
+  ) {
+    return ['Wei', 'Emma', 'Bob'] // QA lead + security tests + implementation
+  }
+
+  // Timeline/capacity planning (specific)
+  if (
+    featureLower.includes('timeline') ||
+    featureLower.includes('estimate') ||
+    featureLower.includes('capacity') ||
+    featureLower.includes('how long')
+  ) {
+    return ['Bob', 'Murat', 'Wei'] // Tech lead + priority + test time
+  }
+
+  // Prioritization/business value (specific)
+  if (
+    featureLower.includes('priority') ||
+    featureLower.includes('value') ||
+    featureLower.includes('roadmap') ||
+    featureLower.includes('mvp')
+  ) {
+    return ['Murat', 'Mary', 'Bob'] // Product + UX + tech feasibility
+  }
+
+  // Architecture/technical design (check "design pattern" before general "design")
+  if (
+    featureLower.includes('architecture') ||
+    featureLower.includes('design pattern') ||
+    featureLower.includes('refactor') ||
+    featureLower.includes('tech debt') ||
+    featureLower.includes('technical debt') ||
+    featureLower.includes('microservice')
+  ) {
+    return ['Bob', 'Mary', 'Murat', 'Wei'] // Tech lead + business impact + priority + testing
+  }
+
+  // UX/User experience focus (general - check after specific "design pattern")
+  if (
+    featureLower.includes('ux') ||
+    featureLower.includes('user experience') ||
+    featureLower.includes('ui') ||
+    featureLower.includes('interface') ||
+    featureLower.includes('design') ||
+    featureLower.includes('usability')
+  ) {
+    return ['Mary', 'Emma', 'Bob', 'Wei'] // UX-focused with security review
+  }
+
+  // Default: Full team for comprehensive review
+  return ['Emma', 'Mary', 'Bob', 'Murat', 'Wei']
+}
+
+/**
  * Run standup with multiple agents
  *
  * @param context - Standup context (feature, roster, code snippet, etc.)
  * @returns Standup result with agent contributions
  */
 export async function runStandup(context: StandupContext): Promise<StandupResult> {
+  // Use provided roster or suggest smart default
+  const roster = context.roster || suggestRoster(context.feature, context.question)
+
   const result: StandupResult = {
-    participants: context.roster,
+    participants: roster,
     conflicts: []
   }
 
   // Process each agent in the roster
-  for (const agent of context.roster) {
+  for (const agent of roster) {
     if (agent === 'Emma') {
       result.Emma = await getEmmaContribution(context)
     } else if (agent === 'Mary') {
@@ -36,7 +164,7 @@ export async function runStandup(context: StandupContext): Promise<StandupResult
   }
 
   // Add synthesis if multiple agents
-  if (context.roster.length > 1) {
+  if (roster.length > 1) {
     result.synthesis = synthesizeDecision(result, context)
   }
 
