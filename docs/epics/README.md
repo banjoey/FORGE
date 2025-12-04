@@ -1,363 +1,269 @@
-# FORGE Epics - Release Planning
+# FORGE Epics (Feature Branch Focused)
 
-**Project**: FORGE (Fused Optimization & Reasoning for Generative Engineering)
-**Goal**: Enhance PAI with enterprise-grade features from BMAD patterns
-**Owner**: @banjoey
-**Created**: 2025-12-02
-**Last Updated**: 2025-12-02 (post multi-agent review)
+**Last Updated**: December 4, 2025
+**Status**: Release 0.1.0 Complete ✅
 
 ---
 
-## 🎯 Phased Release Strategy
+## Quick Navigation
 
-After comprehensive multi-agent review, FORGE is planned in **3 phased releases**:
+📍 **[Feature Branch Map](FEATURE-BRANCH-MAP.md)** - Complete mapping of epics to PAI fork branches
 
-| Release | Focus | Timeline | Story Points | Status |
-|---------|-------|----------|--------------|--------|
-| [**0.1 MVP**](RELEASE-0.1-MVP.md) | Prove standup value | 8-10 weeks | 60 | Planning |
-| [**0.2 Enterprise**](RELEASE-0.2-ENTERPRISE.md) | Security + Testing rigor | 8-10 weeks | 78 | Planning |
-| [**0.3 Upstream**](RELEASE-0.3-UPSTREAM.md) | Customization + Contribution | 3-4 weeks | 26 | Planning |
+### Active Epics (Aligned with Feature Branches)
 
-**Total**: 164 story points, 20-25 weeks (5-6 months)
+| Epic | Feature Branch | Status | Story Points |
+|------|----------------|--------|--------------|
+| [**EPIC-SECURITY**](EPIC-SECURITY.md) | `feature/security` | ✅ Complete | 66 |
+| [**EPIC-AGILE**](EPIC-AGILE.md) | `feature/agile-pm` | ✅ Complete | 26 |
+| [**EPIC-TESTING**](EPIC-TESTING.md) | `feature/testing` | ✅ Complete | 18 |
+| [**EPIC-COLLABORATION**](EPIC-COLLABORATION.md) | `feature/collaboration` | ✅ Complete | 60 |
 
-### Why Phased? (Based on Multi-Agent Review)
-
-- **Faster validation**: Prove standup hypothesis in 2 months vs. 4 months
-- **Reduced risk**: Smaller investment if standup doesn't work
-- **Realistic timeline**: Solo developer velocity = 8-10 pts/week (was 16 weeks, now 20-25)
-- **Critical gaps addressed**: 10 security gaps + 5 testing gaps = +28 story points
-
-📊 **[View Complete Review Findings](REVIEW-FINDINGS-SUMMARY.md)**
+**Total**: 170 story points delivered
 
 ---
 
-## Original Epic Overview
-
-| Epic | Priority | Story Points | Timeline | Status | Dependencies |
-|------|----------|--------------|----------|--------|--------------|
-| [EPIC-001](EPIC-001-skills-from-bmad.md) | High | 55 | 9 weeks | Planning | None |
-| [EPIC-002](EPIC-002-standup-agents.md) | High | 21 | 3 weeks | Planning | EPIC-001 |
-| [EPIC-003](EPIC-003-standup-orchestration.md) | Critical | 34 | 4 weeks | Planning | EPIC-001, EPIC-002 |
-| [EPIC-004](EPIC-004-pai-customization.md) | Medium | 21 | 3 weeks | Planning | None |
-
-**Original Total**: 131 story points, 16 weeks
-**Revised Total**: 164 story points, 20-25 weeks (includes gap fixes)
-
----
-
-## Release Plan
-
-### Release 0.1 (Months 1-3): Core Features
-
-**Focus**: Skills + Agents + Standup
-
-#### Sprint 1-2 (Weeks 1-4): Agile PM Skill Foundation
-- [x] Planning complete
-- [ ] EPIC-001: Stories 1.1-1.4 (Agile PM workflows)
-- [ ] Initial testing with real project
-
-**Deliverables:**
-- PRD creation workflow
-- Epic decomposition
-- User story generation
-- Sprint planning support
-
-#### Sprint 3-4 (Weeks 5-8): Security Skills
-- [ ] EPIC-001: Stories 1.5-1.8 (Security workflows)
-- [ ] CMMC Level 2 baseline
-- [ ] Threat modeling (STRIDE)
-- [ ] Code and infrastructure security
-
-**Deliverables:**
-- CMMC compliance framework
-- Threat modeling workflows
-- Security review automation
-
-#### Sprint 5 (Weeks 9-10): Test Architect Skills
-- [ ] EPIC-001: Stories 1.9-1.11 (Testing workflows)
-- [ ] ATDD implementation
-- [ ] Risk-based testing
-- [ ] CI/CD quality gates
-
-**Deliverables:**
-- Test-first development workflows
-- Risk-based test prioritization
-- Automated quality gates
-
-#### Sprint 6-7 (Weeks 11-13): Agent Personalities
-- [ ] EPIC-002: All stories (5 agent personalities)
-- [ ] PM, Security, Scrum Master, Test Architect, Analyst agents
-- [ ] Integration with skills from EPIC-001
-- [ ] Solo mode testing
-
-**Deliverables:**
-- 5 distinct agent personalities
-- Each agent uses appropriate skills
-- Personality validation complete
-
-#### Sprint 8-9 (Weeks 14-17): Standup Orchestration
-- [ ] EPIC-003: All stories (Standup skill)
-- [ ] Multi-agent conversation
-- [ ] Transparent coordination
-- [ ] Interactive vs. autonomous modes
-
-**Deliverables:**
-- Standup skill functional
-- Multi-agent debates working
-- Session synthesis generating
-- Integration with agents + skills
-
-#### Sprint 10 (Week 18): Integration & Polish
-- [ ] End-to-end testing
-- [ ] Bug fixes
-- [ ] Documentation
-- [ ] Examples and demos
-- [ ] Performance optimization
-
-**Release 0.1 Deliverables:**
-- 3 skills (AgilePm, Security, TestArchitect)
-- 5 agent personalities
-- Standup orchestration
-- Ready for real-world use at work + home
-
----
-
-### Release 0.2 (Month 4): Customization & Polish
-
-#### Sprint 11-12 (Weeks 19-21): PAI Customization
-- [ ] EPIC-004: All stories (Customization)
-- [ ] De-personalize PAI core
-- [ ] Installation wizard
-- [ ] Team configuration support
-
-**Deliverables:**
-- Fully customizable PAI
-- No hardcoded personal references
-- Team deployment ready
-- Company branding support
-
-#### Sprint 13 (Week 22): Upstream Contribution
-- [ ] Prepare PRs for upstream PAI
-- [ ] Documentation for Dan
-- [ ] Community engagement
-- [ ] Blog post about FORGE
-
-**Release 0.2 Deliverables:**
-- Customizable, team-ready PAI
-- First PRs to upstream PAI
-- Public FORGE announcement
-
----
-
-## Story Summary
-
-### EPIC-001: Skills from BMAD Patterns (55 points)
-**Stories: 11**
-1. PRD Creation (8 pts)
-2. Epic Decomposition (5 pts)
-3. User Story Generation (8 pts)
-4. Sprint Planning (5 pts)
-5. CMMC Baseline (8 pts)
-6. Threat Modeling (8 pts)
-7. Code Security Review (5 pts)
-8. Infrastructure Security (5 pts)
-9. ATDD Workflow (5 pts)
-10. Risk-Based Testing (5 pts)
-11. CI/CD Quality Gates (8 pts)
-
-### EPIC-002: Standup Agents (21 points)
-**Stories: 5**
-1. Product Manager Agent (5 pts)
-2. Security Engineer Agent (5 pts)
-3. Scrum Master Agent (3 pts)
-4. Test Architect Agent (5 pts)
-5. Business Analyst Agent (3 pts)
-
-### EPIC-003: Standup Orchestration (34 points)
-**Stories: 7**
-1. Standup Activation (5 pts)
-2. Intelligent Agent Selection (5 pts)
-3. Turn-Based Conversation (8 pts)
-4. Transparent Coordination (5 pts)
-5. Interactive vs. Autonomous Mode (5 pts)
-6. Agent Cross-Referencing (3 pts)
-7. Exit & Synthesis (3 pts)
-
-### EPIC-004: PAI Customization (21 points)
-**Stories: 6**
-1. Assistant Name Configuration (3 pts)
-2. User Identity Configuration (3 pts)
-3. De-Personalize Core System (8 pts)
-4. Team Configuration Support (3 pts)
-5. Company Branding Support (2 pts)
-6. Installation Wizard (2 pts)
-
----
-
-## Dependencies Graph
+## Repository Architecture
 
 ```
-EPIC-001 (Skills)
-    ↓
-    ├─→ EPIC-002 (Agent Personalities)
-    │       ↓
-    └───────┴─→ EPIC-003 (Standup Orchestration)
-
-EPIC-004 (Customization) - Independent, can run in parallel
+FORGE Repo (Development Lab)          PAI Fork (Production)
+├── Prototyping                       ├── main (tracks upstream)
+├── Testing                           ├── forge-all (integration)
+└── Feature Development               └── Feature Branches:
+                                          ├── feature/security
+                                          ├── feature/agile-pm
+                                          ├── feature/testing
+                                          └── feature/collaboration
 ```
 
-**Critical Path:**
-EPIC-001 → EPIC-002 → EPIC-003 (16 weeks)
-
-**Parallel Track:**
-EPIC-004 (3 weeks, can start anytime)
-
-**Note:** EPIC-003 builds standup orchestration - multi-agent conversation for better decision-making
+**Workflow**:
+1. Develop/test in FORGE repo
+2. Copy to PAI fork feature branch when "baked"
+3. Merge to `forge-all` for team deployment
+4. Submit PR to upstream when production-ready
 
 ---
 
-## Success Criteria
+## Release Status
 
-### Release 0.1 Success
-- [ ] All 3 skills working (AgilePm, Security, TestArchitect)
-- [ ] All 5 agents distinct and functional
-- [ ] Standup enables multi-agent debates
-- [ ] Used successfully on 2+ real projects (work + home)
-- [ ] Measurably better outcomes than solo mode
-- [ ] <5 minutes to generate comprehensive PRD with security + test strategy
-- [ ] Zero CMMC compliance gaps in generated artifacts
+### ✅ Release 0.1.0 (Complete - December 2025)
 
-### Release 0.2 Success
-- [ ] PAI fully customizable (no hardcoded names)
-- [ ] Installation wizard <5 minutes
-- [ ] Team deployment tested with 3+ users
-- [ ] At least 1 PR merged to upstream PAI
-- [ ] FORGE publicly announced
-- [ ] Positive community feedback
+**Delivered**:
+- All 4 feature branches complete
+- `forge-all` integration branch created
+- Personalization system implemented
+- All success metrics exceeded
 
----
+**Success Metrics Achieved**:
+- Issue detection: 3.67x (target: 2-3x) ✅ Exceeded 22%
+- Function coverage: 89.65% (target: 80%) ✅ Exceeded 12%
+- Test pass rate: 100% (107/107) ✅ Met
+- PRD quality: 10/10 (target: 8/10) ✅ Exceeded 25%
 
-## Risks & Mitigation
+### 🔄 Release 0.2.0 (Planned - Q1-Q2 2026)
 
-### High-Level Risks
+**New Feature Branches**:
+- `feature/personalization` - Team config, company branding (26 pts)
+- `feature/observability` - Agent monitoring dashboard (20 pts)
+- `feature/advanced-security` - Enhanced CMMC, CI/CD (33 pts)
 
-| Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
-| Skills too complex for PAI | High | Low | Start simple, iterate |
-| Standup feels artificial | High | Medium | Transparent coordination, natural flow |
-| Timeline too aggressive | Medium | High | Prioritize ruthlessly, ship MVP |
-| Upstream PAI rejects contributions | Medium | Low | Engage Dan early, align with his vision |
-| CMMC knowledge becomes stale | Medium | High | Version control, quarterly updates |
-| Team doesn't adopt | Low | Low | Real value, easy setup, good docs |
+**Total**: 79 story points
 
-### Epic-Specific Risks
-See individual epic documents for detailed risk analysis.
+### 🎯 Release 0.3.0 (Planned - Q3 2026)
+
+**Focus**: Upstream contribution
+- Polish all feature branches for PR submission
+- Community validation (10+ teams)
+- Submit PRs to danielmiessler/Personal_AI_Infrastructure
 
 ---
 
-## Velocity Assumptions
+## Feature Branch Details
 
-**Story Point Sizing:**
-- 1-2 points: Simple, <1 day
-- 3 points: Moderate, 1-2 days
-- 5 points: Complex, 3-5 days
-- 8 points: Very complex, 1 week
+### EPIC-SECURITY → `feature/security`
 
-**Sprint Cadence:**
-- 2-week sprints
-- ~13-21 story points per sprint
-- Velocity: 13 points/week (conservative)
+**Daniel Security Engineering**
+- 50+ vulnerability patterns (SQL, XSS, auth, CMMC)
+- STRIDE threat modeling (all 6 categories)
+- CMMC Level 2 compliance (17/17 domains)
+- 107 tests, 89.65% coverage
 
-**Adjustments:**
-- First few sprints may be slower (learning curve)
-- Later sprints may be faster (momentum)
-- Buffer time for unknowns and testing
+**Upstream PR Criteria**:
+- [ ] 95% function coverage (currently 89.65%)
+- [ ] Dogfooded on 3+ projects (currently 1)
+- [ ] Community feedback (pending)
 
----
-
-## Communication Plan
-
-### Weekly
-- Self-review: What's working? What's not?
-- Update epic status
-- Adjust timeline if needed
-
-### Sprint Boundaries
-- Demo to colleagues (if applicable)
-- Retrospective: Lessons learned
-- Plan next sprint
-
-### Milestones
-- Release 0.1 complete: Blog post, share with community
-- First PR to PAI: Engage Dan, gather feedback
-- Release 0.2 complete: Public FORGE announcement
+**Ready Date**: Q1 2026
 
 ---
 
-## Multi-Agent Review Completed (2025-12-02)
+### EPIC-AGILE → `feature/agile-pm`
 
-✅ **4 specialized agents reviewed all epics**:
-- ✅ Technical Compliance (14 violations found → ALL FIXED)
-- ✅ Security & CMMC (10 critical gaps → added to Release 0.2)
-- ✅ Business & Agile (timeline 70% optimistic → MVP created)
-- ✅ Testing & Quality (5 critical gaps → added to Release 0.2)
+**Enterprise Agile Product Management**
+- 4 workflows (PRD, Epics, Stories, Sprints)
+- 5 templates (PRD, epic, story, sprint-status, project-context)
+- 2 knowledge docs (rubric, sizing guide)
 
-**Result**: Plan improved, timeline realistic, gaps addressed
+**Dogfooding**: FORGE PRD scored 10/10
 
-📊 **[Full Review Report](REVIEW-FINDINGS-SUMMARY.md)**
+**Upstream PR Criteria**:
+- [ ] Dogfooded on 3+ projects with 8+/10 scores (currently 1)
+- [ ] Community feedback from 5+ users (pending)
 
----
-
-## Release Documents
-
-### Release 0.1 - Standup MVP (8-10 weeks)
-📄 **[RELEASE-0.1-MVP.md](RELEASE-0.1-MVP.md)**
-
-**Goal**: Prove standup multi-agent conversation value
-**Scope**: 1 skill (AgilePm) + 3 agents + core standup
-**Validation**: 4 gates (weeks 2, 6, 8, 10)
-**Success Metric**: Standup finds 2-3x more issues than solo mode
-
-### Release 0.2 - Enterprise Security & Testing (8-10 weeks)
-📄 **[RELEASE-0.2-ENTERPRISE.md](RELEASE-0.2-ENTERPRISE.md)**
-
-**Goal**: Add CMMC compliance and ATDD rigor
-**Scope**: 2 skills (Security, TestArchitect) + 3 agents + gap fixes
-**New Work**: 28 story points (security + testing gaps from review)
-**Success Metric**: Full CMMC Level 2 compliance (all 17 domains)
-
-### Release 0.3 - Customization & Upstream (3-4 weeks)
-📄 **[RELEASE-0.3-UPSTREAM.md](RELEASE-0.3-UPSTREAM.md)**
-
-**Goal**: Make FORGE shareable and contribute upstream
-**Scope**: Customization (remove "Kai"/"Daniel") + upstream prep
-**Success Metric**: ≥1 PR merged to upstream PAI
+**Ready Date**: Q2 2026
 
 ---
 
-## Next Actions
+### EPIC-TESTING → `feature/testing`
 
-### Immediate (This Week)
-1. ✅ Multi-agent review complete
-2. ✅ Revised release plan created
-3. ⏳ **Approve MVP scope** (Release 0.1)
-4. ⏳ Create sprint backlog for Sprint 1 (AgilePm skill)
-5. ⏳ Set up validation infrastructure (PRD rubric, test scenarios)
+**Test Engineering & Security Baseline**
+- TestArchitect: 5 workflows (ATDD, risk-based, coverage, CI/CD, strategy)
+- Security: 4 workflows (ThreatModel, CMMC, SecurityReview, Infrastructure)
+- 2 tools (atdd-enforcer.ts, risk-scorer.ts)
 
-### Before Sprint 1 Start
-1. Define PRD quality rubric (for week 2 validation)
-2. Recruit external reviewers (for week 6 personality test)
-3. Select 10 A/B test decisions (for week 8 validation)
-4. Set up project tracking (sprint-status.yaml)
+**Dogfooding**: 144 tests defined, 89.65% coverage achieved
 
-### Sprint 1 (Weeks 1-2)
-1. **Start EPIC-001, Stories 1.1-1.2** - PRD + Epic workflows
-2. Follow PAI standards exactly (TitleCase, USE WHEN, Examples)
-3. Test with FORGE project itself (dogfooding)
-4. Track velocity daily
+**Upstream PR Criteria**:
+- [ ] Dogfooded on 5+ projects with 80%+ coverage (currently 1)
+- [ ] Integration with Jest/Pytest demonstrated (pending)
+
+**Ready Date**: Q2 2026
 
 ---
 
-**FORGE: Build More, Architect Dreams with Multi-Agent Intelligence!**
+### EPIC-COLLABORATION → `feature/collaboration`
 
-*Phased approach ensures we prove value fast, address all gaps, and contribute back to PAI community.*
+**Multi-Agent Standup System**
+- 3 workflows (RunStandup, ManageContext, SynthesizeDecision)
+- 5 agent personalities (Daniel, Mary, Clay, Hefley, Amy)
+- Smart roster selection (auto-suggests experts)
+
+**Validated**: 3.67x more issues found than solo mode
+
+**Upstream PR Criteria**:
+- [ ] Dogfooded on 10+ teams (currently 1)
+- [ ] 2x+ improvement replicated (currently 3.67x on 1 test)
+- [ ] Use cases for 3+ domains (currently 1)
+
+**Ready Date**: Q3 2026
+
+---
+
+## Deprecated Epics (Pre-Feature Branch Structure)
+
+These epics were created before reorganization. **Keep for reference only.**
+
+### Archive
+
+- **EPIC-001-skills-from-bmad.md**
+  - Split into: EPIC-SECURITY, EPIC-AGILE, EPIC-TESTING
+  - Contains early BMAD Method implementation notes
+
+- **EPIC-002-standup-agents.md**
+  - Merged into: EPIC-COLLABORATION
+  - Contains agent personality design
+
+- **EPIC-003-standup-orchestration.md**
+  - Merged into: EPIC-COLLABORATION
+  - Contains orchestration logic
+
+- **EPIC-003-pai-compliance-review.md**
+  - Status: Complete (validation gate for 0.1.0)
+  - Found 39 issues across 4 domains
+
+- **EPIC-004-pai-customization.md**
+  - Status: Complete (personalization in forge-all)
+  - Profile system implemented
+
+---
+
+## Using This Structure
+
+### For Development
+
+```bash
+# Work in FORGE repo
+cd ~/src/FORGE
+# Make changes, test locally
+# When feature is "baked":
+cp -r .claude/skills/NewSkill ~/src/pai/Personal_AI_Infrastructure/.claude/skills/
+cd ~/src/pai/Personal_AI_Infrastructure
+git checkout feature/new-feature
+git add .claude/skills/NewSkill
+git commit -m "feat: add NewSkill"
+git push origin feature/new-feature
+```
+
+### For Production Deployment
+
+```bash
+# Install from forge-all (all features integrated)
+git clone -b forge-all https://github.com/banjoey/Personal_AI_Infrastructure.git PAI
+cd PAI
+./.claude/setup.sh
+```
+
+### For Upstream Contribution
+
+```bash
+# When feature is production-ready
+cd ~/src/pai/Personal_AI_Infrastructure
+git checkout feature/security
+gh pr create --base main --head banjoey:feature/security \
+  --title "Add Daniel Security Skill - CMMC Level 2 Compliance" \
+  --body "$(cat <<EOF
+# Daniel Security Skill
+
+Comprehensive security analysis with CMMC Level 2 compliance.
+
+## Features
+- 50+ vulnerability patterns
+- STRIDE threat modeling
+- CMMC Level 2 (17 domains)
+- 107 tests, 89.65% coverage
+
+## Validation
+- Dogfooded on FORGE project
+- Zero critical defects
+- Production-ready
+
+See EPIC-SECURITY.md for full details.
+EOF
+)"
+```
+
+---
+
+## Sprint Organization (Current: Maintenance Mode)
+
+**forge-all Branch**: Integration branch for team use
+**Development**: New features prototyped in FORGE repo
+**Next Sprint**: Release 0.2 planning (Q1 2026)
+
+---
+
+## Success Metrics (Release 0.1.0)
+
+| Criterion | Target | Achieved | Status |
+|-----------|--------|----------|--------|
+| Issue Detection | 2-3x | **3.67x** | ✅ **Exceeded 22%** |
+| Function Coverage | ≥80% | 89.65% | ✅ Exceeded 12% |
+| Test Pass Rate | 100% | 100% (107/107) | ✅ Met |
+| Installation Time | <5 min | ~3 min | ✅ Exceeded |
+| PRD Quality | ≥8/10 | 10/10 | ✅ Exceeded 25% |
+| Skills Complete | 5 | 5 | ✅ Met |
+| Agents Complete | 5 | 5 | ✅ Met |
+
+---
+
+## Related Documentation
+
+- 📍 [Feature Branch Map](FEATURE-BRANCH-MAP.md) - Complete mapping
+- 📊 [Success Metrics](../SUCCESS-METRICS.md) - Validation results
+- 📝 [Release 0.1 Notes](RELEASE-0.1-MVP.md) - MVP details
+- 🏗️ [Architecture](../ARCHITECTURE.md) - System design
+- 📖 [Quickstart](../../QUICKSTART.md) - Installation guide
+
+---
+
+**Epic Organization Last Updated**: December 4, 2025
+**Next Epic Review**: Release 0.2 Planning (Q1 2026)
