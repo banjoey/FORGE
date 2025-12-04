@@ -23,27 +23,54 @@ FORGE is a PAI enhancement that brings **multi-agent collaboration** to software
 - Download and install from [claude.com/claude-code](https://claude.com/claude-code)
 - Follow the installation guide for your platform
 
-**Step 2: Install PAI** (if not already installed)
+**Step 2: Install FORGE-Enhanced PAI**
 ```bash
-# Clone Daniel Miessler's PAI
-git clone https://github.com/danielmiessler/pai.git
-cd pai/Personal_AI_Infrastructure
+# Clone FORGE-enhanced PAI fork (includes all FORGE features)
+git clone -b forge-all https://github.com/banjoey/Personal_AI_Infrastructure.git PAI
+cd PAI
 
-# Run PAI installer
-./install.sh
+# Run PAI setup script (includes personalization wizard)
+./.claude/setup.sh
 ```
 
-**Step 3: Install FORGE**
+**That's it!** All FORGE skills, agents, and PAI features are now available in Claude Code.
+
+### About This Repository
+
+This **FORGE repository** is the **development lab** where features are prototyped and tested. Once features are mature, they're integrated into the [PAI fork](https://github.com/banjoey/Personal_AI_Infrastructure) as feature branches.
+
+**For production use**: Install from the PAI fork (above)
+**For development**: Clone this repo to contribute features
+
+### Installation Options
+
+**Option A: Full Integration** (Recommended)
 ```bash
-# Clone FORGE
+# Get everything: PAI + all FORGE features
+git clone -b forge-all https://github.com/banjoey/Personal_AI_Infrastructure.git PAI
+```
+
+**Option B: Cherry-Pick Features**
+```bash
+# Get vanilla PAI, add specific FORGE features
+git clone https://github.com/danielmiessler/Personal_AI_Infrastructure.git PAI
+cd PAI
+git remote add forge https://github.com/banjoey/Personal_AI_Infrastructure.git
+git fetch forge
+
+# Pick the features you want:
+git merge forge/feature/security          # Daniel Security skill
+git merge forge/feature/agile-pm          # AgilePm skill
+git merge forge/feature/testing           # TestArchitect + Security skills
+git merge forge/feature/collaboration     # Standup + 5 agents
+```
+
+**Option C: Development** (Contribute to FORGE)
+```bash
+# Clone FORGE development repo
 git clone https://github.com/banjoey/FORGE.git
-cd FORGE
-
-# Run FORGE installer (includes personalization wizard)
-./install.sh
+# Make changes, test, then submit PR to PAI fork
 ```
-
-**That's it!** FORGE skills and agents are now available in Claude Code.
 
 ## Key Features
 
